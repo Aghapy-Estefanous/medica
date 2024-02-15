@@ -13,14 +13,14 @@ class BoardingModel {
 List<BoardingModel> onboardingListItems = [
   BoardingModel(
       image: const Image(
-        image: AssetImage('assets/images/Occupations-transformed.png'),
+        image: AssetImage('assets/images/onboarding/Occupations-transformed.png'),
       ),
       title: 'Welcome to ShopEase',
       discribtion:
           'Discover a world of convenience at your fingertips. Shop for the latest trends, exclusive deals, and more. Join millions of shoppers and experience the future of shopping with ShopEase.'),
   BoardingModel(
       image: const Image(
-        image: AssetImage('assets/images/search-bar.png'),
+        image: AssetImage('assets/images/onboarding/Occupations-transformed.png'),
         width: 200,
         height: 200,
       ),
@@ -30,7 +30,7 @@ List<BoardingModel> onboardingListItems = [
   BoardingModel(
       image: const Image(
         image: AssetImage(
-          'assets/images/delivery-truck.gif',
+          'assets/images/onboarding/Occupations-transformed.png',
         ),
         width: 300,
         height: 200,
@@ -69,7 +69,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
             Row(
               children: [
                 Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/onboarding/logo.png',
                   height: 70,
                   width: 70,
                 ),
