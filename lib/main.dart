@@ -19,13 +19,6 @@ class MainApp extends StatelessWidget {
 
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BoardingScreen()
-
-    return const MaterialApp(
-      home: Scaffold(
-        body: Login(),
-      ),
-
-    );
+      home: BoardingScreen());
   }
 }
