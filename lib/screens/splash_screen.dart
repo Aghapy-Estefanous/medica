@@ -12,7 +12,7 @@ class Splash_screen extends StatelessWidget {
     return Scaffold(
       body: AnimatedSplashScreen(
         duration: 1000,
-        splashIconSize: MediaQuery.sizeOf(context).width*0.85,
+        splashIconSize: MediaQuery.sizeOf(context).width*0.86,
         splash: Image.asset(
           'assets/images/onboarding/logo.png',
           fit: BoxFit.cover,
