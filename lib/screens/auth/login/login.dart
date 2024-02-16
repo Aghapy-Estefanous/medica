@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
                         TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
                 InkWell(
                   child: Text(
-                    'Create one.',
+                    'Create one .',
                     style: TextStyle(
                         color: Color.fromRGBO(250, 147, 13, 1),
                         fontSize: 15,
@@ -131,3 +131,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+//login
