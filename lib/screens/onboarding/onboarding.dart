@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medica/pages/Login.dart';
 import 'package:medica/styles/AppColor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -64,7 +65,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.01,
+              height: MediaQuery.sizeOf(context).height * 0.02,
             ),
             Row(
               children: [
@@ -200,6 +201,7 @@ Widget BoardingItems(BoardingModel Model, int index, context) {
                     } else {
                       //go to login & save to pref ✅
                       //  subimtToshared(context);
+                     
                     }
                   },
                   child: const Text(
