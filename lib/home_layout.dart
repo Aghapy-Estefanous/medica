@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
+import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/auth/login/login.dart';
 
 
@@ -19,7 +20,7 @@ class ShopLayout extends StatelessWidget {
         var cubit = AppCubit.get(context);
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Shop App", style:  TextStyle(
+              title: const Text("medica", style:  TextStyle(
                      // color: Color.fromARGB(255, 72, 77, 79),
                       fontWeight: FontWeight.w800,
                       fontSize: 20,
@@ -36,6 +37,7 @@ class ShopLayout extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             items: cubit.BottomNavItems,
             currentIndex: cubit.currentIndex,
+           
             onTap: (int index) {
               cubit.ChangeBottomNavigateBar(index: index);
             },
