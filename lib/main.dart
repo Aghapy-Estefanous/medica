@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:medica/pages/Login.dart';
+import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/screens/onboarding/onboarding.dart';
 
-import 'package:medica/pages/Login.dart';
+
 
 
 void main() {
@@ -19,6 +20,6 @@ class MainApp extends StatelessWidget {
 
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BoardingScreen());
+      home:BoardingScreen());
   }
 }
