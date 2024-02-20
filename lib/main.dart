@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medica/home_layout.dart';
 import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/screens/onboarding/onboarding.dart';
 
@@ -12,6 +13,6 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: BoardingScreen());
+        debugShowCheckedModeBanner: false, home: ShopLayout());
   }
 }

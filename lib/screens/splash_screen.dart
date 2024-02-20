@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/login/login.dart';
 import 'package:medica/styles/AppColor.dart';
+import 'package:medica/screens/auth/login/login.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 
@@ -19,7 +19,7 @@ class Splash_screen extends StatelessWidget {
         ),
         nextScreen: const Login(),
         splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: AppColor.primaryColor,
+         backgroundColor: AppColor.primaryColor,
       ),
     );
   }
