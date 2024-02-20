@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medica/screens/login/Login.dart';
+import 'package:medica/screens/auth/login/login.dart';
 import 'package:medica/styles/AppColor.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
