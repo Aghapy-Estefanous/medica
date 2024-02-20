@@ -1,5 +1,6 @@
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/screens/auth/login/login.dart';
 import 'package:medica/styles/AppColor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -12,20 +13,20 @@ class BoardingModel {
 
 List<BoardingModel> onboardingListItems = [
   BoardingModel(
-      image:Lottie.asset('assets/images/onboarding/animation1.json'),
-      title:"Discover Care Centers: Booking, Details, and Waitlists",
+      image: Lottie.asset('assets/images/onboarding/animation1.json'),
+      title: "Discover Care Centers: Booking, Details, and Waitlists",
       discribtion:
           'Explore clinics, labs, and waitlists effortlessly. Easily book appointments, find information, and use a search service for clinics, labs, medicines, and their components.'),
   BoardingModel(
-     image:Lottie.asset('assets/images/onboarding/animation2.json'),
+      image: Lottie.asset('assets/images/onboarding/animation2.json'),
       title: "Your Health Insights: Test Results and Reports",
-      discribtion: 'Get instant access to test results and your medical report. Understand test instructions quickly, empowering you with valuable health insights at your fingertips.'),
- 
+      discribtion:
+          'Get instant access to test results and your medical report. Understand test instructions quickly, empowering you with valuable health insights at your fingertips.'),
 ];
 var BoardingController = PageController();
- bool isend = false;
+bool isend = false;
 
- //
+//
 // subimtToshared(context) {
 //   CachHelper.Savedata(key: 'onBoarding', value: true).then((value) {
 //     if (value) navigateandFinish(context, Login());
@@ -43,7 +44,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         //delete the background
         backgroundColor: Colors.white,
@@ -52,7 +52,13 @@ class _BoardingScreenState extends State<BoardingScreen> {
           TextButton(
               onPressed: () {
                 //save clicked skip {from boarding} ✅
-               // subimtToshared(context);
+                // subimtToshared(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const Login(),
+                  ),
+                );
               },
               child: const Text(
                 'SKIP',
@@ -61,15 +67,14 @@ class _BoardingScreenState extends State<BoardingScreen> {
         ],
       ),
       body: Container(
-      color: Colors.white,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            
             children: [
               Expanded(
                 child: PageView.builder(
-                  allowImplicitScrolling:true ,
+                  allowImplicitScrolling: true,
                   physics: const BouncingScrollPhysics(),
                   controller: BoardingController,
                   itemBuilder: (context, index) =>
@@ -88,7 +93,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   },
                 ),
               ),
-            
               Row(
                 children: [
                   SmoothPageIndicator(
@@ -103,7 +107,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       count: onboardingListItems.length),
                   const Spacer(),
                   FloatingActionButton(
-                    backgroundColor:  AppColor.primaryColor,
+                    backgroundColor: AppColor.primaryColor,
                     shape: const CircleBorder(eccentricity: 1),
                     onPressed: () {
                       if (!isend) {
@@ -114,10 +118,19 @@ class _BoardingScreenState extends State<BoardingScreen> {
                             curve: Curves.decelerate);
                       } else {
                         //go to login & save to pref ✅
-                       // subimtToshared(context);
+                        // subimtToshared(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => const Login(),
+                          ),
+                        );
                       }
                     },
-                    child: const Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,),
+                    child: const Icon(
+                      Icons.arrow_forward_ios_sharp,
+                      color: Colors.white,
+                    ),
                   )
                 ],
               ),
@@ -135,19 +148,19 @@ class _BoardingScreenState extends State<BoardingScreen> {
 Widget BoardingItems(BoardingModel Model) {
   return Column(
     children: [
-    
-     
       Padding(
         padding: const EdgeInsets.all(22.0),
         child: Model.image,
       ),
-      
+
       Text(
-        
         Model.title.toString(),
         //  onboardingListItems[index]('title'),
-        textAlign:TextAlign.center,
-        style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w700,color: AppColor.primaryColor),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: AppColor.primaryColor),
       ),
       const SizedBox(
         height: 20,
@@ -156,12 +169,12 @@ Widget BoardingItems(BoardingModel Model) {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
-        
             Model.discribtion.toString(),
             style: const TextStyle(
                 fontSize: 18,
                 color: Color.fromARGB(255, 112, 108, 108),
-                fontWeight: FontWeight.w500),textAlign: TextAlign.start,
+                fontWeight: FontWeight.w500),
+            textAlign: TextAlign.start,
           ),
         ),
       ),
