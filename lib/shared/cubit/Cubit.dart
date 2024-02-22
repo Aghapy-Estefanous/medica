@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/screens/splash_screen.dart';
+import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/screens/auth/login/login.dart';
 
 
@@ -33,7 +34,7 @@ class AppCubit extends Cubit<AppState> {
         )),
   ];
   List<Widget> Screen = const [
-    Login(),
+    Home_Screen(),
     Splash_screen(),
     Splash_screen(),
     Splash_screen(),
