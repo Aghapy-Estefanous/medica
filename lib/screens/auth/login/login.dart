@@ -32,6 +32,7 @@ class _LoginState extends State<Login> {
                 ),
               ],
             ),
+
           ),
           SafeArea(
             minimum: EdgeInsets.all(10),
@@ -59,6 +60,7 @@ class _LoginState extends State<Login> {
                       prefixIcon: Icon(Icons.email_outlined),
                       border: InputBorder.none,
                       hintText: 'E-mail'),
+
                 ),
               ),
               SizedBox(

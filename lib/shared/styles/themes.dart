@@ -6,10 +6,11 @@ import 'package:medica/shared/styles/AppColor.dart';
 
 ThemeData liteTheme() {
   return ThemeData(
+     primaryColor: Color(0xFF024d9a),
       textTheme:const  TextTheme(
           bodyMedium: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
         color: Colors.black,
       )),
       colorScheme:ColorScheme.light(background: Colors.white) ,
