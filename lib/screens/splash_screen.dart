@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medica/screens/onboarding/onboarding.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/auth/login/login.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -17,7 +18,7 @@ class Splash_screen extends StatelessWidget {
           'assets/images/onboarding/logo.png',
           fit: BoxFit.cover,
         ),
-        nextScreen: const Login(),
+        nextScreen: BoardingScreen(),
         splashTransition: SplashTransition.fadeTransition,
          backgroundColor: AppColor.primaryColor,
       ),
