@@ -68,14 +68,11 @@ class Home_Screen extends StatelessWidget {
             ),
           ),
 
-          SizedBox(
-            height: 20,
-          ),
           //scrolling body
           Expanded(
             child: ListView(
               children: [
-                Text(
+                const Text(
                   "  Departement",
                   style: TextStyle(
                     fontSize: 16,
@@ -83,7 +80,7 @@ class Home_Screen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 6,
                 ),
                 Container(
                   height: 45,
@@ -97,12 +94,10 @@ class Home_Screen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.02,
-                ),
+                SizedBox(height: 10,),
                 Title_ListWidget(' Clinics'),
                 Container(
-                  height: MediaQuery.sizeOf(context).height * 0.26,
+                  height: 210,
                   width: double.infinity,
                   child: ListView.builder(
                     itemBuilder: (context, index) => Padding(
@@ -219,8 +214,8 @@ class Home_Screen extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * 0.015,
               ),
               //Rowwwwwwww
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              Positioned(
+                 bottom: 5,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
