@@ -216,34 +216,37 @@ class Home_Screen extends StatelessWidget {
               //Rowwwwwwww
               Positioned(
                  bottom: 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            12.0), // Adjust the radius as needed
-                      ),
-                      minWidth: 50.0,
-                      height: 25,
-                      color: AppColor.orangcolor,
-                      child: const Text(' details ',
-                          style:
-                              TextStyle(fontSize: 13.0, color: Colors.white)),
-                      onPressed: () {},
-                    ),
-                    Row(
-                      //mainAxisAlignment: MainAxisAlignment.,
-                      children: [
-                        Icon(
-                          Icons.person,
-                          size: 20,
-                          color: AppColor.orangcolor,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MaterialButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              12.0), // Adjust the radius as needed
                         ),
-                        Text('1462')
-                      ],
-                    )
-                  ],
+                        minWidth: 50.0,
+                        height: 25,
+                        color: AppColor.orangcolor,
+                        child: const Text(' details ',
+                            style:
+                                TextStyle(fontSize: 13.0, color: Colors.white)),
+                        onPressed: () {},
+                      ),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.,
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 20,
+                            color: AppColor.orangcolor,
+                          ),
+                          Text('1462')
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ], //Rowwwwwwwwwwwwwwwwwwwwwww
