@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/login/login.dart';
+import 'package:medica/screens/auth/loginS/loginS.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
 
 
