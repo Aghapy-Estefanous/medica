@@ -53,8 +53,8 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
                   ),
                   OtpTextField(
                     borderRadius: BorderRadius.circular(15),
-                    filled: true,
-                    fillColor: Color.fromRGBO(217, 217, 217, 1),
+                    // filled: true,
+                    // fillColor: Color.fromRGBO(217, 217, 217, 1),
                     numberOfFields: 6,
                     // borderWidth: 4.0,
                     borderColor: Color(0xFF512DA8),
