@@ -103,9 +103,9 @@ class _Sign_UpState extends State<Sign_Up> {
                     //   ),
                     // ),
 
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                     // __________________ password
                     Container(
                       decoration: BoxDecoration(

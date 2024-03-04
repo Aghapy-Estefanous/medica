@@ -1,5 +1,7 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/screens/details_screen/details_clinics.dart';
+import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 class Home_Screen extends StatelessWidget {
@@ -94,7 +96,9 @@ class Home_Screen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Title_ListWidget(' Clinics'),
                 Container(
                   height: 210,
@@ -215,7 +219,7 @@ class Home_Screen extends StatelessWidget {
               ),
               //Rowwwwwwww
               Positioned(
-                 bottom: 5,
+                bottom: 5,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: Row(
@@ -232,7 +236,9 @@ class Home_Screen extends StatelessWidget {
                         child: const Text(' details ',
                             style:
                                 TextStyle(fontSize: 13.0, color: Colors.white)),
-                        onPressed: () {},
+                        onPressed: () {
+                          navigateToScreen(context, Details_screen());
+                        },
                       ),
                       Row(
                         //mainAxisAlignment: MainAxisAlignment.,
