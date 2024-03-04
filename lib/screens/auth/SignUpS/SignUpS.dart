@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/login/login.dart';
+import 'package:medica/screens/auth/ConfirmEmailS/EmailS.dart';
+import 'package:medica/screens/auth/loginS/loginS.dart';
 import 'package:medica/shared/SharedWidget.dart';
 
 class Sign_Up extends StatefulWidget {
@@ -11,6 +12,7 @@ class Sign_Up extends StatefulWidget {
 
 class _Sign_UpState extends State<Sign_Up> {
   bool _obscureText = true;
+  bool _obscureText2 = true;
   String pass = '';
   bool gender = true;
   @override
@@ -87,19 +89,19 @@ class _Sign_UpState extends State<Sign_Up> {
                     SizedBox(
                       height: 10,
                     ),
-                    //____________Email
-                    Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(217, 217, 217, 0.27),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email_outlined),
-                            border: InputBorder.none,
-                            hintText: 'E-mail'),
-                      ),
-                    ),
+                    // ____________Email
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       color: const Color.fromRGBO(217, 217, 217, 0.27),
+                    //       borderRadius: BorderRadius.all(Radius.circular(20))),
+                    //   child: TextField(
+                    //     keyboardType: TextInputType.emailAddress,
+                    //     decoration: InputDecoration(
+                    //         prefixIcon: Icon(Icons.email_outlined),
+                    //         border: InputBorder.none,
+                    //         hintText: 'E-mail'),
+                    //   ),
+                    // ),
 
                     SizedBox(
                       height: 10,
@@ -143,19 +145,19 @@ class _Sign_UpState extends State<Sign_Up> {
                           prefixIcon: Icon(Icons.lock_outlined),
                           suffixIcon: IconButton(
                             alignment: Alignment.centerRight,
-                            icon: Icon(_obscureText
+                            icon: Icon(_obscureText2
                                 ? Icons.visibility_off
                                 : Icons.visibility),
                             onPressed: () {
                               setState(() {
-                                _obscureText = !_obscureText;
+                                _obscureText2 = !_obscureText2;
                               });
                             },
                           ),
                           border: InputBorder.none,
                           hintText: 'Confirm Password',
                         ),
-                        obscureText: _obscureText,
+                        obscureText: _obscureText2,
                         onChanged: (value) {
                           if (value == pass) ;
                         },
@@ -183,36 +185,42 @@ class _Sign_UpState extends State<Sign_Up> {
                     SizedBox(
                       height: 30,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        // Handle button tap
-                      },
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color.fromRGBO(255, 175, 70, 1),
-                              Color.fromRGBO(250, 147, 13, 1),
-                            ], // Define multiple colors for gradient
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Adjust border radius as needed
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromRGBO(250, 191, 113, 1),
+                            Color.fromRGBO(250, 147, 13, 1),
+                          ], // Define multiple colors for gradient
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                         ),
-                        child: Container(
-                          constraints: BoxConstraints(
-                              minWidth: 150,
-                              minHeight: 50), // Adjust size as needed
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Sign_Up',
-                            style: TextStyle(
-                              color: Colors.white, // Text color
-                              fontSize: 16.0,
+                        borderRadius: BorderRadius.circular(
+                            10.0), // Adjust border radius as needed
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              onPressed: () {
+                                navigateToScreen(
+                                    context, Email(ScreenName: Login()));
+                              },
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
 
@@ -249,7 +257,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                 fontSize: 15, fontWeight: FontWeight.w500)),
                         InkWell(
                           onTap: () {
-                            navigateandFinish(context, Login());
+                            Navigator.pop(context);
                           },
                           child: Text(
                             'Login .',

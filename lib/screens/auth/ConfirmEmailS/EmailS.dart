@@ -1,17 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/SignUp/SignUp.dart';
-import 'package:medica/screens/home/home_screen.dart';
+
+import 'package:medica/screens/auth/ConfirmEmailS/ConfirmEmailS.dart';
+import 'package:medica/screens/auth/SignUpS/SignUpS.dart';
 import 'package:medica/shared/SharedWidget.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Email extends StatefulWidget {
+  final Widget ScreenName;
+  Email({
+    Key? key,
+    required this.ScreenName,
+  }) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Email> createState() => _EmailState();
 }
 
-class _LoginState extends State<Login> {
-  bool _obscureText = true;
+class _EmailState extends State<Email> {
+  bool v = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +31,7 @@ class _LoginState extends State<Login> {
               children: [
                 Image.asset('assets/images/onboarding/shape.png'),
                 Text(
-                  'Login',
+                  'Email',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -55,55 +61,32 @@ class _LoginState extends State<Login> {
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(217, 217, 217, 0.27),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: TextField(
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email_outlined),
-                      border: InputBorder.none,
-                      hintText: 'E-mail'),
+                    prefixIcon: Icon(Icons.email_outlined),
+                    border: InputBorder.none,
+                    hintText: 'E-mail',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter an email address';
+                    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(value)) {
+                      return 'Please enter a valid email address';
+                    }
+                    v = true;
+                    return null;
+                  },
                 ),
               ),
+
               SizedBox(
                 height: 20,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 0.27),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock_outlined),
-                    suffixIcon: IconButton(
-                      alignment: Alignment.centerRight,
-                      icon: Icon(_obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                    ),
-                    border: InputBorder.none,
-                    hintText: 'Password',
-                  ),
-                  obscureText: _obscureText,
-                ),
-              ),
               SizedBox(
                 height: 10,
-              ),
-              InkWell(
-                child: Text(
-                  'Forgot password?',
-                  style: TextStyle(
-                      color: Color.fromRGBO(250, 147, 13, 1),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
-                ),
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 30,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -111,7 +94,7 @@ class _LoginState extends State<Login> {
                     colors: [
                       Color.fromRGBO(250, 191, 113, 1),
                       Color.fromRGBO(250, 147, 13, 1),
-                    ], // Define multiple colors for gradient
+                    ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
@@ -123,12 +106,11 @@ class _LoginState extends State<Login> {
                     Expanded(
                       child: TextButton(
                         onPressed: () {
-                          navigateandFinish(context, Home_Screen());
+                          v == true
+                              ? navigateandFinish(context,
+                                  ConfirmEmail(ScreenName: widget.ScreenName))
+                              : null;
                         },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white),
-                        ),
                         style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -136,6 +118,10 @@ class _LoginState extends State<Login> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
+                        ),
+                        child: Text(
+                          'Confirm E-mail',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -146,7 +132,7 @@ class _LoginState extends State<Login> {
                 //       minWidth: 150, minHeight: 50), // Adjust size as needed
                 //   alignment: Alignment.center,
                 //   child: Text(
-                //     'Login',
+                //     'Email',
                 //     style: TextStyle(
                 //       color: Colors.white, // Text color
                 //       fontSize: 16.0,
@@ -155,32 +141,6 @@ class _LoginState extends State<Login> {
                 // ),
               ),
 
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: TextButton(
-              //         onPressed: () {
-              //           navigateandFinish(context, Home_Screen());
-              //         },
-              //         child: Text(
-              //           'Login',
-              //           style: TextStyle(color: Colors.white),
-              //         ),
-              //         style: ButtonStyle(
-              //           backgroundColor: MaterialStateProperty.all<Color>(
-              //               Color.fromRGBO(250, 147, 13, 1)),
-              //           shape:
-              //               MaterialStateProperty.all<RoundedRectangleBorder>(
-              //             RoundedRectangleBorder(
-              //               borderRadius: BorderRadius.circular(
-              //                   10.0), // Adjust the value as needed
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               SizedBox(
                 height: 30,
               ),
@@ -210,4 +170,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
-//login
+//Email
