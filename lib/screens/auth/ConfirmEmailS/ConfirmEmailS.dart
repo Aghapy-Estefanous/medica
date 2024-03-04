@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -43,15 +44,42 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: TextField(
-                          maxLength: 1,
-                        ),
-                      )
-                    ],
+                  Text(
+                    'we have send verification code for your email xxxdoaa@ gmail.com please enter code digits',
+                    style: TextStyle(color: Color.fromRGBO(135, 135, 135, 1)),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  OtpTextField(
+                    borderRadius: BorderRadius.circular(15),
+                    filled: true,
+                    fillColor: Color.fromRGBO(217, 217, 217, 1),
+                    numberOfFields: 6,
+                    // borderWidth: 4.0,
+                    borderColor: Color(0xFF512DA8),
+                    //set to true to show as box or false to show as dash
+                    showFieldAsBox: true,
+
+                    //runs when a code is typed in
+                    onCodeChanged: (String code) {
+                      //handle validation or checks here
+                    },
+                    //runs when every textfield is filled
+                    onSubmit: (String verificationCode) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Verification Code"),
+                              content:
+                                  Text('Code entered is $verificationCode'),
+                            );
+                          });
+                    }, // end onSubmit
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -71,7 +99,7 @@ class _ConfirmEmailState extends State<ConfirmEmail> {
                         Expanded(
                           child: TextButton(
                             onPressed: () {
-                              navigateToScreen(context, widget.ScreenName);
+                              navigateandFinish(context, widget.ScreenName);
                             },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<
