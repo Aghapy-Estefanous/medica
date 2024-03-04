@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
       create: (context) => AppCubit(),
       child: MaterialApp(
            theme:liteTheme() ,
-          debugShowCheckedModeBanner: false, home: Details_screen()),
+          debugShowCheckedModeBanner: false, home: Splash_screen()),
     );
   }
 }

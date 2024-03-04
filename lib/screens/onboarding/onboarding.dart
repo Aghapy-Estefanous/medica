@@ -1,7 +1,7 @@
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-import 'package:medica/screens/auth/login/login.dart';
+import 'package:medica/screens/auth/loginS/loginS.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BoardingModel {
