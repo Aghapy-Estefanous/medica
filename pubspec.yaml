@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   iconsax: ^0.0.8
+  flutter_otp_text_field: ^1.1.0+2
   
 
 
@@ -73,6 +74,7 @@ flutter:
   assets:
     - assets/images/onboarding/
     - assets/images/home-Images/
+    - assets/images/Auth/
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

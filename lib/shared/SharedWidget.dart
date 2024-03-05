@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-import 'package:medica/screens/auth/login/login.dart';
-import 'package:medica/shared/network/local/sharedPref.dart';
+
 
 //   from .......> to
 void navigateToScreen(context, ScreenName) {
@@ -30,16 +29,16 @@ dynamic showtoast({required context, required String Message, required color}) {
       )));
 }
 
-logout(context) {
-  return TextButton(
-    child: Text('logout'),
-    onPressed: () {
-      //    Text(CachHelper.getdata(key: 'token',),style: TextStyle(color: Colors.black45),);
-      CachHelper.removeKey(key: 'token');
-      navigateandFinish(context, Login());
-    },
-  );
-}
+// logout(context) {
+//   return TextButton(
+//     child: Text('logout'),
+//     onPressed: () {
+//       //    Text(CachHelper.getdata(key: 'token',),style: TextStyle(color: Colors.black45),);
+//       CachHelper.removeKey(key: 'token');
+//       navigateandFinish(context, Login());
+//     },
+//   );
+// }
 
 AppBar MyAppBarWidget(BuildContext context, String title) {
   return AppBar(
