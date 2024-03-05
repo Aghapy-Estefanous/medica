@@ -1,5 +1,6 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 class Details_screen extends StatelessWidget {
@@ -7,26 +8,9 @@ class Details_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
+    String title= 'clinics details';
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        titleSpacing: 10.0,
-        centerTitle: true,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            Icons.arrow_back_ios,
-            color: AppColor.primaryColor,
-          ),
-        ),
-        title: Text(
-          'clinics details',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-        ),
-      ),
+      appBar: MyAppBarWidget(context, title),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -179,6 +163,8 @@ class Details_screen extends StatelessWidget {
       ),
     );
   }
+
+ 
 
   Container avilableDayContainer() {
     return Container(
