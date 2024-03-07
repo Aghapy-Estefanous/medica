@@ -2,19 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/screens/auth/loginS/loginS.dart';
 
-class NewPassword extends StatefulWidget {
+class NewPassword extends StatelessWidget {
   const NewPassword({super.key});
 
-  @override
-  State<NewPassword> createState() => _NewPasswordState();
-}
-
-class _NewPasswordState extends State<NewPassword> {
-  bool _obscureText = true;
-  bool _obscureText2 = true;
-
-  String pass = '';
-  bool gender = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,20 +43,16 @@ class _NewPasswordState extends State<NewPassword> {
                           prefixIcon: Icon(Icons.lock_outlined),
                           suffixIcon: IconButton(
                             alignment: Alignment.centerRight,
-                            icon: Icon(_obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility),
+                            icon: Icon(Icons.visibility),
                             onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
+                              
                             },
                           ),
                           border: InputBorder.none,
                           hintText: 'New Password',
                         ),
-                        obscureText: _obscureText,
-                        onChanged: (value) => pass = value,
+                        obscureText: true,
+                        // onChanged: (value) => pass = value,
                       ),
                     ),
                     SizedBox(
@@ -82,22 +68,17 @@ class _NewPasswordState extends State<NewPassword> {
                           prefixIcon: Icon(Icons.lock_outlined),
                           suffixIcon: IconButton(
                             alignment: Alignment.centerRight,
-                            icon: Icon(_obscureText2
-                                ? Icons.visibility_off
-                                : Icons.visibility),
+                            icon: Icon(Icons.visibility),
                             onPressed: () {
-                              setState(() {
-                                _obscureText2 = !_obscureText2;
-                              });
                             },
                           ),
                           border: InputBorder.none,
                           hintText: 'Confirm New Password',
                         ),
-                        obscureText: _obscureText2,
-                        onChanged: (value) {
-                          if (value == pass) ;
-                        },
+                        obscureText: true,
+                        // onChanged: (value) {
+                        //   if (value == pass) ;
+                        // },
                       ),
                     ),
                     SizedBox(
