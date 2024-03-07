@@ -67,7 +67,6 @@ class Home_Screen extends StatelessWidget {
               ),
             ),
           ),
-
           //scrolling body
           Expanded(
             child: ListView(
@@ -94,7 +93,9 @@ class Home_Screen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Title_ListWidget(' Clinics'),
                 Container(
                   height: 180,
@@ -240,7 +241,10 @@ class Home_Screen extends StatelessWidget {
                           size: 18,
                           color: AppColor.orangcolor,
                         ),
-                        Text('1462',style: TextStyle(fontSize: 12),)
+                        Text(
+                          '1462',
+                          style: TextStyle(fontSize: 12),
+                        )
                       ],
                     )
                   ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/loginS/loginS.dart';
-import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/SharedWidget.dart';
+import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});

@@ -22,7 +22,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         url: 'http://medicalsystem-001-site1.ftempurl.com/api/Auth/register',
         data: {
           'nid': nid,
-          'name': name,
+         'name': name,
           'username': username,
           'gender': gender,
           'email': email,

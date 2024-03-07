@@ -61,3 +61,47 @@ AppBar MyAppBarWidget(BuildContext context, String title) {
     ),
   );
 }
+
+Center mySubmitButton(
+      void Function() buttonFunction, String? buttontitle, context) {
+    return Center(
+      child: Container(
+        height: 45,
+        width: MediaQuery.sizeOf(context).width * 0.95,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(250, 191, 113, 1),
+              Color.fromRGBO(250, 147, 13, 1),
+            ], // Define multiple colors for gradient
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius:
+              BorderRadius.circular(10.0), // Adjust border radius as needed
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextButton(
+                onPressed: buttonFunction,
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  "$buttontitle",
+                  //  'Login',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
