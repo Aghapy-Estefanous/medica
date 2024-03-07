@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/home/home_screen.dart';
+import 'package:medica/screens/auth/ConfirmEmailS/EmailS.dart';
 import 'package:medica/screens/auth/register_auth/register.dart';
+import 'package:medica/screens/auth/NewPasswordS/NewPasswordS.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginState.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -13,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -64,7 +67,6 @@ class LoginScreen extends StatelessWidget {
               child: Form(
                 key: formstate,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
@@ -84,113 +86,168 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("LOGIN",
                               style: Theme.of(context)
                                   .textTheme
-                                  .headlineMedium!
+                                  .headlineSmall!
                                   .copyWith(color: Colors.black)),
-                          Text("log in now to brows our hot offers",
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text("Login now! Your health is our priority",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge!
-                                  .copyWith(color: Colors.grey)),
+                                  .copyWith(color: Colors.grey, fontSize: 18)),
                           const SizedBox(
                             height: 15,
                           ),
+                          //************************email filed*************************
                           TextFormField(
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                hintText: "Email",
-                                hintStyle: const TextStyle(fontSize: 20),
-                                prefixIcon:
-                                    const Icon(Icons.email_outlined, size: 25),
-                              ),
-                              validator: (String? value) =>
-                                  validation(value, "Please enter your email")),
-                          const SizedBox(height: 15),
-                          TextFormField(
-                            obscureText: LoginCubit.get(context).isvisiable,
-                            controller: passwordController,
-                            validator: (String? value) =>
-                                validation(value, "Please enter your password"),
+                            controller: emailController,
+                            // validator: (value) {
+                            //   if (value == null || value.isEmpty) {
+                            //     return 'Please enter your email';
+                            //   } else if (!RegExp(
+                            //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            //       .hasMatch(value))
+                            //     return 'please enter a valid email adress';
+                            //   return null;
+                            // },
                             decoration: InputDecoration(
-                              filled: true,
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0)),
-                              hintText: "Password",
-                              hintStyle: const TextStyle(fontSize: 20),
-                              prefixIcon: const Icon(Icons.lock, size: 25),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  LoginCubit.get(context).ChangeVisiablityIcon();
-                                },
-                                icon:
-                                    Icon(LoginCubit.get(context).icon, size: 25),
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
                               ),
+                              fillColor: Color.fromRGBO(217, 217, 217, 0.27),
+                              filled: true,
+                              prefixIcon: Icon(Icons.email_outlined),
+                              hintText: 'Email',
                             ),
+                          ),
+
+                          //************************email filed*************************
+                          const SizedBox(height: 15),
+                          //************************password filed*************************
+                          TextFormField(
+                            controller: passwordController,
+                            obscureText: LoginCubit.get(context).isvisiable,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password';
+                              } else if (!RegExp(
+                                      r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^\w\d]).{8,}$')
+                                  .hasMatch(value)) {
+                                return 'Password must have at least one digit, uppercase  \n and uppercaseletter,and non-alphanumeric character.';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide.none,
+                              ),
+                              fillColor: Color.fromRGBO(217, 217, 217, 0.27),
+                              filled: true,
+                              prefixIcon: Icon(Icons.lock_outlined),
+                              suffixIcon: IconButton(
+                                alignment: Alignment.centerRight,
+                                icon: Icon(Icons.visibility_off),
+                                onPressed: () {
+                                  LoginCubit.get(context)
+                                      .ChangeVisiablityIcon();
+                                },
+                              ),
+                              hintText: 'Password',
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          //************************password filed*************************
+                          InkWell(
+                            child: Text(
+                              ' Forgot password?',
+                              style: const TextStyle(
+                                  color: Color.fromRGBO(250, 147, 13, 1),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            onTap: () {
+                              navigateToScreen(
+                                  context, Email(ScreenName: NewPassword()));
+                            },
+                          ),
+                          //.............................
+                          const SizedBox(height: 15),
+                          ConditionalBuilder(
+                            fallback: (context) => const Center(
+                                child: CircularProgressIndicator()),
+                            builder: (BuildContext context) {
+                              return mySubmitButton(() {
+                                if (formstate.currentState!.validate()) {
+                                  cubit.userlogin(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  );
+                                }
+                              }, "Login", context);
+                              // SizedBox(
+                              //   height: 50,
+                              //   width: 450,
+                              //   child: ElevatedButton(
+                              //     style: ElevatedButton.styleFrom(
+                              //         backgroundColor: AppColor.orangcolor),
+                              // onPressed: () {
+                              //   // Validate the form
+                              //   if (formstate.currentState!.validate()) {
+                              //     cubit.userlogin(
+                              //       email: emailController.text
+                              //           .trim(), // Get the text value from the controller
+                              //       password: passwordController.text
+                              //           .trim(), // Get the text value from the controller
+                              //     );
+                              //   }
+                              //       // print(emailController.text +
+                              //       //     passwordController.text);
+                              //     },
+                              //     child: const Text(
+                              //       'LOGIN',
+                              //       style:
+                              //           TextStyle(color: AppColor.whiteColor),
+                              //     ),
+                              //   ),
+                              // );
+                            },
+                            condition: state is! LoginLoadingState,
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          ConditionalBuilder(
-                            fallback: (context) =>
-                                const Center(child: CircularProgressIndicator()),
-                            builder: (BuildContext context) {
-                              return SizedBox(
-                                height: 50,
-                                width: 450,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColor.primaryColor),
-                                  onPressed: () {
-                                    // Validate the form
-                                    if (formstate.currentState!.validate()) {
-                                      cubit.userlogin(
-                                        email: emailController.text
-                                            .trim(), // Get the text value from the controller
-                                        password: passwordController.text
-                                            .trim(), // Get the text value from the controller
-                                      );
-                                    }
-                                    // print(emailController.text +
-                                    //     passwordController.text);
-                                  },
-                                  child: const Text('LOGIN'),
+                          Row(
+                            children: [
+                              const Text(" Don't have an account?  ",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
+                              InkWell(
+                                onTap: () {
+                                  navigateToScreen(context, RegisterScreen());
+
+                                  //           // CachHelper.removeKey(key: 'token')
+                                  //           //     .then((value) {
+                                  //           //   navigateToScreen(context, RegisterScreen());
+                                  //           // });
+                                },
+                                child: const Text(
+                                  'Create one .',
+                                  style: TextStyle(
+                                      color: AppColor.orangcolor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                              );
-                            },
-                            condition: state is! LoginLoadingState,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(60, 20, 0, 0),
-                            child: Row(
-                              children: [
-                                const Text(
-                                  "Don't have account  ",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    navigateToScreen(context, RegisterScreen());
-                                    // CachHelper.removeKey(key: 'token')
-                                    //     .then((value) {
-                                    //   navigateToScreen(context, RegisterScreen());
-                                    // });
-                                  },
-                                  child: const Text(
-                                    "register",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: AppColor.primaryColor),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -205,11 +262,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-validation(String? value, String AlertTxet) {
-  if (value == null || value.isEmpty) {
-    return AlertTxet;
-  } else {
-    return null;
-  }
-}
+  

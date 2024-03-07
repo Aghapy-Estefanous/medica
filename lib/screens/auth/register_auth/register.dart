@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -16,7 +17,7 @@ class RegisterScreen extends StatelessWidget {
   TextEditingController passwordController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   TextEditingController nidController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
 
   @override
@@ -59,207 +60,331 @@ class RegisterScreen extends StatelessWidget {
       builder: (context, state) {
         RegisterCubit cubit = RegisterCubit.get(context);
         return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
-            ),
-            body: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SingleChildScrollView(
-                child: Form(
+          //  appBar: MyAppBarWidget(context, ""),
+          body: SingleChildScrollView(
+              child: Form(
                   key: formstate,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text("REGITER",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(color: Colors.black)),
-                      Text("register now to brows our hot offers",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(color: Colors.grey)),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                          controller: nameController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            hintText: "name",
-                            hintStyle: const TextStyle(fontSize: 20),
-                            prefixIcon: const Icon(Icons.person, size: 25),
-                          ),
-                          validator: (String? value) =>
-                              validation(value, "Please enter your name")),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                          controller: nameController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            hintText: "name",
-                            hintStyle: const TextStyle(fontSize: 20),
-                            prefixIcon: const Icon(Icons.person, size: 25),
-                          ),
-                          validator: (String? value) =>
-                              validation(value, "Please enter your name")),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                          controller: nidController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            hintText: "nid",
-                            hintStyle: const TextStyle(fontSize: 20),
-                            prefixIcon: const Icon(Icons.person, size: 25),
-                          ),
-                          validator: (String? value) =>
-                              validation(value, "Please enter your nid")),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            hintText: "Email",
-                            hintStyle: const TextStyle(fontSize: 20),
-                            prefixIcon:
-                                const Icon(Icons.email_outlined, size: 25),
-                          ),
-                          validator: (String? value) =>
-                              validation(value, "Please enter your email")),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                          controller: genderController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            hintText: "gender",
-                            hintStyle: const TextStyle(fontSize: 20),
-                            prefixIcon: const Icon(Icons.person, size: 25),
-                          ),
-                          validator: (String? value) =>
-                              validation(value, "Please enter your gender")),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        obscureText: cubit.isvisiable,
-                        controller: passwordController,
-                        validator: (String? value) =>
-                            validation(value, "Please enter your password"),
-                        decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            hintText: "Password",
-                            hintStyle: const TextStyle(fontSize: 20),
-                            prefixIcon: const Icon(Icons.lock, size: 25),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                cubit.ChangeVisiablityIcon();
-                              },
-                              icon: Icon(cubit.icon, size: 25),
-                            )),
-                        onFieldSubmitted: (value) {
-                          // cubit.postRegiserData(
-                          //     nid: nidController.text,
-                          //     username: nameController.text,
-                          //     gender: genderController.text,
-                          //     email: emailController.text,
-                          //     password: passwordController.text,
-                          //     confirmPassword: confirmPassController.text);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        controller: confirmPassController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0)),
-                          hintText: " confirm password",
-                          hintStyle: const TextStyle(fontSize: 20),
-                          prefixIcon: const Icon(Icons.lock, size: 25),
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        /////
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: SizedBox(
+                              height: 140,
+                              child: Stack(
+                                children: [
+                                  Image.asset(
+                                      'assets/images/onboarding/shape.png'),
+                                  Image.asset(
+                                    'assets/images/onboarding/logo.png',
+                                    height: 140,
+                                    width: 130,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Positioned(
+                                    left: 5,
+                                    top: 5,
+                                    child: Container(
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.white.withOpacity(0.5),
+                                          width: 1.2,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_back_ios,
+                                        color: AppColor.whiteColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
                         ),
-                        validator: (String? value) => validation(
-                            value, "Please enter your confirm password"),
-                      ),
-                      const SizedBox(height: 20),
-                      ConditionalBuilder(
-                        fallback: (context) =>
-                            const Center(child: CircularProgressIndicator()),
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            height: 50,
-                            width: 450,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColor.primaryColor),
-                              onPressed: () {
-                                // Validate the form
-                                if (formstate.currentState!.validate()) {
-                                  cubit.postRegiserData(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("LOGIN",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(color: Colors.black)),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text("Login now! Your health is our priority",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                          color: Colors.grey, fontSize: 18)),
+                              const SizedBox(
+                                height: 15,
+                              ),
 
-                                    nid: nidController.text,
-                                    username: nameController.text,
-                                    name: nameController.text,
-                                    gender: genderController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    confirmPassword: confirmPassController.text,
-                                  );
-                                  print(nidController.text +
-                                      passwordController.text +
-                                      confirmPassController.text);
-                                }
-                              },
-                              child: const Text('REGISTER'),
-                            ),
-                          );
-                        },
-                        condition: state is! RegisterLoadingState,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ));
+                              // TextFormField(
+                              //     controller: nameController,
+                              //     keyboardType: TextInputType.emailAddress,
+                              //     decoration: InputDecoration(
+                              //       filled: true,
+                              //       border: OutlineInputBorder(
+                              //           borderRadius: BorderRadius.circular(15.0)),
+                              //       hintText: "name",
+                              //       hintStyle: const TextStyle(fontSize: 20),
+                              //       prefixIcon: const Icon(Icons.person, size: 25),
+                              //     ),
+                              //     validator: (String? value) =>
+                              //         validation(value, "Please enter your name")),
+                              // const SizedBox(
+                              //   height: 15,
+                              // ),
+                              TextFormField(
+                                controller: usernameController,
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty)
+                                    return "Please enter your user name";
+                                  else if (value!.length < 4) {
+                                    return "name lenght at least 4 chars ";
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  fillColor:
+                                      Color.fromRGBO(217, 217, 217, 0.27),
+                                  filled: true,
+                                  prefixIcon: Icon(Iconsax.user),
+                                  hintText: 'name',
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              //______________NID
+                              TextFormField(
+                                controller: nidController,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length != 14)
+                                    return 'Please enter your national ID (14 numbers)';
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      // Use OutlineInputBorder for border customization
+                                      borderRadius: BorderRadius.circular(
+                                          20), // Set the border radius
+                                      borderSide: BorderSide
+                                          .none, // Optional: remove side border
+                                    ),
+                                    fillColor:
+                                        Color.fromRGBO(217, 217, 217, 0.27),
+                                    filled: true,
+                                    prefixIcon:
+                                        Icon(Iconsax.security_safe),
+                                    hintText: 'National ID'),
+                                keyboardType: const TextInputType.numberWithOptions(
+                                    decimal: false, signed: false),
+                              ),
+
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                controller: emailController,
+                                // validator: (value) {
+                                //   if (value == null || value.isEmpty) {
+                                //     return 'Please enter your email';
+                                //   } else if (!RegExp(
+                                //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                //       .hasMatch(value))
+                                //     return 'please enter a valid email adress';
+                                //   return null;
+                                // },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  fillColor:
+                                      Color.fromRGBO(217, 217, 217, 0.27),
+                                  filled: true,
+                                  prefixIcon: Icon(Iconsax.sms),
+                                  hintText: 'Email',
+                                ),
+                              ),
+
+                              //************************email filed*************************
+                              const SizedBox(height: 15),
+                              //************************password filed*************************
+                              TextFormField(
+                                controller: passwordController,
+                                obscureText: cubit.isvisiable,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your password';
+                                  } else if (!RegExp(
+                                          r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^\w\d]).{8,}$')
+                                      .hasMatch(value)) {
+                                    return 'Password must have at least one digit, uppercase  \n and uppercaseletter,and non-alphanumeric character.';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  fillColor:
+                                      Color.fromRGBO(217, 217, 217, 0.27),
+                                  filled: true,
+                                  prefixIcon: Icon(Iconsax.lock),
+                                  suffixIcon: IconButton(
+                                    alignment: Alignment.centerRight,
+                                    icon: Icon(Icons.visibility_off),
+                                    onPressed: () {
+                                      cubit.ChangeVisiablityIcon();
+                                    },
+                                  ),
+                                  hintText: 'Password',
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+
+                              TextFormField(
+                                controller: confirmPassController,
+                                obscureText: cubit.isvisiable,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please confirm your password';
+                                  } else if (value != passwordController.text) {
+                                    return 'Password doesn\'t match';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  fillColor:
+                                      Color.fromRGBO(217, 217, 217, 0.27),
+                                  filled: true,
+                                  prefixIcon: Icon(Iconsax.lock),
+                                  suffixIcon: IconButton(
+                                    alignment: Alignment.centerRight,
+                                    icon: Icon(Icons.visibility_off),
+                                    onPressed: () {
+                                      cubit.ChangeVisiablityIcon();
+                                    },
+                                  ),
+                                  hintText: ' confirm Password',
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              // TextFormField(
+                              //   obscureText: cubit.isvisiable,
+                              //   controller: passwordController,
+                              //   validator: (String? value) =>
+                              //       validation(value, "Please enter your password"),
+                              //   decoration: InputDecoration(
+                              //       filled: true,
+                              //       border: OutlineInputBorder(
+                              //           borderRadius: BorderRadius.circular(15.0)),
+                              //       hintText: "Password",
+                              //       hintStyle: const TextStyle(fontSize: 20),
+                              //       prefixIcon: const Icon(Icons.lock, size: 25),
+                              //       suffixIcon: IconButton(
+                              //         onPressed: () {
+                              //           cubit.ChangeVisiablityIcon();
+                              //         },
+                              //         icon: Icon(cubit.icon, size: 25),
+                              //       )),
+                              //   onFieldSubmitted: (value) {
+                              //     // cubit.postRegiserData(
+                              //     //     nid: nidController.text,
+                              //     //     username: nameController.text,
+                              //     //     gender: genderController.text,
+                              //     //     email: emailController.text,
+                              //     //     password: passwordController.text,
+                              //     //     confirmPassword: confirmPassController.text);
+                              //   },
+                              // ),
+                              // const SizedBox(
+                              //   height: 15,
+
+                              const SizedBox(height: 20),
+                              ConditionalBuilder(
+                                fallback: (context) => const Center(
+                                    child: CircularProgressIndicator()),
+                                builder: (BuildContext context) {
+                                  return 
+                                  // SizedBox(
+                                  //   height: 50,
+                                  //   width: 450,
+                                  //   child: ElevatedButton(
+                                  //     style: ElevatedButton.styleFrom(
+                                  //         backgroundColor:
+                                  //             AppColor.primaryColor),
+                                  //     onPressed: () {
+                                  //       // Validate the form
+                                  //       if (formstate.currentState!
+                                  //           .validate()) {
+                                  //         cubit.postRegiserData(
+                                  //           nid: nidController.text,
+                                  //           username: usernameController.text,
+                                  //           // name: nameController.text,
+                                  //           gender: genderController.text,
+                                  //           email: emailController.text,
+                                  //           password: passwordController.text,
+                                  //           confirmPassword:
+                                  //               confirmPassController.text,
+                                  //         );
+                                  //         print(nidController.text +
+                                  //             passwordController.text +
+                                  //             confirmPassController.text);
+                                  //       }
+                                  //     },
+                                  //     child: const Text('REGISTER'),
+                                  //   ),
+                                  // );
+                                  mySubmitButton(() {
+                                        // Validate the form
+                                        if (formstate.currentState!
+                                            .validate()) {
+                                          cubit.postRegiserData(
+                                            nid: nidController.text,
+                                            username: usernameController.text,
+                                             name: usernameController.text,
+                                            gender: genderController.text,
+                                            email: emailController.text,
+                                            password: passwordController.text,
+                                            confirmPassword:
+                                                confirmPassController.text,
+                                          );
+                                          print(nidController.text +
+                                              passwordController.text +
+                                              confirmPassController.text);
+                                        }
+                                      }, "Register", context);
+                                },
+                                condition: state is! RegisterLoadingState,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]))),
+        );
       },
     );
   }
 }
 
-validation(String? value, String AlertTxet) {
-  if (value == null || value.isEmpty) {
-    return AlertTxet;
-  } else {
-    return null;
-  }
-}
+
