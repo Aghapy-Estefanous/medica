@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/shared/SharedWidget.dart';
-import 'package:medica/screens/auth/loginS/loginS.dart';
+// import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class NewPassword extends StatelessWidget {
   const NewPassword({super.key});
@@ -102,7 +103,7 @@ class NewPassword extends StatelessWidget {
                           Expanded(
                             child: TextButton(
                               onPressed: () {
-                                navigateandFinish(context, Login());
+                                navigateandFinish(context, LoginScreen());
                               },
                               child: Text(
                                 'Confirm',

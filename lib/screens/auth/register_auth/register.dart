@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/auth/ConfirmEmailS/ConfirmEmailS.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/home/home_screen.dart';
@@ -25,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          navigateToScreen(context, LoginScreen());
+          navigateToScreen(context, ConfirmEmail(ScreenName: LoginScreen(),));
           // if (state.model!.status == false) {
           //   showSnackBar(
           //     context,

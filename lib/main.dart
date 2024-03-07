@@ -37,7 +37,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
           theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: LoginScreen()),
+          home: Splash_screen()),
     );
   }
 }

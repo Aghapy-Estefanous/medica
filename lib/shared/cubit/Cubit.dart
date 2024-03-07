@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/screens/home/home_screen.dart';
-import 'package:medica/screens/auth/loginS/loginS.dart';
+// import 'package:medica/screens/auth/loginS/loginS.dart';
 
 
 class AppCubit extends Cubit<AppState> {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/EmailS.dart';
-import 'package:medica/screens/auth/loginS/loginS.dart';
+// import 'package:medica/screens/auth/loginS/loginS.dart';
+import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/shared/SharedWidget.dart';
 
 class Sign_Up extends StatefulWidget {
@@ -261,7 +262,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                         ? oninteraction =
                                             AutovalidateMode.always
                                         : navigateToScreen(context,
-                                            Email(ScreenName: Login()));
+                                            Email(ScreenName: LoginScreen()));
                                   });
                                 },
                                 child: Text(
