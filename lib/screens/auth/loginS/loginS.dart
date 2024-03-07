@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:medica/shared/SharedWidget.dart';
+import 'package:medica/screens/home/home_screen.dart';
+import 'package:medica/screens/auth/SignUpS/SignUpS.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/EmailS.dart';
 import 'package:medica/screens/auth/NewPasswordS/NewPasswordS.dart';
-import 'package:medica/screens/auth/SignUpS/SignUpS.dart';
-import 'package:medica/screens/home/home_screen.dart';
-import 'package:medica/shared/SharedWidget.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.w500),
                 ),
                 onTap: () {
-                  navigateToScreen(context, Email(ScreenName: NewPassword()));
+                  navigateToScreen(context, Email(ScreenName:NewPassword()));
                 },
               ),
               SizedBox(

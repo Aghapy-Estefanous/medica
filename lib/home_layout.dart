@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
-import 'package:medica/shared/SharedWidget.dart';
-import 'package:medica/screens/auth/loginS/loginS.dart';
+
 
 
 class ShopLayout extends StatelessWidget {

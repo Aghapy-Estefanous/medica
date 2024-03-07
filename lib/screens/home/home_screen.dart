@@ -1,7 +1,5 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import 'package:medica/screens/details_screen/details_clinics.dart';
-import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 class Home_Screen extends StatelessWidget {
@@ -96,12 +94,10 @@ class Home_Screen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10,),
                 Title_ListWidget(' Clinics'),
                 Container(
-                  height: 210,
+                  height: 180,
                   width: double.infinity,
                   child: ListView.builder(
                     itemBuilder: (context, index) => Padding(
@@ -218,41 +214,36 @@ class Home_Screen extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * 0.015,
               ),
               //Rowwwwwwww
-              Positioned(
-                bottom: 5,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MaterialButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              12.0), // Adjust the radius as needed
-                        ),
-                        minWidth: 50.0,
-                        height: 25,
-                        color: AppColor.orangcolor,
-                        child: const Text(' details ',
-                            style:
-                                TextStyle(fontSize: 13.0, color: Colors.white)),
-                        onPressed: () {
-                          navigateToScreen(context, Details_screen());
-                        },
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            12.0), // Adjust the radius as needed
                       ),
-                      Row(
-                        //mainAxisAlignment: MainAxisAlignment.,
-                        children: [
-                          Icon(
-                            Icons.person,
-                            size: 20,
-                            color: AppColor.orangcolor,
-                          ),
-                          Text('1462')
-                        ],
-                      )
-                    ],
-                  ),
+                      minWidth: 40.0,
+                      height: 25,
+                      color: AppColor.orangcolor,
+                      child: const Text(' details ',
+                          style:
+                              TextStyle(fontSize: 13.0, color: Colors.white)),
+                      onPressed: () {},
+                    ),
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          size: 18,
+                          color: AppColor.orangcolor,
+                        ),
+                        Text('1462',style: TextStyle(fontSize: 12),)
+                      ],
+                    )
+                  ],
                 ),
               ),
             ], //Rowwwwwwwwwwwwwwwwwwwwwww
