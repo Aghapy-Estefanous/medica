@@ -2,10 +2,8 @@ import 'dart:ffi';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/screens/auth/ConfirmEmailS/ConfirmEmailS.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/screens/auth/register_auth/cubit/register_State.dart';
 import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
@@ -26,7 +24,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          navigateToScreen(context, ConfirmEmail(ScreenName: LoginScreen(),));
+          navigateToScreen(context, LoginScreen());
           // if (state.model!.status == false) {
           //   showSnackBar(
           //     context,
@@ -68,50 +66,61 @@ class RegisterScreen extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        /////
                         Align(
                           alignment: Alignment.topLeft,
                           child: SizedBox(
-                              height: 140,
-                              child: Stack(
-                                children: [
-                                  Image.asset(
-                                      'assets/images/onboarding/shape.png'),
-                                  Image.asset(
-                                    'assets/images/onboarding/logo.png',
-                                    height: 140,
-                                    width: 130,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Positioned(
-                                    left: 5,
-                                    top: 5,
-                                    child: Container(
-                                      height: 32,
-                                      width: 32,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.white.withOpacity(0.5),
-                                          width: 1.2,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      child: const Icon(
-                                        Icons.arrow_back_ios,
-                                        color: AppColor.whiteColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
+                              child: Image.asset(
+                            'assets/images/Auth/logoFinal.png',
+                            height: 130,
+                            width: 200,
+                            fit: BoxFit.cover,
+                          )),
                         ),
+                        /////
+                        // Align(
+                        //   alignment: Alignment.topLeft,
+                        //   child: ,
+                        // child: SizedBox(
+                        //     height: 140,
+                        //     child: Stack(
+                        //       children: [
+                        //         Image.asset(
+                        //             'assets/images/onboarding/shape.png'),
+                        //         Image.asset(
+                        //           'assets/images/onboarding/logo.png',
+                        //           height: 140,
+                        //           width: 130,
+                        //           fit: BoxFit.cover,
+                        //         ),
+                        //         Positioned(
+                        //           left: 5,
+                        //           top: 5,
+                        //           child: Container(
+                        //             height: 32,
+                        //             width: 32,
+                        //             decoration: BoxDecoration(
+                        //               border: Border.all(
+                        //                 color: Colors.white.withOpacity(0.5),
+                        //                 width: 1.2,
+                        //               ),
+                        //               borderRadius:
+                        //                   BorderRadius.circular(8.0),
+                        //             ),
+                        //             child: const Icon(
+                        //               Icons.arrow_back_ios,
+                        //               color: AppColor.whiteColor,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     )),
+                        //  ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("LOGIN",
+                              Text("Register",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall!
@@ -188,11 +197,11 @@ class RegisterScreen extends StatelessWidget {
                                     fillColor:
                                         Color.fromRGBO(217, 217, 217, 0.27),
                                     filled: true,
-                                    prefixIcon:
-                                        Icon(Iconsax.security_safe),
+                                    prefixIcon: Icon(Iconsax.security_safe),
                                     hintText: 'National ID'),
-                                keyboardType: const TextInputType.numberWithOptions(
-                                    decimal: false, signed: false),
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: false, signed: false),
                               ),
 
                               const SizedBox(
@@ -217,7 +226,7 @@ class RegisterScreen extends StatelessWidget {
                                   fillColor:
                                       Color.fromRGBO(217, 217, 217, 0.27),
                                   filled: true,
-                                  prefixIcon: Icon(Iconsax.sms),
+                                  prefixIcon: Icon(Icons.email_outlined),
                                   hintText: 'Email',
                                 ),
                               ),
@@ -232,9 +241,9 @@ class RegisterScreen extends StatelessWidget {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your password';
                                   } else if (!RegExp(
-                                          r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^\w\d]).{8,}$')
+                                          r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\d]).{5,}$')
                                       .hasMatch(value)) {
-                                    return 'Password must have at least one digit, uppercase  \n and uppercaseletter,and non-alphanumeric character.';
+                                    return 'Password must have at least one uppercase letter, one digit, and one non-alphanumeric character.';
                                   }
                                   return null;
                                 },
@@ -257,127 +266,141 @@ class RegisterScreen extends StatelessWidget {
                                   hintText: 'Password',
                                 ),
                               ),
+                              //************************password filed*************************
+
                               const SizedBox(height: 15),
 
                               TextFormField(
-                                controller: confirmPassController,
-                                obscureText: cubit.isvisiable,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please confirm your password';
-                                  } else if (value != passwordController.text) {
-                                    return 'Password doesn\'t match';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide.none,
+                                  controller: confirmPassController,
+                                  obscureText: cubit.isvisiable,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please confirm your password';
+                                    } else if (value !=
+                                        passwordController.text) {
+                                      return 'Password doesn\'t match';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    fillColor:
+                                        Color.fromRGBO(217, 217, 217, 0.27),
+                                    filled: true,
+                                    prefixIcon: Icon(Iconsax.lock),
+                                    suffixIcon: IconButton(
+                                      alignment: Alignment.centerRight,
+                                      icon: Icon(Icons.visibility_off),
+                                      onPressed: () {
+                                        cubit.ChangeVisiablityIcon();
+                                      },
+                                    ),
+                                    hintText: ' confirm Password',
                                   ),
-                                  fillColor:
-                                      Color.fromRGBO(217, 217, 217, 0.27),
-                                  filled: true,
-                                  prefixIcon: Icon(Iconsax.lock),
-                                  suffixIcon: IconButton(
-                                    alignment: Alignment.centerRight,
-                                    icon: Icon(Icons.visibility_off),
-                                    onPressed: () {
-                                      cubit.ChangeVisiablityIcon();
-                                    },
-                                  ),
-                                  hintText: ' confirm Password',
-                                ),
-                              ),
+                                  onFieldSubmitted: (value) {
+                                  cubit.postRegiserData(
+                                        nid: nidController.text,
+                                        username: usernameController.text,
+                                        name: usernameController.text,
+                                        gender: genderController.text,
+                                        email: emailController.text,
+                                        password: passwordController.text,
+                                        confirmPassword:
+                                            confirmPassController.text,
+                                      );
+                                  }),
                               const SizedBox(height: 15),
-                              // TextFormField(
-                              //   obscureText: cubit.isvisiable,
-                              //   controller: passwordController,
-                              //   validator: (String? value) =>
-                              //       validation(value, "Please enter your password"),
-                              //   decoration: InputDecoration(
-                              //       filled: true,
-                              //       border: OutlineInputBorder(
-                              //           borderRadius: BorderRadius.circular(15.0)),
-                              //       hintText: "Password",
-                              //       hintStyle: const TextStyle(fontSize: 20),
-                              //       prefixIcon: const Icon(Icons.lock, size: 25),
-                              //       suffixIcon: IconButton(
-                              //         onPressed: () {
-                              //           cubit.ChangeVisiablityIcon();
-                              //         },
-                              //         icon: Icon(cubit.icon, size: 25),
-                              //       )),
-                              //   onFieldSubmitted: (value) {
-                              //     // cubit.postRegiserData(
-                              //     //     nid: nidController.text,
-                              //     //     username: nameController.text,
-                              //     //     gender: genderController.text,
-                              //     //     email: emailController.text,
-                              //     //     password: passwordController.text,
-                              //     //     confirmPassword: confirmPassController.text);
-                              //   },
-                              // ),
-                              // const SizedBox(
-                              //   height: 15,
 
-                              const SizedBox(height: 20),
                               ConditionalBuilder(
                                 fallback: (context) => const Center(
                                     child: CircularProgressIndicator()),
                                 builder: (BuildContext context) {
-                                  return 
-                                  // SizedBox(
-                                  //   height: 50,
-                                  //   width: 450,
-                                  //   child: ElevatedButton(
-                                  //     style: ElevatedButton.styleFrom(
-                                  //         backgroundColor:
-                                  //             AppColor.primaryColor),
-                                  //     onPressed: () {
-                                  //       // Validate the form
-                                  //       if (formstate.currentState!
-                                  //           .validate()) {
-                                  //         cubit.postRegiserData(
-                                  //           nid: nidController.text,
-                                  //           username: usernameController.text,
-                                  //           // name: nameController.text,
-                                  //           gender: genderController.text,
-                                  //           email: emailController.text,
-                                  //           password: passwordController.text,
-                                  //           confirmPassword:
-                                  //               confirmPassController.text,
-                                  //         );
-                                  //         print(nidController.text +
-                                  //             passwordController.text +
-                                  //             confirmPassController.text);
-                                  //       }
-                                  //     },
-                                  //     child: const Text('REGISTER'),
-                                  //   ),
-                                  // );
-                                  mySubmitButton(() {
-                                        // Validate the form
-                                        if (formstate.currentState!
-                                            .validate()) {
-                                          cubit.postRegiserData(
-                                            nid: nidController.text,
-                                            username: usernameController.text,
-                                             name: usernameController.text,
-                                            gender: genderController.text,
-                                            email: emailController.text,
-                                            password: passwordController.text,
-                                            confirmPassword:
-                                                confirmPassController.text,
-                                          );
-                                          print(nidController.text +
-                                              passwordController.text +
-                                              confirmPassController.text);
-                                        }
-                                      }, "Register", context);
+                                  return
+                                      // SizedBox(
+                                      //   height: 50,
+                                      //   width: 450,
+                                      //   child: ElevatedButton(
+                                      //     style: ElevatedButton.styleFrom(
+                                      //         backgroundColor:
+                                      //             AppColor.primaryColor),
+                                      //     onPressed: () {
+                                      //       // Validate the form
+                                      //       if (formstate.currentState!
+                                      //           .validate()) {
+                                      //         cubit.postRegiserData(
+                                      //           nid: nidController.text,
+                                      //           username: usernameController.text,
+                                      //           // name: nameController.text,
+                                      //           gender: genderController.text,
+                                      //           email: emailController.text,
+                                      //           password: passwordController.text,
+                                      //           confirmPassword:
+                                      //               confirmPassController.text,
+                                      //         );
+                                      //         print(nidController.text +
+                                      //             passwordController.text +
+                                      //             confirmPassController.text);
+                                      //       }
+                                      //     },
+                                      //     child: const Text('REGISTER'),
+                                      //   ),
+                                      // );
+                                      mySubmitButton(() {
+                                    // Validate the form
+                                    if (formstate.currentState!.validate()) {
+                                      cubit.postRegiserData(
+                                        nid: nidController.text,
+                                        username: usernameController.text,
+                                        name: usernameController.text,
+                                        gender: genderController.text,
+                                        email: emailController.text,
+                                        password: passwordController.text,
+                                        confirmPassword:
+                                            confirmPassController.text,
+                                      );
+                                      print(nidController.text +
+                                          passwordController.text +
+                                          confirmPassController.text);
+                                    }
+                                  }, "Register", context);
                                 },
                                 condition: state is! RegisterLoadingState,
                               ),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  const Text(" Already have an account?  ",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500)),
+                                  InkWell(
+                                    onTap: () {
+                                      navigateToScreen(context, LoginScreen());
+
+                                      //           // CachHelper.removeKey(key: 'token')
+                                      //           //     .then((value) {
+                                      //           //   navigateToScreen(context, RegisterScreen());
+                                      //           // });
+                                    },
+                                    child: const Text(
+                                      'Login',
+                                      style: TextStyle(
+                                          color: AppColor.orangcolor,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                             
                             ],
                           ),
                         ),
@@ -387,5 +410,3 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
-
-

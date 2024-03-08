@@ -1,9 +1,9 @@
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-// import 'package:medica/screens/auth/loginS/loginS.dart';
+import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+// import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class BoardingModel {
   Widget? image;
@@ -14,12 +14,18 @@ class BoardingModel {
 
 List<BoardingModel> onboardingListItems = [
   BoardingModel(
-      image: Lottie.asset('assets/images/onboarding/animation1.json'),
+      image: Lottie.asset(
+        'assets/images/onboarding/animation1.json',
+        // fit: BoxFit.cover,
+      ),
       title: "Discover Care Centers: Booking, Details, and Waitlists",
       discribtion:
           'Explore clinics, labs, and waitlists effortlessly. Easily book appointments, find information, and use a search service for clinics, labs, medicines, and their components.'),
   BoardingModel(
-      image: Lottie.asset('assets/images/onboarding/animation2.json'),
+      image: Lottie.asset(
+        'assets/images/onboarding/animation2.json',
+        // fit: BoxFit.cover,
+      ),
       title: "Your Health Insights: Test Results and Reports",
       discribtion:
           'Get instant access to test results and your medical report. Understand test instructions quickly, empowering you with valuable health insights at your fingertips.'),
@@ -61,120 +67,114 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   ),
                 );
               },
-              child: const Text(
-                'SKIP',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ))
+              child:
+                  Text('SKIP', style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColor.bink,fontSize: 18)))
         ],
       ),
-      body: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  allowImplicitScrolling: true,
-                  physics: const BouncingScrollPhysics(),
-                  controller: BoardingController,
-                  itemBuilder: (context, index) =>
-                      BoardingItems(onboardingListItems[index]),
-                  itemCount: 2,
-                  onPageChanged: (value) {
-                    if (onboardingListItems.length - 1 == value) {
-                      setState(() {
-                        isend = true;
-                      });
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                allowImplicitScrolling: true,
+                physics: const BouncingScrollPhysics(),
+                controller: BoardingController,
+                itemBuilder: (context, index) =>
+                    BoardingItems(context, onboardingListItems[index]),
+                itemCount: 2,
+                onPageChanged: (value) {
+                  if (onboardingListItems.length - 1 == value) {
+                    setState(() {
+                      isend = true;
+                    });
+                  } else {
+                    setState(() {
+                      isend = false;
+                    });
+                  }
+                },
+              ),
+            ),
+            Row(
+              children: [
+                SmoothPageIndicator(
+                    controller: BoardingController,
+                    effect: const ExpandingDotsEffect(
+                      spacing: 12,
+                      activeDotColor: AppColor.primaryColor,
+                      expansionFactor: 4.0,
+                      dotHeight: 12,
+                      dotWidth: 12,
+                    ),
+                    count: onboardingListItems.length),
+                const Spacer(),
+                FloatingActionButton(
+                  backgroundColor: AppColor.primaryColor,
+                  shape: const CircleBorder(eccentricity: 1),
+                  onPressed: () {
+                    if (!isend) {
+                      BoardingController.nextPage(
+                          duration: const Duration(
+                            milliseconds: 800,
+                          ),
+                          curve: Curves.decelerate);
                     } else {
-                      setState(() {
-                        isend = false;
-                      });
+                      //go to login & save to pref ✅
+                      // subimtToshared(context);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => LoginScreen(),
+                        ),
+                      );
                     }
                   },
-                ),
-              ),
-              Row(
-                children: [
-                  SmoothPageIndicator(
-                      controller: BoardingController,
-                      effect: const ExpandingDotsEffect(
-                        spacing: 12,
-                        activeDotColor: AppColor.primaryColor,
-                        expansionFactor: 4.0,
-                        dotHeight: 12,
-                        dotWidth: 12,
-                      ),
-                      count: onboardingListItems.length),
-                  const Spacer(),
-                  FloatingActionButton(
-                    backgroundColor: AppColor.primaryColor,
-                    shape: const CircleBorder(eccentricity: 1),
-                    onPressed: () {
-                      if (!isend) {
-                        BoardingController.nextPage(
-                            duration: const Duration(
-                              milliseconds: 800,
-                            ),
-                            curve: Curves.decelerate);
-                      } else {
-                        //go to login & save to pref ✅
-                        // subimtToshared(context);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => LoginScreen(),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-            ],
-          ),
+                  child: const Icon(
+                    Icons.arrow_forward_ios_sharp,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-Widget BoardingItems(BoardingModel Model) {
+Widget BoardingItems(var context, BoardingModel Model) {
   return Column(
     children: [
-      Padding(
-        padding: const EdgeInsets.all(22.0),
-        child: Model.image,
+      Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+            width: MediaQuery.of(context).size.width * 0.65,
+            height: MediaQuery.of(context).size.height * 0.40,
+            child: Model.image),
       ),
 
-      Text(
-        Model.title.toString(),
-        //  onboardingListItems[index]('title'),
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: AppColor.primaryColor),
-      ),
+      Text(Model.title.toString(),
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: AppColor.primaryColor,
+              fontWeight: FontWeight.w500,
+              fontSize: 18)),
       const SizedBox(
-        height: 20,
+        height: 10,
       ),
       Expanded(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
             Model.discribtion.toString(),
-            style: const TextStyle(
-                fontSize: 18,
-                color: Color.fromARGB(255, 112, 108, 108),
-                fontWeight: FontWeight.w500),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: const Color.fromARGB(255, 122, 119, 119),
+                fontWeight: FontWeight.w600),
             textAlign: TextAlign.start,
           ),
         ),
