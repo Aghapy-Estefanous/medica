@@ -1,3 +1,4 @@
+import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -71,17 +72,12 @@ class LoginScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: SizedBox(
-                        height: 140,
-                        child: Stack(children: [
-                          Image.asset('assets/images/onboarding/shape.png'),
-                          Image.asset(
-                            'assets/images/onboarding/logo.png',
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        ]),
-                      ),
+                          child: Image.asset(
+                        'assets/images/Auth/logoFinal.png',
+                        height: 130,
+                        width: 200,
+                        fit: BoxFit.cover,
+                      )),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -123,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               fillColor: Color.fromRGBO(217, 217, 217, 0.27),
                               filled: true,
-                              prefixIcon: Icon(Icons.email_outlined),
+                              prefixIcon: Icon(Iconsax.sms),
                               hintText: 'Email',
                             ),
                           ),
@@ -138,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';
                               } else if (!RegExp(
-                                      r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^\w\d]).{8,}$')
+                                      r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^\w\d]).{6,}$')
                                   .hasMatch(value)) {
                                 return 'Password must have at least one digit, uppercase  \n and uppercaseletter,and non-alphanumeric character.';
                               }
@@ -151,7 +147,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               fillColor: Color.fromRGBO(217, 217, 217, 0.27),
                               filled: true,
-                              prefixIcon: Icon(Icons.lock_outlined),
+                              prefixIcon: Icon(Iconsax.lock),
                               suffixIcon: IconButton(
                                 alignment: Alignment.centerRight,
                                 icon: Icon(Icons.visibility_off),
@@ -262,4 +258,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-  
