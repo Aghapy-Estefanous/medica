@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/styles/themes.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -19,8 +20,8 @@ main() {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginCubit()), // Your login provider
-        BlocProvider(
-            create: (context) => RegisterCubit()), // Your register provider
+        BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => NewPasswordCubit()),
       ],
       child: const MainApp(),
     ),

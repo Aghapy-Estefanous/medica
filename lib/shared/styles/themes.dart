@@ -4,14 +4,20 @@ import 'package:medica/shared/styles/AppColor.dart';
 
 ThemeData liteTheme() {
   return ThemeData(
-    primaryColor: Color(0xFF024d9a),
-    highlightColor: Colors.red,
+    primaryColor: AppColor.primaryColor,
+    highlightColor: AppColor.highlightColor,
     textTheme: const TextTheme(
+        bodyLarge: TextStyle(fontSize: 20),
+        bodySmall: TextStyle(fontSize: 10, color: AppColor.dividerColor),
         bodyMedium: TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      color: Colors.black,
-    )),
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: Colors.black,
+        )),
+    dividerTheme: DividerThemeData(
+      thickness: 1,
+      color: AppColor.dividerColor,
+    ),
     colorScheme: ColorScheme.light(background: Colors.white),
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0.0,
