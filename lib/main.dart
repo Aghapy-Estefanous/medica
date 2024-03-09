@@ -5,6 +5,7 @@ import 'package:medica/shared/styles/themes.dart';
 import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/screens/see_all/see_all.dart';
 import 'package:medica/shared/cubit/blocObservser.dart';
+import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
