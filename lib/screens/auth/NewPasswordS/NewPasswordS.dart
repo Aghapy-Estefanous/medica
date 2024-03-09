@@ -45,9 +45,7 @@ class NewPassword extends StatelessWidget {
                           suffixIcon: IconButton(
                             alignment: Alignment.centerRight,
                             icon: Icon(Icons.visibility),
-                            onPressed: () {
-                              
-                            },
+                            onPressed: () {},
                           ),
                           border: InputBorder.none,
                           hintText: 'New Password',
@@ -70,8 +68,7 @@ class NewPassword extends StatelessWidget {
                           suffixIcon: IconButton(
                             alignment: Alignment.centerRight,
                             icon: Icon(Icons.visibility),
-                            onPressed: () {
-                            },
+                            onPressed: () {},
                           ),
                           border: InputBorder.none,
                           hintText: 'Confirm New Password',
@@ -85,43 +82,9 @@ class NewPassword extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromRGBO(250, 191, 113, 1),
-                            Color.fromRGBO(250, 147, 13, 1),
-                          ], // Define multiple colors for gradient
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                            10.0), // Adjust border radius as needed
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              onPressed: () {
-                                navigateandFinish(context, LoginScreen());
-                              },
-                              child: Text(
-                                'Confirm',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    mySubmitButton(() {
+                      navigateandFinish(context, LoginScreen());
+                    }, 'Confirm', context)
                   ]),
             ),
           ],

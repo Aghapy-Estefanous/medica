@@ -4,8 +4,8 @@ import 'package:medica/shared/styles/AppColor.dart';
 
 ThemeData liteTheme() {
   return ThemeData(
-    primaryColor: Color(0xFF024d9a),
-    highlightColor: Colors.red,
+    primaryColor: AppColor.primaryColor,
+    highlightColor: AppColor.highlightColor,
     textTheme: const TextTheme(
         bodyMedium: TextStyle(
       fontSize: 16,

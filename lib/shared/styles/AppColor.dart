@@ -9,4 +9,5 @@ class AppColor {
   static const Color secondaryTextColor = Color(0xFF000000);
   static const Color bink = Color(0xFFae2081);
   static const Color brawn = Color(0xFF383737);
+  static const Color highlightColor = Color.fromRGBO(250, 147, 13, 1);
 }

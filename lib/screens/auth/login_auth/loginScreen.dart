@@ -164,8 +164,8 @@ class LoginScreen extends StatelessWidget {
                           InkWell(
                             child: Text(
                               ' Forgot password?',
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(250, 147, 13, 1),
+                              style: TextStyle(
+                                  color: Theme.of(context).highlightColor,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -188,32 +188,6 @@ class LoginScreen extends StatelessWidget {
                                   );
                                 }
                               }, "Login", context);
-                              // SizedBox(
-                              //   height: 50,
-                              //   width: 450,
-                              //   child: ElevatedButton(
-                              //     style: ElevatedButton.styleFrom(
-                              //         backgroundColor: AppColor.orangcolor),
-                              // onPressed: () {
-                              //   // Validate the form
-                              //   if (formstate.currentState!.validate()) {
-                              //     cubit.userlogin(
-                              //       email: emailController.text
-                              //           .trim(), // Get the text value from the controller
-                              //       password: passwordController.text
-                              //           .trim(), // Get the text value from the controller
-                              //     );
-                              //   }
-                              //       // print(emailController.text +
-                              //       //     passwordController.text);
-                              //     },
-                              //     child: const Text(
-                              //       'LOGIN',
-                              //       style:
-                              //           TextStyle(color: AppColor.whiteColor),
-                              //     ),
-                              //   ),
-                              // );
                             },
                             condition: state is! LoginLoadingState,
                           ),
@@ -229,16 +203,11 @@ class LoginScreen extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   navigateToScreen(context, RegisterScreen());
-
-                                  //           // CachHelper.removeKey(key: 'token')
-                                  //           //     .then((value) {
-                                  //           //   navigateToScreen(context, RegisterScreen());
-                                  //           // });
                                 },
-                                child: const Text(
+                                child: Text(
                                   'Create one .',
                                   style: TextStyle(
-                                      color: AppColor.orangcolor,
+                                      color: Theme.of(context).highlightColor,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500),
                                 ),

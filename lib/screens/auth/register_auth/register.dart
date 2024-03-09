@@ -160,7 +160,7 @@ class RegisterScreen extends StatelessWidget {
                                   if (value == null || value.isEmpty)
                                     return "Please enter your user name";
                                   else if (value!.length < 4) {
-                                    return "name lenght at least 4 chars ";
+                                    return "name length must be at least 4 chars ";
                                   }
                                 },
                                 decoration: InputDecoration(
