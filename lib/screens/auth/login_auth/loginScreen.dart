@@ -207,7 +207,7 @@ class LoginScreen extends StatelessWidget {
                                 child: Text(
                                   'Create one .',
                                   style: TextStyle(
-                                      color: Theme.of(context).highlightColor,
+                                      color: AppColor.highlightColor,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500),
                                 ),

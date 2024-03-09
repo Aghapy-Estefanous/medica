@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -301,16 +300,16 @@ class RegisterScreen extends StatelessWidget {
                                     hintText: ' confirm Password',
                                   ),
                                   onFieldSubmitted: (value) {
-                                  cubit.postRegiserData(
-                                        nid: nidController.text,
-                                        username: usernameController.text,
-                                        name: usernameController.text,
-                                        gender: genderController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                        confirmPassword:
-                                            confirmPassController.text,
-                                      );
+                                    cubit.postRegiserData(
+                                      nid: nidController.text,
+                                      username: usernameController.text,
+                                      name: usernameController.text,
+                                      gender: genderController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      confirmPassword:
+                                          confirmPassController.text,
+                                    );
                                   }),
                               const SizedBox(height: 15),
 
@@ -400,7 +399,6 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                             
                             ],
                           ),
                         ),
