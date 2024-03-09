@@ -38,7 +38,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
           theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: Splash_screen()),
+          home: TicketScreen()) //Splash_screen()),
     );
   }
 }

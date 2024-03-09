@@ -1,5 +1,6 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/home_layout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
@@ -46,7 +47,7 @@ class LoginScreen extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const Home_Screen(),
+                builder: (context) => const ShopLayout(),
               ),
               (route) => false,
             );
