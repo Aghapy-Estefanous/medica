@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/screens/home/home_screen.dart';
+import 'package:medica/screens/reservation/ticketScreen.dart';
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
 
@@ -11,23 +12,23 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(InitialState());
   // get instance of App cubit
   static AppCubit get(context) => BlocProvider.of(context);
-  List<BottomNavigationBarItem> BottomNavItems = const [
-    BottomNavigationBarItem(
+  List<NavigationDestination> BottomNavItems = const [
+    NavigationDestination(
         label: "Home",
         icon: Icon(
           Icons.home,
         )),
-    BottomNavigationBarItem(
+    NavigationDestination(
         label: "Categories",
         icon: Icon(
           Icons.category,
         )),
-    BottomNavigationBarItem(
+    NavigationDestination(
         label: "Favorites",
         icon: Icon(
           Icons.favorite,
         )),
-    BottomNavigationBarItem(
+    NavigationDestination(
         label: "settings",
         icon: Icon(
           Icons.settings,
@@ -37,7 +38,7 @@ class AppCubit extends Cubit<AppState> {
     Home_Screen(),
     Splash_screen(),
     Splash_screen(),
-    Splash_screen(),
+     TicketScreen(),
     // produts_screen(),
     // //shopHome_screen(),
     // categories_screen(),

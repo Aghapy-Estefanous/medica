@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 
-
-
-class ShopLayout extends StatelessWidget {
-  const ShopLayout({super.key});
+class HomeLayout extends StatelessWidget {
+  const HomeLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +15,31 @@ class ShopLayout extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            items: cubit.BottomNavItems,
-            currentIndex: cubit.currentIndex,
-           
-            onTap: (int index) {
-              cubit.ChangeBottomNavigateBar(index: index);
-            },
-          ),
-          body:cubit.Screen[cubit.currentIndex]
-        );
+            bottomNavigationBar: NavigationBar(
+              height: 75,
+              backgroundColor: Colors.white,
+              indicatorColor: Color.fromARGB(255, 120, 189, 235),
+
+              animationDuration: Duration(milliseconds: 1100),
+              //onDestinationSelected: cubit.currentIndex,
+              destinations: cubit.BottomNavItems,
+              selectedIndex: cubit.currentIndex,
+
+              onDestinationSelected: (int index) {
+                cubit.ChangeBottomNavigateBar(index: index);
+              },
+            ),
+            //body: Screen[_currentNavBarIndex],
+
+            //  BottomNavigationBar(
+            //   items: cubit.BottomNavItems,
+            //   currentIndex: cubit.currentIndex,
+
+            //   onTap: (int index) {
+            //     cubit.ChangeBottomNavigateBar(index: index);
+            //   },
+            // ),
+            body: cubit.Screen[cubit.currentIndex]);
       },
     );
   }

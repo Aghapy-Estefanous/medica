@@ -1,3 +1,4 @@
+import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
@@ -44,8 +45,73 @@ class TicketScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Divider(
+                            const Divider(
                               color: Colors.grey,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.calendar_month,
+                                      size: 20,
+                                    ),
+                                    Container(
+                                      height: 22,
+                                      decoration: BoxDecoration(
+                                          color: Color.fromARGB(
+                                              255, 233, 206, 232),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(4),
+                                          )),
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            '12-dec-2020',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge!
+                                                .copyWith(
+                                                    color: AppColor.bink,
+                                                    fontSize: 12),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.timer_outlined,
+                                      size: 18,
+                                      weight: 30,
+                                    ),
+                                    Container(
+                                      height: 22,
+                                      decoration: BoxDecoration(
+                                          color:Color.fromARGB(157, 141, 192, 240),// Color.fromARGB( 255, 233, 206, 232),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(4),
+                                          )),
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            '10.30 Am',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge!
+                                                .copyWith(
+                                                    color:
+                                                        AppColor.primaryColor,
+                                                    fontSize: 12),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
                             ),
                             myContianerTitleText("Name :", context),
                             Text(
@@ -53,13 +119,7 @@ class TicketScreen extends StatelessWidget {
                               style:
                                   TextStyle(color: Colors.black, fontSize: 16),
                             ),
-                            myContianerTitleText("waiting list :", context),
 
-                            Text(
-                              " 6677 person",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                            ),
                             // //clinic
                             // Divider(
                             //   color: Colors.grey,
@@ -105,23 +165,25 @@ class TicketScreen extends StatelessWidget {
                                 //     ),
                                 //   ),
                                 // )
-                                Container(
-                                  height: 22,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 242, 223, 166),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      )),
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        '123 \$',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge!
-                                            .copyWith(
-                                                color: AppColor.orangcolor),
-                                      )),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.group_add_outlined,
+                                      size: 18,
+                                      weight: 30,
+                                      color: AppColor.orangcolor,
+                                    ),
+                                    TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          '1232 ',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge!
+                                              .copyWith(),
+                                        )),
+                                  ],
                                 ),
 
                                 Container(
@@ -167,16 +229,17 @@ class TicketScreen extends StatelessWidget {
     return Container(
       height: 20,
       decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 193, 225, 238),
+          color: Color.fromARGB(100, 208, 206, 206), // Color.fromARGB(255, 193, 225, 238),
           borderRadius: BorderRadius.all(
-            Radius.circular(20),
+            Radius.circular(3),
           )),
       child: TextButton(
           onPressed: () {},
           child: Text(
             '${TitleName}',
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: AppColor.primaryColor,
+                  color: Colors.black,
+                  fontSize: 14,
                 ),
           )),
     );
@@ -190,7 +253,7 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
       //  var ticket = TicketList[index];
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        backgroundColor: AppColor.primaryColor,
+        // backgroundColor: const Color.fromARGB(65, 255, 255, 255),
         title: const Text(
           "تفاصيل الطلب",
           style: TextStyle(color: Colors.white),
@@ -200,7 +263,7 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
             height: MediaQuery.of(context).size.height * 0.90,
             isCornerRounded: true,
             padding: EdgeInsets.all(20),
-            shadow: [BoxShadow()],
+            //shadow: [BoxShadow()],
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -285,7 +348,7 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
         actions: <Widget>[
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.bink,
+              backgroundColor: AppColor.orangcolorwithOpacity,
             ),
             child: const Text(
               "الغاء",
