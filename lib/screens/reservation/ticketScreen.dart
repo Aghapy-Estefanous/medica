@@ -219,7 +219,7 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
       //  var ticket = TicketList[index];
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        // backgroundColor: const Color.fromARGB(65, 255, 255, 255),
+        backgroundColor: AppColor.primaryColor,
         title: const Text(
           "تفاصيل الطلب",
           style: TextStyle(color: Colors.white),
@@ -314,11 +314,11 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
         actions: <Widget>[
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.orangcolorwithOpacity,
+              backgroundColor: AppColor.bink,
             ),
             child: const Text(
-              "الغاء",
-              style: TextStyle(),
+              "Print",
+              style: TextStyle(color: AppColor.secondaryTextColor),
             ),
             onPressed: () {
               Navigator.of(context).pop();
