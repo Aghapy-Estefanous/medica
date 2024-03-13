@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/models/login_model.dart';
+import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
+
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
@@ -15,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     dio_helper.postData(
             
-        url: 'http://medicalsystem-001-site1.ftempurl.com/api/Auth/LogIn',
+        url: BaseUrl+LOGIN,
         data: {
           'userName': userName,
           'password': password,
