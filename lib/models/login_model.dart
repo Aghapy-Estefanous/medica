@@ -1,16 +1,31 @@
 class LoginModel {
-  // int? status;
-  // String? message;
+  dynamic status;
+  bool? succeeded;
+  String? message;
   UserModel? data;
+  List<Map<String, dynamic>>? errorsList;
+
   LoginModel({
-    // this.status,
-    // this.message,
+    this.status,
+    this.succeeded,
+    this.message,
     this.data,
+    this.errorsList,
   });
-  LoginModel.fromjason(Map<String, dynamic> json) {
-    // status = json['status'];
-    // message = json['message'];
-    data = json['data'] != null ? UserModel.Fromjson(json['data']) : null;
+
+  LoginModel.fromJson(Map<String, dynamic> json) {
+    status = json['statusCode'];
+    succeeded = json['succeeded'];
+    message = json['message'];
+
+    errorsList = [];
+    if (json['errors'] != null) {
+      json['errors'].forEach((element) {
+        errorsList?.add(Map<String, dynamic>.from(element));
+      });
+    }
+
+    data = json['data'] != null ? UserModel.fromJson(json['data']) : null;
   }
 }
 
@@ -19,16 +34,15 @@ class UserModel {
   String? email;
   String? nid;
   String? gender;
-  bool? isAuthenticted;
+  bool? isAuthenticated;
   String? token;
 
-  //named constructor "with any name" and delete ordinary constructor
-  UserModel.Fromjson(Map<String, dynamic> jsondata) {
-    nid = jsondata['nid'];
-    name = jsondata['username'];
-    email = jsondata['email'];
-    isAuthenticted = jsondata['isAuthenticted'];
-    gender = jsondata['gender'];
-    token = jsondata['token'];
+  UserModel.fromJson(Map<String, dynamic> json) {
+    nid = json['nid'];
+    name = json['name'];
+    email = json['email'];
+    isAuthenticated = json['isAuthenticted'];
+    gender = json['gender'];
+    token = json['token'];
   }
 }
