@@ -9,14 +9,13 @@ class LoginLoadingState extends LoginState {}
 class LoginSuccessgState extends LoginState {
   LoginModel? model;
   int? StatusCode;
-  LoginSuccessgState(this.model,this.StatusCode);
+  LoginSuccessgState(this.model, this.StatusCode);
 }
 //@@Doa2@@
 
 class LoginErrorState extends LoginState {
-  //LoginModel? model;
-   var error;
-  // final String StatusCodeInt;
+  var error;
+
   LoginErrorState(this.error);
 }
 

@@ -40,7 +40,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home:LoginScreen()) //Splash_screen()),
+          home: Splash_screen()),
     );
   }
 }
