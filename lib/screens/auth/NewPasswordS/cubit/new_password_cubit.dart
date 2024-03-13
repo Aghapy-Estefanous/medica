@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import '../../../../models/login_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 
-import '../../../../models/login_model.dart';
 
 part 'new_password_state.dart';
 
@@ -27,7 +27,7 @@ class NewPasswordCubit extends Cubit<NewPasswordState> {
           'confirmPassword': confirmPassword,
         }).then((value) {
       print("here the data send ${value!.data}");
-      LoginModel CURRENT_USER = LoginModel.fromjason(value.data);
+      LoginModel CURRENT_USER = LoginModel.fromJson(value.data);
       if (value.statusCode != 200) {
         print("there is some error${value.statusCode}");
       } else {

@@ -15,7 +15,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -25,41 +25,39 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginErrorState) {
+            //  print(LoginCubit.get(context).CURRENT_USER);
             showtoast(
               context: context,
-              Message: " error in email or password",
+              Message: " error pass or user",
               color: Colors.red,
             );
-          }
-          if (state is LoginSuccessgState) {
-            //if (state.model?.status == true) {
-            // print(state.model?.data!.token);
-            // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
-            //     .then((value) {
-            //   token = state.model?.data!.token;
-            //   print(CachHelper.getdata(key: 'token'));
-            // });
-            showtoast(
-              context: context,
-              Message: " login successfully ",
-              color: Color.fromARGB(255, 60, 189, 53),
-            );
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomeLayout(),
-              ),
-              (route) => false,
-            );
-
-            // } else {
-            //    showtoast(
-            //     context:context,
-            //     Message: state.model!.message.toString(),
-            //     color: Color.fromARGB(255, 103, 31, 13),
-            //   );
-
-            //}
+          } else if (state is LoginSuccessgState) {
+            if (state.model?.succeeded == true) {
+              print(state.model?.data!.token);
+              // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
+              //     .then((value) {
+              //   token = state.model?.data!.token;
+              //   print(CachHelper.getdata(key: 'token'));
+              // });
+              showtoast(
+                context: context,
+                Message: state.model!.message.toString(),
+                color: Color.fromARGB(255, 60, 189, 53),
+              );
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomeLayout(),
+                ),
+                (route) => false,
+              );
+            } else {
+              showtoast(
+                context: context,
+                Message: state.model!.message.toString(),
+                color: Color.fromARGB(255, 145, 48, 24),
+              );
+            }
           }
         },
         builder: (context, state) {
@@ -101,9 +99,9 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 15,
                           ),
-                          //************************email filed*************************
+                          //************************username filed*************************
                           TextFormField(
-                            controller: emailController,
+                            controller: usernameController,
                             // validator: (value) {
                             //   if (value == null || value.isEmpty) {
                             //     return 'Please enter your email';
@@ -120,8 +118,8 @@ class LoginScreen extends StatelessWidget {
                               ),
                               fillColor: Color.fromRGBO(217, 217, 217, 0.27),
                               filled: true,
-                              prefixIcon: Icon(Iconsax.sms),
-                              hintText: 'Email',
+                              prefixIcon: const Icon(Iconsax.user),
+                              hintText: 'User Name',
                             ),
                           ),
 
@@ -137,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                               } else if (!RegExp(
                                       r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^\w\d]).{6,}$')
                                   .hasMatch(value)) {
-                                return 'Password must have at least one digit, uppercase  \n and uppercaseletter,and non-alphanumeric character.';
+                                return 'must have at least one digit,upper-lower\ncase ,non-alphanumeric char,';
                               }
                               return null;
                             },
@@ -166,9 +164,7 @@ class LoginScreen extends StatelessWidget {
                             child: Text(
                               ' Forgot password?',
                               style: TextStyle(
-                                  color: Theme.of(context).highlightColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 15, fontWeight: FontWeight.w500),
                             ),
                             onTap: () {
                               navigateToScreen(
@@ -184,7 +180,7 @@ class LoginScreen extends StatelessWidget {
                               return mySubmitButton(() {
                                 if (formstate.currentState!.validate()) {
                                   cubit.userlogin(
-                                    email: emailController.text.trim(),
+                                    userName: usernameController.text.trim(),
                                     password: passwordController.text.trim(),
                                   );
                                 }

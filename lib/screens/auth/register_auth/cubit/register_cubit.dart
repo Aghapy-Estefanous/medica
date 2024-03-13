@@ -30,7 +30,7 @@ class RegisterCubit extends Cubit<RegisterState> {
           'confirmPassword': confirmPassword,
         }).then((value) {
       print("here the data send ${value!.data}");
-      LoginModel CURRENT_USER = LoginModel.fromjason(value.data);
+      LoginModel CURRENT_USER = LoginModel.fromJson(value.data);
       if (value.statusCode != 200) {
         print("there is some error${value.statusCode}");
       } else {

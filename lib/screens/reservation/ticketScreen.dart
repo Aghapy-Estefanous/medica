@@ -1,4 +1,3 @@
-import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
@@ -89,7 +88,8 @@ class TicketScreen extends StatelessWidget {
                                     Container(
                                       height: 22,
                                       decoration: BoxDecoration(
-                                          color:Color.fromARGB(157, 141, 192, 240),// Color.fromARGB( 255, 233, 206, 232),
+                                          color: Color.fromARGB(157, 141, 192,
+                                              240), // Color.fromARGB( 255, 233, 206, 232),
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(4),
                                           )),
@@ -119,11 +119,6 @@ class TicketScreen extends StatelessWidget {
                               style:
                                   TextStyle(color: Colors.black, fontSize: 16),
                             ),
-
-                            // //clinic
-                            // Divider(
-                            //   color: Colors.grey,
-                            // ),
                             myContianerTitleText("Clinic Name :", context),
                             Text(
                               " dentist clinicdentist clinicdentist clinic",
@@ -136,35 +131,6 @@ class TicketScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                // ElevatedButton(
-                                //   onPressed: () {
-                                //     //      showDialogDetailsOrder(context, index,l);
-                                //   },
-                                //   style: ElevatedButton.styleFrom(
-                                //     backgroundColor: AppColor.primaryColor,
-                                //   ),
-                                //   child: const Text(
-                                //     'Show ',
-                                //     style: TextStyle(
-                                //       color: Colors.white,
-                                //     ),
-                                //   ),
-                                // ),
-                                // const SizedBox(
-                                //   width: 20,
-                                // ),
-                                // ElevatedButton(
-                                //   onPressed: () {},
-                                //   style: ElevatedButton.styleFrom(
-                                //     backgroundColor: AppColor.primaryColor,
-                                //   ),
-                                //   child: const Text(
-                                //     ' Delete ',
-                                //     style: TextStyle(
-                                //       color: Colors.white,
-                                //     ),
-                                //   ),
-                                // )
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -185,7 +151,6 @@ class TicketScreen extends StatelessWidget {
                                         )),
                                   ],
                                 ),
-
                                 Container(
                                   height: 22,
                                   decoration: BoxDecoration(
@@ -229,7 +194,8 @@ class TicketScreen extends StatelessWidget {
     return Container(
       height: 20,
       decoration: const BoxDecoration(
-          color: Color.fromARGB(100, 208, 206, 206), // Color.fromARGB(255, 193, 225, 238),
+          color: Color.fromARGB(
+              100, 208, 206, 206), // Color.fromARGB(255, 193, 225, 238),
           borderRadius: BorderRadius.all(
             Radius.circular(3),
           )),
