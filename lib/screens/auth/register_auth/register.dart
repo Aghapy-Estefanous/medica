@@ -1,5 +1,6 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/home_layout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
@@ -23,36 +24,33 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          navigateToScreen(context, LoginScreen());
-          // if (state.model!.status == false) {
-          //   showSnackBar(
-          //     context,
-          //     message: state.model!.message.toString(),
-          //     snackColor: const Color(0xFFB71C1C),
-          //   );
-          // } else {
-          //   showSnackBar(
-          //     context,
-          //     message: state.model!.message.toString(),
-          //     snackColor: baseColor,
-          //   );
-          //   CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
-          //       .then(
-          //     (value) {
-          //       token = state.model?.data!.token;
-          //       print('from register token value is :$value');
-          //       print('from register token from model is :$token');
-          //       Navigator.pushAndRemoveUntil(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => const ShopLayout(),
-          //         ),
-          //         (route) => false,
-          //       );
-          //       // navigateToScreen(context, const ShopLayout());
-          //     },
-          //   );
-          // }
+          if (state.model!.succeeded == false) {
+            showtoast(
+              context: context,
+              Message: state.model!.message.toString(),
+              color: Color.fromARGB(255, 60, 189, 53),
+            );
+          } else {
+            showtoast(
+              context: context,
+              Message: state.model!.message.toString(),
+              color: const Color(0xFFB71C1C),
+            );
+            // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
+            //     .then(
+            //   (value) {
+            //     token = state.model?.data!.token;
+            //     print('from register token value is :$value');
+            //     print('from register token from model is :$token');
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeLayout(),
+              ),
+              (route) => false,
+            );
+            // navigateToScreen(context, const ShopLayout());
+          }
         }
       },
       builder: (context, state) {

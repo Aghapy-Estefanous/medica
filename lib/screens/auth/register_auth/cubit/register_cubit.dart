@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/models/login_model.dart';
+import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/auth/register_auth/cubit/register_State.dart';
 
@@ -18,17 +19,14 @@ class RegisterCubit extends Cubit<RegisterState> {
   }) {
     emit(RegisterLoadingState());
 
-    dio_helper.postData(
-        url: 'http://medicalsystem-001-site1.ftempurl.com/api/Auth/register',
-        data: {
-          'nid': nid,
-          'name': name,
-          'username': username,
-          'gender': gender,
-          'email': email,
-          'password': password,
-          'confirmPassword': confirmPassword,
-        }).then((value) {
+    dio_helper.postData(url: BaseUrl + REGISTER, data: {
+      'nid': nid,
+      'username': username,
+      'gender': gender,
+      'email': email,
+      'password': password,
+      'confirmPassword': confirmPassword,
+    }).then((value) {
       print("here the data send ${value!.data}");
       LoginModel CURRENT_USER = LoginModel.fromJson(value.data);
       if (value.statusCode != 200) {
