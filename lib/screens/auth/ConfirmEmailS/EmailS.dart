@@ -27,7 +27,7 @@ class Email extends StatelessWidget {
           if (state is EmailErrorState) {
             showtoast(
               context: context,
-              Message: "email not found",
+              Message: state.error,
               color: Colors.red,
             );
           }
