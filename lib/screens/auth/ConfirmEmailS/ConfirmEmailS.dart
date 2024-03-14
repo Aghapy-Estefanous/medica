@@ -1,290 +1,135 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
+import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/SharedWidget.dart';
 
-class ConfirmEmail extends StatefulWidget {
+class ConfirmEmail extends StatelessWidget {
   Widget ScreenName;
+  String Email;
   ConfirmEmail({
     Key? key,
     required this.ScreenName,
+    required this.Email,
   }) : super(key: key);
 
-  @override
-  State<ConfirmEmail> createState() => _ConfirmEmailState();
-}
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
+  // TextEditingController emailController = TextEditingController();
+  // TextEditingController otpController = TextEditingController();
+  String otp = '';
 
-class _ConfirmEmailState extends State<ConfirmEmail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 200,
-            child: Stack(
-              alignment: Alignment.topLeft,
-              children: [
-                Image.asset('assets/images/onboarding/shape.png'),
-                Text(
-                  'ConfirmEmail',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-          SafeArea(
-              minimum: EdgeInsets.all(10),
+    return BlocProvider(
+      create: (context) => ConfirmEmailCubit(),
+      child: BlocConsumer<ConfirmEmailCubit, ConfirmEmailState>(
+        listener: (context, state) {
+          if (state is ConfirmEmailErrorState) {
+            showtoast(
+              context: context,
+              Message: "Invalid OTP or expired",
+              color: Colors.red,
+            );
+          }
+          if (state is ConfirmEmailSuccessgState) {
+            showtoast(
+              context: context,
+              Message: "OTP correct",
+              color: Color.fromARGB(255, 60, 189, 53),
+            );
+            navigateandFinish(context, ScreenName);
+          }
+        },
+        builder: (context, state) {
+          ConfirmEmailCubit cubit = ConfirmEmailCubit.get(context);
+          return Scaffold(
+            body: Form(
+              key: formstate,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'we have send verification code for your email xxxdoaa@ gmail.com please enter code digits',
-                    style: TextStyle(color: Color.fromRGBO(135, 135, 135, 1)),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                        child: Image.asset(
+                      'assets/images/Auth/logoFinal.png',
+                      height: 130,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    )),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  OtpTextField(
-                    borderRadius: BorderRadius.circular(15),
-                    // filled: true,
-                    // fillColor: Color.fromRGBO(217, 217, 217, 1),
-                    numberOfFields: 6,
-                    // borderWidth: 4.0,
-                    borderColor: Color(0xFF512DA8),
-                    //set to true to show as box or false to show as dash
-                    showFieldAsBox: true,
-
-                    //runs when a code is typed in
-                    onCodeChanged: (String code) {
-                      //handle validation or checks here
-                    },
-                    //runs when every textfield is filled
-                    onSubmit: (String verificationCode) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text("Verification Code"),
-                              content:
-                                  Text('Code entered is $verificationCode'),
-                            );
-                          });
-                    }, // end onSubmit
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromRGBO(250, 191, 113, 1),
-                          Color.fromRGBO(250, 147, 13, 1),
-                        ], // Define multiple colors for gradient
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust border radius as needed
-                    ),
-                    child: Row(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: TextButton(
-                            onPressed: () {
-                              navigateandFinish(context, widget.ScreenName);
-                            },
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              'Confirm ',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
+                        Text("Enter the OTP",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(color: Colors.black)),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                            "we have sent a verification code for your email $Email please enter code digits",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(color: Colors.grey, fontSize: 18)),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        OtpTextField(
+                          borderRadius: BorderRadius.circular(15),
+                          // filled: true,
+                          // fillColor: Color.fromRGBO(217, 217, 217, 1), 
+                          numberOfFields: 6,
+                          // borderWidth: 4.0,
+                          borderColor: Color(0xFF512DA8),
+                          //set to true to show as box or false to show as dash
+                          showFieldAsBox: true,
+
+                          //runs when a code is typed in
+                          onCodeChanged: (String code) {
+                            //handle validation or checks here
+                          },
+                          //runs when every textfield is filled
+                          onSubmit: (String verificationCode) {
+                            otp = verificationCode;
+                            print(otp);
+                          }, // end onSubmit
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ConditionalBuilder(
+                          fallback: (context) =>
+                              const Center(child: CircularProgressIndicator()),
+                          builder: (BuildContext context) {
+                            return mySubmitButton(() {
+                              if (formstate.currentState!.validate()) {
+                                cubit.Email(
+                                  Email: Email,
+                                  OTP: otp,
+                                );
+                              }
+                            }, 'Enter the OTP', context);
+                          },
+                          condition: state is! ConfirmEmailLoadingState,
                         ),
                       ],
                     ),
                   ),
                 ],
-              )
-              //       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-
-              //     SizedBox(
-              //       height: 40,
-              //     ),
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           color: const Color.fromRGBO(217, 217, 217, 0.27),
-              //           borderRadius: BorderRadius.all(Radius.circular(20))),
-              //       child: TextField(
-              //         keyboardType: TextInputType.emailAddress,
-              //         decoration: InputDecoration(
-              //             prefixIcon: Icon(Icons.email_outlined),
-              //             border: InputBorder.none,
-              //             hintText: 'E-mail'),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       height: 20,
-              //     ),
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           color: const Color.fromRGBO(217, 217, 217, 0.27),
-              //           borderRadius: BorderRadius.all(Radius.circular(20))),
-              //       child: TextField(
-              //         decoration: InputDecoration(
-              //           prefixIcon: Icon(Icons.lock_outlined),
-              //           suffixIcon: IconButton(
-              //             alignment: Alignment.centerRight,
-              //             icon: Icon(_obscureText
-              //                 ? Icons.visibility_off
-              //                 : Icons.visibility),
-              //             onPressed: () {
-              //               setState(() {
-              //                 _obscureText = !_obscureText;
-              //               });
-              //             },
-              //           ),
-              //           border: InputBorder.none,
-              //           hintText: 'Password',
-              //         ),
-              //         obscureText: _obscureText,
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       height: 10,
-              //     ),
-              //     InkWell(
-              //       child: Text(
-              //         'Forgot password?',
-              //         style: TextStyle(
-              //             color: Color.fromRGBO(250, 147, 13, 1),
-              //             fontSize: 15,
-              //             fontWeight: FontWeight.w500),
-              //       ),
-              //       onTap: () {
-              //         navigateToScreen(context, ForgotPassword());
-              //       },
-              //     ),
-              //     SizedBox(
-              //       height: 30,
-              //     ),
-              //     Container(
-              //       decoration: BoxDecoration(
-              //         gradient: LinearGradient(
-              //           colors: [
-              //             Color.fromRGBO(250, 191, 113, 1),
-              //             Color.fromRGBO(250, 147, 13, 1),
-              //           ], // Define multiple colors for gradient
-              //           begin: Alignment.centerLeft,
-              //           end: Alignment.centerRight,
-              //         ),
-              //         borderRadius: BorderRadius.circular(
-              //             10.0), // Adjust border radius as needed
-              //       ),
-              //       child: Row(
-              //         children: [
-              //           Expanded(
-              //             child: TextButton(
-              //               onPressed: () {
-              //                 navigateandFinish(context, Login());
-              //               },
-              //               child: Text(
-              //                 'Confirm',
-              //                 style: TextStyle(color: Colors.white),
-              //               ),
-              //               style: ButtonStyle(
-              //                 shape:
-              //                     MaterialStateProperty.all<RoundedRectangleBorder>(
-              //                   RoundedRectangleBorder(
-              //                     borderRadius: BorderRadius.circular(10.0),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //       // child: Container(
-              //       //   constraints: BoxConstraints(
-              //       //       minWidth: 150, minHeight: 50), // Adjust size as needed
-              //       //   alignment: Alignment.center,
-              //       //   child: Text(
-              //       //     'ConfirmEmail',
-              //       //     style: TextStyle(
-              //       //       color: Colors.white, // Text color
-              //       //       fontSize: 16.0,
-              //       //     ),
-              //       //   ),
-              //       // ),
-              //     ),
-
-              //     // Row(
-              //     //   children: [
-              //     //     Expanded(
-              //     //       child: TextButton(
-              //     //         onPressed: () {
-              //     //           navigateandFinish(context, Home_Screen());
-              //     //         },
-              //     //         child: Text(
-              //     //           'ConfirmEmail',
-              //     //           style: TextStyle(color: Colors.white),
-              //     //         ),
-              //     //         style: ButtonStyle(
-              //     //           backgroundColor: MaterialStateProperty.all<Color>(
-              //     //               Color.fromRGBO(250, 147, 13, 1)),
-              //     //           shape:
-              //     //               MaterialStateProperty.all<RoundedRectangleBorder>(
-              //     //             RoundedRectangleBorder(
-              //     //               borderRadius: BorderRadius.circular(
-              //     //                   10.0), // Adjust the value as needed
-              //     //             ),
-              //     //           ),
-              //     //         ),
-              //     //       ),
-              //     //     ),
-              //     //   ],
-              //     // ),
-              //     SizedBox(
-              //       height: 30,
-              //     ),
-              //     Row(
-              //       children: [
-              //         Text("Don't have an account?  ",
-              //             style:
-              //                 TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-              //         InkWell(
-              //           onTap: () {
-              //             navigateToScreen(context, Sign_Up());
-              //           },
-              //           child: Text(
-              //             'Create one .',
-              //             style: TextStyle(
-              //                 color: Color.fromRGBO(250, 147, 13, 1),
-              //                 fontSize: 15,
-              //                 fontWeight: FontWeight.w500),
-              //           ),
-              //         ),
-              //       ],
-              //     )
-              //   ]),
               ),
-        ],
+            ),
+          );
+        },
       ),
     );
   }
 }
-//ConfirmEmail
