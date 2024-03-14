@@ -28,7 +28,11 @@ class ConfirmEmailCubit extends Cubit<ConfirmEmailState> {
       // int? StatusCode=value.statusCode;
       // LoginModel CURRENT_USER = LoginModel.fromJson(value.data);
       print("  message from me${value.statusCode}");
-      emit(ConfirmEmailSuccessgState(OTP, Email));
+      if (value.statusCode == 200) {
+        emit(ConfirmEmailSuccessgState(OTP, Email));
+      } else {
+        emit(ConfirmEmailErrorState('Status code: ${value.statusCode}'));
+      }
     }).catchError((error) {
       print(" error here$error");
       emit(ConfirmEmailErrorState(error.toString()));
