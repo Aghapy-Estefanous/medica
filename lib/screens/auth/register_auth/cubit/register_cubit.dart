@@ -36,7 +36,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       if (value.statusCode != 200) {
         print("there is some error${value.statusCode}");
       } else {
-        print("all is ok 200");
+        print(value.statusMessage);
       }
       emit(RegisterSuccessState(CURRENT_USER));
     }).catchError((e) {
