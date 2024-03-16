@@ -6,7 +6,6 @@ import 'package:medica/models/login_model.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 
-
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
@@ -15,13 +14,10 @@ class LoginCubit extends Cubit<LoginState> {
   void userlogin({required String userName, required String password}) {
     emit(LoginLoadingState());
 
-    dio_helper.postData(
-            
-        url: BaseUrl+LOGIN,
-        data: {
-          'userName': userName,
-          'password': password,
-        }).then((value) {
+    dio_helper.postData(url: BaseUrl + LOGIN, data: {
+      'userName': userName,
+      'password': password,
+    }).then((value) {
       print(value!.data);
 
       int? StatusCodeInt = value.statusCode;

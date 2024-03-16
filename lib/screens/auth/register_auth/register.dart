@@ -12,6 +12,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController genderController = TextEditingController();
@@ -28,13 +30,14 @@ class RegisterScreen extends StatelessWidget {
             showtoast(
               context: context,
               Message: state.model!.message.toString(),
-              color: Color.fromARGB(255, 60, 189, 53),
+                color: const Color(0xFFB71C1C),
             );
           } else {
             showtoast(
               context: context,
               Message: state.model!.message.toString(),
-              color: const Color(0xFFB71C1C),
+           
+                 color: Color.fromARGB(255, 60, 189, 53),
             );
             // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
             //     .then(
@@ -152,6 +155,50 @@ class RegisterScreen extends StatelessWidget {
                               //   height: 15,
                               // ),
                               TextFormField(
+                                controller: firstNameController,
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty)
+                                    return "Please enter your frist name";
+                                  else if (value!.length < 3) {
+                                    return "name length must be at least 3 chars ";
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  fillColor:
+                                      Color.fromRGBO(217, 217, 217, 0.27),
+                                  filled: true,
+                                  prefixIcon: Icon(Iconsax.user),
+                                  hintText: 'first name',
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              TextFormField(
+                                controller: lastNameController,
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty)
+                                    return "Please enter your last name";
+                                  else if (value!.length < 3) {
+                                    return "name length must be at least 3 chars ";
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  fillColor:
+                                      Color.fromRGBO(217, 217, 217, 0.27),
+                                  filled: true,
+                                  prefixIcon: Icon(Iconsax.user),
+                                  hintText: 'last name',
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              TextFormField(
                                 controller: usernameController,
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty)
@@ -168,8 +215,8 @@ class RegisterScreen extends StatelessWidget {
                                   fillColor:
                                       Color.fromRGBO(217, 217, 217, 0.27),
                                   filled: true,
-                                  prefixIcon: Icon(Iconsax.user),
-                                  hintText: 'name',
+                                  prefixIcon: Icon(Iconsax.profile_circle),
+                                  hintText: 'user name',
                                 ),
                               ),
                               const SizedBox(height: 15),
@@ -223,7 +270,7 @@ class RegisterScreen extends StatelessWidget {
                                   fillColor:
                                       Color.fromRGBO(217, 217, 217, 0.27),
                                   filled: true,
-                                  prefixIcon: Icon(Icons.email_outlined),
+                                  prefixIcon: Icon(Iconsax.sms),
                                   hintText: 'Email',
                                 ),
                               ),
@@ -299,6 +346,8 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                   onFieldSubmitted: (value) {
                                     cubit.postRegiserData(
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
                                       nid: nidController.text,
                                       username: usernameController.text,
                                       name: usernameController.text,
@@ -315,6 +364,7 @@ class RegisterScreen extends StatelessWidget {
                                 fallback: (context) => const Center(
                                     child: CircularProgressIndicator()),
                                 builder: (BuildContext context) {
+                                  print("my usern =${firstNameController.text+lastNameController.text}");
                                   return
                                       // SizedBox(
                                       //   height: 50,
@@ -349,8 +399,10 @@ class RegisterScreen extends StatelessWidget {
                                     // Validate the form
                                     if (formstate.currentState!.validate()) {
                                       cubit.postRegiserData(
+                                        firstName: firstNameController.text,
+                                        lastName: lastNameController.text,
                                         nid: nidController.text,
-                                        username: usernameController.text,
+                                        username:usernameController.text,
                                         name: usernameController.text,
                                         gender: genderController.text,
                                         email: emailController.text,
