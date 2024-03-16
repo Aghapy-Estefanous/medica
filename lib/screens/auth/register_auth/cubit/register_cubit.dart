@@ -9,6 +9,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
   static RegisterCubit get(context) => BlocProvider.of(context);
   void postRegiserData({
+    required String firstName,
+    required String lastName,
     required String nid,
     required String username,
     required String name,
@@ -20,6 +22,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoadingState());
 
     dio_helper.postData(url: BaseUrl + REGISTER, data: {
+      'firstName': firstName,
+      'lastName': lastName,
       'nid': nid,
       'username': username,
       'gender': gender,

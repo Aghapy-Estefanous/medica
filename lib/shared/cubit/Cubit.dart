@@ -1,12 +1,15 @@
 import 'package:bloc/bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/screens/splash_screen.dart';
+import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
+import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
+import 'package:medica/shared/network/remote/Dio_helper.dart';
 // import 'package:medica/screens/auth/loginS/loginS.dart';
-
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(InitialState());
@@ -16,7 +19,7 @@ class AppCubit extends Cubit<AppState> {
     NavigationDestination(
         label: "Home",
         icon: Icon(
-          Icons.home,
+          Iconsax.home,
         )),
     NavigationDestination(
         label: "Categories",
@@ -24,9 +27,9 @@ class AppCubit extends Cubit<AppState> {
           Icons.category,
         )),
     NavigationDestination(
-        label: "Favorites",
+        label: "Reservation",
         icon: Icon(
-          Icons.favorite,
+          Iconsax.tick_circle,
         )),
     NavigationDestination(
         label: "settings",
@@ -37,8 +40,9 @@ class AppCubit extends Cubit<AppState> {
   List<Widget> Screen = const [
     Home_Screen(),
     Splash_screen(),
-    Splash_screen(),
-     TicketScreen(),
+
+    TicketScreen(),
+    TicketScreen(),
     // produts_screen(),
     // //shopHome_screen(),
     // categories_screen(),
@@ -52,7 +56,24 @@ class AppCubit extends Cubit<AppState> {
     currentIndex = index;
     emit(ChangeBottomNavigateBarState());
   }
+
+//
+  void getReservationdata() {
+    emit(ReservationLoadingState());
+    var CurrentToken =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJEb2FhR2FtYWwiLCJqdGkiOiIxZThkZjVhYS0zYTFjLTRmNGYtYWY2NS1iYWM3ZWRmOTEwZGUiLCJlbWFpbCI6IkRvYWFAZ2FtaWwuY29tIiwidWlkIjoiY2MxNjg0ZWMtZjQxNC00NTI1LWIxMmQtNTQwYWQxOWZjNWFhIiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzEzMDA5NjQ2fQ.5JPQo7HWoI0Jz8EW3coE1ytUdgKzjL1zGJG_R6lmKxw';
+
+    dio_helper
+        .getData(url: USER_RESERVATION, AccessToken: CurrentToken)
+        .then((value) {
+      print(value?.data);
+    });
+    emit(ReservationLoadingState());
+    UserReservationModel? RservationModel;
+  }
 }
+
+
   // Map<int, bool> favoriteMap = {};
   // void getHomeData() {
   //   emit(shopHomeLoadingState());
@@ -81,6 +102,7 @@ class AppCubit extends Cubit<AppState> {
   //     emit(shopHomeErrorState(error.toString()));
   //   });
   // }
+///....................................................................
 
   // getCategoriesData() {
   //   emit(shopCategoriesLoadingState());

@@ -1,9 +1,26 @@
+import 'package:medica/models/reservationModel.dart';
+
 
 abstract class AppState {}
 
 class InitialState extends AppState {}
 
 class ChangeBottomNavigateBarState extends AppState {}
+
+// reservation states..............................
+class ReservationLoadingState extends AppState {}
+
+class ReservationSuccessState extends AppState {
+   final UserReservationModel modelReservation;
+   ReservationSuccessState(this.modelReservation);
+}
+
+class ReservationErrorState extends AppState {
+  final dynamic error;
+  ReservationErrorState(this.error);
+}
+
+
 //class shopInitialState extends shopState {}
 
 // class shopHomeLoadingState extends shopState {}
