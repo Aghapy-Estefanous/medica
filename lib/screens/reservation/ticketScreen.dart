@@ -23,7 +23,7 @@ class TicketScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: Container(
-                      height: 260,
+                     height: MediaQuery.sizeOf(context).height*0.36,
                       width: MediaQuery.sizeOf(context).width * .90,
                       decoration: BoxDecoration(
                           color: Colors
@@ -54,10 +54,10 @@ class TicketScreen extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.calendar_month,
-                                      size: 20,
+                                      size: 23,
                                     ),
                                     Container(
-                                      height: 22,
+                                    height: MediaQuery.sizeOf(context).height*0.038,
                                       decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 233, 206, 232),
@@ -73,7 +73,7 @@ class TicketScreen extends StatelessWidget {
                                                 .labelLarge!
                                                 .copyWith(
                                                     color: AppColor.bink,
-                                                    fontSize: 12),
+                                                    fontSize: 13),
                                           )),
                                     ),
                                   ],
@@ -82,11 +82,11 @@ class TicketScreen extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.timer_outlined,
-                                      size: 18,
+                                      size: 22,
                                       weight: 30,
                                     ),
                                     Container(
-                                      height: 22,
+                                     height: MediaQuery.sizeOf(context).height*0.037,
                                       decoration: BoxDecoration(
                                           color: Color.fromARGB(157, 141, 192,
                                               240), // Color.fromARGB( 255, 233, 206, 232),
@@ -103,7 +103,7 @@ class TicketScreen extends StatelessWidget {
                                                 .copyWith(
                                                     color:
                                                         AppColor.primaryColor,
-                                                    fontSize: 12),
+                                                    fontSize: 13),
                                           )),
                                     ),
                                   ],
@@ -136,7 +136,7 @@ class TicketScreen extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.group_add_outlined,
-                                      size: 18,
+                                      size: 22,
                                       weight: 30,
                                       color: AppColor.orangcolor,
                                     ),
@@ -152,11 +152,11 @@ class TicketScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Container(
-                                  height: 22,
+                                  height: MediaQuery.sizeOf(context).height*0.041,
                                   decoration: BoxDecoration(
                                       color: AppColor.orangcolor,
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
+                                        Radius.circular(12),
                                       )),
                                   child: TextButton(
                                       onPressed: () {
@@ -192,7 +192,7 @@ class TicketScreen extends StatelessWidget {
 
   Container myContianerTitleText(String TitleName, BuildContext context) {
     return Container(
-      height: 20,
+     height: MediaQuery.sizeOf(context).height*0.038,
       decoration: const BoxDecoration(
           color: Color.fromARGB(
               100, 208, 206, 206), // Color.fromARGB(255, 193, 225, 238),

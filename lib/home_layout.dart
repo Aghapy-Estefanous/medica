@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
+import 'package:medica/shared/styles/AppColor.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
@@ -18,8 +19,8 @@ class HomeLayout extends StatelessWidget {
             bottomNavigationBar: NavigationBar(
               height: 75,
               backgroundColor: Colors.white,
-              indicatorColor: Color.fromARGB(255, 120, 189, 235),
-
+              indicatorColor:AppColor.primaryColor,
+              indicatorShape: BeveledRectangleBorder(borderRadius:BorderRadius.circular(22)),
               animationDuration: Duration(milliseconds: 1100),
               //onDestinationSelected: cubit.currentIndex,
               destinations: cubit.BottomNavItems,
