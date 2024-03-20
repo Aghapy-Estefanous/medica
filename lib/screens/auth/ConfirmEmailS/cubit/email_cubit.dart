@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/main.dart';
-import 'package:medica/shared/cubit/ErrorHandling.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:meta/meta.dart';
 
@@ -29,11 +29,19 @@ class EmailCubit extends Cubit<EmailState> {
       if (value.statusCode == 200)
         emit(EmailSuccessgState(email));
       else {
-        emit(EmailErrorState(ErrMessage(value.statusCode)));
+        print("Status code : ${value.statusCode}");
+
+        emit(EmailErrorState(value.statusMessage!));
       }
     }).catchError((error) {
       print(" error here$error");
-      emit(EmailErrorState(error.toString()));
+      if (error is DioException) {
+        print("HTTP Error Status Code: ${error.response?.statusCode}");
+        emit(EmailErrorState(error.response!.statusCode as String));
+      } else {
+        print("Non-HTTP Error: $error");
+        // Handle non-HTTP errors here
+      }
     });
   }
 }

@@ -30,14 +30,13 @@ class RegisterScreen extends StatelessWidget {
             showtoast(
               context: context,
               Message: state.model!.message.toString(),
-                color: const Color(0xFFB71C1C),
+              color: const Color(0xFFB71C1C),
             );
           } else {
             showtoast(
               context: context,
               Message: state.model!.message.toString(),
-           
-                 color: Color.fromARGB(255, 60, 189, 53),
+              color: Color.fromARGB(255, 60, 189, 53),
             );
             // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
             //     .then(
@@ -364,7 +363,8 @@ class RegisterScreen extends StatelessWidget {
                                 fallback: (context) => const Center(
                                     child: CircularProgressIndicator()),
                                 builder: (BuildContext context) {
-                                  print("my usern =${firstNameController.text+lastNameController.text}");
+                                  print(
+                                      "my usern =${firstNameController.text + lastNameController.text}");
                                   return
                                       // SizedBox(
                                       //   height: 50,
@@ -402,7 +402,7 @@ class RegisterScreen extends StatelessWidget {
                                         firstName: firstNameController.text,
                                         lastName: lastNameController.text,
                                         nid: nidController.text,
-                                        username:usernameController.text,
+                                        username: usernameController.text,
                                         name: usernameController.text,
                                         gender: genderController.text,
                                         email: emailController.text,
@@ -449,6 +449,9 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                height: 25,
+                              )
                             ],
                           ),
                         ),
