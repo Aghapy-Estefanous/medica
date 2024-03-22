@@ -5,8 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
+import 'package:medica/screens/auth/register_auth/register.dart';
 import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/SharedWidget.dart';
+
+import '../NewPasswordS/NewPasswordS.dart';
 
 class ConfirmEmail extends StatelessWidget {
   Widget ScreenName;
@@ -41,7 +44,11 @@ class ConfirmEmail extends StatelessWidget {
               Message: "OTP correct",
               color: Color.fromARGB(255, 60, 189, 53),
             );
-            navigateandFinish(context, ScreenName);
+            navigateandFinish(
+                context,
+                NewPassword(
+                  Email: Email,
+                ));
           }
         },
         builder: (context, state) {
@@ -86,7 +93,7 @@ class ConfirmEmail extends StatelessWidget {
                         OtpTextField(
                           borderRadius: BorderRadius.circular(15),
                           // filled: true,
-                          // fillColor: Color.fromRGBO(217, 217, 217, 1), 
+                          // fillColor: Color.fromRGBO(217, 217, 217, 1),
                           numberOfFields: 6,
                           // borderWidth: 4.0,
                           borderColor: Color(0xFF512DA8),
@@ -120,6 +127,35 @@ class ConfirmEmail extends StatelessWidget {
                             }, 'Enter the OTP', context);
                           },
                           condition: state is! ConfirmEmailLoadingState,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        // mySubmitButton(() {
+                        //   navigateandFinish(context,
+                        //       ConfirmEmail(ScreenName: ScreenName));
+                        // }, 'Confirm E-mail', context),
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
+                        Row(
+                          children: [
+                            Text("Don't have an account?  ",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w500)),
+                            InkWell(
+                              onTap: () {
+                                navigateandFinish(context, RegisterScreen());
+                              },
+                              child: Text(
+                                'Create one .',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(250, 147, 13, 1),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

@@ -168,7 +168,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             onTap: () {
                               navigateToScreen(
-                                  context, Email(ScreenName: NewPassword()));
+                                  context, Email(ScreenName: NewPassword(Email: '',)));
                             },
                           ),
                           //.............................

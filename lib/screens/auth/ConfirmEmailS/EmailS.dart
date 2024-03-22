@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:medica/screens/auth/ConfirmEmailS/ConfirmEmailS.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/email_cubit.dart';
-import 'package:medica/screens/auth/SignUpS/SignUpS.dart';
+import 'package:medica/screens/auth/register_auth/register.dart';
 import 'package:medica/shared/SharedWidget.dart';
 
 class Email extends StatelessWidget {
@@ -147,7 +147,7 @@ class Email extends StatelessWidget {
                                       fontWeight: FontWeight.w500)),
                               InkWell(
                                 onTap: () {
-                                  navigateandFinish(context, Sign_Up());
+                                  navigateandFinish(context, RegisterScreen());
                                 },
                                 child: Text(
                                   'Create one .',
@@ -158,7 +158,7 @@ class Email extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          )
+                          ),
                         ]),
                   ),
                 ],

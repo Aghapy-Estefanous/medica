@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/main.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
@@ -34,7 +35,13 @@ class EmailCubit extends Cubit<EmailState> {
       }
     }).catchError((error) {
       print(" error here$error");
-      emit(EmailErrorState(error.toString()));
+      if (error is DioException) {
+        print("HTTP Error Status Code: ${error.response?.statusCode}");
+        emit(EmailErrorState(error.response!.statusCode as String));
+      } else {
+        print("Non-HTTP Error: $error");
+        // Handle non-HTTP errors here
+      }
     });
   }
 }

@@ -221,17 +221,17 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: AppColor.primaryColor,
         title: const Text(
-          "تفاصيل الطلب",
+          "Ticket details",
           style: TextStyle(color: Colors.white),
         ),
         content: TicketWidget(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.90,
+            height: 450,
             isCornerRounded: true,
             padding: EdgeInsets.all(20),
             //shadow: [BoxShadow()],
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   'Name',
@@ -251,35 +251,31 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
                 ),
                 Text('Ay haga'),
                 Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        Text(
-                          'num in waiting list',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          '15',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
+                    Text(
+                      'num in waiting list',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    // Spacer(),
-                    Column(
-                      children: [
-                        Text(
-                          'Address',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text('Cairo ,Egypt'),
-                      ],
+                    Text(
+                      '15',
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 ),
                 Divider(),
+                Column(
+                  children: [
+                    Text(
+                      'Address',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    Text('Cairo ,Egypt'),
+                  ],
+                ),
+                Divider(),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
@@ -290,7 +286,7 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
                         Text('1/1/1111'),
                       ],
                     ),
-                    Spacer(),
+                    // Spacer(),
                     Column(
                       children: [
                         Text(
@@ -311,20 +307,6 @@ void showDialogDetailsOrder(BuildContext context, int index, List TicketList) {
                 ),
               ],
             )),
-        actions: <Widget>[
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.bink,
-            ),
-            child: const Text(
-              "Print",
-              style: TextStyle(color: AppColor.secondaryTextColor),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
       );
     },
   );
