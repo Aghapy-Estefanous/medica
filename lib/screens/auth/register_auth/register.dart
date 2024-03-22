@@ -281,14 +281,7 @@ class RegisterScreen extends StatelessWidget {
                                 controller: passwordController,
                                 obscureText: cubit.isvisiable,
                                 validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
-                                  } else if (!RegExp(
-                                          r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\d]).{5,}$')
-                                      .hasMatch(value)) {
-                                    return 'Password must have at least one uppercase letter, one digit, and one non-alphanumeric character.';
-                                  }
-                                  return null;
+                                  return Validate_password(value);
                                 },
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -301,7 +294,10 @@ class RegisterScreen extends StatelessWidget {
                                   prefixIcon: Icon(Iconsax.lock),
                                   suffixIcon: IconButton(
                                     alignment: Alignment.centerRight,
-                                    icon: Icon(Icons.visibility_off),
+                                    icon: Icon(
+                                      cubit.icon,
+                                      color: AppColor.secondaryTextColor,
+                                    ),
                                     onPressed: () {
                                       cubit.ChangeVisiablityIcon();
                                     },
@@ -315,7 +311,7 @@ class RegisterScreen extends StatelessWidget {
 
                               TextFormField(
                                   controller: confirmPassController,
-                                  obscureText: cubit.isvisiable,
+                                  obscureText: cubit.isvisiable2,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please confirm your password';
@@ -336,9 +332,12 @@ class RegisterScreen extends StatelessWidget {
                                     prefixIcon: Icon(Iconsax.lock),
                                     suffixIcon: IconButton(
                                       alignment: Alignment.centerRight,
-                                      icon: Icon(Icons.visibility_off),
+                                      icon: Icon(
+                                        cubit.icon2,
+                                        color: AppColor.secondaryTextColor,
+                                      ),
                                       onPressed: () {
-                                        cubit.ChangeVisiablityIcon();
+                                        cubit.ChangeVisiablityIcon2();
                                       },
                                     ),
                                     hintText: ' confirm Password',

@@ -1,8 +1,9 @@
 import 'package:medica/models/login_model.dart';
 
-abstract class RegisterState{}
+abstract class RegisterState {}
 
 class RegisterLoadingState extends RegisterState {}
+
 class RegisterInitial extends RegisterState {}
 
 class RegisterSuccessState extends RegisterState {
@@ -16,3 +17,5 @@ class RegisterErrorState extends RegisterState {
 }
 
 class RsgisterVisiablityIconState extends RegisterState {}
+
+// class RsgisterVisiablityIconState2 extends RegisterState {}

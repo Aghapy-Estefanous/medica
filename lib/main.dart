@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/email_cubit.dart';
 import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
+import 'package:medica/screens/static_pages/testing.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/styles/themes.dart';
 import 'package:medica/screens/splash_screen.dart';
