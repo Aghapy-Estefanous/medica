@@ -17,10 +17,11 @@ class HomeLayout extends StatelessWidget {
         var cubit = AppCubit.get(context);
         return Scaffold(
             bottomNavigationBar: NavigationBar(
+          
               height: 75,
               backgroundColor: Colors.white,
-              indicatorColor:AppColor.primaryColor,
-              indicatorShape: BeveledRectangleBorder(borderRadius:BorderRadius.circular(22)),
+              indicatorColor: AppColor.primaryColor,
+              //onDestinationSelected
               animationDuration: Duration(milliseconds: 1100),
               //onDestinationSelected: cubit.currentIndex,
               destinations: cubit.BottomNavItems,

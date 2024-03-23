@@ -1,18 +1,26 @@
+import 'package:dio/dio.dart';
 import 'package:bloc/bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/State.dart';
+import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
+import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
+import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
+import 'package:medica/screens/medical_history/medical_history.dart';
+
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit() : super(InitialState());
+  AppCubit(this.api) : super(InitialState());
+
+  final ApiConsumer api;
   // get instance of App cubit
   static AppCubit get(context) => BlocProvider.of(context);
   List<NavigationDestination> BottomNavItems = const [
@@ -32,7 +40,7 @@ class AppCubit extends Cubit<AppState> {
           Iconsax.tick_circle,
         )),
     NavigationDestination(
-        label: "settings",
+        label: "medical history",
         icon: Icon(
           Icons.settings,
         )),
@@ -40,14 +48,8 @@ class AppCubit extends Cubit<AppState> {
   List<Widget> Screen = const [
     Home_Screen(),
     Splash_screen(),
-
     TicketScreen(),
-    TicketScreen(),
-    // produts_screen(),
-    // //shopHome_screen(),
-    // categories_screen(),
-    // favorites_screen(),
-    // settings_screen(),
+    MedicalHistoryScreen(),
   ];
   // MyHomeModel? homeModel;
   // CategoriesModel? categoriesModel;
@@ -57,22 +59,76 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeBottomNavigateBarState());
   }
 
-//
-  void getReservationdata() {
-    emit(ReservationLoadingState());
-    var CurrentToken =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJEb2FhR2FtYWwiLCJqdGkiOiIxZThkZjVhYS0zYTFjLTRmNGYtYWY2NS1iYWM3ZWRmOTEwZGUiLCJlbWFpbCI6IkRvYWFAZ2FtaWwuY29tIiwidWlkIjoiY2MxNjg0ZWMtZjQxNC00NTI1LWIxMmQtNTQwYWQxOWZjNWFhIiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzEzMDA5NjQ2fQ.5JPQo7HWoI0Jz8EW3coE1ytUdgKzjL1zGJG_R6lmKxw';
+// reserve method1
+List<DataUserReservation> ?myReservationsList=[];
+  getdata() async {
+    try {
+      late UserReservationModel modelReservation;
+      emit(ReservationLoadingState());
 
-    dio_helper
-        .getData(url: USER_RESERVATION, AccessToken: CurrentToken)
-        .then((value) {
-      print(value?.data);
-    });
-    emit(ReservationLoadingState());
-    UserReservationModel? RservationModel;
+      var response = await api.get(
+        'http://medicalsystem-001-site1.ftempurl.com/api/Reservation/UserReservations',
+      );
+     // print(response.data);
+      modelReservation = UserReservationModel.fromJson(response);
+      myReservationsList=modelReservation.data;
+      print(modelReservation.data?[0].firstname);
+      
+      emit(ReservationSuccessState(modelReservation));
+    } on ServerExceptions catch (e) {
+      print(e.toString());
+      emit(ReservationErrorState(e.errorModel.message));
+    }
   }
 }
+/*
+  late UserReservationModel modelReservation;
+  void getReservationdata() async {
+    emit(ReservationLoadingState());
 
+    dio_helper
+        .getData(
+      url:
+          'http://medicalsystem-001-site1.ftempurl.com/api/Reservation/UserReservations', //BaseUrl+USER_RESERVATION,
+      AccessToken:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJEb2FhR2FtYWwiLCJqdGkiOiJkYzM3NTdiZi1jMmRlLTQwOWEtYjQ0OC1kODI1YzU3NmZhMzQiLCJlbWFpbCI6ImRvYWEyMkBnbWFpbC5jb20iLCJ1aWQiOiIxMjM0NTY3ODkxMDExIiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzEzMjEyNDkyfQ.-HnqeRVbDAK8faez5N66WMSdVhxCBwJW-snLYb165qw',
+    )
+        .then((value) {
+      print("form reserv object");
+      print(json.encode(value!.data));
+      modelReservation = UserReservationModel.fromJson(value?.data);
+      CachHelper.Savedata(
+          key: 'reservationId', value: modelReservation.data?[0].id);
+      print(modelReservation.data?[0].id);
+      emit(ReservationSuccessState(modelReservation));
+    }).catchError((error) {
+      ReservationErrorState(error.toString());
+    });
+      **************************************here end/
+  
+
+
+
+  // //func2
+  // late ReservationInfoModel modelReservationInfo;
+
+  // void getReservationInfoData() {
+  //   emit(ReservationInfoLoadingState());
+  //   // var CurrentToken =
+  //   //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJEb2FhR2FtYWwiLCJqdGkiOiIxZThkZjVhYS0zYTFjLTRmNGYtYWY2NS1iYWM3ZWRmOTEwZGUiLCJlbWFpbCI6IkRvYWFAZ2FtaWwuY29tIiwidWlkIjoiY2MxNjg0ZWMtZjQxNC00NTI1LWIxMmQtNTQwYWQxOWZjNWFhIiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzEzMDA5NjQ2fQ.5JPQo7HWoI0Jz8EW3coE1ytUdgKzjL1zGJG_R6lmKxw';
+
+  //   dio_helper.getData(
+  //       url: BaseUrl+USER_RESERVATION,
+  //       AccessToken: CachHelper.getdata(key: 'token'),
+  //       query: {}).then((value) {
+  //     print(value?.data);
+  //     modelReservationInfo = ReservationInfoModel.fromJson( value?.data);
+  //     emit(ReservationInfoSuccessState(modelReservationInfo));
+  //   }).catchError((error) {
+  //     ReservationInfoErrorState(error.toString());
+  //   });
+  // }
+}
 
   // Map<int, bool> favoriteMap = {};
   // void getHomeData() {
@@ -234,4 +290,4 @@ class AppCubit extends Cubit<AppState> {
 //        emit(RsgisterVisiablityIconState ());
 //     }
 
-// }
+*/

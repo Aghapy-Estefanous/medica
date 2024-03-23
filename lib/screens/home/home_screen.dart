@@ -1,6 +1,8 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:medica/screens/details_screen/details_clinics.dart';
 
 class Home_Screen extends StatelessWidget {
   const Home_Screen({Key? key}) : super(key: key);
@@ -106,7 +108,7 @@ class Home_Screen extends StatelessWidget {
                     child: ListView.builder(
                       itemBuilder: (context, index) => Padding(
                         padding: EdgeInsets.all(10),
-                        child: myClinicCard(context),
+                        child: myClinicCard(context,DetailsScreen()),
                       ),
                       itemCount: 10,
                       scrollDirection: Axis.horizontal,
@@ -119,7 +121,7 @@ class Home_Screen extends StatelessWidget {
                     child: ListView.builder(
                       itemBuilder: (context, index) => Padding(
                         padding: EdgeInsets.all(10),
-                        child: myClinicCard(context),
+                        child: myClinicCard(context,DetailsScreen()),
                       ),
                       itemCount: 10,
                       scrollDirection: Axis.horizontal,
@@ -187,7 +189,7 @@ class Home_Screen extends StatelessWidget {
     );
   }
 
-  Material myClinicCard(BuildContext context) {
+  Material myClinicCard(BuildContext context,ScreenName) {
     return Material(
       elevation: 1,
       shadowColor: Color.fromARGB(134, 21, 21, 21),
@@ -231,7 +233,9 @@ class Home_Screen extends StatelessWidget {
                       ' details ',
                       style: TextStyle(fontSize: 13.0, color: Colors.white),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      navigateToScreen(context, ScreenName);
+                    },
                   ),
                   Row(
                     children: [

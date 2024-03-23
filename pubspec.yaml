@@ -46,6 +46,7 @@ dependencies:
   shared_preferences: ^2.2.2
   conditional_builder_null_safety: ^0.0.6
   ticket_widget: ^1.0.2
+  intl: ^0.19.0
 
 
 dev_dependencies:

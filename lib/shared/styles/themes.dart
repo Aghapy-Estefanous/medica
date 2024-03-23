@@ -10,8 +10,10 @@ ThemeData liteTheme() {
         hoverColor: AppColor.primaryColor,
         buttonColor: AppColor.orangcolor,
       ),
+
       textTheme: const TextTheme(
           bodyLarge: TextStyle(fontSize: 20),
+          titleSmall: TextStyle(fontSize: 20, color: AppColor.dividerColor),
           bodySmall: TextStyle(fontSize: 10, color: AppColor.dividerColor),
           bodyMedium: TextStyle(
             fontSize: 16,
