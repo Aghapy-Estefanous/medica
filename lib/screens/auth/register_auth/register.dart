@@ -30,14 +30,13 @@ class RegisterScreen extends StatelessWidget {
             showtoast(
               context: context,
               Message: state.model!.message.toString(),
-                color: const Color(0xFFB71C1C),
+              color: const Color(0xFFB71C1C),
             );
           } else {
             showtoast(
               context: context,
               Message: state.model!.message.toString(),
-           
-                 color: Color.fromARGB(255, 60, 189, 53),
+              color: Color.fromARGB(255, 60, 189, 53),
             );
             // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
             //     .then(
@@ -282,14 +281,7 @@ class RegisterScreen extends StatelessWidget {
                                 controller: passwordController,
                                 obscureText: cubit.isvisiable,
                                 validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
-                                  } else if (!RegExp(
-                                          r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\d]).{5,}$')
-                                      .hasMatch(value)) {
-                                    return 'Password must have at least one uppercase letter, one digit, and one non-alphanumeric character.';
-                                  }
-                                  return null;
+                                  return Validate_password(value);
                                 },
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -302,7 +294,10 @@ class RegisterScreen extends StatelessWidget {
                                   prefixIcon: Icon(Iconsax.lock),
                                   suffixIcon: IconButton(
                                     alignment: Alignment.centerRight,
-                                    icon: Icon(Icons.visibility_off),
+                                    icon: Icon(
+                                      cubit.icon,
+                                      color: AppColor.secondaryTextColor,
+                                    ),
                                     onPressed: () {
                                       cubit.ChangeVisiablityIcon();
                                     },
@@ -316,7 +311,7 @@ class RegisterScreen extends StatelessWidget {
 
                               TextFormField(
                                   controller: confirmPassController,
-                                  obscureText: cubit.isvisiable,
+                                  obscureText: cubit.isvisiable2,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please confirm your password';
@@ -337,9 +332,12 @@ class RegisterScreen extends StatelessWidget {
                                     prefixIcon: Icon(Iconsax.lock),
                                     suffixIcon: IconButton(
                                       alignment: Alignment.centerRight,
-                                      icon: Icon(Icons.visibility_off),
+                                      icon: Icon(
+                                        cubit.icon2,
+                                        color: AppColor.secondaryTextColor,
+                                      ),
                                       onPressed: () {
-                                        cubit.ChangeVisiablityIcon();
+                                        cubit.ChangeVisiablityIcon2();
                                       },
                                     ),
                                     hintText: ' confirm Password',
@@ -364,7 +362,8 @@ class RegisterScreen extends StatelessWidget {
                                 fallback: (context) => const Center(
                                     child: CircularProgressIndicator()),
                                 builder: (BuildContext context) {
-                                  print("my usern =${firstNameController.text+lastNameController.text}");
+                                  print(
+                                      "my usern =${firstNameController.text + lastNameController.text}");
                                   return
                                       // SizedBox(
                                       //   height: 50,
@@ -402,7 +401,7 @@ class RegisterScreen extends StatelessWidget {
                                         firstName: firstNameController.text,
                                         lastName: lastNameController.text,
                                         nid: nidController.text,
-                                        username:usernameController.text,
+                                        username: usernameController.text,
                                         name: usernameController.text,
                                         gender: genderController.text,
                                         email: emailController.text,
@@ -449,6 +448,9 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                height: 25,
+                              )
                             ],
                           ),
                         ),

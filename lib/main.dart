@@ -2,6 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/home_layout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
+=======
+import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
+import 'package:medica/screens/auth/ConfirmEmailS/cubit/email_cubit.dart';
+import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
+import 'package:medica/screens/static_pages/testing.dart';
+>>>>>>> 04b19bf5e28a20c6baa63816a3541857b69fcab9
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/core/api/dioConsumer.dart';
 import 'package:medica/shared/styles/themes.dart';

@@ -17,7 +17,6 @@ class ConfirmEmailCubit extends Cubit<ConfirmEmailState> {
     required String OTP,
   }) {
     emit(ConfirmEmailLoadingState());
-
     dio_helper.postData(url: '$BaseAPI/api/Mailing/verify-otp', query: {
       'Email': Email,
       'EnteredOTP': OTP,

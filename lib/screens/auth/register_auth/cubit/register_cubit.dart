@@ -36,7 +36,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       if (value.statusCode != 200) {
         print("there is some error${value.statusCode}");
       } else {
-        print("all is ok 200");
+        print(value.statusMessage);
       }
       emit(RegisterSuccessState(CURRENT_USER));
     }).catchError((e) {
@@ -47,15 +47,29 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   //for register
   //VisiablityIconState
-  bool isvisiable = false;
-  IconData icon = Icons.visibility;
+  bool isvisiable = true;
+  bool isvisiable2 = true;
+  IconData icon = Icons.visibility_off;
+  IconData icon2 = Icons.visibility_off;
   void ChangeVisiablityIcon() {
     if (isvisiable) {
-      icon = Icons.visibility_off;
-      isvisiable = !isvisiable; //false
-    } else {
       icon = Icons.visibility;
+
       isvisiable = !isvisiable;
+    } else {
+      icon = Icons.visibility_off;
+      isvisiable = !isvisiable;
+    }
+    emit(RsgisterVisiablityIconState());
+  }
+
+  void ChangeVisiablityIcon2() {
+    if (isvisiable2) {
+      icon2 = Icons.visibility;
+      isvisiable2 = !isvisiable2;
+    } else {
+      icon2 = Icons.visibility_off;
+      isvisiable2 = !isvisiable2;
     }
     emit(RsgisterVisiablityIconState());
   }

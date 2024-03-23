@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
-
 //   from .......> to
 void navigateToScreen(context, ScreenName) {
   Navigator.push(
@@ -63,45 +62,75 @@ AppBar MyAppBarWidget(BuildContext context, String title) {
 }
 
 Center mySubmitButton(
-      void Function() buttonFunction, String? buttontitle, context) {
-    return Center(
-      child: Container(
-        height: 45,
-        width: MediaQuery.sizeOf(context).width * 0.95,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(250, 191, 113, 1),
-              Color.fromRGBO(250, 147, 13, 1),
-            ], // Define multiple colors for gradient
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius:
-              BorderRadius.circular(10.0), // Adjust border radius as needed
+    void Function() buttonFunction, String? buttontitle, context) {
+  return Center(
+    child: Container(
+      height: 45,
+      width: MediaQuery.sizeOf(context).width * 0.95,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromRGBO(250, 191, 113, 1),
+            Color.fromRGBO(250, 147, 13, 1),
+          ], // Define multiple colors for gradient
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
         ),
-        child: Row(
-          children: [
-            Expanded(
-              child: TextButton(
-                onPressed: buttonFunction,
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+        borderRadius:
+            BorderRadius.circular(10.0), // Adjust border radius as needed
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextButton(
+              onPressed: buttonFunction,
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text(
-                  "$buttontitle",
-                  //  'Login',
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                ),
+              ),
+              child: Text(
+                "$buttontitle",
+                //  'Login',
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
+Validate_password(value) {
+  String errmess = 'Password must have at least:\n';
+  bool t = false;
+  if (value == null || value.isEmpty) {
+    return 'Please enter your password';
+  } else {
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      t = true;
+      errmess += 'one uppercase letter \n';
+    }
+    if (!RegExp(r'[a-z]').hasMatch(value)) {
+      t = true;
+
+      errmess += 'one lowercase letter \n';
+    }
+    if (!RegExp(r'\d').hasMatch(value)) {
+      t = true;
+      errmess += 'one digit \n';
+    }
+    if (!RegExp(r'[^\w\d]').hasMatch(value)) {
+      t = true;
+      errmess += 'special char like(@,#,/,*,.....)\n';
+    }
+    if (value.length < 6) {
+      t = true;
+      errmess += '6 char length \n';
+    }
+    return t == true ? errmess.trimRight() : null;
+  }
+}
