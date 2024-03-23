@@ -32,7 +32,7 @@ class TicketScreen extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: Container(
-                              height: MediaQuery.sizeOf(context).height * 0.36,
+                              height: MediaQuery.sizeOf(context).height * 0.33,
                               width: MediaQuery.sizeOf(context).width * .90,
                               decoration: BoxDecoration(
                                   color: Colors
@@ -64,36 +64,38 @@ class TicketScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.calendar_month,
                                               size: 23,
                                             ),
                                             Container(
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
-                                                  0.038,
-                                              decoration: BoxDecoration(
+                                                  0.034,
+                                              decoration: const BoxDecoration(
                                                   color: Color.fromARGB(
                                                       255, 233, 206, 232),
                                                   borderRadius:
                                                       BorderRadius.all(
                                                     Radius.circular(4),
                                                   )),
-                                              child: Text(
-                                                '${convertDateTime(cubit.myReservationsList?[index].time)['date']}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge!
-                                                    .copyWith(
-                                                        color: AppColor.bink,
-                                                        fontSize: 13),
+                                              child: Center(
+                                                child: Text(
+                                                  '${convertDateTime(cubit.myReservationsList?[index].time)['date']}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge!
+                                                      .copyWith(
+                                                          color: AppColor.bink,
+                                                          fontSize: 14),
+                                                ),
                                               ),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.timer_outlined,
                                               size: 22,
                                               weight: 30,
@@ -101,8 +103,8 @@ class TicketScreen extends StatelessWidget {
                                             Container(
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
-                                                  0.037,
-                                              decoration: BoxDecoration(
+                                                  0.034,
+                                              decoration: const BoxDecoration(
                                                   color: Color.fromARGB(
                                                       157,
                                                       141,
@@ -112,15 +114,17 @@ class TicketScreen extends StatelessWidget {
                                                       BorderRadius.all(
                                                     Radius.circular(4),
                                                   )),
-                                              child: Text(
-                                                '${convertDateTime(cubit.myReservationsList?[index].time)['time']}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge!
-                                                    .copyWith(
-                                                        color: AppColor
-                                                            .primaryColor,
-                                                        fontSize: 13),
+                                              child: Center(
+                                                child: Text(
+                                                  '${convertDateTime(cubit.myReservationsList?[index].time)['time']}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge!
+                                                      .copyWith(
+                                                          color: AppColor
+                                                              .primaryColor,
+                                                          fontSize: 14),
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -128,24 +132,41 @@ class TicketScreen extends StatelessWidget {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 3,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.020,
                                     ),
                                     myContianerTitleText("Name :", context),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.010,
+                                    ),
                                     Text(
                                       "${cubit.myReservationsList?[index].firstname} ${cubit.myReservationsList?[index].lastname} ",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.black, fontSize: 16),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.010,
                                     ),
                                     myContianerTitleText(
                                         "Clinic Name :", context),
-                                    Text(
-                                      " ${cubit.myReservationsList?[index].placeName}",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 16),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.010,
                                     ),
-                                    Divider(
-                                      color: Colors.grey,
+                                    Expanded(
+                                      child: Text(
+                                        " ${cubit.myReservationsList?[index].placeName}",
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
                                     ),
+                                 
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -154,7 +175,7 @@ class TicketScreen extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.group_add_outlined,
                                               size: 22,
                                               weight: 30,
@@ -178,7 +199,7 @@ class TicketScreen extends StatelessWidget {
                                           height: MediaQuery.sizeOf(context)
                                                   .height *
                                               0.041,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: AppColor.orangcolor,
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(12),
@@ -228,15 +249,15 @@ class TicketScreen extends StatelessWidget {
           borderRadius: BorderRadius.all(
             Radius.circular(3),
           )),
-      child: TextButton(
-          onPressed: () {},
-          child: Text(
-            '${TitleName}',
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-          )),
+      child: Center(
+        child: Text(
+          '${TitleName}',
+          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: Colors.black,
+                fontSize: 14,
+              ),
+        ),
+      ),
     );
   }
 }

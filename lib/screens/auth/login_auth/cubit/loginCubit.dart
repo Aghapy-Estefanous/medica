@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   void userlogin({required String userName, required String password}) {
     emit(LoginLoadingState());
 
-    dio_helper.postData(url: BaseUrl + LOGIN, data: {
+    dio_helper.postData(url: Endpoint.BaseUrl+Endpoint.LOGIN, data: {
       'userName': userName,
       'password': password,
     }).then((value) {

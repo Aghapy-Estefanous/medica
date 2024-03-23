@@ -21,7 +21,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }) {
     emit(RegisterLoadingState());
 
-    dio_helper.postData(url: BaseUrl + REGISTER, data: {
+    dio_helper.postData(url:  Endpoint.BaseUrl+Endpoint.REGISTER, data: {
       'firstName': firstName,
       'lastName': lastName,
       'nid': nid,
