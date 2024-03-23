@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
-class Details_screen extends StatelessWidget {
-  const Details_screen({super.key});
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;

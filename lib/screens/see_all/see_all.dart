@@ -52,7 +52,7 @@ class seeAllScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 13.0, color: Colors.white),
                         ),
                         onPressed: () {
-                          navigateToScreen(context, Details_screen());
+                          navigateToScreen(context, DetailsScreen());
                         },
                       ),
                     ],

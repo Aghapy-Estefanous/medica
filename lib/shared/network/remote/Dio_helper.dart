@@ -17,23 +17,45 @@ class dio_helper {
       // }
     ));
   }
-
-  static Future<Response?> getData({
-    //
-    @required String? url,
-    @required Map<String, dynamic>? query,
-    String lang = 'en',
-    String? AccessToken,
-  }) async {
-    dio.options.headers = {
-      //  زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه او عشن اجيب الاتا سوء مفضلة او ف الشحن من غلال توكن اليوزر
-      //'lang': lang,
+static Future<Response?> getData({
+  @required String? url,
+  Map<String, dynamic>? query,
+  String lang = 'en',
+  @required String? AccessToken,
+}) async {
+  try {
+    var headers = {
+      'Authorization': 'Bearer $AccessToken',
       'Content-Type': 'application/json',
-      'tokenAuthorization': 'Bearer ${AccessToken}'
     };
-    return await dio.get(url!, queryParameters: query);
+    var dio = Dio();
+    dio.options.headers.addAll(headers);
+    Response response = await dio.get(url!, queryParameters: query);
+    return response;
+  } catch (error) {
+    print('Error fetching data: $error');
+    return null;
   }
+}
 
+  // static Future<Response?> getData({
+  //   //
+  //   @required String? url,
+  //  Map<String, dynamic>? query,
+  //   String lang = 'en',
+  //   @required  String? AccessToken,
+  // }) async {
+  
+  //   dio.options.headers = {
+  //     //  زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه او عشن اجيب الاتا سوء مفضلة او ف الشحن من غلال توكن اليوزر
+  //     //'lang': lang,
+  //     'Content-Type': 'application/json',
+  //     'tokenAuthorization': 'Bearer $AccessToken'
+  //   };
+  //   return await dio.get(url!, queryParameters: query);
+  // }
+// curl --location '//api/Reservation/ReservationINFO/<integer>' \
+// --header 'Authorization: Bearer {{bearerToken}}'
   static Future<Response?> postData({
     required String url, //endpionts
     Map<String, dynamic>? query,
