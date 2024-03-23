@@ -1,11 +1,11 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/models/reservationModel.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-
 class TicketScreen extends StatelessWidget {
   const TicketScreen({super.key});
 
@@ -209,7 +209,7 @@ class TicketScreen extends StatelessWidget {
                                                 showDialogDetailsOrder(
                                                     context,
                                                     index,
-                                                    cubit.myReservationsList);
+                                                    cubit.myReservationsList?[index]);
                                               },
                                               child: Text(
                                                 'Details',
@@ -262,11 +262,12 @@ class TicketScreen extends StatelessWidget {
   }
 }
 
-void showDialogDetailsOrder(BuildContext context, int index, TicketList) {
+void showDialogDetailsOrder(BuildContext context, int index, DataUserReservation? ticketmodel) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      //  var ticket = TicketList[index];
+        
+        //print(ticket);
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: AppColor.primaryColor,
@@ -287,19 +288,19 @@ void showDialogDetailsOrder(BuildContext context, int index, TicketList) {
                   'Name',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-                Text('User Name'),
+                Text('${ticketmodel?.firstname} ${ticketmodel?.lastname}'),
                 Divider(),
                 Text(
                   'NID',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-                Text('12345678901234'),
+                Text('${ticketmodel?.nid}'),
                 Divider(),
                 Text(
                   'Clinic Name',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-                Text('Ay haga'),
+                Text('${ticketmodel?.placeName}'),
                 Divider(),
                 Column(
                   children: [
@@ -308,22 +309,22 @@ void showDialogDetailsOrder(BuildContext context, int index, TicketList) {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
-                      '15',
+                      '${ticketmodel?.waiting}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 ),
                 Divider(),
-                Column(
-                  children: [
-                    Text(
-                      'Address',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    Text('Cairo ,Egypt'),
-                  ],
-                ),
-                Divider(),
+                // Column(
+                //   children: [
+                //     Text(
+                //       'Address',
+                //       style: Theme.of(context).textTheme.bodySmall,
+                //     ),
+                //     Text('Cairo ,Egypt'),
+                //   ],
+                // ),
+                // Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -333,7 +334,7 @@ void showDialogDetailsOrder(BuildContext context, int index, TicketList) {
                           'Date',
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
-                        Text('1/1/1111'),
+                        Text('${convertDateTime(ticketmodel?.time)['date']}'),
                       ],
                     ),
                     // Spacer(),
@@ -344,7 +345,7 @@ void showDialogDetailsOrder(BuildContext context, int index, TicketList) {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
-                          '100 EGP',
+                          '${ticketmodel?.price}',
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ],
