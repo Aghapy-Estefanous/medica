@@ -5,6 +5,7 @@ abstract class RegisterState {}
 class RegisterLoadingState extends RegisterState {}
 
 class RegisterInitial extends RegisterState {}
+class DateState extends RegisterState {}
 
 class RegisterSuccessState extends RegisterState {
   LoginModel? model;

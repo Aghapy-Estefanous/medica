@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/home_layout.dart';
@@ -20,6 +21,7 @@ class RegisterScreen extends StatelessWidget {
   TextEditingController nidController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
+  TextEditingController birthDate = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -354,10 +356,22 @@ class RegisterScreen extends StatelessWidget {
                                       password: passwordController.text,
                                       confirmPassword:
                                           confirmPassController.text,
+                                      birthDate: cubit.date,
                                     );
                                   }),
                               const SizedBox(height: 15),
 
+                              //*********************************Birth Date*
+                              Row(
+                                children: [
+                                  Text("Enter your BirthDate :"),
+                                  TextButton(
+                                      onPressed: () =>
+                                          cubit.changeDate(context),
+                                      child: Text(cubit.date))
+                                ],
+                              ),
+                              const SizedBox(height: 15),
                               ConditionalBuilder(
                                 fallback: (context) => const Center(
                                     child: CircularProgressIndicator()),
@@ -408,6 +422,7 @@ class RegisterScreen extends StatelessWidget {
                                         password: passwordController.text,
                                         confirmPassword:
                                             confirmPassController.text,
+                                        birthDate: cubit.date,
                                       );
                                       print(nidController.text +
                                           passwordController.text +
@@ -459,4 +474,26 @@ class RegisterScreen extends StatelessWidget {
       },
     );
   }
+}
+
+DateTime birthDate = DateTime.now();
+DateTime datepicker(BuildContext context) {
+  DateTime date = DateTime.now();
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        //print(ticket);
+        return Container(
+          height: 100,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            minimumYear: 1900,
+            initialDateTime: DateTime.now(),
+            backgroundColor: Colors.white,
+            maximumDate: DateTime.now(),
+            onDateTimeChanged: (value) => birthDate = value,
+          ),
+        );
+      });
+  return date;
 }
