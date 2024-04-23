@@ -18,6 +18,18 @@ class ReservationErrorState extends AppState {
   final dynamic error;
   ReservationErrorState(this.error);
 }
+//......................********* here states for department ***********................
+class GetAllDepartmentLoadingState extends AppState {}
+
+class GetAllDepartmentSuccessState extends AppState {
+  // final UserReservationModel? modelReservation;
+  // ReservationSuccessState(this.modelReservation);
+}
+
+class GetAllDepartmentErrorState extends AppState {
+  final dynamic error;
+  GetAllDepartmentErrorState(this.error);
+}
 
 
 

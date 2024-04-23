@@ -10,6 +10,7 @@ class Endpoint{
     static const LOGIN ='Auth/LogIn';
     static const REGISTER ='Auth/register';
     static const USER_RESERVATION='Reservation/UserReservations';
+    static const ALLDEPARTMENTS='Department/All-Departments';
 }
 //http://medicalsystem-001-site1.ftempurl.com
 //Authorization : 'Bearer ${AccessToken}'

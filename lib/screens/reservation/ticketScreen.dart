@@ -1,11 +1,12 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/models/reservationModel.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:medica/models/reservationModel.dart';
+
 class TicketScreen extends StatelessWidget {
   const TicketScreen({super.key});
 
@@ -18,7 +19,7 @@ class TicketScreen extends StatelessWidget {
       return State is ReservationLoadingState
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
-              // backgroundColor: AppColor.primaryColor,
+             // backgroundColor: AppColor.primaryColor,
               body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -166,7 +167,6 @@ class TicketScreen extends StatelessWidget {
                                             color: Colors.black, fontSize: 16),
                                       ),
                                     ),
-                                 
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -209,7 +209,8 @@ class TicketScreen extends StatelessWidget {
                                                 showDialogDetailsOrder(
                                                     context,
                                                     index,
-                                                    cubit.myReservationsList?[index]);
+                                                    cubit.myReservationsList?[
+                                                        index]);
                                               },
                                               child: Text(
                                                 'Details',
@@ -262,12 +263,12 @@ class TicketScreen extends StatelessWidget {
   }
 }
 
-void showDialogDetailsOrder(BuildContext context, int index, DataUserReservation? ticketmodel) {
+void showDialogDetailsOrder(
+    BuildContext context, int index, DataUserReservation? ticketmodel) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-        
-        //print(ticket);
+      //print(ticket);
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         backgroundColor: AppColor.primaryColor,

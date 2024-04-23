@@ -54,7 +54,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(DioConsumer(dio: Dio()))..getdata(),
+      create: (context) => AppCubit(DioConsumer(dio: Dio()))..getdata()..GetAllDepartments(),
       child: MaterialApp(
           //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,

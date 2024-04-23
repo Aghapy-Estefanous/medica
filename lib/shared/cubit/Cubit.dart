@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
+import 'package:medica/models/departmentModel.dart';
 import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
@@ -78,6 +79,28 @@ List<DataUserReservation> ?myReservationsList=[];
     } on ServerExceptions catch (e) {
       print(e.toString());
       emit(ReservationErrorState(e.errorModel.message));
+    }
+  }
+
+//  ******* get all department for home ************** 
+late List<Data>?alldepartmentslist=[];
+  GetAllDepartments() async {
+    try {
+      late DepartmentsModel departmentsModel;
+      emit(GetAllDepartmentLoadingState());
+
+       var response = await api.get(
+        Endpoint.BaseUrl+Endpoint.ALLDEPARTMENTS,
+      );
+     // print(response.data);
+      departmentsModel = DepartmentsModel.fromJson(response);
+      alldepartmentslist=departmentsModel.data;
+      print(departmentsModel.data?[0].name);
+      
+      emit(GetAllDepartmentSuccessState());
+    } on ServerExceptions catch (e) {
+      print(e.toString());
+      emit(GetAllDepartmentErrorState(e.errorModel.message));
     }
   }
 }
