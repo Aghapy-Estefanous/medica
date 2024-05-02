@@ -18,6 +18,43 @@ class ReservationErrorState extends AppState {
   final dynamic error;
   ReservationErrorState(this.error);
 }
+//......................********* here states for department ***********................
+class GetAllDepartmentLoadingState extends AppState {}
+
+class GetAllDepartmentSuccessState extends AppState {
+  // final UserReservationModel? modelReservation;
+  // ReservationSuccessState(this.modelReservation);
+}
+
+class GetAllDepartmentErrorState extends AppState {
+  final dynamic error;
+  GetAllDepartmentErrorState(this.error);
+}
+class chnageButtonDepartmenTColor extends AppState {}
+//......................********* here states for all clinics of department ***********................
+class GetAllClinicsDepartmentLoadingState extends AppState {}
+
+class GetAllClinicsDepartmentSuccessState extends AppState {
+  // final UserReservationModel? modelReservation;
+  // ReservationSuccessState(this.modelReservation);
+}
+
+class GetAllClinicsDepartmentErrorState extends AppState {
+  final dynamic error;
+  GetAllClinicsDepartmentErrorState(this.error);
+}
+//......................********* here states for all clinics   for home ui ***********................
+class GetAllClinicsLoadingState extends AppState {}
+
+class GetAllClinicsSuccessState extends AppState {
+  // final UserReservationModel? modelReservation;
+  // ReservationSuccessState(this.modelReservation);
+}
+
+class GetAllClinicsErrorState extends AppState {
+  final dynamic error;
+  GetAllClinicsErrorState(this.error);
+}
 
 
 

@@ -202,7 +202,7 @@ class RegisterScreen extends StatelessWidget {
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty)
                                     return "Please enter your user name";
-                                  else if (value!.length < 4) {
+                                  else if (value.length < 4) {
                                     return "name length must be at least 4 chars ";
                                   }
                                 },
@@ -353,7 +353,8 @@ class RegisterScreen extends StatelessWidget {
                                       email: emailController.text,
                                       password: passwordController.text,
                                       confirmPassword:
-                                          confirmPassController.text,
+                                          confirmPassController.text, 
+                                          dob: '',
                                     );
                                   }),
                               const SizedBox(height: 15),
