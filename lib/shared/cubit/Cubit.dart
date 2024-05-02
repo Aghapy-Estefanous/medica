@@ -3,7 +3,11 @@ import 'package:bloc/bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:medica/screens/static_pages/testing.dart';
+
 import 'package:medica/models/clinicModel.dart';
+
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -36,6 +40,11 @@ class AppCubit extends Cubit<AppState> {
           Icons.category,
         )),
     NavigationDestination(
+        label: "Labs",
+        icon: Icon(
+          Icons.library_books_outlined,
+        )),
+    NavigationDestination(
         label: "Reservation",
         icon: Icon(
           Iconsax.tick_circle,
@@ -46,9 +55,10 @@ class AppCubit extends Cubit<AppState> {
           Icons.settings,
         )),
   ];
-  List<Widget> Screen = const [
+  List<Widget> Screen = [
     Home_Screen(),
     Splash_screen(),
+    Testing(),
     TicketScreen(),
     MedicalHistoryScreen(),
   ];

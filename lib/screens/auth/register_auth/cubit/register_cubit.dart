@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/models/login_model.dart';
@@ -18,10 +19,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String email,
     required String password,
     required String confirmPassword,
+    required String birthDate,
   }) {
     emit(RegisterLoadingState());
-
-    dio_helper.postData(url:  Endpoint.BaseUrl+Endpoint.REGISTER, data: {
+    print(birthDate);
+    dio_helper.postData(url: Endpoint.BaseUrl + Endpoint.REGISTER, data: {
       'firstName': firstName,
       'lastName': lastName,
       'nid': nid,
@@ -30,6 +32,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       'email': email,
       'password': password,
       'confirmPassword': confirmPassword,
+      'birthDate': birthDate,
     }).then((value) {
       print("here the data send ${value!.data}");
       LoginModel CURRENT_USER = LoginModel.fromJson(value.data);
@@ -72,5 +75,33 @@ class RegisterCubit extends Cubit<RegisterState> {
       isvisiable2 = !isvisiable2;
     }
     emit(RsgisterVisiablityIconState());
+  }
+
+  String date =
+      '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()}';
+  DateTime dateD = DateTime.now();
+  void changeDate(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          //print(ticket);
+          return Container(
+            height: 100,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              minimumYear: 1900,
+              initialDateTime: dateD,
+              backgroundColor: Colors.white,
+              maximumDate: DateTime.now(),
+              onDateTimeChanged: (value) {
+                dateD = value;
+                date = value.toIso8601String();
+
+                print(date);
+                emit(DateState());
+              },
+            ),
+          );
+        });
   }
 }

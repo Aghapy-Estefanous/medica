@@ -12,7 +12,9 @@ import 'package:medica/screens/auth/NewPasswordS/NewPasswordS.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginState.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+
 var TOKEN;
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
@@ -38,7 +40,7 @@ class LoginScreen extends StatelessWidget {
               // print(state.model?.data!.token);
               CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
                   .then((value) {
-               var token = state.model?.data!.token;
+                var token = state.model?.data!.token;
                 print(CachHelper.getdata(key: 'token'));
               });
               showtoast(
@@ -170,7 +172,11 @@ class LoginScreen extends StatelessWidget {
                             ),
                             onTap: () {
                               navigateToScreen(
-                                  context, Email(ScreenName: NewPassword(Email: '',)));
+                                  context,
+                                  Email(
+                                      ScreenName: NewPassword(
+                                    Email: '',
+                                  )));
                             },
                           ),
                           //.............................
