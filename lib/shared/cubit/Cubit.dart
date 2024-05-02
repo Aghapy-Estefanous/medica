@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/static_pages/testing.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -35,6 +36,11 @@ class AppCubit extends Cubit<AppState> {
           Icons.category,
         )),
     NavigationDestination(
+        label: "Labs",
+        icon: Icon(
+          Icons.library_books_outlined,
+        )),
+    NavigationDestination(
         label: "Reservation",
         icon: Icon(
           Iconsax.tick_circle,
@@ -45,9 +51,10 @@ class AppCubit extends Cubit<AppState> {
           Icons.settings,
         )),
   ];
-  List<Widget> Screen = const [
+  List<Widget> Screen = [
     Home_Screen(),
     Splash_screen(),
+    Testing(),
     TicketScreen(),
     MedicalHistoryScreen(),
   ];
@@ -60,7 +67,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
 // reserve method1
-List<DataUserReservation> ?myReservationsList=[];
+  List<DataUserReservation>? myReservationsList = [];
   getdata() async {
     try {
       late UserReservationModel modelReservation;
@@ -69,11 +76,11 @@ List<DataUserReservation> ?myReservationsList=[];
       var response = await api.get(
         'http://medicalsystem-001-site1.ftempurl.com/api/Reservation/UserReservations',
       );
-     // print(response.data);
+      // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
-      myReservationsList=modelReservation.data;
+      myReservationsList = modelReservation.data;
       print(modelReservation.data?[0].firstname);
-      
+
       emit(ReservationSuccessState(modelReservation));
     } on ServerExceptions catch (e) {
       print(e.toString());
