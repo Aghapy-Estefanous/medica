@@ -3,27 +3,24 @@ class LoginModel {
   bool? succeeded;
   String? message;
   UserModel? data;
-  List<Map<String, dynamic>>? errorsList;
+  String? error;
 
   LoginModel({
     this.status,
     this.succeeded,
     this.message,
     this.data,
-    this.errorsList,
+    this.error,
   });
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     status = json['statusCode'];
     succeeded = json['succeeded'];
     message = json['message'];
+    succeeded = json['succeeded'];
+    error = json['errors'];
 
-    errorsList = [];
-    if (json['errors'] != null) {
-      json['errors'].forEach((element) {
-        errorsList?.add(Map<String, dynamic>.from(element));
-      });
-    }
+    
 
     data = json['data'] != null ? UserModel.fromJson(json['data']) : null;
   }

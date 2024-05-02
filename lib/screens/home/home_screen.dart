@@ -5,11 +5,11 @@ import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:medica/screens/home/AllclinicsOfDepartment.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
 
 class Home_Screen extends StatelessWidget {
   const Home_Screen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
       AppCubit cubit = AppCubit.get(context);
@@ -105,7 +105,7 @@ class Home_Screen extends StatelessWidget {
                             child: ListView.builder(
                               itemBuilder: (context, index) => Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                                child: departementWidget(index,cubit.alldepartmentslist?[index].name),
+                                child: departementWidget(index,cubit.alldepartmentslist?[index].name,cubit.alldepartmentslist?[index].id,context,cubit),
                               ),
                               itemCount: cubit.alldepartmentslist?.length,
                               scrollDirection: Axis.horizontal,
@@ -183,20 +183,28 @@ class Home_Screen extends StatelessWidget {
     );
   }
 
-  Container departementWidget(int index,String?name) {
-    return Container(
-      width: 150,
-      decoration: BoxDecoration(
-        color: index == 0 ? AppColor.orangcolor : Color(0xFFF5F5FF),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Center(
-        child: Text(
-          name??"",
-          style: TextStyle(
-            color: index == 0
-                ? AppColor.whiteColor
-                : Color.fromARGB(171, 56, 55, 55),
+  InkWell departementWidget(int index,String?name ,int? id,var context, AppCubit cubit) {
+    return InkWell(
+      onTap: () {
+       cubit.currentDepartment(index);
+      navigateToScreen(context, departmentClinicsScreen(DepertmentId: id,DepertmentName: name,));
+      
+     
+      },
+      child: Container(
+        width: 150,
+        decoration: BoxDecoration(
+          color:cubit.indxSelected==index?AppColor.orangcolor:Color.fromARGB(213, 90, 138, 192),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Center(
+          child: Text(
+            name??"",
+            style: TextStyle(
+              color: 
+                   AppColor.whiteColor
+                 // : Color.fromARGB(171, 56, 55, 55),
+            ),
           ),
         ),
       ),
@@ -236,21 +244,7 @@ class Home_Screen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    minWidth: 40.0,
-                    height: 25,
-                    color: AppColor.orangcolor,
-                    child: const Text(
-                      ' details ',
-                      style: TextStyle(fontSize: 13.0, color: Colors.white),
-                    ),
-                    onPressed: () {
-                      navigateToScreen(context, ScreenName);
-                    },
-                  ),
+                  detailsButtoncustom(context, ScreenName),
                   Row(
                     children: [
                       Icon(
@@ -272,4 +266,5 @@ class Home_Screen extends StatelessWidget {
       ),
     );
   }
+
 }

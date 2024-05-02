@@ -3,17 +3,17 @@ import 'package:bloc/bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/models/clinicModel.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/models/departmentModel.dart';
 import 'package:medica/core/errors/Exceptions.dart';
+import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
-import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
-import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
 // import 'package:medica/screens/auth/loginS/loginS.dart';
@@ -61,20 +61,20 @@ class AppCubit extends Cubit<AppState> {
   }
 
 // reserve method1
-List<DataUserReservation> ?myReservationsList=[];
+  List<DataUserReservation>? myReservationsList = [];
   getdata() async {
     try {
       late UserReservationModel modelReservation;
       emit(ReservationLoadingState());
 
       var response = await api.get(
-        'http://medicalsystem-001-site1.ftempurl.com/api/Reservation/UserReservations',
+       Endpoint.BaseUrl+Endpoint.REGISTER,
       );
-     // print(response.data);
+      // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
-      myReservationsList=modelReservation.data;
+      myReservationsList = modelReservation.data;
       print(modelReservation.data?[0].firstname);
-      
+
       emit(ReservationSuccessState(modelReservation));
     } on ServerExceptions catch (e) {
       print(e.toString());
@@ -82,27 +82,66 @@ List<DataUserReservation> ?myReservationsList=[];
     }
   }
 
-//  ******* get all department for home ************** 
-late List<Data>?alldepartmentslist=[];
+//   *******get all department for home**************
+
+  late List<Data>? alldepartmentslist = [];
+
   GetAllDepartments() async {
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
 
-       var response = await api.get(
-        Endpoint.BaseUrl+Endpoint.ALLDEPARTMENTS,
+      var response = await api.get(
+        Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
-     // print(response.data);
+      // print(response.data);
       departmentsModel = DepartmentsModel.fromJson(response);
-      alldepartmentslist=departmentsModel.data;
+      alldepartmentslist = departmentsModel.data;
       print(departmentsModel.data?[0].name);
-      
+
       emit(GetAllDepartmentSuccessState());
     } on ServerExceptions catch (e) {
       print(e.toString());
       emit(GetAllDepartmentErrorState(e.errorModel.message));
     }
   }
+
+  //.........................to chnage color button department
+  //Color DepartmentButtonColor = AppColor.orangcolor;
+  int indxSelected=0;
+  currentDepartment(int index) {
+   indxSelected =index;
+    emit(chnageButtonDepartmenTColor());
+  }
+
+//............................. get all cilics of a department
+  late List<DataClinic>? allClinicsOfDepartmentslist = [
+    //DataClinic(id: 12,name: "test clinic")
+  ];
+
+  GetAllClinicOfDepartments(int? Did) async {
+    try {
+      late ClinicModel clinicModel;
+      emit(GetAllDepartmentLoadingState());
+
+      var response = await api.get(
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS_OF_DEPARTMENTS + Did.toString(),
+      );
+
+      clinicModel = ClinicModel.fromJson(response);
+      allClinicsOfDepartmentslist?.clear();
+      allClinicsOfDepartmentslist = clinicModel.data;
+      print("list :${allClinicsOfDepartmentslist?.length}");
+      print("from cubit :${allClinicsOfDepartmentslist?[0].name}");
+
+      emit(GetAllDepartmentSuccessState());
+    } on ServerExceptions catch (e) {
+      print(e.toString());
+      emit(GetAllDepartmentErrorState(e.errorModel.message));
+    }
+  }
+
+
 }
 /*
   late UserReservationModel modelReservation;

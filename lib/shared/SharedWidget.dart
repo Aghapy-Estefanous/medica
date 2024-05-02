@@ -27,6 +27,24 @@ dynamic showtoast({required context, required String Message, required color}) {
             fontSize: 17, fontWeight: FontWeight.w500, color: Colors.white),
       )));
 }
+Widget detailsButtoncustom(BuildContext context, ScreenName) {
+    return MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  minWidth: 40.0,
+                  height: 25,
+                  color: AppColor.orangcolor,
+                  child: const Text(
+                    ' details ',
+                    style: TextStyle(fontSize: 13.0, color: Colors.white),
+                  ),
+                  onPressed: () {
+                    navigateToScreen(context, ScreenName);
+                  },
+                );
+  }
+
 
 // logout(context) {
 //   return TextButton(
