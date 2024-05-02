@@ -1,4 +1,3 @@
-import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';

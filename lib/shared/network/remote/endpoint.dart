@@ -1,4 +1,4 @@
-const BaseUrl='http://medicalsystem-001-site1.ftempurl.com';
+const BaseUrl='http://youssifasaad-001-site1.ltempurl.com/api/';
 const LOGIN ='Auth/LogIn';
 const REGISTER ='Auth/register';
 
@@ -6,10 +6,13 @@ const USER_RESERVATION='/api/Reservation/UserReservations';
 const ReservationINFO='Reservation/ReservationINFO/15';
 
 class Endpoint{
-    static const BaseUrl='http://medicalsystem-001-site1.ftempurl.com/api/';
+    static const BaseUrl='http://youssifasaad-001-site1.ltempurl.com/api/';
     static const LOGIN ='Auth/LogIn';
     static const REGISTER ='Auth/register';
     static const USER_RESERVATION='Reservation/UserReservations';
+    static const ALLDEPARTMENTS='Department/All-Departments';
+    static const ALLCLINICS_OF_DEPARTMENTS='Clinic/GetAllClinicsWthDeptId/';
+    static const ALLCLINICS='Clinic/All-Clinics';
 }
 //http://medicalsystem-001-site1.ftempurl.com
 //Authorization : 'Bearer ${AccessToken}'
