@@ -11,7 +11,7 @@ import 'package:medica/models/departmentModel.dart';
 import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
-import 'package:medica/screens/static_pages/testing.dart';
+import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';

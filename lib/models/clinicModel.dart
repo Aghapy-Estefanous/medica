@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class ClinicModel {
   String? statusCode;
   bool? succeeded;
