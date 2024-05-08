@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/shared/network/remote/endpoint.dart';
 
 class dio_helper {
   static late Dio dio;
   static init() {
     // dio?.options.headers['Authorization'] = 'f96edd43fbc848b69a17ab04fec81381';
     dio = Dio(BaseOptions(
-      baseUrl: 'http://medicalsystem-001-site1.ftempurl.com',
+      baseUrl: Endpoint.BaseUrl,
       receiveDataWhenStatusError: true,
       validateStatus: (status) {
         return status! >= 200 && status < 500; // Adjust as needed
@@ -25,7 +26,7 @@ static Future<Response?> getData({
 }) async {
   try {
     var headers = {
-      'Authorization': 'Bearer $AccessToken',
+     // 'Authorization': 'Bearer $AccessToken',
       'Content-Type': 'application/json',
     };
     var dio = Dio();
@@ -68,7 +69,7 @@ static Future<Response?> getData({
       // 'lang': lang,
       'Content-Type': 'application/json',
       'accept': '*/*',
-      'tokenAuthorization': 'Bearer ${AccessToken}'
+      //'tokenAuthorization': 'Bearer ${AccessToken}'
     };
     return await dio.post(url, queryParameters: query, data: data);
   }

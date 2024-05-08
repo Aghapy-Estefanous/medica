@@ -354,7 +354,7 @@ class RegisterScreen extends StatelessWidget {
                                       password: passwordController.text,
                                       confirmPassword:
                                           confirmPassController.text, 
-                                          dob: '',
+                                     
                                     );
                                   }),
                               const SizedBox(height: 15),
