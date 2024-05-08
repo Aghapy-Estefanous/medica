@@ -14,7 +14,10 @@ import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 
 
-final BaseAPI = 'http://youssifasaad-001-site1.ltempurl.com';
+
+final BaseAPI = 'http://medicalsystem.runasp.net/api/';
+
+
 
 main() async {
   Bloc.observer = MyBlocObserver();

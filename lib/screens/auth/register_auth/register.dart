@@ -355,9 +355,14 @@ class RegisterScreen extends StatelessWidget {
                                       email: emailController.text,
                                       password: passwordController.text,
                                       confirmPassword:
+<<<<<<< HEAD
+                                          confirmPassController.text, 
+                                     
+=======
                                           confirmPassController.text,
                                       birthDate: cubit.date,
 
+>>>>>>> 6abe7d2bb3a992363dd162c21cc76e94db110566
                                     );
                                   }),
                               const SizedBox(height: 15),
