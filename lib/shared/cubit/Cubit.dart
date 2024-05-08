@@ -9,9 +9,9 @@ import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/models/departmentModel.dart';
 import 'package:medica/core/errors/Exceptions.dart';
-import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
+import 'package:medica/screens/static_pages/testing.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
@@ -36,6 +36,11 @@ class AppCubit extends Cubit<AppState> {
           Icons.category,
         )),
     NavigationDestination(
+        label: "Labs",
+        icon: Icon(
+          Icons.library_books_outlined,
+        )),
+    NavigationDestination(
         label: "Reservation",
         icon: Icon(
           Iconsax.tick_circle,
@@ -46,9 +51,10 @@ class AppCubit extends Cubit<AppState> {
           Icons.settings,
         )),
   ];
-  List<Widget> Screen = const [
+  List<Widget> Screen = [
     Home_Screen(),
     Splash_screen(),
+    Testing(),
     TicketScreen(),
     MedicalHistoryScreen(),
   ];
@@ -68,7 +74,7 @@ class AppCubit extends Cubit<AppState> {
       emit(ReservationLoadingState());
 
       var response = await api.get(
-       Endpoint.BaseUrl+Endpoint.REGISTER,
+        Endpoint.BaseUrl + Endpoint.REGISTER,
       );
       // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
@@ -108,9 +114,9 @@ class AppCubit extends Cubit<AppState> {
 
   //.........................to chnage color button department
   //Color DepartmentButtonColor = AppColor.orangcolor;
-  int indxSelected=0;
+  int indxSelected = 0;
   currentDepartment(int index) {
-   indxSelected =index;
+    indxSelected = index;
     emit(chnageButtonDepartmenTColor());
   }
 
@@ -140,8 +146,6 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllDepartmentErrorState(e.errorModel.message));
     }
   }
-
-
 }
 /*
   late UserReservationModel modelReservation;

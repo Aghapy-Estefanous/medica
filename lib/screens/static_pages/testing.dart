@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
-class Testing extends StatefulWidget {
-  const Testing({Key? key}) : super(key: key);
+class Testing extends StatelessWidget {
+  Testing({Key? key}) : super(key: key);
 
-  @override
-  State<Testing> createState() => _TestingState();
-}
-
-class _TestingState extends State<Testing> {
   int selected = 0;
 
   @override
@@ -60,9 +55,9 @@ class _TestingState extends State<Testing> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selected = index;
-                        });
+                        // setState(() {
+                        //   selected = index;
+                        // });
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -85,18 +80,34 @@ class _TestingState extends State<Testing> {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return ListTile(
-                    title: Text('count : $index'),
-                  );
-                },
-                childCount: 20,
+            if (selected == 0)
+              test1()
+            else
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return ListTile(
+                      title: Text('count : $index'),
+                    );
+                  },
+                  childCount: 20,
+                ),
               ),
-            ),
           ],
         ),
+      ),
+    );
+  }
+
+  SliverList test1() {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return ListTile(
+            title: Text('count : $index'),
+          );
+        },
+        childCount: 2,
       ),
     );
   }

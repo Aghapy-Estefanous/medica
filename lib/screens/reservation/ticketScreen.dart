@@ -5,6 +5,7 @@ import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+
 import 'package:medica/models/reservationModel.dart';
 
 class TicketScreen extends StatelessWidget {
@@ -282,82 +283,84 @@ void showDialogDetailsOrder(
             isCornerRounded: true,
             padding: EdgeInsets.all(20),
             //shadow: [BoxShadow()],
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Name',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Text('${ticketmodel?.firstname} ${ticketmodel?.lastname}'),
-                Divider(),
-                Text(
-                  'NID',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Text('${ticketmodel?.nid}'),
-                Divider(),
-                Text(
-                  'Clinic Name',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Text('${ticketmodel?.placeName}'),
-                Divider(),
-                Column(
-                  children: [
-                    Text(
-                      'num in waiting list',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    Text(
-                      '${ticketmodel?.waiting}',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
-                Divider(),
-                // Column(
-                //   children: [
-                //     Text(
-                //       'Address',
-                //       style: Theme.of(context).textTheme.bodySmall,
-                //     ),
-                //     Text('Cairo ,Egypt'),
-                //   ],
-                // ),
-                // Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          'Date',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text('${convertDateTime(ticketmodel?.time)['date']}'),
-                      ],
-                    ),
-                    // Spacer(),
-                    Column(
-                      children: [
-                        Text(
-                          'price',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          '${ticketmodel?.price}',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Divider(),
-                Image(
-                  image: AssetImage('assets/images/home-Images/Barcode.png'),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Name',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text('${ticketmodel?.firstname} ${ticketmodel?.lastname}'),
+                  Divider(),
+                  Text(
+                    'NID',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text('${ticketmodel?.nid}'),
+                  Divider(),
+                  Text(
+                    'Clinic Name',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text('${ticketmodel?.placeName}'),
+                  Divider(),
+                  Column(
+                    children: [
+                      Text(
+                        'num in waiting list',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      Text(
+                        '${ticketmodel?.waiting}',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                  // Column(
+                  //   children: [
+                  //     Text(
+                  //       'Address',
+                  //       style: Theme.of(context).textTheme.bodySmall,
+                  //     ),
+                  //     Text('Cairo ,Egypt'),
+                  //   ],
+                  // ),
+                  // Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'Date',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          Text('${convertDateTime(ticketmodel?.time)['date']}'),
+                        ],
+                      ),
+                      // Spacer(),
+                      Column(
+                        children: [
+                          Text(
+                            'price',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          Text(
+                            '${ticketmodel?.price}',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                  Image(
+                    image: AssetImage('assets/images/home-Images/Barcode.png'),
+                  ),
+                ],
+              ),
             )),
       );
     },
