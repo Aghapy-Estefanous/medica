@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
+import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
+import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/core/api/dioConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -29,6 +32,7 @@ main() async {
         BlocProvider(create: (context) => NewPasswordCubit()),
         BlocProvider(create: (context) => EmailCubit()),
         BlocProvider(create: (context) => ConfirmEmailCubit()),
+        BlocProvider(create: (context) => TestsCubit()),
       ],
       child: const MainApp(),
     ),
