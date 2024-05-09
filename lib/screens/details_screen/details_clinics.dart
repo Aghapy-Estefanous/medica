@@ -1,14 +1,17 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:medica/models/clinicModel.dart';
+import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final clinicData;
+  DetailsScreen(this.clinicData, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
-    String title= 'clinics details';
+    String title = 'clinics details';
     return Scaffold(
       appBar: MyAppBarWidget(context, title),
       body: Padding(
@@ -35,7 +38,7 @@ class DetailsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Baby clinc',
+                Text(clinicData.name,
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -65,7 +68,7 @@ class DetailsScreen extends StatelessWidget {
             ),
 
             Text(
-              "datadatadatadatadatadatadatadatadatadatadatadatadatadata",
+              clinicData.department??"department .....................",
               style: TextStyle(
                 color: Color.fromARGB(255, 133, 129, 129),
               ),
@@ -74,13 +77,13 @@ class DetailsScreen extends StatelessWidget {
             //   height: 20,
             // ),
             Padding(
-              padding:  EdgeInsets.symmetric(vertical: height*0.020),
+              padding: EdgeInsets.symmetric(vertical: height * 0.020),
               child: Container(
                 height: height * .10,
                 child: ListView.builder(
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: index == 0||index==2
+                    child: index == 0 || index == 2
                         ? avilableDayContainer()
                         : UnavilableDayContainer(),
                   ),
@@ -91,7 +94,7 @@ class DetailsScreen extends StatelessWidget {
             ),
 
             Padding(
-              padding:  EdgeInsets.symmetric(vertical: height*0.020),
+              padding: EdgeInsets.symmetric(vertical: height * 0.020),
               child: const Row(
                 children: [
                   Icon(
@@ -164,21 +167,18 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
- 
-
   Container avilableDayContainer() {
     return Container(
-                        decoration: const BoxDecoration(
-                            color: AppColor.primaryColor,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8))),
-                        height: 70,
-                        width: 55,
-                        child: Center(
-                            child: Text(
-                          "data",
-                          style: TextStyle(color: AppColor.whiteColor),
-                        )));
+        decoration: const BoxDecoration(
+            color: AppColor.primaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        height: 70,
+        width: 55,
+        child: Center(
+            child: Text(
+          "data",
+          style: TextStyle(color: AppColor.whiteColor),
+        )));
   }
 
   Container UnavilableDayContainer() {
