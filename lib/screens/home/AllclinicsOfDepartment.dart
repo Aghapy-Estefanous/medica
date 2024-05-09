@@ -83,7 +83,7 @@ class _departmentClinicsScreenState extends State<departmentClinicsScreen> {
                               ),
                             ),
                             onPressed: () {
-                              navigateToScreen(context, DetailsScreen());
+                             // navigateToScreen(context, DetailsScreen());
                             },
                             child: Text(
                               "Details",

@@ -40,11 +40,11 @@ class AppCubit extends Cubit<AppState> {
         icon: Icon(
           Icons.library_books_outlined,
         )),
-    NavigationDestination(
-        label: "Reservation",
-        icon: Icon(
-          Iconsax.tick_circle,
-        )),
+    // NavigationDestination(
+    //     label: "Reservation",
+    //     icon: Icon(
+    //       Iconsax.tick_circle,
+    //     )),
     NavigationDestination(
         label: "medical history",
         icon: Icon(
@@ -55,7 +55,6 @@ class AppCubit extends Cubit<AppState> {
     Home_Screen(),
     Splash_screen(),
     Testing(),
-    TicketScreen(),
     MedicalHistoryScreen(),
   ];
   // MyHomeModel? homeModel;
@@ -146,6 +145,33 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllDepartmentErrorState(e.errorModel.message));
     }
   }
+
+//............................. get all cilics (home)
+  late List<DataClinic>? allClinicslist = [];
+
+  GetAllClinics() async {
+    try {
+      late ClinicModel clinicModel;
+      emit(GetAllClinicsLoadingState());
+
+      var response = await api.get(
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS,
+      );
+
+      clinicModel = ClinicModel.fromJson(response);
+      allClinicslist = clinicModel.data;
+
+      print("list :${allClinicslist?.length}");
+      print("from cubit :${allClinicslist?[0].name}");
+
+      emit(GetAllClinicsSuccessState());
+    } on ServerExceptions catch (e) {
+      print(e.toString());
+      emit(GetAllClinicsErrorState(e.errorModel.message));
+    }
+  }
+
+
 }
 /*
   late UserReservationModel modelReservation;
