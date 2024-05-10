@@ -1,4 +1,4 @@
-const BaseUrl='http://youssifasaad-001-site1.ltempurl.com/api/';
+const BaseUrl='http://medicalsystem.runasp.net/api/';
 const LOGIN ='Auth/LogIn';
 const REGISTER ='Auth/register';
 
@@ -6,7 +6,7 @@ const USER_RESERVATION='/api/Reservation/UserReservations';
 const ReservationINFO='Reservation/ReservationINFO/15';
 
 class Endpoint{
-    static const BaseUrl='http://youssifasaad-001-site1.ltempurl.com/api/';
+    static const BaseUrl='http://medicalsystem.runasp.net/api/';
     static const LOGIN ='Auth/LogIn';
     static const REGISTER ='Auth/register';
     static const USER_RESERVATION='Reservation/UserReservations';

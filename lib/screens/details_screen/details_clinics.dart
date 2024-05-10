@@ -4,11 +4,12 @@ import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final clinicData;
+  DetailsScreen(this.clinicData, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
-    String title= 'clinics details';
+    String title = 'clinics details';
     return Scaffold(
       appBar: MyAppBarWidget(context, title),
       body: Padding(
@@ -35,13 +36,13 @@ class DetailsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Baby clinc',
-                    style: TextStyle(
+                Text(clinicData.name,
+                    style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.w500)),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
+                const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -65,7 +66,7 @@ class DetailsScreen extends StatelessWidget {
             ),
 
             Text(
-              "datadatadatadatadatadatadatadatadatadatadatadatadatadata",
+              clinicData.department ?? "department .....................",
               style: TextStyle(
                 color: Color.fromARGB(255, 133, 129, 129),
               ),
@@ -74,13 +75,13 @@ class DetailsScreen extends StatelessWidget {
             //   height: 20,
             // ),
             Padding(
-              padding:  EdgeInsets.symmetric(vertical: height*0.020),
+              padding: EdgeInsets.symmetric(vertical: height * 0.020),
               child: Container(
                 height: height * .10,
                 child: ListView.builder(
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: index == 0||index==2
+                    child: index == 0 || index == 2
                         ? avilableDayContainer()
                         : UnavilableDayContainer(),
                   ),
@@ -91,7 +92,7 @@ class DetailsScreen extends StatelessWidget {
             ),
 
             Padding(
-              padding:  EdgeInsets.symmetric(vertical: height*0.020),
+              padding: EdgeInsets.symmetric(vertical: height * 0.020),
               child: const Row(
                 children: [
                   Icon(
@@ -164,21 +165,18 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
- 
-
   Container avilableDayContainer() {
     return Container(
-                        decoration: const BoxDecoration(
-                            color: AppColor.primaryColor,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8))),
-                        height: 70,
-                        width: 55,
-                        child: Center(
-                            child: Text(
-                          "data",
-                          style: TextStyle(color: AppColor.whiteColor),
-                        )));
+        decoration: const BoxDecoration(
+            color: AppColor.primaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        height: 70,
+        width: 55,
+        child: Center(
+            child: Text(
+          "data",
+          style: TextStyle(color: AppColor.whiteColor),
+        )));
   }
 
   Container UnavilableDayContainer() {

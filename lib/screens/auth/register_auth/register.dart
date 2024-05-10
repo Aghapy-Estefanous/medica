@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:medica/home_layout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -357,7 +357,6 @@ class RegisterScreen extends StatelessWidget {
                                       confirmPassword:
                                           confirmPassController.text,
                                       birthDate: cubit.date,
-
                                     );
                                   }),
                               const SizedBox(height: 15),

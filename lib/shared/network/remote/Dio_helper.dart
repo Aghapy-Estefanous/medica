@@ -7,7 +7,8 @@ class dio_helper {
   static init() {
     // dio?.options.headers['Authorization'] = 'f96edd43fbc848b69a17ab04fec81381';
     dio = Dio(BaseOptions(
-      baseUrl:Endpoint.BaseUrl,
+      baseUrl: Endpoint.BaseUrl,
+
       receiveDataWhenStatusError: true,
       validateStatus: (status) {
         return status! >= 200 && status < 500; // Adjust as needed
@@ -18,26 +19,30 @@ class dio_helper {
       // }
     ));
   }
-static Future<Response?> getData({
-  @required String? url,
-  Map<String, dynamic>? query,
-  String lang = 'en',
-  @required String? AccessToken,
-}) async {
-  try {
-    var headers = {
-      'Authorization': AccessToken,
-      'Content-Type': 'application/json',
-    };
-    var dio = Dio();
-    dio.options.headers.addAll(headers);
-    Response response = await dio.get(url!, queryParameters: query);
-    return response;
-  } catch (error) {
-    print('Error fetching data: $error');
-    return null;
+
+  static Future<Response?> getData({
+    @required String? url,
+    Map<String, dynamic>? query,
+    String lang = 'en',
+    @required String? AccessToken,
+  }) async {
+    try {
+      var headers = {
+        // 'Authorization': 'Bearer $AccessToken',
+
+        'Authorization': AccessToken,
+
+        'Content-Type': 'application/json',
+      };
+      var dio = Dio();
+      dio.options.headers.addAll(headers);
+      Response response = await dio.get(url!, queryParameters: query);
+      return response;
+    } catch (error) {
+      print('Error fetching data: $error');
+      return null;
+    }
   }
-}
 
   // static Future<Response?> getData({
   //   //
@@ -46,7 +51,7 @@ static Future<Response?> getData({
   //   String lang = 'en',
   //   @required  String? AccessToken,
   // }) async {
-  
+
   //   dio.options.headers = {
   //     //  زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه او عشن اجيب الاتا سوء مفضلة او ف الشحن من غلال توكن اليوزر
   //     //'lang': lang,
@@ -69,7 +74,7 @@ static Future<Response?> getData({
       // 'lang': lang,
       'Content-Type': 'application/json',
       'accept': '*/*',
-      'tokenAuthorization': 'Bearer ${AccessToken}'
+      //'tokenAuthorization': 'Bearer ${AccessToken}'
     };
     return await dio.post(url, queryParameters: query, data: data);
   }
