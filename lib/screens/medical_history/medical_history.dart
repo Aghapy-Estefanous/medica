@@ -102,6 +102,7 @@ class MedicalHistoryScreen extends StatelessWidget {
               Container(
                 color: Colors.blue,
                 height: MediaQuery.of(context).size.height * 0.44,
+                child: Card(),
               ),
               SizedBox(height: 30),
               cardRowWidget(Icons.dashboard_customize_rounded, "Prescriptions",prescriptionsScreen(),context ),

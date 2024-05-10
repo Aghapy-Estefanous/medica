@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/main.dart';
+import 'package:medica/shared/cubit/ErrorHandling.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:meta/meta.dart';
 
@@ -28,11 +29,8 @@ class EmailCubit extends Cubit<EmailState> {
       print("  message from me${value.data}");
       if (value.statusCode == 200)
         emit(EmailSuccessgState(email));
-      else {
-        print("Status code : ${value.statusCode}");
-
-        emit(EmailErrorState(value.statusMessage!));
-      }
+      else
+        emit(EmailErrorState(ErrMessage(value.statusCode)));
     }).catchError((error) {
       print(" error here$error");
       if (error is DioException) {
