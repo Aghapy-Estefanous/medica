@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
+import 'package:medica/screens/auth/Profile/profile.dart';
+import 'package:medica/screens/medical_history/medical_history.dart';
 import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
@@ -17,7 +19,7 @@ import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
 import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 
-final BaseAPI = 'http://medicalsystem.runasp.net/api/';
+final BaseAPI = 'http://medicalsystem.runasp.net';
 
 main() async {
   Bloc.observer = MyBlocObserver();
@@ -47,11 +49,12 @@ class MainApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AppCubit(DioConsumer(dio: Dio()))
         ..getdata()
-        ..GetAllDepartments()..GetAllClinics(),
+        ..GetAllDepartments()
+        ..GetAllClinics(),
       child: MaterialApp(
           //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: Home_Screen()),
+          home: MedicalHistoryScreen()),
     );
   }
 }
