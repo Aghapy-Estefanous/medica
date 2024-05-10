@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   void userlogin({required String userName, required String password}) {
     emit(LoginLoadingState());
 
-    dio_helper.postData(url: Endpoint.BaseUrl+Endpoint.LOGIN, data: {
+    dio_helper.postData(url: Endpoint.BaseUrl + Endpoint.LOGIN, data: {
       'userName': userName,
       'password': password,
     }).then((value) {
@@ -28,10 +28,17 @@ class LoginCubit extends Cubit<LoginState> {
 
       emit(LoginSuccessgState(CURRENT_USER, StatusCodeInt));
     }).catchError((error) {
-      print(" error here : $error");
-      emit(
-        LoginErrorState(error),
-      );
+      if (error is DioException) {
+        print("HTTP Error Status Code: ${error.response?.statusCode}");
+        emit(LoginErrorState(error.response!.statusCode as String));
+      } else {
+        print("Non-HTTP Error: $error");
+        // Handle non-HTTP errors here
+      }
+      // print(" error here : $error");
+      // emit(
+      //   LoginErrorState(error),
+      // );
       // if (error is DioException) {
       //   // Access the response data from the DioError
       //   //LoginModel responseData =null;//= error.response?.data;

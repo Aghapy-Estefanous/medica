@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
             //  print(LoginCubit.get(context).CURRENT_USER);
             showtoast(
               context: context,
-              Message: " error pass or user",
+              Message: state.error.toString(),
               color: Colors.red,
             );
           } else if (state is LoginSuccessgState) {
