@@ -1,7 +1,5 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import 'package:medica/models/clinicModel.dart';
-import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
@@ -39,12 +37,12 @@ class DetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(clinicData.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.w500)),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
+                const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -68,7 +66,7 @@ class DetailsScreen extends StatelessWidget {
             ),
 
             Text(
-              clinicData.department??"department .....................",
+              clinicData.department ?? "department .....................",
               style: TextStyle(
                 color: Color.fromARGB(255, 133, 129, 129),
               ),

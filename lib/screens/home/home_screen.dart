@@ -34,7 +34,7 @@ class Home_Screen extends StatelessWidget {
                 Text(
                   "Hello! Alex",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -60,6 +60,7 @@ class Home_Screen extends StatelessWidget {
                       InkWell(
                         onTap: () {},
                         child: Container(
+                          width: MediaQuery.sizeOf(context).width * 0.45,
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             color: AppColor.primaryColor,
@@ -76,6 +77,7 @@ class Home_Screen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
+                                width: MediaQuery.sizeOf(context).width * 0.45,
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -91,7 +93,8 @@ class Home_Screen extends StatelessWidget {
                               Text(
                                 "Search \nfor any clinics",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.045,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -144,7 +147,8 @@ class Home_Screen extends StatelessWidget {
                               Text(
                                 "Visit your \nreservation",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.045,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -154,6 +158,8 @@ class Home_Screen extends StatelessWidget {
                                 "see all reservation",
                                 style: TextStyle(
                                   color: Colors.black54,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.040,
                                 ),
                               ),
                             ],
@@ -168,7 +174,7 @@ class Home_Screen extends StatelessWidget {
                     child: Text(
                       "Departments",
                       style: TextStyle(
-                        fontSize: 23,
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.w500,
                         color: const Color.fromARGB(183, 0, 0, 0),
                       ),
@@ -197,8 +203,9 @@ class Home_Screen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
                       "Popular Clinics",
+                      //title style
                       style: TextStyle(
-                        fontSize: 23,
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.w500,
                         color: const Color.fromARGB(183, 0, 0, 0),
                       ),
@@ -215,78 +222,89 @@ class Home_Screen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                
-                                Navigator.push(
+                            return Container(
+                              width: MediaQuery.of(context).size.width *
+                                  0.4, // Adjust width
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => DetailsScreen(cubit.allClinicslist?[index]),
-                                    ));
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.symmetric(vertical: 15),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  // boxShadow: [
-                                  //   BoxShadow(
-                                  //     color: Colors.black12,
-                                  //     blurRadius: 4,
-                                  //     spreadRadius: 2,
-                                  //   ),
-                                  // ],
-                                  border: Border.all(
-                                    color: const Color.fromARGB(35, 2, 78,
-                                        154), // Specify the border color here
-                                    width: 1, // Specify the border width here
+                                      builder: (context) => DetailsScreen(
+                                          cubit.allClinicslist?[index]),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color:
+                                          const Color.fromARGB(35, 2, 78, 154),
+                                      width: 1,
+                                    ),
                                   ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 35,
-                                      backgroundImage: AssetImage(
-                                          "assets/images/home-Images/baby.jpg"),
-                                    ),
-                                    Text(
-                                      cubit.allClinicslist?[index].name
-                                              .toString() ??
-                                          "clinics name",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black54,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      CircleAvatar(
+                                        radius:
+                                            MediaQuery.of(context).size.width *
+                                                0.1, // Adjust radius
+                                        backgroundImage: AssetImage(
+                                            "assets/images/home-Images/baby.jpg"),
                                       ),
-                                    ),
-                                    Text(
-                                      cubit.allClinicslist?[index].department ??
-                                          "department",
-                                      style: TextStyle(
-                                        color: Colors.black45,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.attach_money_outlined,
-                                          color: Colors.amber,
+                                      Text(
+                                        cubit.allClinicslist?[index].name
+                                                .toString() ??
+                                            "clinics name",
+                                        style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.04, // Adjust font size
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black54,
                                         ),
-                                        Text(
-                                          "${cubit.allClinicslist?[index].placePrices ?? "24"} EGP",
-                                          style: TextStyle(
-                                            color: Colors.black45,
+                                      ),
+                                      Text(
+                                        cubit.allClinicslist?[index]
+                                                .department ??
+                                            "department",
+                                        style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.035, // Adjust font size
+                                          color: Colors.black45,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.attach_money_outlined,
+                                            color: Colors.amber,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          Text(
+                                            "${cubit.allClinicslist?[index].placePrices ?? "24"} EGP",
+                                            style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.035, // Adjust font size
+                                              color: Colors.black45,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
