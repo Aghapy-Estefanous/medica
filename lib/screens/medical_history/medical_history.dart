@@ -10,20 +10,17 @@ class MedicalHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(height: MediaQuery.sizeOf(context).height*0.055 ),
+              Container(height: MediaQuery.sizeOf(context).height * 0.055),
               Container(
                 decoration: const BoxDecoration(
-                     color: AppColor.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(12))
-                ),
+                    color: AppColor.primaryColor,
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
                 padding: EdgeInsets.all(12),
-             
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -60,7 +57,6 @@ class MedicalHistoryScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Center(
@@ -100,15 +96,24 @@ class MedicalHistoryScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
+                child: Row(
+                  children: [
+                    
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
                 color: Colors.blue,
                 height: MediaQuery.of(context).size.height * 0.44,
-                child: Card(),
+                // child: Card(),
               ),
               SizedBox(height: 30),
-              cardRowWidget(Icons.dashboard_customize_rounded, "Prescriptions",prescriptionsScreen(),context ),
-                
+              cardRowWidget(Icons.dashboard_customize_rounded, "Prescriptions",
+                  prescriptionsScreen(), context),
               SizedBox(height: 10),
-              cardRowWidget(Icons.local_hospital, "Medical tests", MedicalTestsScreen(),context )
+              cardRowWidget(Icons.local_hospital, "Medical tests",
+                  MedicalTestsScreen(), context)
             ],
           ),
         ),
@@ -159,10 +164,9 @@ class MedicalHistoryScreen extends StatelessWidget {
 Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
   return Container(
     decoration: const BoxDecoration(
-                     color: AppColor.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8))
-                ),
-    height: MediaQuery.sizeOf(context).height*0.075,
+        color: AppColor.primaryColor,
+        borderRadius: BorderRadius.all(Radius.circular(8))),
+    height: MediaQuery.sizeOf(context).height * 0.075,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

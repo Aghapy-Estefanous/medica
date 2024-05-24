@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/home_layout.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 import 'package:medica/screens/auth/Profile/profile.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
@@ -54,7 +55,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
           //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: MedicalHistoryScreen()),
+          home: Splash_screen()),
     );
   }
 }
