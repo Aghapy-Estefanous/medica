@@ -54,6 +54,13 @@ class LoginCubit extends Cubit<LoginState> {
     print(sharedPreferences.getString('saveModel'));
   }
 
+  // Logout Method
+  void logout() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.remove('saveModel');
+    emit(LogoutState());
+  }
+
   //VisiablityIconState
   bool isvisiable = false;
   IconData icon = Icons.visibility;
@@ -70,6 +77,7 @@ class LoginCubit extends Cubit<LoginState> {
     return super.close();
   }
 }
+
 
 // class LoginCubit extends Cubit<LoginState> {
 //   LoginCubit() : super(LoginInitial());
