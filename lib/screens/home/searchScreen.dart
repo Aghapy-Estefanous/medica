@@ -5,7 +5,9 @@ import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
- TextEditingController SearchController = TextEditingController();
+
+TextEditingController SearchController = TextEditingController();
+
 class Search_Screen extends StatelessWidget {
   const Search_Screen({super.key});
 
@@ -17,7 +19,7 @@ class Search_Screen extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
               appBar: MyAppBarWidget(context, "Search for any clinic"),
-              // backgroundColor: AppColor.primaryColor,
+              // backgroundColor: AppColor.primaryColor,s
               body: Padding(
                   padding: EdgeInsets.all(12),
                   child: Column(
@@ -26,26 +28,28 @@ class Search_Screen extends StatelessWidget {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color :AppColor.primaryColor, ),
-                          
+                          border: Border.all(
+                            color: AppColor.primaryColor,
+                          ),
                         ),
                         child: TextField(
-                          controller:SearchController ,
+                          controller: SearchController,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixText: '    ',
                               hintText: 'Search for... ',
-                              fillColor:AppColor.primaryColor,
+                              fillColor: AppColor.primaryColor,
                               suffixIcon: IconButton(
-                                icon:Icon(Icons.search),
-                                color: AppColor.orangcolor, onPressed: () async{
-                                   await cubit.ScearchFunction(SearchController.text);
-                                    SearchController.text="";
-                                  },
+                                icon: Icon(Icons.search),
+                                color: AppColor.orangcolor,
+                                onPressed: () async {
+                                  await cubit.ScearchFunction(
+                                      SearchController.text);
+                                  SearchController.text = "";
+                                },
                               )),
                           onChanged: (value) async {
                             await cubit.ScearchFunction(value);
-                          
                           },
                         ),
                       ),
@@ -55,21 +59,25 @@ class Search_Screen extends StatelessWidget {
                       State is GetAllDepartmentLoadingState
                           ? Center(child: CircularProgressIndicator())
                           : cubit.SearchResponseList!.isEmpty
-                              ? Center(
+                              ? Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                    children: [
-                                      Image.asset(
-                                          'assets/images/ilustrations/nodata.jpg'),
-                                      Text(
-                                        "There is no Results!",
-                                        style:
-                                            Theme.of(context).textTheme.bodyLarge,
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/ilustrations/nodata.jpg'),
+                                          Text(
+                                            "There is no Results!",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                                                    ),
-                                  ))
+                                    ),
+                                  ),
+                                )
                               : Expanded(
                                   child: ListView.separated(
                                       itemCount:
@@ -90,7 +98,8 @@ class Search_Screen extends StatelessWidget {
                                           child: ListTile(
                                               leading: Icon(
                                                 Icons.medical_services_rounded,
-                                                color: Color.fromARGB(255, 226, 229, 230),
+                                                color: Color.fromARGB(
+                                                    255, 226, 229, 230),
                                                 size: 30,
                                               ),
                                               title: Text(
