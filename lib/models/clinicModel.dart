@@ -23,28 +23,72 @@ class ClinicModel {
 }
 
 class DataClinic {
-  int? id;
+   int? id;
   String? name;
   int? departmentID;
-  String? department;
-  String? placePrices;
-  // String? reservations;
+  String? description;
+  int? reservationCount;
+  String? departmentName;
+  double? price;
+  int? photoID;
+  String? photo;
+  List<String>? workdays;
+  List<Shifts>? shifts;
 
-  DataClinic({
-    this.id,
-    this.name,
-    this.departmentID,
-    this.department,
-    this.placePrices,
-    //this.reservations
-  });
+ 
+  DataClinic(
+      {this.id,
+      this.name,
+      this.departmentID,
+      this.description,
+      this.reservationCount,
+      this.departmentName,
+      this.price,
+      this.photoID,
+      this.photo,
+      this.workdays,
+      this.shifts});
 
-  DataClinic.fromJson(Map<String, dynamic> json) {
+   DataClinic.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     departmentID = json['departmentID'];
-    department = json['department'];
-    placePrices = json['placePrices'];
-    //  reservations = json['reservations'];
+    description = json['description'];
+    reservationCount = json['reservationCount'];
+    departmentName = json['departmentName'];
+    price = json['price'];
+    photoID = json['photoID'];
+    photo = json['photo'];
+    workdays = json['workdays'].cast<String>();
+    if (json['shifts'] != null) {
+      shifts = <Shifts>[];
+      json['shifts'].forEach((v) {
+        shifts!.add(new Shifts.fromJson(v));
+      });
+    }
+  }
+}
+class Shifts {
+  int? id;
+  String? name;
+  String? startTime;
+  String? endTime;
+
+  Shifts({this.id, this.name, this.startTime, this.endTime});
+
+  Shifts.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    startTime = json['startTime'];
+    endTime = json['endTime'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['startTime'] = this.startTime;
+    data['endTime'] = this.endTime;
+    return data;
   }
 }

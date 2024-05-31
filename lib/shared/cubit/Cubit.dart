@@ -11,9 +11,10 @@ import 'package:medica/models/departmentModel.dart';
 import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
-import 'package:medica/screens/static_pages/testing/testing.dart';
+import 'package:medica/models/AllClinicoFDepModel.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
+import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
 // import 'package:medica/screens/auth/loginS/loginS.dart';
@@ -126,16 +127,20 @@ class AppCubit extends Cubit<AppState> {
 
   GetAllClinicOfDepartments(int? Did) async {
     try {
-      late ClinicModel clinicModel;
+      late ClinicModel Model;
       emit(GetAllDepartmentLoadingState());
-
+      
+      var filterParameter ="departmentID=$Did";
+        String xx= Endpoint.BaseUrl + Endpoint.ALLCLINICS +"filter=$filterParameter";
+      print(xx);
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS_OF_DEPARTMENTS + Did.toString(),
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS +"?filter=$filterParameter",
       );
-
-      clinicModel = ClinicModel.fromJson(response);
+    
+      Model = ClinicModel.fromJson(response);
       allClinicsOfDepartmentslist?.clear();
-      allClinicsOfDepartmentslist = clinicModel.data;
+      allClinicsOfDepartmentslist = Model.data;
+      print(Model.data);
       print("list :${allClinicsOfDepartmentslist?.length}");
       print("from cubit :${allClinicsOfDepartmentslist?[0].name}");
 
@@ -170,8 +175,34 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllClinicsErrorState(e.errorModel.message));
     }
   }
+  //..............................search functon..........................
+ late List<DataClinic>? SearchResponseList = [
+    //DataClinic(id: 12,name: "test clinic")
+  ];
 
+  ScearchFunction(String searchWord) async {
+    try {
+      late ClinicModel Model;
+      emit(GetAllDepartmentLoadingState());
+      
+      var filterParameter ="name=$searchWord";
+      var response = await api.get(
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS +"?filter=$filterParameter",
+      );
+    
+      Model = ClinicModel.fromJson(response);
+      SearchResponseList?.clear();
+      SearchResponseList = Model.data;
+      print(Model.data);
+      print("list :${SearchResponseList?.length}");
+      print("from cubit :${SearchResponseList?[0].name}");
 
+      emit(GetAllDepartmentSuccessState());
+    } on ServerExceptions catch (e) {
+      print(e.toString());
+      emit(GetAllDepartmentErrorState(e.errorModel.message));
+    }
+  }
 }
 /*
   late UserReservationModel modelReservation;

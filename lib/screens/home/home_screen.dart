@@ -9,6 +9,7 @@ import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:medica/screens/home/searchScreen.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/home/AllclinicsOfDepartment.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
@@ -58,7 +59,10 @@ class Home_Screen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                           navigateToScreen(context, Search_Screen());
+
+                        },
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 0.45,
                           padding: EdgeInsets.all(20),
@@ -272,8 +276,8 @@ class Home_Screen extends StatelessWidget {
                                       ),
                                       Text(
                                         cubit.allClinicslist?[index]
-                                                .department ??
-                                            "department",
+                                                .description ??
+                                        "department..........................................gsaggghvcvggvcgcgvvvbvv xvvvvx gvv gvg ggv gbxvsgg gxgv",
                                         style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -292,7 +296,7 @@ class Home_Screen extends StatelessWidget {
                                             color: Colors.amber,
                                           ),
                                           Text(
-                                            "${cubit.allClinicslist?[index].placePrices ?? "24"} EGP",
+                                            "${cubit.allClinicslist?[index].price ?? "24"} EGP",
                                             style: TextStyle(
                                               fontSize: MediaQuery.of(context)
                                                       .size
@@ -314,170 +318,11 @@ class Home_Screen extends StatelessWidget {
               ),
             ),
           ));
-      // Column(
-      //   children: [
-      //     Container(
-      //       height: MediaQuery.of(context).size.height * 0.25,
-      //       width: MediaQuery.of(context).size.width,
-      //       color: AppColor.primaryColor,
-      //       child: Padding(
-      //         padding: EdgeInsets.all(12),
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.start,
-      //           children: [
-      //             Expanded(
-      //               child: Row(
-      //                 children: [
-      //                   const CircleAvatar(
-      //                     backgroundImage: AssetImage(
-      //                         'assets/images/onboarding/logo.png'),
-      //                     radius: 30,
-      //                   ),
-      //                   const SizedBox(width: 16),
-      //                   const Text(
-      //                     'John Doe',
-      //                     style: TextStyle(
-      //                         color: Colors.white, fontSize: 20),
-      //                   ),
-      //                   const Spacer(),
-      //                   IconButton(
-      //                     onPressed: () {},
-      //                     icon: const Icon(
-      //                       Iconsax.notification,
-      //                       color: AppColor.whiteColor,
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //             ),
-      //             Container(
-      //               height: 53,
-      //               decoration: BoxDecoration(
-      //                 border: Border.all(
-      //                   color: AppColor.whiteColor, // Border color
-      //                   width: 0.8,
-      //                 ),
-      //                 borderRadius:
-      //                     const BorderRadius.all(Radius.circular(12)),
-      //               ),
-      //               child: const TextField(
-      //                 decoration: InputDecoration(
-      //                   prefixIcon: Icon(Iconsax.search_normal),
-      //                   border: InputBorder.none,
-      //                   hintText: 'search doctor....',
-      //                   hintStyle: TextStyle(
-      //                     color: AppColor.whiteColor,
-      //                     fontWeight: FontWeight.w300,
-      //                   ),
-      //                   prefixIconColor: AppColor.whiteColor,
-      //                 ),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //     Expanded(
-      //       child: SingleChildScrollView(
-      //         scrollDirection: Axis.vertical,
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.start,
-      //           children: [
-      //             Align(
-      //               alignment: Alignment.topLeft,
-      //               child: const Text(
-      //                 "   Department",
-      //                 style: TextStyle(
-      //                   fontSize: 16,
-      //                   fontWeight: FontWeight.bold,
-      //                 ),
-      //               ),
-      //             ),
-      //             SizedBox(height: 5),
-      //             Container(
-      //               height: 45,
-      //               width: double.infinity,
-      //               child: ListView.builder(
-      //                 itemBuilder: (context, index) => Padding(
-      //                   padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-      //                   child: departementWidget(index,cubit.alldepartmentslist?[index].name,cubit.alldepartmentslist?[index].id,context,cubit),
-      //                 ),
-      //                 itemCount: cubit.alldepartmentslist?.length,
-      //                 scrollDirection: Axis.horizontal,
-      //               ),
-      //             ),
-
-      //             SizedBox(height: 10),
-      //             TitleListWidget('  Clinics'),
-      //             Container(
-      //               height: MediaQuery.of(context).size.height * 0.26,
-      //               width: double.infinity,
-      //               child: ListView.builder(
-      //                 itemBuilder: (context, index) => Padding(
-      //                   padding: EdgeInsets.all(10),
-      //                   child: myClinicCard(context, DetailsScreen()),
-      //                 ),
-      //                 itemCount: 10,
-      //                 scrollDirection: Axis.horizontal,
-      //               ),
-      //             ),
-      //             TitleListWidget('   Radiology'),
-      //             Container(
-      //               height: MediaQuery.of(context).size.height * 0.26,
-      //               width: double.infinity,
-      //               child: ListView.builder(
-      //                 itemBuilder: (context, index) => Padding(
-      //                   padding: EdgeInsets.all(10),
-      //                   child: myClinicCard(context, DetailsScreen()),
-      //                 ),
-      //                 itemCount: 10,
-      //                 scrollDirection: Axis.horizontal,
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
+    
     });
   }
 }
 
-Row TitleListWidget(String title) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        ' $title',
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      Row(
-        children: [
-          Image.asset(
-            'assets/images/home-Images/Vector.png',
-            height: 30,
-            width: 30,
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "See all  ",
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                color: AppColor.primaryColor,
-              ),
-            ),
-          ),
-        ],
-      ),
-    ],
-  );
-}
 
 InkWell departementWidget(
     int index, String? name, int? id, var context, AppCubit cubit) {
@@ -489,6 +334,7 @@ InkWell departementWidget(
           departmentClinicsScreen(
             DepertmentId: id,
             DepertmentName: name,
+            cubit:cubit
           ));
     },
     child: Container(
@@ -511,66 +357,60 @@ InkWell departementWidget(
   );
 }
 
-Material myClinicCard(BuildContext context, ScreenName) {
-  return Material(
-    elevation: 1,
-    shadowColor: Color.fromARGB(134, 21, 21, 21),
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-      height: MediaQuery.of(context).size.height * 0.22,
-      width: MediaQuery.of(context).size.width * 0.45,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.129,
-            width: MediaQuery.of(context).size.width * 0.45,
-            child: Image.asset(
-              'assets/images/home-Images/baby.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.001),
-          const Text(
-            "  baby clinic",
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                detailsButtoncustom(context, ScreenName),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      size: 18,
-                      color: AppColor.orangcolor,
-                    ),
-                    Text(
-                      '1462',
-                      style: TextStyle(fontSize: 12),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
+// Material myClinicCard(BuildContext context, ScreenName) {
+//   return Material(
+//     elevation: 1,
+//     shadowColor: Color.fromARGB(134, 21, 21, 21),
+//     borderRadius: BorderRadius.all(Radius.circular(12)),
+//     child: Container(
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.all(Radius.circular(12)),
+//       ),
+//       height: MediaQuery.of(context).size.height * 0.22,
+//       width: MediaQuery.of(context).size.width * 0.45,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Container(
+//             height: MediaQuery.of(context).size.height * 0.129,
+//             width: MediaQuery.of(context).size.width * 0.45,
+//             child: Image.asset(
+//               'assets/images/home-Images/baby.jpg',
+//               fit: BoxFit.cover,
+//             ),
+//           ),
+//           SizedBox(height: MediaQuery.of(context).size.height * 0.001),
+//           const Text(
+//             "  baby clinic",
+//             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+//           ),
+//           SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+//           Padding(
+//             padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 detailsButtoncustom(context, ScreenName),
+//                 Row(
+//                   children: [
+//                     Icon(
+//                       Icons.person,
+//                       size: 18,
+//                       color: AppColor.orangcolor,
+//                     ),
+//                     Text(
+//                       '1462',
+//                       style: TextStyle(fontSize: 12),
+//                     )
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 
-List symptoms = [
-  "Temperature",
-  "Snuffle",
-  "Fever",
-  "Cough",
-  "Cold",
-];
+

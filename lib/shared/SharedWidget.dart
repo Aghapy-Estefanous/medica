@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
@@ -42,7 +43,7 @@ Widget detailsButtoncustom(BuildContext context, ScreenName) {
                   onPressed: () {
                     navigateToScreen(context, ScreenName);
                   },
-                );
+        );
   }
 
 
@@ -151,4 +152,16 @@ Validate_password(value) {
     }
     return t == true ? errmess.trimRight() : null;
   }
+}
+Map<String, String> convertDateTime(String? dateTimeString) {
+  // String dateTimeString = "2024-03-16T22:23:23.9849549";
+
+  DateTime dateTime = DateTime.parse(dateTimeString!);
+
+  // Format time in 12-hour format (e.g., "12:22pm")
+  String formattedTime = DateFormat.jm().format(dateTime);
+
+  // Format date (e.g., "16/3/2024")
+  String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
+  return {'date': formattedDate, 'time': formattedTime};
 }
