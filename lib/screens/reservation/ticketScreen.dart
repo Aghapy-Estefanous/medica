@@ -23,13 +23,18 @@ class TicketScreen extends StatelessWidget {
          : Scaffold( appBar: MyAppBarWidget(context, "Your reservations"), 
              // backgroundColor: AppColor.primaryColor,
               body:cubit.myReservationsList!.isEmpty?
-          Center(child: Column(
-            children: [
-              
-              Image.asset('assets/images/ilustrations/nodata.jpg')
-              ,Text("There is no reservations just now!",style:Theme.of(context).textTheme.bodyLarge,),
-            ],
-          ))
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  
+                  Image.asset('assets/images/ilustrations/nodata.jpg')
+                  ,Text("There is no reservations just now!",style:Theme.of(context).textTheme.bodyLarge,),
+                ],
+              ),
+            )),
+          )
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(

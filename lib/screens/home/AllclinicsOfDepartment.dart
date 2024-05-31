@@ -4,7 +4,6 @@ import 'package:medica/models/clinicModel.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-import 'package:medica/models/AllClinicoFDepModel.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
 import 'package:medica/shared/cubit/Cubit.dart'; // Import your cubit file
 
