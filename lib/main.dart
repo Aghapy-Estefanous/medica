@@ -50,7 +50,9 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
           //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: Home_Screen()),
+
+          home: Splash_screen()),
+
     );
   }
 }
