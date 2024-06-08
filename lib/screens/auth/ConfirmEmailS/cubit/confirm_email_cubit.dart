@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../main.dart';
 
@@ -15,9 +16,12 @@ class ConfirmEmailCubit extends Cubit<ConfirmEmailState> {
   void Email({
     required String Email,
     required String OTP,
-  }) {
+  }) async{
+    SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var token = sharedPreferences.getString('Token');
     emit(ConfirmEmailLoadingState());
-    dio_helper.postData(url: '$BaseAPI/api/Mailing/verify-otp', query: {
+    dio_helper.postData(url: '$BaseAPI/api/Mailing/verify-otp', AccessToken: token, query: {
       'Email': Email,
       'EnteredOTP': OTP,
     }, data: {

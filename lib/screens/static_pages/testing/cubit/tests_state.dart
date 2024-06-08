@@ -26,3 +26,16 @@ class TestsItemSelected extends TestsState {
 
 class PlusOrNO extends TestsState{}
 
+class TestsLoading extends TestsState {}
+
+class TestsLoaded extends TestsState {
+  final List<AvailableTests> tests;
+
+  TestsLoaded(this.tests);
+}
+
+class TestsError extends TestsState {
+  final String error;
+
+  TestsError(this.error);
+}

@@ -5,6 +5,7 @@ import 'package:medica/main.dart';
 import 'package:medica/shared/cubit/ErrorHandling.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'email_state.dart';
 
@@ -15,10 +16,14 @@ class EmailCubit extends Cubit<EmailState> {
 
   void Email({
     required String email,
-  }) {
+  }) async{
     emit(EmailLoadingState());
-
-    dio_helper.postData(url: '$BaseAPI/api/Mailing/send', query: {
+    SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var token = sharedPreferences.getString('Token');
+    dio_helper.postData (url: '$BaseAPI/api/Mailing/send',
+      AccessToken: token,
+     query: {
       'ToEmail': email,
     }, data: {
       // 'ToEmail': email,
