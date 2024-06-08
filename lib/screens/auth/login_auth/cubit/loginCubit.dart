@@ -8,7 +8,6 @@ import 'package:medica/models/login_model.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 
-
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
@@ -22,10 +21,13 @@ class LoginCubit extends Cubit<LoginState> {
     dio_helper.postData(url: Endpoint.BaseUrl + Endpoint.LOGIN, data: {
       'userName': userName,
       'password': password,
-    }).then((value) {
+    }).then((value) async {
       if (isClosed) return;
       print(value!.data);
-
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString('Token', value.data['data']['token']);
+      print(sharedPreferences.getString('Token'));
       int? StatusCodeInt = value.statusCode;
 
       CURRENT_USER = LoginModel.fromJson(value.data);
@@ -39,7 +41,8 @@ class LoginCubit extends Cubit<LoginState> {
       if (isClosed) return;
       if (error is DioException) {
         print("HTTP Error Status Code: ${error.response?.statusCode}");
-        emit(LoginErrorState(error.response?.statusCode.toString() ?? "Unknown Error"));
+        emit(LoginErrorState(
+            error.response?.statusCode.toString() ?? "Unknown Error"));
       } else {
         print("Non-HTTP Error: $error");
         emit(LoginErrorState(error.toString()));
