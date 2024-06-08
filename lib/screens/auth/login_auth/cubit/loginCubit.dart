@@ -38,6 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginErrorState(value.data['message']));
       }
     }).catchError((error) {
+
       if (isClosed) return;
       if (error is DioException) {
         print("HTTP Error Status Code: ${error.response?.statusCode}");
@@ -47,6 +48,7 @@ class LoginCubit extends Cubit<LoginState> {
         print("Non-HTTP Error: $error");
         emit(LoginErrorState(error.toString()));
       }
+
     });
   }
 

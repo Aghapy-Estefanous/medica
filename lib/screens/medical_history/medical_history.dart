@@ -156,6 +156,7 @@ class MedicalHistoryScreen extends StatelessWidget {
             ),
           );
         },
+
       ),
     );
   }

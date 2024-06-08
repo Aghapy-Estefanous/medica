@@ -10,7 +10,7 @@ import 'package:medica/shared/cubit/Cubit.dart'; // Import your cubit file
 class departmentClinicsScreen extends StatefulWidget {
   final int? DepertmentId;
   final String? DepertmentName;
-  departmentClinicsScreen({super.key, this.DepertmentId, this.DepertmentName});
+  departmentClinicsScreen({super.key, this.DepertmentId, this.DepertmentName, required AppCubit cubit});
 
   @override
   State<departmentClinicsScreen> createState() =>
@@ -83,7 +83,7 @@ class _departmentClinicsScreenState extends State<departmentClinicsScreen> {
                               ),
                             ),
                             onPressed: () {
-                             // navigateToScreen(context, DetailsScreen());
+                           navigateToScreen(context, DetailsScreen(cliniclist?[index]));
                             },
                             child: Text(
                               "Details",

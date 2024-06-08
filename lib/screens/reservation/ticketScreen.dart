@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
+import 'package:medica/shared/SharedWidget.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-
 import 'package:medica/models/reservationModel.dart';
+
 
 class TicketScreen extends StatelessWidget {
   const TicketScreen({super.key});
@@ -19,9 +20,22 @@ class TicketScreen extends StatelessWidget {
     }, builder: (context, state) {
       return State is ReservationLoadingState
           ? Center(child: CircularProgressIndicator())
-          : Scaffold(
+         : Scaffold( appBar: MyAppBarWidget(context, "Your reservations"), 
              // backgroundColor: AppColor.primaryColor,
-              body: Padding(
+              body:cubit.myReservationsList!.isEmpty?
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  
+                  Image.asset('assets/images/ilustrations/nodata.jpg')
+                  ,Text("There is no reservations just now!",style:Theme.of(context).textTheme.bodyLarge,),
+                ],
+              ),
+            )),
+          )
+          : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -385,15 +399,4 @@ class itemInCard extends StatelessWidget {
   }
 }
 
-Map<String, String> convertDateTime(String? dateTimeString) {
-  // String dateTimeString = "2024-03-16T22:23:23.9849549";
 
-  DateTime dateTime = DateTime.parse(dateTimeString!);
-
-  // Format time in 12-hour format (e.g., "12:22pm")
-  String formattedTime = DateFormat.jm().format(dateTime);
-
-  // Format date (e.g., "16/3/2024")
-  String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-  return {'date': formattedDate, 'time': formattedTime};
-}

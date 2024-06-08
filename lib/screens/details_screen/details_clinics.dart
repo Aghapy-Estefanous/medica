@@ -2,7 +2,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-
 class DetailsScreen extends StatelessWidget {
   final clinicData;
   DetailsScreen(this.clinicData, {Key? key}) : super(key: key);
@@ -41,21 +40,21 @@ class DetailsScreen extends StatelessWidget {
                         fontSize: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.w500)),
-                const Padding(
-                  padding: EdgeInsets.all(12.0),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.group,
                         size: 20,
                         color: AppColor.primaryColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 3,
                       ),
-                      Text('unannounced',
-                          style: TextStyle(
+                      Text(clinicData.reservationCount.toString(),
+                          style: const TextStyle(
                               fontSize: 18,
                               color: AppColor.orangcolor,
                               fontWeight: FontWeight.w400))
@@ -64,9 +63,11 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-
             Text(
-              clinicData.department ?? "department .....................",
+              clinicData.description == null ||
+                      clinicData.description.toString().isEmpty
+                  ? "thise is the discription of the place in floor2 room num :321"
+                  : clinicData.description,
               style: TextStyle(
                 color: Color.fromARGB(255, 133, 129, 129),
               ),
@@ -79,31 +80,56 @@ class DetailsScreen extends StatelessWidget {
               child: Container(
                 height: height * .10,
                 child: ListView.builder(
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: index == 0 || index == 2
-                        ? avilableDayContainer()
-                        : UnavilableDayContainer(),
-                  ),
+                  itemBuilder: (context, index) {
+                    String day = allDaysOfWeek[index];
+                    bool isWorkday = clinicData.workdays.contains(day);
+                    return Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: isWorkday
+                          ? avilableDayContainer(day)
+                          : UnavilableDayContainer(day),
+                    );
+                  },
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: 7,
                 ),
               ),
             ),
 
             Padding(
               padding: EdgeInsets.symmetric(vertical: height * 0.020),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(
-                    Icons.alarm_rounded,
+                  const Icon(
+                    Iconsax.timer_start,
                     size: 20,
                     color: AppColor.orangcolor,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
-                  Text("Form 8 am to 2 pm ",
+                  Text(
+                      "Start time : ${convertDateTime(clinicData.shifts[0].startTime)["time"]!}",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 133, 129, 129),
+                      )),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: height * 0.020),
+              child: Row(
+                children: [
+                  const Icon(
+                    Iconsax.timer_pause,
+                    size: 20,
+                    color: AppColor.orangcolor,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                      "End time :${convertDateTime(clinicData.shifts[0].endTime)["time"]!}",
                       style: TextStyle(
                         color: Color.fromARGB(255, 133, 129, 129),
                       )),
@@ -117,13 +143,13 @@ class DetailsScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       color: AppColor.orangcolor,
                       borderRadius: BorderRadius.all(Radius.circular(6))),
                   height: 55, // MediaQuery.sizeOf(context).height * 0.09,
                   width: MediaQuery.sizeOf(context).width * 0.93,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -148,7 +174,7 @@ class DetailsScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        Text('\$15',
+                        Text(clinicData.price.toString(),
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -165,21 +191,21 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
-  Container avilableDayContainer() {
+  Container avilableDayContainer(String day) {
     return Container(
         decoration: const BoxDecoration(
             color: AppColor.primaryColor,
             borderRadius: BorderRadius.all(Radius.circular(8))),
-        height: 70,
-        width: 55,
+        height: 80,
+        width: 75,
         child: Center(
             child: Text(
-          "data",
-          style: TextStyle(color: AppColor.whiteColor),
+          day,
+          style: TextStyle(color: AppColor.whiteColor, fontSize: 12),
         )));
   }
 
-  Container UnavilableDayContainer() {
+  Container UnavilableDayContainer(String day) {
     return Container(
         decoration: const BoxDecoration(
             color: AppColor.whiteColor,
@@ -189,12 +215,22 @@ class DetailsScreen extends StatelessWidget {
                 bottom: BorderSide(color: AppColor.orangcolor, width: 1.2),
                 right: BorderSide(color: AppColor.orangcolor, width: 1.2)),
             borderRadius: BorderRadius.all(Radius.circular(8))),
-        height: 70,
-        width: 55,
+        height: 80,
+        width: 75,
         child: Center(
             child: Text(
-          "data",
-          style: TextStyle(color: AppColor.orangcolor),
+          day,
+          style: TextStyle(color: AppColor.orangcolor, fontSize: 12),
         )));
   }
 }
+
+List<String> allDaysOfWeek = [
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+];

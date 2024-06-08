@@ -15,7 +15,6 @@ import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/blocObservser.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
-
 const BaseAPI = 'http://medicalsystem.runasp.net';
 
 main() async {
@@ -50,8 +49,9 @@ class MainApp extends StatelessWidget {
         ..GetAllClinics(),
       child: MaterialApp(
           //  theme: liteTheme(),
-          debugShowCheckedModeBanner: false,
+
           home: Splash_screen()),
+
     );
   }
 }
