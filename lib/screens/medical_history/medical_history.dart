@@ -1,117 +1,162 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
+import 'package:medica/screens/auth/login_auth/cubit/loginState.dart';
+import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
 
 class MedicalHistoryScreen extends StatelessWidget {
-  const MedicalHistoryScreen({Key? key});
+  const MedicalHistoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-    
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(height: MediaQuery.sizeOf(context).height*0.055 ),
-              Container(
-                decoration: const BoxDecoration(
-                     color: AppColor.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(12))
-                ),
-                padding: EdgeInsets.all(12),
-             
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+    return BlocProvider(
+      create: (context) => LoginCubit(),
+      child: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if (state is LogoutState) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+              (route) => false,
+            );
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Colors.amber,
-                      backgroundImage: NetworkImage(
-                          'https://static.vecteezy.com/system/resources/thumbnails/020/926/555/small/young-man-portrait-photo.jpg'),
-                    ),
-                    SizedBox(width: 5),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    Container(
+                        height: MediaQuery.sizeOf(context).height * 0.055),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: AppColor.primaryColor,
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      padding: EdgeInsets.all(12),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            "mohamed Abeltwaap  mahmoud",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundColor: Colors.amber,
+                            backgroundImage: NetworkImage(
+                              'https://static.vecteezy.com/system/resources/thumbnails/020/926/555/small/young-man-portrait-photo.jpg',
+                            ),
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Age: 22',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "mohamed Abeltwaap  mahmoud",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Age: 22',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    TextButton(
+                                      onPressed: () {
+                                        LoginCubit.get(context).logout();
+                                      },
+                                      child: Text(
+                                        'LogOut',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
+                    SizedBox(height: 8),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      child: Center(
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            presonalDataComponent(
+                                "Blood", "A+", Icons.bloodtype_outlined),
+                            SizedBox(width: 10),
+                            Container(
+                              width: 2, // Thickness of the line
+                              height: 10, // Height of the line
+                              color: Color.fromARGB(255, 197, 191, 191),
+                            ),
+                            presonalDataComponent(
+                                "Height", "178", Icons.height),
+                            SizedBox(width: 10),
+                            Container(
+                              width: 2, // Thickness of the line
+                              height: 20, // Height of the line
+                              color: Color.fromARGB(255, 197, 191, 191),
+                            ),
+                            SizedBox(width: 3),
+                            presonalDataComponent(
+                                "Weight", "78", Icons.accessibility),
+                            SizedBox(width: 10),
+                            Container(
+                              width: 2, // Thickness of the line
+                              height: 20, // Height of the line
+                              color: Color.fromARGB(255, 197, 191, 191),
+                            ),
+                            SizedBox(width: 3),
+                            presonalDataComponent("Pressure", "178",
+                                Icons.favorite_border_outlined),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      child: Row(
+                        children: [],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      color: Colors.blue,
+                      height: MediaQuery.of(context).size.height * 0.44,
+                      // child: Card(),
+                    ),
+                    SizedBox(height: 30),
+                    cardRowWidget(Icons.dashboard_customize_rounded,
+                        "Prescriptions", prescriptionsScreen(), context),
+                    SizedBox(height: 10),
+                    cardRowWidget(Icons.local_hospital, "Medical tests",
+                        MedicalTestsScreen(), context),
                   ],
                 ),
               ),
-              SizedBox(height: 8),
-              
-              Container(
-                height: MediaQuery.of(context).size.height * 0.08,
-                child: Center(
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      presonalDataComponent(
-                          "Blood", "A+", Icons.bloodtype_outlined),
-                      SizedBox(width: 10),
-                      Container(
-                        width: 2, // Thickness of the line
-                        height: 10, // Height of the line
-                        color: Color.fromARGB(255, 197, 191, 191),
-                      ),
-                      presonalDataComponent("Height", "178", Icons.height),
-                      SizedBox(width: 10),
-                      Container(
-                        width: 2, // Thickness of the line
-                        height: 20, // Height of the line
-                        color: Color.fromARGB(255, 197, 191, 191),
-                      ),
-                      SizedBox(width: 3),
-                      presonalDataComponent(
-                          "Weight", "78", Icons.accessibility),
-                      SizedBox(width: 10),
-                      Container(
-                        width: 2, // Thickness of the line
-                        height: 20, // Height of the line
-                        color: Color.fromARGB(255, 197, 191, 191),
-                      ),
-                      SizedBox(width: 3),
-                      presonalDataComponent(
-                          "Pressure", "178", Icons.favorite_border_outlined),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                color: Colors.blue,
-                height: MediaQuery.of(context).size.height * 0.44,
-                child: Card(),
-              ),
-              SizedBox(height: 30),
-              cardRowWidget(Icons.dashboard_customize_rounded, "Prescriptions",prescriptionsScreen(),context ),
-                
-              SizedBox(height: 10),
-              cardRowWidget(Icons.local_hospital, "Medical tests", MedicalTestsScreen(),context )
-            ],
-          ),
-        ),
+            ),
+          );
+        },
+
       ),
     );
   }
@@ -159,10 +204,10 @@ class MedicalHistoryScreen extends StatelessWidget {
 Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
   return Container(
     decoration: const BoxDecoration(
-                     color: AppColor.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8))
-                ),
-    height: MediaQuery.sizeOf(context).height*0.075,
+      color: AppColor.primaryColor,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+    height: MediaQuery.sizeOf(context).height * 0.075,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -182,14 +227,15 @@ Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
           ],
         ),
         IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              size: 17,
-              color: AppColor.orangcolor,
-            ),
-            onPressed: () {
-              navigateToScreen(context, ScreenName);
-            }),
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 17,
+            color: AppColor.orangcolor,
+          ),
+          onPressed: () {
+            navigateToScreen(context, ScreenName);
+          },
+        ),
       ],
     ),
   );
