@@ -32,13 +32,12 @@ class LoginCubit extends Cubit<LoginState> {
 
       CURRENT_USER = LoginModel.fromJson(value.data);
       if (value.statusCode == 200) {
-        _save(name: userName, password: password);
+        // _save(name: userName, password: password);
         emit(LoginSuccessgState(CURRENT_USER, StatusCodeInt));
       } else {
         emit(LoginErrorState(value.data['message']));
       }
     }).catchError((error) {
-
       if (isClosed) return;
       if (error is DioException) {
         print("HTTP Error Status Code: ${error.response?.statusCode}");
@@ -48,21 +47,20 @@ class LoginCubit extends Cubit<LoginState> {
         print("Non-HTTP Error: $error");
         emit(LoginErrorState(error.toString()));
       }
-
     });
   }
 
-  void _save({required String name, required String password}) async {
-    SaveModel saveModel = SaveModel(name: name, password: password);
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString('saveModel', jsonEncode(saveModel.toJson()));
-    print(sharedPreferences.getString('saveModel'));
-  }
+  // void _save({required String name, required String password}) async {
+  //   SaveModel saveModel = SaveModel(name: name, password: password);
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   sharedPreferences.setString('saveModel', jsonEncode(saveModel.toJson()));
+  //   print(sharedPreferences.getString('saveModel'));
+  // }
 
   // Logout Method
   void logout() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.remove('saveModel');
+    sharedPreferences.remove('Token');
     emit(LogoutState());
   }
 
