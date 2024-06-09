@@ -16,7 +16,10 @@ import 'package:medica/shared/cubit/blocObservser.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 
+
+
 const BaseAPI = 'http://medicalsystem.runasp.net';
+
 
 main() async {
   Bloc.observer = MyBlocObserver();
@@ -53,7 +56,15 @@ class MainApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           //  theme: liteTheme(),
 
+          debugShowCheckedModeBanner: false,
+          home: Splash_screen()),
+
+
+          home: Splash_screen()),
+
+
           home: SplashScreen()),
+
     );
   }
 }
