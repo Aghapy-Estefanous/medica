@@ -58,7 +58,7 @@ class AppCubit extends Cubit<AppState> {
   ];
   List<Widget> Screen = [
     Home_Screen(),
-    Splash_screen(),
+    SplashScreen(),
     Testing(),
     MedicalHistoryScreen(),
   ];

@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:medica/models/login_model.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginState.dart';
 import 'package:medica/shared/styles/AppColor.dart';
@@ -10,43 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/home_layout.dart';
 
-class Splash_screen extends StatelessWidget {
-  const Splash_screen({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => LoginCubit(),
-        child: BlocConsumer<LoginCubit, LoginState>(
-          listener: (context, state) {
-            if (state is LoginSuccessgState) {
-              if (state.model?.succeeded == true) {
-                SharedPreferences.getInstance().then((prefs) {
-                  prefs.setString('token', state.model?.data!.token ?? '');
-                });
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeLayout()),
-                  (route) => false,
-                );
-              } else {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => BoardingScreen()),
-                  (route) => false,
-                );
-              }
-            } else if (state is LoginErrorState) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => BoardingScreen()),
-                (route) => false,
-              );
-            }
-          },
-          builder: (context, state) {
-            _attemptAutoLogin(context);
+      body: FutureBuilder(
+        future: _checkToken(context),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: AnimatedSplashScreen(
                 duration: 1000,
@@ -55,24 +26,29 @@ class Splash_screen extends StatelessWidget {
                   'assets/images/onboarding/logo.png',
                   fit: BoxFit.cover,
                 ),
-                nextScreen: BoardingScreen(),
+                nextScreen: Container(), // Empty container, will be replaced by navigation logic
                 splashTransition: SplashTransition.fadeTransition,
                 backgroundColor: AppColor.primaryColor,
               ),
             );
-          },
-        ),
+          } else {
+            return Container(); // Empty container, will be replaced by navigation logic
+          }
+        },
       ),
     );
   }
 
-  void _attemptAutoLogin(BuildContext context) async {
+  Future<void> _checkToken(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var value = sharedPreferences.getString('saveModel');
-    if (value != null) {
-      SaveModel saveModel = SaveModel.fromJson(jsonDecode(value));
-      LoginCubit cubit = LoginCubit.get(context);
-      cubit.userlogin(userName: saveModel.name!, password: saveModel.password!);
+    var token = sharedPreferences.getString('token');
+
+    if (token != null) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeLayout()),
+        (route) => false,
+      );
     } else {
       Navigator.pushAndRemoveUntil(
         context,

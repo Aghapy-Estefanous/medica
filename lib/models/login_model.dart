@@ -8,6 +8,7 @@ class LoginModel {
   String? message;
   UserModel? data;
   String? error;
+  String? token;
 
   LoginModel({
     this.status,
@@ -23,7 +24,7 @@ class LoginModel {
     message = json['message'];
     succeeded = json['succeeded'];
     error = json['errors'];
-
+    // token=SharedPreferences.getInstance().then((value) => value.getString('token'));
     data = json['data'] != null ? UserModel.fromJson(json['data']) : null;
   }
 }
@@ -73,24 +74,25 @@ class UserModel {
 //   }
 // }
 class SaveModel {
-  String? name;
-  String? password;
+  String? token;
+  // String? password;
 
-  SaveModel({this.name, this.password});
+  SaveModel({this.token, });
 
   SaveModel.fromJson(Map<String, dynamic> map) {
-    name = map['name'];
-    password = map['password'];
+    token = map['token'];
+    // name = map['name'];
+    // password = map['password'];
   }
 
   Map<String, dynamic> toJson() {
-    return {'name': name, 'password': password};
+    return {'token': token,};
   }
 }
 
-void _save({required String name, required String password}) async {
-  SaveModel saveModel = SaveModel(name: name, password: password);
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  sharedPreferences.setString('saveModel', jsonEncode(saveModel.toJson()));
-  print(sharedPreferences.getString('saveModel'));
-}
+// void _save({required String token}) async {
+//   SaveModel saveModel = SaveModel(token:token);
+//   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+//   sharedPreferences.setString('saveModel', jsonEncode(saveModel.toJson()));
+//   print(sharedPreferences.getString('saveModel'));
+// }
