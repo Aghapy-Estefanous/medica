@@ -51,7 +51,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
           //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: MedicalHistoryScreen()),
+          home: Home_Screen()),
     );
   }
 }

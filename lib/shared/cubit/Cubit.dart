@@ -12,9 +12,13 @@ import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
+
+
 
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
@@ -71,9 +75,8 @@ class AppCubit extends Cubit<AppState> {
     try {
       late UserReservationModel modelReservation;
       emit(ReservationLoadingState());
-
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.REGISTER,
+        Endpoint.BaseUrl + Endpoint.REGISTER ,
       );
       // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
@@ -95,9 +98,12 @@ class AppCubit extends Cubit<AppState> {
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
-
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      String? token = sharedPreferences.getString('Token');
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
+        Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS ,
+        
       );
       // print(response.data);
       departmentsModel = DepartmentsModel.fromJson(response);
@@ -128,15 +134,23 @@ class AppCubit extends Cubit<AppState> {
     try {
       late ClinicModel Model;
       emit(GetAllDepartmentLoadingState());
-      
-      var filterParameter ="departmentID=$Did";
-        String xx= Endpoint.BaseUrl + Endpoint.ALLCLINICS +"filter=$filterParameter";
+
+      var filterParameter = "departmentID=$Did";
+      String xx =
+          Endpoint.BaseUrl + Endpoint.ALLCLINICS + "filter=$filterParameter";
       print(xx);
-      var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS +"?filter=$filterParameter",
-      );
-    
-      Model = ClinicModel.fromJson(response);
+       SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String? token = sharedPreferences.getString('Token');
+      // var response = await api.get(
+      //   Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
+      // );
+      var response = dio_helper.getData(url: 
+  'http://medicalsystem.runasp.net/api/ApplicationUserDisease?Type=1&ValueResult=2&Description=nhhfh&Height=12&Weight=22&ApplicationUserId=bdbbdbdb&DiseaseId=553&Diagnosis=bcbncbn&DiagnosisDate=01%2F01%2F2024' , AccessToken: token);
+      // Map<String,dynamic> response = response.Map
+
+      Model = ClinicModel.fromJson(response as Map<String, dynamic>);
+      print(Model);
       allClinicsOfDepartmentslist?.clear();
       allClinicsOfDepartmentslist = Model.data;
       print(Model.data);
@@ -174,8 +188,9 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllClinicsErrorState(e.errorModel.message));
     }
   }
+
   //..............................search functon..........................
- late List<DataClinic>? SearchResponseList = [
+  late List<DataClinic>? SearchResponseList = [
     //DataClinic(id: 12,name: "test clinic")
   ];
 
@@ -183,12 +198,12 @@ class AppCubit extends Cubit<AppState> {
     try {
       late ClinicModel Model;
       emit(GetAllDepartmentLoadingState());
-      
-      var filterParameter ="name=$searchWord";
+
+      var filterParameter = "name=$searchWord";
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS +"?filter=$filterParameter",
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
       );
-    
+
       Model = ClinicModel.fromJson(response);
       SearchResponseList?.clear();
       SearchResponseList = Model.data;
