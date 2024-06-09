@@ -8,6 +8,7 @@ import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/cubit/blocObservser.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
+import 'package:medica/screens/medical_history/medical_history.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/email_cubit.dart';
 import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
@@ -50,7 +51,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
           //  theme: liteTheme(),
           debugShowCheckedModeBanner: false,
-          home: Home_Screen()),
+          home: MedicalHistoryScreen()),
     );
   }
 }
