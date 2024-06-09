@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
-import 'package:medica/shared/styles/AppColor.dart';
-
+import 'available.dart'; // Make sure to import your AvailablePage here
+import 'cubit/tests_cubit.dart';
 import 'prepare.dart';
+import 'package:medica/shared/styles/AppColor.dart';
 
 class Testing extends StatelessWidget {
   Testing({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class Testing extends StatelessWidget {
                               10), // Adjust sigmaX and sigmaY for blur intensity
                       child: ColorFiltered(
                         colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.4),
+                          Colors.white.withOpacity(0.4),
                           BlendMode.srcOver,
                         ),
                         child: Image.network(
@@ -71,9 +71,8 @@ class Testing extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             cubit.selected(index);
-                            // setState(() {
-                            //   selected = index;
-                            // });
+                            // TestsCubit cubit2 = TestsCubit.get(context);
+                            if (index == 1) cubit.available();
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -97,10 +96,10 @@ class Testing extends StatelessWidget {
                   ),
                 ),
                 if (cubit.select == 0)
-                  test1()
-                else if (cubit.select == 1)
                   Prepare()
-                else
+                else if (cubit.select == 1)
+                  AvailablePage()
+                else if (cubit.select == 2)
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
@@ -118,19 +117,6 @@ class Testing extends StatelessWidget {
       },
     );
   }
-
-  SliverList test1() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          return ListTile(
-            title: Text('count : $index'),
-          );
-        },
-        childCount: 2,
-      ),
-    );
-  }
 }
 
-List<String> items = ['التحاليل', 'تحضيرات التحاليل', 'نتائج التحاليل'];
+List<String> items = ['تحضيرات التحاليل', 'التحاليل المتاحة', 'نتائج التحاليل'];

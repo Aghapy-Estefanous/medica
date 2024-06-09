@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:medica/screens/auth/login_auth/loginScreen.dart';
+import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
+import 'package:medica/screens/auth/login_auth/cubit/loginState.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
 
@@ -13,7 +17,7 @@ TextEditingController _diseaseValueController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 
 class MedicalHistoryScreen extends StatelessWidget {
-  const MedicalHistoryScreen({Key? key});
+  const MedicalHistoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -457,14 +461,15 @@ Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
           ],
         ),
         IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              size: 17,
-              color: AppColor.orangcolor,
-            ),
-            onPressed: () {
-              navigateToScreen(context, ScreenName);
-            }),
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            size: 17,
+            color: AppColor.orangcolor,
+          ),
+          onPressed: () {
+            navigateToScreen(context, ScreenName);
+          },
+        ),
       ],
     ),
   );

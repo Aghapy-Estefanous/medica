@@ -446,12 +446,7 @@ class RegisterScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w500)),
                                   InkWell(
                                     onTap: () {
-                                      navigateToScreen(context, LoginScreen());
-
-                                      //           // CachHelper.removeKey(key: 'token')
-                                      //           //     .then((value) {
-                                      //           //   navigateToScreen(context, RegisterScreen());
-                                      //           // });
+                                      navigateandFinish(context, LoginScreen());
                                     },
                                     child: const Text(
                                       'Login',

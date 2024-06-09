@@ -7,16 +7,19 @@ class LoginInitial extends LoginState {}
 class LoginLoadingState extends LoginState {}
 
 class LoginSuccessgState extends LoginState {
-  LoginModel? model;
-  int? StatusCode;
-  LoginSuccessgState(this.model, this.StatusCode);
+  final LoginModel? model;
+  final int? statusCode;
+
+  LoginSuccessgState(this.model, this.statusCode);
 }
-//@@Doa2@@
 
 class LoginErrorState extends LoginState {
-  var error;
+  final String error;
 
   LoginErrorState(this.error);
 }
 
 class VisiablityIconState extends LoginState {}
+
+// Logout state
+class LogoutState extends LoginState {}

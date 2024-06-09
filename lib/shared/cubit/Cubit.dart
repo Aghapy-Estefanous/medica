@@ -11,6 +11,7 @@ import 'package:medica/models/departmentModel.dart';
 import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
+
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';

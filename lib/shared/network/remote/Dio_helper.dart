@@ -30,7 +30,7 @@ class dio_helper {
       var headers = {
         // 'Authorization': 'Bearer $AccessToken',
 
-        'Authorization': AccessToken,
+        'Authorization': 'Bearer $AccessToken',
 
         'Content-Type': 'application/json',
       };
