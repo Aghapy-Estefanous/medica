@@ -15,11 +15,11 @@ import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/blocObservser.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
+import 'package:medica/shared/styles/AppColor.dart';
 
-
+import 'screens/auth/Profile/cubit/profile_cubit.dart';
 
 const BaseAPI = 'http://medicalsystem.runasp.net';
-
 
 main() async {
   Bloc.observer = MyBlocObserver();
@@ -35,6 +35,7 @@ main() async {
         BlocProvider(create: (context) => EmailCubit()),
         BlocProvider(create: (context) => ConfirmEmailCubit()),
         BlocProvider(create: (context) => TestsCubit()),
+        BlocProvider(create: (context) => ProfileCubit()),
       ],
       child: const MainApp(),
     ),
@@ -52,19 +53,17 @@ class MainApp extends StatelessWidget {
         ..GetAllDepartments()
         ..GetAllClinics(),
       child: MaterialApp(
-          theme: ThemeData(useMaterial3: false),
+          theme: ThemeData(
+            useMaterial3: false,
+            primaryColor: AppColor.primaryColor,
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: AppColor.primaryColor,
+              secondary: AppColor.orangcolor,
+            ),
+          ),
           debugShowCheckedModeBanner: false,
           //  theme: liteTheme(),
-
-          debugShowCheckedModeBanner: false,
-          home: Splash_screen()),
-
-
-          home: Splash_screen()),
-
-
           home: SplashScreen()),
-
     );
   }
 }

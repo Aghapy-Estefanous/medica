@@ -26,7 +26,8 @@ class SplashScreen extends StatelessWidget {
                   'assets/images/onboarding/logo.png',
                   fit: BoxFit.cover,
                 ),
-                nextScreen: Container(), // Empty container, will be replaced by navigation logic
+                nextScreen:
+                    Container(), // Empty container, will be replaced by navigation logic
                 splashTransition: SplashTransition.fadeTransition,
                 backgroundColor: AppColor.primaryColor,
               ),
@@ -42,6 +43,7 @@ class SplashScreen extends StatelessWidget {
   Future<void> _checkToken(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
+    print('Token from splash $token');
 
     if (token != null) {
       Navigator.pushAndRemoveUntil(
