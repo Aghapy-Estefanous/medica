@@ -47,11 +47,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfileCubit cubit = ProfileCubit.get(context);
+    cubit.userData();
     return BlocProvider(
       create: (context) => AppCubit(DioConsumer(dio: Dio()))
         ..getdata()
         ..GetAllDepartments()
         ..GetAllClinics(),
+      // ..userData(),
       child: MaterialApp(
           theme: ThemeData(
             useMaterial3: false,

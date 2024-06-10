@@ -29,6 +29,7 @@ class AppCubit extends Cubit<AppState> {
   final ApiConsumer api;
   // get instance of App cubit
   static AppCubit get(context) => BlocProvider.of(context);
+  
   List<NavigationDestination> BottomNavItems = const [
     NavigationDestination(
         label: "Home",
@@ -67,6 +68,7 @@ class AppCubit extends Cubit<AppState> {
   int currentIndex = 0;
   ChangeBottomNavigateBar({required index}) {
     currentIndex = index;
+    // if (currentIndex == 1)
     emit(ChangeBottomNavigateBarState());
   }
 
