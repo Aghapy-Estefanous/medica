@@ -19,7 +19,7 @@ import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
-
+import '../../screens/auth/Profile/profile.dart';
 
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
@@ -58,7 +58,7 @@ class AppCubit extends Cubit<AppState> {
   ];
   List<Widget> Screen = [
     Home_Screen(),
-    SplashScreen(),
+    ProfileScreen(),
     Testing(),
     MedicalHistoryScreen(),
   ];
@@ -77,7 +77,7 @@ class AppCubit extends Cubit<AppState> {
       late UserReservationModel modelReservation;
       emit(ReservationLoadingState());
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.REGISTER ,
+        Endpoint.BaseUrl + Endpoint.REGISTER,
       );
       // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
@@ -100,11 +100,10 @@ class AppCubit extends Cubit<AppState> {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       String? token = sharedPreferences.getString('Token');
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS ,
-        
+        Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
       // print(response.data);
       departmentsModel = DepartmentsModel.fromJson(response);
@@ -140,14 +139,16 @@ class AppCubit extends Cubit<AppState> {
       String xx =
           Endpoint.BaseUrl + Endpoint.ALLCLINICS + "filter=$filterParameter";
       print(xx);
-       SharedPreferences sharedPreferences =
+      SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       String? token = sharedPreferences.getString('Token');
       // var response = await api.get(
       //   Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
       // );
-      var response = dio_helper.getData(url: 
-  'http://medicalsystem.runasp.net/api/ApplicationUserDisease?Type=1&ValueResult=2&Description=nhhfh&Height=12&Weight=22&ApplicationUserId=bdbbdbdb&DiseaseId=553&Diagnosis=bcbncbn&DiagnosisDate=01%2F01%2F2024' , AccessToken: token);
+      var response = dio_helper.getData(
+          url:
+              'http://medicalsystem.runasp.net/api/ApplicationUserDisease?Type=1&ValueResult=2&Description=nhhfh&Height=12&Weight=22&ApplicationUserId=bdbbdbdb&DiseaseId=553&Diagnosis=bcbncbn&DiagnosisDate=01%2F01%2F2024',
+          AccessToken: token);
       // Map<String,dynamic> response = response.Map
 
       Model = ClinicModel.fromJson(response as Map<String, dynamic>);

@@ -24,14 +24,14 @@ class LoginCubit extends Cubit<LoginState> {
     }).then((value) async {
       if (isClosed) return;
       print(value!.data);
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      sharedPreferences.setString('Token', value.data['data']['token']);
-      print(sharedPreferences.getString('Token'));
+      // print(sharedPreferences.getString('Token'));
       int? StatusCodeInt = value.statusCode;
 
       CURRENT_USER = LoginModel.fromJson(value.data);
       if (value.statusCode == 200) {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString('Token', value.data['data']['token']);
         // _save(name: userName, password: password);
         emit(LoginSuccessgState(CURRENT_USER, StatusCodeInt));
       } else {

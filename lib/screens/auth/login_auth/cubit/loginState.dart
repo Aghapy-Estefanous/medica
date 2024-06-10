@@ -1,4 +1,5 @@
 import 'package:medica/models/login_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LoginState {}
 
@@ -22,4 +23,7 @@ class LoginErrorState extends LoginState {
 class VisiablityIconState extends LoginState {}
 
 // Logout state
-class LogoutState extends LoginState {}
+class LogoutState extends LoginState {
+  //remove token from shared preferences
+  
+}

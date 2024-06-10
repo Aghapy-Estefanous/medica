@@ -7,6 +7,8 @@ import 'cubit/tests_cubit.dart';
 import 'prepare.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
+import 'result.dart';
+
 class Testing extends StatelessWidget {
   Testing({Key? key}) : super(key: key);
 
@@ -73,6 +75,7 @@ class Testing extends StatelessWidget {
                             cubit.selected(index);
                             // TestsCubit cubit2 = TestsCubit.get(context);
                             if (index == 1) cubit.available();
+                            else if (index == 2) cubit.testResult();
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -100,16 +103,17 @@ class Testing extends StatelessWidget {
                 else if (cubit.select == 1)
                   AvailablePage()
                 else if (cubit.select == 2)
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return ListTile(
-                          title: Text('count : $index'),
-                        );
-                      },
-                      childCount: 20,
-                    ),
-                  ),
+                  // SliverList(
+                  //   delegate: SliverChildBuilderDelegate(
+                  //     (context, index) {
+                  //       return ListTile(
+                  //         title: Text('count : $index'),
+                  //       );
+                  //     },
+                  //     childCount: 20,
+                  //   ),
+                  // ),
+                  ResultPage(),
               ],
             ),
           ),

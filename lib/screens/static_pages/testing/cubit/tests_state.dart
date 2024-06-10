@@ -39,3 +39,18 @@ class TestsError extends TestsState {
 
   TestsError(this.error);
 }
+
+
+class TestResultLoading extends TestsState {}
+
+class TestResultError extends TestsState {
+  final String errorMessage;
+
+  TestResultError(this.errorMessage);
+}
+
+class TestResultLoaded extends TestsState {
+  final List<DataModel> testResults;
+
+  TestResultLoaded(this.testResults);
+}
