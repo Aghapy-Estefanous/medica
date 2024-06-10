@@ -165,3 +165,25 @@ Map<String, String> convertDateTime(String? dateTimeString) {
   String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
   return {'date': formattedDate, 'time': formattedTime};
 }
+
+
+ Container CustomContainer({Widget? child}) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }

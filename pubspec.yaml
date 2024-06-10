@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   iconsax: ^0.0.8
   flutter_otp_text_field: ^1.1.0+2
+  web: ^0.3.0  # Ensure this is the correct version
+  js: ^0.6.3
   
 
 
@@ -48,6 +50,7 @@ dependencies:
   ticket_widget: ^1.0.2
   intl: ^0.19.0
   http: ^1.2.0
+  # bottom_sheet: ^4.0.4
 
 
 dev_dependencies:
