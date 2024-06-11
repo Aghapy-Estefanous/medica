@@ -32,6 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString('Token', value.data['data']['token']);
+        sharedPreferences.setString('ID', value.data['data']['nid']);
         // _save(name: userName, password: password);
         emit(LoginSuccessgState(CURRENT_USER, StatusCodeInt));
       } else {

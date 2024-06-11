@@ -58,16 +58,7 @@ class ConfirmEmail extends StatelessWidget {
               key: formstate,
               child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: SizedBox(
-                        child: Image.asset(
-                      'assets/images/Auth/logoFinal.png',
-                      height: 130,
-                      width: 200,
-                      fit: BoxFit.cover,
-                    )),
-                  ),
+                  LogoWidget(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     child: Column(
