@@ -49,10 +49,7 @@ class NewPassword extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 200,
-                  child: Image.asset('assets/images/Auth/logoFinal.png'),
-                ),
+                LogoWidget(),
                 SafeArea(
                   minimum: EdgeInsets.all(10),
                   child: Form(

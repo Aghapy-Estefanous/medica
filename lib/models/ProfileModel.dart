@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ProfileModel {
   String? firstName;
   String? lastName;
@@ -22,3 +24,11 @@ class ProfileModel {
     age = json['age'];
   }
 }
+
+// class Gender {
+//   String name;
+//   IconData icon;
+//   bool isSelected;
+
+//   Gender(this.name, this.icon, this.isSelected);
+// }

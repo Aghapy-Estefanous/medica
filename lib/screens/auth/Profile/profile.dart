@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medica/models/ProfileModel.dart';
-import 'package:medica/screens/auth/Profile/EditProfile.dart';
+import 'package:medica/screens/auth/Profile/update_profile.dart';
 import 'package:medica/screens/onboarding/onboarding.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
+// import '../register_auth/Gender.dart';
 import 'cubit/profile_cubit.dart';
+// import 'cubit/update_profile_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -117,35 +119,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        Center(
-          child: BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, state) {
-              final cubit = ProfileCubit.get(context);
-              return TextButton(
-                onPressed: () {}, //show(context),
-
-                // cubit.Change();
-
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFEF476F),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  child: Text(
-                    'Edit',
-                    style: TextStyle(
-                      fontFamily: 'SF Pro',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        Center(child: bottomsheetwidget(userProfile: userProfile, context: context)),
         CustomContainer(
           child: Column(
             children: [
@@ -164,6 +138,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
 
 class CustomRow extends StatelessWidget {
   final String? txt;

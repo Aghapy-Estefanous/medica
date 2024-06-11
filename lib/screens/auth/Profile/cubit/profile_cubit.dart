@@ -19,6 +19,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       var token = sharedPreferences.getString('Token');
+      // var id = sharedPreferences.getString('ID');
       var response = await dio_helper.getData(
           url: BaseUrl + 'ApplicationUser/BasicData', AccessToken: token
           // AccessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ2hhcHkiLCJqdGkiOiJmYzE1OTVlNC0yYjIxLTQzNjctYTU3MS1kZDYyYjI5N2UzYTkiLCJlbWFpbCI6ImFnaGFweTA4MEBnbWFpbC5jb20iLCJ1aWQiOiIxMTIyMzM0NDU1NjY3NyIsInJvbGVzIjoiVXNlciIsImV4cCI6MTcyMDUzMzQ1NX0.F02wKFgGnYsTNSjyYrHzHwSm9e5R0kUpOIwPRnPWUP0', // Use token here

@@ -18,6 +18,7 @@ import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 import 'screens/auth/Profile/cubit/profile_cubit.dart';
+import 'screens/auth/Profile/cubit/update_profile_cubit.dart';
 
 const BaseAPI = 'http://medicalsystem.runasp.net';
 
@@ -36,6 +37,7 @@ main() async {
         BlocProvider(create: (context) => ConfirmEmailCubit()),
         BlocProvider(create: (context) => TestsCubit()),
         BlocProvider(create: (context) => ProfileCubit()),
+        BlocProvider(create: (context) => UpdateProfileCubit()),
       ],
       child: const MainApp(),
     ),
