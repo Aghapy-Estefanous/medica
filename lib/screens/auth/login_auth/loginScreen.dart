@@ -37,11 +37,11 @@ class LoginScreen extends StatelessWidget {
             if (state.model?.succeeded == true) {
               // TOKEN=state.model?.data!.token;
               // print(state.model?.data!.token);
-              CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
-                  .then((value) {
-                var token = state.model?.data!.token;
-                print(CachHelper.getdata(key: 'token'));
-              });
+              // CachHelper.Savedata(key: 'token', value: state.model?.data!.token)
+              //     .then((value) {
+              //   var token = state.model?.data!.token;
+              //   print(CachHelper.getdata(key: 'token'));
+              // });
               showtoast(
                 context: context,
                 Message: state.model!.message.toString(),

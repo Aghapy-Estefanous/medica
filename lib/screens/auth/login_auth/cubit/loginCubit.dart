@@ -60,8 +60,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   // Logout Method
   void logout() async {
+    print('logout');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.remove('Token');
+    print(sharedPreferences.getString('Token'));
     emit(LogoutState());
   }
 
