@@ -67,8 +67,8 @@ class AppCubit extends Cubit<AppState> {
   List<Widget> Screen = [
     Home_Screen(),
     SplashScreen(),
-    ProfileScreen(),
     Testing(),
+    ProfileScreen(),
     MedicalHistoryScreen(),
   ];
   // MyHomeModel? homeModel;
@@ -109,9 +109,10 @@ class AppCubit extends Cubit<AppState> {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
 
-   SharedPreferences sharedPreferences =
+      SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      String? token = sharedPreferences.getString('Token');      var response = await api.get(
+      String? token = sharedPreferences.getString('Token');
+      var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
       // print(response.data);
@@ -261,9 +262,8 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
-  late List<DiseasesOfUser> AllUserDiseasesList = [
-  ];
+  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
+  late List<DiseasesOfUser> AllUserDiseasesList = [];
 
   getAllUserDiseases() async {
     try {
@@ -344,18 +344,18 @@ class AppCubit extends Cubit<AppState> {
     // var bodydata = FormData.fromMap({
     //   'files': [await MultipartFile.fromFile(file!.path, filename: file.path)]
     // });
-    
-   // Convert FilePickerResult to MultipartFile
-  MultipartFile? multipartFile;
-  if (file != null && file.files.isNotEmpty) {
-    final pickedFile = file.files.first;
-    multipartFile = await MultipartFile.fromFile(
-      pickedFile.path!,
-      filename: pickedFile.name,
-    );
-  }
-  var data = FormData.fromMap({
-      'Photo':  multipartFile,
+
+    // Convert FilePickerResult to MultipartFile
+    MultipartFile? multipartFile;
+    if (file != null && file.files.isNotEmpty) {
+      final pickedFile = file.files.first;
+      multipartFile = await MultipartFile.fromFile(
+        pickedFile.path!,
+        filename: pickedFile.name,
+      );
+    }
+    var data = FormData.fromMap({
+      'Photo': multipartFile,
     });
     var dio = Dio();
     String baseUrl = Endpoint.BaseUrl + Endpoint.ADD_DISEASE;
@@ -384,12 +384,12 @@ class AppCubit extends Cubit<AppState> {
       emit(PostDiseasesError(e.toString()));
     });
   }
- 
+
   //.............get basic data..........................
   //late List<BasicDataData?> BasicDataModelList=[];
   GetBasicData() async {
     try {
-       late BasicDataModel basicDataModel;
+      late BasicDataModel basicDataModel;
       emit(getBasicDataLoading());
 
       var response = await api.get(
@@ -399,12 +399,10 @@ class AppCubit extends Cubit<AppState> {
       //print("add from basic${}");
       // print("add from basic${response}");
       //access model from list
-        // BasicDataModelList.add(basicDataModel.data);
-        // print(BasicDataModelList);
-        print(" print from model${basicDataModel.data!.firstName}");
+      // BasicDataModelList.add(basicDataModel.data);
+      // print(BasicDataModelList);
+      print(" print from model${basicDataModel.data!.firstName}");
       emit(getBasicDataSuccess(basicDataModel));
-
-       
     } on ServerExceptions catch (e) {
       print(e.toString());
       emit(getBasicDataError(e.errorModel.message));

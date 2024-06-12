@@ -1,6 +1,7 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -9,6 +10,8 @@ import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
+
+import '../static_pages/testing/result.dart';
 
 TextEditingController _typeController = TextEditingController();
 TextEditingController _descriptionController = TextEditingController();
@@ -132,85 +135,16 @@ class MedicalHistoryScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-<<<<<<< HEAD
                         ),
-=======
-
-                          presonalDataComponent("Height", "178", Icons.height),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 2, // Thickness of the line
-                            height: 20, // Height of the line
-                            color: Color.fromARGB(255, 197, 191, 191),
-                          ),
-                          SizedBox(width: 3),
-                          presonalDataComponent(
-                              "Weight", "78", Icons.accessibility),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 2, // Thickness of the line
-                            height: 20, // Height of the line
-                            color: Color.fromARGB(255, 197, 191, 191),
-
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "mohamed Abeltwaap  mahmoud",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Age: 22',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    TextButton(
-                                      onPressed: () {
-                                        print('funnnn');
-                                        LoginCubit.get(context).logout();
-                                      },
-                                      child: Text(
-                                        'LogOut',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-
-                          ),
-                          SizedBox(width: 3),
-                          presonalDataComponent("Pressure", "178",
-                              Icons.favorite_border_outlined),
-                        ],
-                      ),
-                    ),
-                  ),
->>>>>>> 8b462b5f2aa263141bf0953746c2b38c178c7789
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
                   SizedBox(height: 30),
                   cardRowWidget(Icons.dashboard_customize_rounded,
                       "Prescriptions", prescriptionsScreen(), context),
                   SizedBox(height: 10),
                   cardRowWidget(Icons.local_hospital, "Medical tests",
-                      MedicalTestsScreen(), context),
+                      ResultPage2(), context),
                   SizedBox(height: 10),
-                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... showing Bottonnsheet..............🟢🟢🟢🟢🟢🟢......
+                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -229,11 +163,10 @@ class MedicalHistoryScreen extends StatelessWidget {
                           ))
                     ],
                   ),
-                  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
                   SizedBox(
                     height: 400,
                     child: ListView.separated(
-                        itemCount: cubit.AllUserDiseasesList.length,
+                        itemCount: 10,
                         separatorBuilder: (context, index) => const SizedBox(
                               height: 8,
                             ),
@@ -251,33 +184,29 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        //❌❌❌delete if u not use🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
-                                        // Container(
-                                        //   width: 40,
-                                        //   margin: EdgeInsets.all(12),
-                                        //   decoration: BoxDecoration(
-                                        //       color: AppColor.whiteColor,
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(4)),
-                                        //   child: Center(
-                                        //     child: Text(
-                                        //       'name',
-                                        //       style: Theme.of(context)
-                                        //           .textTheme
-                                        //           .labelLarge!
-                                        //           .copyWith(
-                                        //               color:
-                                        //                   AppColor.primaryColor,
-                                        //               fontSize: 14),
-                                        //     ),
-                                        //   ),
-                                        // ),
-
+                                        Container(
+                                          width: 40,
+                                          margin: EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              color: AppColor.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(4)),
+                                          child: Center(
+                                            child: Text(
+                                              'name',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color:
+                                                          AppColor.primaryColor,
+                                                      fontSize: 14),
+                                            ),
+                                          ),
+                                        ),
                                         Expanded(
                                           child: Text(
-                                              cubit.AllUserDiseasesList[index]
-                                                      .diseaseName ??
-                                                  "no name",
+                                              "name of disease 1hnmfjhhj jdbh ghhxfn ِللالاات تبللابس j,hf gsfugh ggs ybdg hg",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodyLarge
@@ -300,9 +229,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                               color: AppColor.orangcolor,
                                               size: 17,
                                             ),
-                                            Text(
-                                                '${convertDateTime(cubit.AllUserDiseasesList[index].diagnosisDate)['date']}' ??
-                                                    "no time",
+                                            Text("12/3/2024",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodySmall
@@ -337,9 +264,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 trailing: TextButton(
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all<Color>(
+                                          WidgetStateProperty.all<Color>(
                                               AppColor.orangcolor),
-                                      shape: MaterialStateProperty.all<
+                                      shape: WidgetStateProperty.all<
                                           RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -639,6 +566,9 @@ class MedicalHistoryScreen extends StatelessWidget {
 }
 
 Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
+  TestsCubit cubit = TestsCubit.get(context);
+
+  cubit.testResult();
   return Container(
     decoration: const BoxDecoration(
         color: AppColor.primaryColor,
