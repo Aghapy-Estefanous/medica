@@ -42,7 +42,7 @@ class SplashScreen extends StatelessWidget {
 
   Future<void> _checkToken(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString('token');
+    var token = sharedPreferences.getString('Token');
     print('Token from splash $token');
 
     if (token != null) {

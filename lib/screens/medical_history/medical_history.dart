@@ -151,11 +151,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                 children: [
                   Text("All records of disease",
                       style: TextStyle(fontSize: 16)),
-                  IconButton(
-                      onPressed: () {
-                        showmodelBottonsheetWidget(context);
-                      },
-                      icon: Icon(Icons.add))
+                  IconButton(onPressed: () {
+                    showmodelBottonsheetWidget(context);
+                  }, icon: Icon(Icons.add))
                 ],
               ),
               SizedBox(
@@ -266,7 +264,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   ),
                                 ),
                                 //for showing sheet
-                                onPressed: () {},
+                                onPressed: () {
+                                  
+                                },
                                 child: Text(
                                   "Details",
                                   style: TextStyle(color: Colors.white),
@@ -283,123 +283,150 @@ class MedicalHistoryScreen extends StatelessWidget {
 
   Future<dynamic> showmodelBottonsheetWidget(BuildContext context) {
     return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: 16,
-            right: 16,
-            top: 16,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Enter Details',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 16),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(labelText: 'Name'),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter a name';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(labelText: 'Description'),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter a description';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _dateController,
-                      decoration: InputDecoration(labelText: 'Date'),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter a date';
-                        }
-                        return null;
-                      },
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2101),
-                        );
-                        if (pickedDate != null) {
-                          _dateController.text =
-                              "${pickedDate.toLocal()}".split(' ')[0];
-                        }
-                      },
-                    ),
-                    TextFormField(
-                      controller: _weightController,
-                      decoration: InputDecoration(labelText: 'Weight'),
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter weight';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _heightController,
-                      decoration: InputDecoration(labelText: 'Height'),
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter height';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _diseaseValueController,
-                      decoration:
-                          InputDecoration(labelText: 'Value of Disease'),
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter value of disease';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Process data
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text('Submit'),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom,
+                                        left: 16,
+                                        right: 16,
+                                        top: 16,
+                                        
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            'Enter Details',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(height: 16),
+                                          Form(
+                                            key: _formKey,
+                                            child: Column(
+                                              children: [
+                                                TextFormField(
+                                                  controller: _nameController,
+                                                  decoration: InputDecoration(
+                                                      labelText: 'Name'),
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter a name';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  controller:
+                                                      _descriptionController,
+                                                  decoration: InputDecoration(
+                                                      labelText:
+                                                          'Description'),
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter a description';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  controller: _dateController,
+                                                  decoration: InputDecoration(
+                                                      labelText: 'Date'),
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter a date';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onTap: () async {
+                                                    FocusScope.of(context)
+                                                        .requestFocus(
+                                                            FocusNode());
+                                                    DateTime? pickedDate =
+                                                        await showDatePicker(
+                                                      context: context,
+                                                      initialDate:
+                                                          DateTime.now(),
+                                                      firstDate:
+                                                          DateTime(2000),
+                                                      lastDate:
+                                                          DateTime(2101),
+                                                    );
+                                                    if (pickedDate != null) {
+                                                      _dateController.text =
+                                                          "${pickedDate.toLocal()}"
+                                                              .split(' ')[0];
+                                                    }
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  controller:
+                                                      _weightController,
+                                                  decoration: InputDecoration(
+                                                      labelText: 'Weight'),
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter weight';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  controller:
+                                                      _heightController,
+                                                  decoration: InputDecoration(
+                                                      labelText: 'Height'),
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter height';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  controller:
+                                                      _diseaseValueController,
+                                                  decoration: InputDecoration(
+                                                      labelText:
+                                                          'Value of Disease'),
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter value of disease';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                SizedBox(height: 20),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    if (_formKey.currentState!
+                                                        .validate()) {
+                                                      // Process data
+                                                      Navigator.pop(context);
+                                                    }
+                                                  },
+                                                  child: Text('Submit'),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
   }
 
   Column presonalDataComponent(
