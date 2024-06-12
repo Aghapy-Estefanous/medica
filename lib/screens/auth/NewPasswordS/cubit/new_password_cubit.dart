@@ -1,7 +1,7 @@
+import '../../../../main.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
-import '../../../../main.dart';
 import '../../../../models/login_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
@@ -20,7 +20,7 @@ class NewPasswordCubit extends Cubit<NewPasswordState> {
     emit(NewPasswordLoadingState());
 
     dio_helper
-        .postData(url: '$BaseAPI/api/ApplicationUser/ForgetPassword', query: {
+      .postData(url: '$BaseAPI/api/ApplicationUser/ForgetPassword', query: {
       'Email': email,
       'NewPassword': newPassword,
       'ConfirmPassword': confirmPassword,

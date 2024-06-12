@@ -1,4 +1,9 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/models/reservationModel.dart';
+
 
 abstract class AppState {}
 
@@ -55,8 +60,63 @@ class GetAllClinicsErrorState extends AppState {
   final dynamic error;
   GetAllClinicsErrorState(this.error);
 }
+//......................********* here states for all diseases   for medical h drop down ***********................
+class GetAllDiseasesLoadingState extends AppState {}
+
+class GetAllDiseasesSuccessState extends AppState {
+  // final UserReservationModel? modelReservation;
+  // ReservationSuccessState(this.modelReservation);
+}
+
+class GetAllDiseasesErrorState extends AppState {
+  final dynamic error;
+  GetAllDiseasesErrorState(this.error);
+}
+
+//................................post diseases
+class PostDiseasesLoading extends AppState {}
+
+class PostDiseasesSuccess extends AppState {
+  final succeeded; 
+  PostDiseasesSuccess(this.succeeded);
+}
+
+class PostDiseasesError extends AppState {
+  final dynamic error;
+  PostDiseasesError(this.error);
+}
+//............................... diseases
+class DiseasePhotoSelectedstate extends AppState {
+  final file;
+  DiseasePhotoSelectedstate(this.file );
+}
 
 
+class DiseasePhotoSelectionErrorstate extends AppState {
+  final dynamic error;
+  DiseasePhotoSelectionErrorstate(this.error);
+}
+
+//...............................user basic data
+class getBasicDataLoading extends AppState {}
+
+class getBasicDataSuccess extends AppState {
+  final  model; 
+  getBasicDataSuccess(this.model);
+}
+
+class getBasicDataError extends AppState {
+  final dynamic error;
+  getBasicDataError(this.error);
+}
+// ...................................for file picker
+class YourCubitInitial extends AppState {}
+
+class YourCubitFilePicked extends AppState {
+  final FilePickerResult file;
+
+  YourCubitFilePicked(this.file);
+}
 
 
 //class shopInitialState extends shopState {}

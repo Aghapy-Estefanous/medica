@@ -36,7 +36,7 @@ class Testing extends StatelessWidget {
                         Text(
                           items[cubit.select],
                           style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w700),
+                              color: Colors.white, fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
                           width: 20,

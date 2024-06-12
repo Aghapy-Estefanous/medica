@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
+
 
 class dio_helper {
   static late Dio dio;
@@ -74,8 +77,32 @@ class dio_helper {
       // 'lang': lang,
       'Content-Type': 'application/json',
       'accept': '*/*',
-      //'tokenAuthorization': 'Bearer ${AccessToken}'
+      'Authorization': 'Bearer ${AccessToken}'
     };
+    return await dio.post(url, queryParameters: query, data: data);
+  }
+  static Future<Response?> postDataWithFile({
+    required String url, //endpionts
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    XFile? file,
+    String? AccessToken,
+    String? lang,
+  }) async {
+    dio.options.headers = {
+      //زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه
+      // 'lang': lang,
+      // 'Content-Type': 'application/json',
+      'accept': '*/*',
+      'Authorization': 'Bearer ${AccessToken}'
+    };
+     FormData formData = FormData.fromMap(data);
+    if (file != null) {
+      formData.files.add(MapEntry(
+        'Photo', // This should match the expected key on the backend
+        await MultipartFile.fromFile(file.path, filename: file.path.split('/').last),
+      ));
+    }
     return await dio.post(url, queryParameters: query, data: data);
   }
 }

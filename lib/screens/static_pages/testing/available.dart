@@ -51,8 +51,7 @@ class AvailablePage extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          test.price
-                              .toString(), // Replace with actual description if available
+                          'Price: ${test.price.toString()}EGP', // Replace with actual description if available
                           textDirection: TextDirection.rtl,
                         )),
                   ),

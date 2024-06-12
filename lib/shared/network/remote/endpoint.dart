@@ -13,6 +13,8 @@ class Endpoint{
     static const ALLDEPARTMENTS='Department/All-Departments';
     static const ALLCLINICS_OF_DEPARTMENTS='Clinic/GetAllClinicsWthDeptId/';
     static const ALLCLINICS='Clinic/All-Clinics';
+    static const  ADD_DISEASE='ApplicationUserDisease';
+    static const  BASIC_DATA='ApplicationUser/BasicData';
 }
 //http://medicalsystem-001-site1.ftempurl.com
 //Authorization : 'Bearer ${AccessToken}'

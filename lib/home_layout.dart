@@ -17,7 +17,6 @@ class HomeLayout extends StatelessWidget {
         var cubit = AppCubit.get(context);
         return Scaffold(
             bottomNavigationBar: NavigationBar(
-          
               height: 75,
               backgroundColor: Colors.white,
               indicatorColor: AppColor.primaryColor,
