@@ -132,7 +132,76 @@ class MedicalHistoryScreen extends StatelessWidget {
                               ],
                             ),
                           ),
+<<<<<<< HEAD
                         ),
+=======
+
+                          presonalDataComponent("Height", "178", Icons.height),
+                          SizedBox(width: 10),
+                          Container(
+                            width: 2, // Thickness of the line
+                            height: 20, // Height of the line
+                            color: Color.fromARGB(255, 197, 191, 191),
+                          ),
+                          SizedBox(width: 3),
+                          presonalDataComponent(
+                              "Weight", "78", Icons.accessibility),
+                          SizedBox(width: 10),
+                          Container(
+                            width: 2, // Thickness of the line
+                            height: 20, // Height of the line
+                            color: Color.fromARGB(255, 197, 191, 191),
+
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "mohamed Abeltwaap  mahmoud",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Age: 22',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    TextButton(
+                                      onPressed: () {
+                                        print('funnnn');
+                                        LoginCubit.get(context).logout();
+                                      },
+                                      child: Text(
+                                        'LogOut',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                          ),
+                          SizedBox(width: 3),
+                          presonalDataComponent("Pressure", "178",
+                              Icons.favorite_border_outlined),
+                        ],
+                      ),
+                    ),
+                  ),
+>>>>>>> 8b462b5f2aa263141bf0953746c2b38c178c7789
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
                   SizedBox(height: 30),
                   cardRowWidget(Icons.dashboard_customize_rounded,
