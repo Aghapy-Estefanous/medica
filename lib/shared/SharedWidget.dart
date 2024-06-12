@@ -28,24 +28,24 @@ dynamic showtoast({required context, required String Message, required color}) {
             fontSize: 17, fontWeight: FontWeight.w500, color: Colors.white),
       )));
 }
-Widget detailsButtoncustom(BuildContext context, ScreenName) {
-    return MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  minWidth: 40.0,
-                  height: 25,
-                  color: AppColor.orangcolor,
-                  child: const Text(
-                    ' details ',
-                    style: TextStyle(fontSize: 13.0, color: Colors.white),
-                  ),
-                  onPressed: () {
-                    navigateToScreen(context, ScreenName);
-                  },
-        );
-  }
 
+Widget detailsButtoncustom(BuildContext context, ScreenName) {
+  return MaterialButton(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12.0),
+    ),
+    minWidth: 40.0,
+    height: 25,
+    color: AppColor.orangcolor,
+    child: const Text(
+      ' details ',
+      style: TextStyle(fontSize: 13.0, color: Colors.white),
+    ),
+    onPressed: () {
+      navigateToScreen(context, ScreenName);
+    },
+  );
+}
 
 // logout(context) {
 //   return TextButton(
@@ -153,6 +153,7 @@ Validate_password(value) {
     return t == true ? errmess.trimRight() : null;
   }
 }
+
 Map<String, String> convertDateTime(String? dateTimeString) {
   // String dateTimeString = "2024-03-16T22:23:23.9849549";
 
@@ -164,4 +165,60 @@ Map<String, String> convertDateTime(String? dateTimeString) {
   // Format date (e.g., "16/3/2024")
   String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
   return {'date': formattedDate, 'time': formattedTime};
+}
+
+Container CustomContainer({Widget? child}) {
+  return Container(
+    margin: EdgeInsets.all(10),
+    padding: EdgeInsets.all(10),
+    width: double.infinity,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.3),
+          spreadRadius: 2,
+          blurRadius: 7,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+    child: child,
+  );
+}
+
+TextFormField CustomTxtFormField(
+    {controller, hint, icon, text, validator, keyType, initialValue}) {
+  return TextFormField(
+    initialValue: initialValue,
+    validator: validator,
+    controller: controller,
+    decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide.none,
+        ),
+        fillColor: Color.fromRGBO(217, 217, 217, 0.27),
+        filled: true,
+        prefixIcon: icon,
+        hintText: hint,
+        labelText: text),
+    keyboardType: keyType,
+  );
+}
+
+Widget LogoWidget() {
+  return SafeArea(
+    child: Align(
+      alignment: Alignment.topLeft,
+      child: SizedBox(
+          child: Image.asset(
+        'assets/images/Auth/logoFinal.png',
+        height: 130,
+        width: 200,
+        fit: BoxFit.cover,
+      )),
+    ),
+  );
 }

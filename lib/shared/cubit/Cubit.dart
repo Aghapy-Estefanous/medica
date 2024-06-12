@@ -22,6 +22,11 @@ import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
+<<<<<<< HEAD
+=======
+import '../../screens/auth/Profile/profile.dart';
+
+>>>>>>> 0fdad71c62d2e75c18141baf3df8dbf6dd77fc40
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -30,6 +35,7 @@ class AppCubit extends Cubit<AppState> {
   final ApiConsumer api;
   // get instance of App cubit
   static AppCubit get(context) => BlocProvider.of(context);
+  
   List<NavigationDestination> BottomNavItems = const [
     NavigationDestination(
         label: "Home",
@@ -59,7 +65,7 @@ class AppCubit extends Cubit<AppState> {
   ];
   List<Widget> Screen = [
     Home_Screen(),
-    SplashScreen(),
+    ProfileScreen(),
     Testing(),
     MedicalHistoryScreen(),
   ];
@@ -68,6 +74,7 @@ class AppCubit extends Cubit<AppState> {
   int currentIndex = 0;
   ChangeBottomNavigateBar({required index}) {
     currentIndex = index;
+    // if (currentIndex == 1)
     emit(ChangeBottomNavigateBarState());
   }
 
@@ -100,7 +107,13 @@ class AppCubit extends Cubit<AppState> {
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
+<<<<<<< HEAD
 
+=======
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String? token = sharedPreferences.getString('Token');
+>>>>>>> 0fdad71c62d2e75c18141baf3df8dbf6dd77fc40
       var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
@@ -138,10 +151,24 @@ class AppCubit extends Cubit<AppState> {
       String xx =
           Endpoint.BaseUrl + Endpoint.ALLCLINICS + "filter=$filterParameter";
       print(xx);
+<<<<<<< HEAD
 
       var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
       );
+=======
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String? token = sharedPreferences.getString('Token');
+      // var response = await api.get(
+      //   Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
+      // );
+      var response = dio_helper.getData(
+          url:
+              'http://medicalsystem.runasp.net/api/ApplicationUserDisease?Type=1&ValueResult=2&Description=nhhfh&Height=12&Weight=22&ApplicationUserId=bdbbdbdb&DiseaseId=553&Diagnosis=bcbncbn&DiagnosisDate=01%2F01%2F2024',
+          AccessToken: token);
+      // Map<String,dynamic> response = response.Map
+>>>>>>> 0fdad71c62d2e75c18141baf3df8dbf6dd77fc40
 
       Model = ClinicModel.fromJson(response as Map<String, dynamic>);
       print(Model);

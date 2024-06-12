@@ -20,6 +20,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String password,
     required String confirmPassword,
     required String birthDate,
+    // required String gender,
   }) {
     emit(RegisterLoadingState());
     print(birthDate);
@@ -33,6 +34,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       'password': password,
       'confirmPassword': confirmPassword,
       'birthDate': birthDate,
+      // 'gender' : gender
     }).then((value) {
       print("here the data send ${value!.data}");
       LoginModel CURRENT_USER = LoginModel.fromJson(value.data);

@@ -4,6 +4,8 @@ import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
+import 'screens/auth/Profile/cubit/profile_cubit.dart';
+
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
 
@@ -12,9 +14,13 @@ class HomeLayout extends StatelessWidget {
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
         // TODO: implement listener
+        ProfileCubit cubit = ProfileCubit.get(context);
+        cubit.userData();
       },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        // ProfileCubit cubit2 = ProfileCubit.get(context);
+        // cubit2.userData();
         return Scaffold(
             bottomNavigationBar: NavigationBar(
               height: 75,

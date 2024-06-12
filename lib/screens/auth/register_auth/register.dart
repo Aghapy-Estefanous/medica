@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:medica/home_layout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/auth/register_auth/Gender.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/auth/login_auth/loginScreen.dart';
@@ -22,6 +23,7 @@ class RegisterScreen extends StatelessWidget {
   TextEditingController usernameController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
   TextEditingController birthDate = TextEditingController();
+  TextEditingController gender = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,55 +69,7 @@ class RegisterScreen extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: SizedBox(
-                              child: Image.asset(
-                            'assets/images/Auth/logoFinal.png',
-                            height: 130,
-                            width: 200,
-                            fit: BoxFit.cover,
-                          )),
-                        ),
-                        /////
-                        // Align(
-                        //   alignment: Alignment.topLeft,
-                        //   child: ,
-                        // child: SizedBox(
-                        //     height: 140,
-                        //     child: Stack(
-                        //       children: [
-                        //         Image.asset(
-                        //             'assets/images/onboarding/shape.png'),
-                        //         Image.asset(
-                        //           'assets/images/onboarding/logo.png',
-                        //           height: 140,
-                        //           width: 130,
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //         Positioned(
-                        //           left: 5,
-                        //           top: 5,
-                        //           child: Container(
-                        //             height: 32,
-                        //             width: 32,
-                        //             decoration: BoxDecoration(
-                        //               border: Border.all(
-                        //                 color: Colors.white.withOpacity(0.5),
-                        //                 width: 1.2,
-                        //               ),
-                        //               borderRadius:
-                        //                   BorderRadius.circular(8.0),
-                        //             ),
-                        //             child: const Icon(
-                        //               Icons.arrow_back_ios,
-                        //               color: AppColor.whiteColor,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     )),
-                        //  ),
+                        LogoWidget(),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Column(
@@ -252,29 +206,10 @@ class RegisterScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 15,
                               ),
-                              TextFormField(
-                                controller: emailController,
-                                // validator: (value) {
-                                //   if (value == null || value.isEmpty) {
-                                //     return 'Please enter your email';
-                                //   } else if (!RegExp(
-                                //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                //       .hasMatch(value))
-                                //     return 'please enter a valid email adress';
-                                //   return null;
-                                // },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  fillColor:
-                                      Color.fromRGBO(217, 217, 217, 0.27),
-                                  filled: true,
-                                  prefixIcon: Icon(Iconsax.sms),
-                                  hintText: 'Email',
-                                ),
-                              ),
+                              CustomTxtFormField(
+                                  controller: emailController,
+                                  hint: 'email',
+                                  icon: Icon(Iconsax.sms)),
 
                               //************************email filed*************************
                               const SizedBox(height: 15),
@@ -351,12 +286,13 @@ class RegisterScreen extends StatelessWidget {
                                       nid: nidController.text,
                                       username: usernameController.text,
                                       name: usernameController.text,
-                                      gender: genderController.text,
+                                      // gender: genderController.text,
                                       email: emailController.text,
                                       password: passwordController.text,
                                       confirmPassword:
                                           confirmPassController.text,
                                       birthDate: cubit.date,
+                                      gender:gender.text,
                                     );
                                   }),
                               const SizedBox(height: 15),
@@ -372,12 +308,17 @@ class RegisterScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 15),
+                              Text(
+                                'Select your gender :',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              GenderSelector(gender),
                               ConditionalBuilder(
                                 fallback: (context) => const Center(
                                     child: CircularProgressIndicator()),
                                 builder: (BuildContext context) {
                                   print(
-                                      "my usern =${firstNameController.text + lastNameController.text}");
+                                      "my usern =${firstNameController.text + lastNameController.text + gender.text}");
                                   return
                                       // SizedBox(
                                       //   height: 50,
@@ -469,6 +410,8 @@ class RegisterScreen extends StatelessWidget {
       },
     );
   }
+
+  
 }
 
 DateTime birthDate = DateTime.now();
