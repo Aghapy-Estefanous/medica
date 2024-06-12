@@ -8,7 +8,7 @@ class LoginModel {
   String? message;
   UserModel? data;
   String? error;
-  String? token;
+  // String? token;
 
   LoginModel({
     this.status,
@@ -36,7 +36,7 @@ class UserModel {
   String? nid;
   String? gender;
   bool? isAuthenticated;
-  String? token;
+  // String? token;
 
   UserModel.fromJson(Map<String, dynamic> json) {
     nid = json['nid'];
@@ -45,7 +45,7 @@ class UserModel {
     pass = json['pass'];
     isAuthenticated = json['isAuthenticted'];
     gender = json['gender'];
-    token = json['token'];
+    // token = json['token'];
   }
 
   toJson() {
@@ -56,7 +56,7 @@ class UserModel {
       'nid': nid,
       'gender': gender,
       'isAuthenticated': isAuthenticated,
-      'token': token
+      // 'token': token
     };
   }
 }
@@ -73,22 +73,22 @@ class UserModel {
 //     return {'name': name, 'password': password};
 //   }
 // }
-class SaveModel {
-  String? token;
-  // String? password;
+// class SaveModel {
+//   String? token;
+//   // String? password;
 
-  SaveModel({this.token, });
+//   SaveModel({this.token, });
 
-  SaveModel.fromJson(Map<String, dynamic> map) {
-    token = map['token'];
-    // name = map['name'];
-    // password = map['password'];
-  }
+//   SaveModel.fromJson(Map<String, dynamic> map) {
+//     token = map['token'];
+//     // name = map['name'];
+//     // password = map['password'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    return {'token': token,};
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     return {'token': token,};
+//   }
+// }
 
 // void _save({required String token}) async {
 //   SaveModel saveModel = SaveModel(token:token);

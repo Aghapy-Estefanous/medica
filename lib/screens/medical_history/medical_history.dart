@@ -54,12 +54,45 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Age: 22',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "mohamed Abeltwaap  mahmoud",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Age: 22',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    TextButton(
+                                      onPressed: () {
+                                        print('funnnn');
+                                        LoginCubit.get(context).logout();
+                                      },
+                                      child: Text(
+                                        'LogOut',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ],
