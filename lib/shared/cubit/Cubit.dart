@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medica/models/clinicModel.dart';
+import 'package:medica/screens/auth/Profile/profile.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -16,17 +17,13 @@ import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
+import 'package:medica/models/user/AllDiseasesOfUser.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
-<<<<<<< HEAD
-=======
-import '../../screens/auth/Profile/profile.dart';
-
->>>>>>> 0fdad71c62d2e75c18141baf3df8dbf6dd77fc40
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -35,7 +32,6 @@ class AppCubit extends Cubit<AppState> {
   final ApiConsumer api;
   // get instance of App cubit
   static AppCubit get(context) => BlocProvider.of(context);
-  
   List<NavigationDestination> BottomNavItems = const [
     NavigationDestination(
         label: "Home",
@@ -52,6 +48,11 @@ class AppCubit extends Cubit<AppState> {
         icon: Icon(
           Icons.library_books_outlined,
         )),
+    NavigationDestination(
+        label: "profile",
+        icon: Icon(
+          Icons.person,
+        )),
     // NavigationDestination(
     //     label: "Reservation",
     //     icon: Icon(
@@ -65,6 +66,7 @@ class AppCubit extends Cubit<AppState> {
   ];
   List<Widget> Screen = [
     Home_Screen(),
+    SplashScreen(),
     ProfileScreen(),
     Testing(),
     MedicalHistoryScreen(),
@@ -74,7 +76,6 @@ class AppCubit extends Cubit<AppState> {
   int currentIndex = 0;
   ChangeBottomNavigateBar({required index}) {
     currentIndex = index;
-    // if (currentIndex == 1)
     emit(ChangeBottomNavigateBarState());
   }
 
@@ -107,14 +108,10 @@ class AppCubit extends Cubit<AppState> {
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
-<<<<<<< HEAD
 
-=======
-      SharedPreferences sharedPreferences =
+   SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      String? token = sharedPreferences.getString('Token');
->>>>>>> 0fdad71c62d2e75c18141baf3df8dbf6dd77fc40
-      var response = await api.get(
+      String? token = sharedPreferences.getString('Token');      var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
       // print(response.data);
@@ -151,24 +148,10 @@ class AppCubit extends Cubit<AppState> {
       String xx =
           Endpoint.BaseUrl + Endpoint.ALLCLINICS + "filter=$filterParameter";
       print(xx);
-<<<<<<< HEAD
 
       var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
       );
-=======
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      String? token = sharedPreferences.getString('Token');
-      // var response = await api.get(
-      //   Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
-      // );
-      var response = dio_helper.getData(
-          url:
-              'http://medicalsystem.runasp.net/api/ApplicationUserDisease?Type=1&ValueResult=2&Description=nhhfh&Height=12&Weight=22&ApplicationUserId=bdbbdbdb&DiseaseId=553&Diagnosis=bcbncbn&DiagnosisDate=01%2F01%2F2024',
-          AccessToken: token);
-      // Map<String,dynamic> response = response.Map
->>>>>>> 0fdad71c62d2e75c18141baf3df8dbf6dd77fc40
 
       Model = ClinicModel.fromJson(response as Map<String, dynamic>);
       print(Model);
@@ -270,6 +253,29 @@ class AppCubit extends Cubit<AppState> {
 
       Model = Alldiseases.fromJson(response);
       ALLDiseasesList = Model.data!;
+      print(Model.data);
+      emit(GetAllDepartmentSuccessState());
+    } on ServerExceptions catch (e) {
+      print(e.toString());
+      emit(GetAllDepartmentErrorState(e.errorModel.message));
+    }
+  }
+
+   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
+  late List<DiseasesOfUser> AllUserDiseasesList = [
+  ];
+
+  getAllUserDiseases() async {
+    try {
+      late AllDiseasesOfUserModel Model;
+      emit(GetAllDiseasesLoadingState());
+
+      var response = await api.get(
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS,
+      );
+
+      Model = AllDiseasesOfUserModel.fromJson(response);
+      AllUserDiseasesList = Model.data!;
       print(Model.data);
       emit(GetAllDepartmentSuccessState());
     } on ServerExceptions catch (e) {

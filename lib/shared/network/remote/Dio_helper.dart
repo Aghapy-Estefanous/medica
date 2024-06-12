@@ -81,26 +81,17 @@ class dio_helper {
     };
     return await dio.post(url, queryParameters: query, data: data);
   }
-
-  static Future<Response>? postDataWithFile({
+  static Future<Response?> postDataWithFile({
     required String url, //endpionts
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
     XFile? file,
-
-
-   Future<Response?> putData({
-    required String url, //endpionts    
-    Map<String, dynamic>? query,
-    required Map<String, dynamic> data,
-
     String? AccessToken,
     String? lang,
   }) async {
     dio.options.headers = {
       //زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه
       // 'lang': lang,
-
       // 'Content-Type': 'application/json',
       'accept': '*/*',
       'Authorization': 'Bearer ${AccessToken}'
@@ -113,12 +104,21 @@ class dio_helper {
       ));
     }
     return await dio.post(url, queryParameters: query, data: data);
-
+  }
+  static Future<Response?> putData({
+    required String url, //endpionts    
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    String? AccessToken,
+    String? lang,
+  }) async {
+    dio.options.headers = {
+      //زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه
+      // 'lang': lang,
       'Content-Type': 'application/json',
       'accept': '*/*',
       //'tokenAuthorization': 'Bearer ${AccessToken}'
     };
     return await dio.put(url, queryParameters: query, data: data);
-
   }
 }
