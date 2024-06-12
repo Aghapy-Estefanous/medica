@@ -15,6 +15,7 @@ class Endpoint{
     static const ALLCLINICS='Clinic/All-Clinics';
     static const  ADD_DISEASE='ApplicationUserDisease';
     static const  BASIC_DATA='ApplicationUser/BasicData';
+    static const  USER_Disease='ApplicationUser/BasicData';
 }
 //http://medicalsystem-001-site1.ftempurl.com
 //Authorization : 'Bearer ${AccessToken}'

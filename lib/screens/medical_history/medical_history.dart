@@ -92,20 +92,49 @@ class MedicalHistoryScreen extends StatelessWidget {
                         ),
                   SizedBox(height: 8),
                   modelbasic == null
-                      ? CircularProgressIndicator() :Container(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    child: Center(
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          presonalDataComponent(
-                              "Blood",   modelbasic.bloodType.toString(), Icons.bloodtype_outlined),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 2, // Thickness of the line
-                            height: 10, // Height of the line
-                            color: Color.fromARGB(255, 197, 191, 191),
+                      ? CircularProgressIndicator()
+                      : Container(
+                          height: MediaQuery.of(context).size.height * 0.08,
+                          child: Center(
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                presonalDataComponent(
+                                    "Blood",
+                                    modelbasic.bloodType.toString(),
+                                    Icons.bloodtype_outlined),
+                                SizedBox(width: 10),
+                                Container(
+                                  width: 2, // Thickness of the line
+                                  height: 10, // Height of the line
+                                  color: Color.fromARGB(255, 197, 191, 191),
+                                ),
+                                presonalDataComponent(
+                                    "Height", "178", Icons.height),
+                                SizedBox(width: 10),
+                                Container(
+                                  width: 2, // Thickness of the line
+                                  height: 20, // Height of the line
+                                  color: Color.fromARGB(255, 197, 191, 191),
+                                ),
+                                SizedBox(width: 3),
+                                presonalDataComponent(
+                                    "Weight", "78", Icons.accessibility),
+                                SizedBox(width: 10),
+                                Container(
+                                  width: 2, // Thickness of the line
+                                  height: 20, // Height of the line
+                                  color: Color.fromARGB(255, 197, 191, 191),
+                                ),
+                                SizedBox(width: 3),
+                                presonalDataComponent("Pressure", "178",
+                                    Icons.favorite_border_outlined),
+                              ],
+                            ),
                           ),
+<<<<<<< HEAD
+                        ),
+=======
 
                           presonalDataComponent("Height", "178", Icons.height),
                           SizedBox(width: 10),
@@ -172,6 +201,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+>>>>>>> 8b462b5f2aa263141bf0953746c2b38c178c7789
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
                   SizedBox(height: 30),
                   cardRowWidget(Icons.dashboard_customize_rounded,
@@ -180,7 +210,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                   cardRowWidget(Icons.local_hospital, "Medical tests",
                       MedicalTestsScreen(), context),
                   SizedBox(height: 10),
-                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
+                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... showing Bottonnsheet..............🟢🟢🟢🟢🟢🟢......
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -199,10 +229,11 @@ class MedicalHistoryScreen extends StatelessWidget {
                           ))
                     ],
                   ),
+                  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
                   SizedBox(
                     height: 400,
                     child: ListView.separated(
-                        itemCount: 10,
+                        itemCount: cubit.AllUserDiseasesList.length,
                         separatorBuilder: (context, index) => const SizedBox(
                               height: 8,
                             ),
@@ -220,29 +251,33 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Container(
-                                          width: 40,
-                                          margin: EdgeInsets.all(12),
-                                          decoration: BoxDecoration(
-                                              color: AppColor.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(4)),
-                                          child: Center(
-                                            child: Text(
-                                              'name',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge!
-                                                  .copyWith(
-                                                      color:
-                                                          AppColor.primaryColor,
-                                                      fontSize: 14),
-                                            ),
-                                          ),
-                                        ),
+                                        //❌❌❌delete if u not use🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
+                                        // Container(
+                                        //   width: 40,
+                                        //   margin: EdgeInsets.all(12),
+                                        //   decoration: BoxDecoration(
+                                        //       color: AppColor.whiteColor,
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(4)),
+                                        //   child: Center(
+                                        //     child: Text(
+                                        //       'name',
+                                        //       style: Theme.of(context)
+                                        //           .textTheme
+                                        //           .labelLarge!
+                                        //           .copyWith(
+                                        //               color:
+                                        //                   AppColor.primaryColor,
+                                        //               fontSize: 14),
+                                        //     ),
+                                        //   ),
+                                        // ),
+
                                         Expanded(
                                           child: Text(
-                                              "name of disease 1hnmfjhhj jdbh ghhxfn ِللالاات تبللابس j,hf gsfugh ggs ybdg hg",
+                                              cubit.AllUserDiseasesList[index]
+                                                      .diseaseName ??
+                                                  "no name",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodyLarge
@@ -265,7 +300,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                                               color: AppColor.orangcolor,
                                               size: 17,
                                             ),
-                                            Text("12/3/2024",
+                                            Text(
+                                                '${convertDateTime(cubit.AllUserDiseasesList[index].diagnosisDate)['date']}' ??
+                                                    "no time",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodySmall
