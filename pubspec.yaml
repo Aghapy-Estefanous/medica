@@ -50,8 +50,8 @@ dependencies:
   ticket_widget: ^1.0.2
   intl: ^0.19.0
   http: ^1.2.0
-  flutter_launcher_icons: ^0.13.1
-  # bottom_sheet: ^4.0.4
+  image_picker: ^1.0.8
+  file_picker: ^8.0.0+1
 
 
 dev_dependencies:
@@ -83,6 +83,7 @@ flutter:
     - assets/images/home-Images/
     - assets/images/Auth/
     - assets/images/backgrounds/
+    - assets/images/ilustrations/
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

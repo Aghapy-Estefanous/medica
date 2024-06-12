@@ -4,7 +4,6 @@ import 'package:medica/home_layout.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-import 'package:medica/screens/home/home_screen.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/EmailS.dart';
 import 'package:medica/screens/auth/register_auth/register.dart';
