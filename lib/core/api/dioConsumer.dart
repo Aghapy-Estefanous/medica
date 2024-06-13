@@ -53,4 +53,10 @@ class DioConsumer extends ApiConsumer {
       handleDioExceptions(e);
     }
   }
+  
+  @override
+  Future getAsFormData(String url, {FormData? data, Map<String, dynamic>? queryParameter}) {
+    // TODO: implement getAsFormData
+    throw UnimplementedError();
+  }
 }
