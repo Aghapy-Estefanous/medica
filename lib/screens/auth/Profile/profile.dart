@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
       create: (context) => ProfileCubit()..userData(),
       child: Scaffold(
         body: Container(
-          height: 650,
+          // height: 650,
           margin: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -119,7 +119,9 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        Center(child: bottomsheetwidget(userProfile: userProfile, context: context)),
+        Center(
+            child:
+                bottomsheetwidget(userProfile: userProfile, context: context)),
         CustomContainer(
           child: Column(
             children: [
@@ -138,7 +140,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
 
 class CustomRow extends StatelessWidget {
   final String? txt;

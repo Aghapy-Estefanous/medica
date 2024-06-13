@@ -18,13 +18,24 @@ class TestSuccessState extends TestsState {}
 class TestsItemSelected extends TestsState {
   final int selectedIndex;
 
-    TestsItemSelected(this.selectedIndex);
+  TestsItemSelected(this.selectedIndex);
 
   @override
   List<Object> get props => [selectedIndex];
 }
 
-class PlusOrNO extends TestsState{}
+class FItemSelected extends TestsState {
+  final int fselectedIndex;
+
+  FItemSelected(this.fselectedIndex);
+
+  @override
+  List<Object> get props => [fselectedIndex];
+}
+
+class FPlusOrNO extends TestsState {}
+
+class PlusOrNO extends TestsState {}
 
 class TestsLoading extends TestsState {}
 
@@ -39,7 +50,6 @@ class TestsError extends TestsState {
 
   TestsError(this.error);
 }
-
 
 class TestResultLoading extends TestsState {}
 

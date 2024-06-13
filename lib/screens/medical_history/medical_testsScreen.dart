@@ -1,89 +1,83 @@
-import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/static_pages/testing/TestResultDetails.dart';
+import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/shared/SharedWidget.dart';
-import 'package:medica/shared/styles/AppColor.dart';
 
-class MedicalTestsScreen extends StatelessWidget {
-  const MedicalTestsScreen({Key? key}) : super(key: key);
+class ResultPage2 extends StatelessWidget {
+  const ResultPage2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBarWidget(context,"Patient Medical tests"),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-                children: [
-          Expanded(
-            child: ListView.separated(
-                itemCount: 3,
-                separatorBuilder:(context, index) => SizedBox(height: 8,),
+    return Material(
+      // Wrap with Material widget
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Your Tests'),
+        ),
+        body: BlocBuilder<TestsCubit, TestsState>(
+          builder: (context, state) {
+            if (state is TestResultLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is TestResultLoaded) {
+              return ListView.builder(
+                itemCount: state.testResults.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    //color: AppColor.primaryColor,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      color:const Color.fromARGB(219, 2, 78, 154)
-                      // gradient: LinearGradient(
-                      //   begin: Alignment.topCenter,
-                      //   end: Alignment.bottomCenter,
-                      //   colors: [
-                      // //    Color.fromARGB(255, 62, 136, 210),
-                      //  Color.fromARGB(255, 214, 226, 238),
-                     
-                      // AppColor.primaryColor,   
-                         
-                      //   ],
-                      // ),
-                    ),
-                    child: ListTile(
-                        leading: Icon(
-                          Iconsax.health,
-                          color:Color.fromARGB(255, 230, 226, 226),
-                          size: 44,
+                  var test = state.testResults[index];
+                  var cubit = TestsCubit.get(context);
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 2,
+                            blurRadius: 7,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        onTap: () {
+                          navigateToScreen(
+                              context, TestResultDetails(test: test));
+                        },
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/backgrounds/tests.jpeg',
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        title: Text("Serum Fibrinogen Test",style:Theme.of(context).textTheme.bodyLarge?.copyWith(color:AppColor.whiteColor,)),
-                        subtitle: Column(
-                          children: [
-                            SizedBox(height: 6,),
-                            Text(
-                                'description ,fdtyfahb cxzjhghhfhgghfgghfhgfhghgghgh',style:Theme.of(context).textTheme.bodyMedium?.copyWith(color:Color.fromARGB(255, 221, 216, 216))),
-                            Row(
-                              children: [
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.now_wallpaper,color: Colors.orange,)),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.downloading,color: Colors.orange,)),
-                              ],
-                            ),
-                          ],
-                        )),
+                        title: Text(
+                          test.title ?? '',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          '${test.test.name}',
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                    ),
                   );
-                }),
-          )
-                ],
-              ),
-        ));
+                },
+              );
+            } else if (state is TestResultError) {
+              return Center(child: Text('Error: ${state.errorMessage}'));
+            } else {
+              return Center(child: Text('No data available.'));
+            }
+          },
+        ),
+      ),
+    );
   }
 }
-
-// ListTile(
-//             leading: Icon(Icons.medical_services),
-//             title: Text(
-//                 "dadatadatadadatadatadatadatadatadatadatadatatadatata"),
-//             trailing: Row(
-//               children: [
-//                 IconButton(
-//                     onPressed: () {}, icon: Icon(Icons.visibility_rounded)),
-//                 IconButton(
-//                     onPressed: () {}, icon: Icon(Icons.download)),
-//               ],
-//             ),
-//           ),
