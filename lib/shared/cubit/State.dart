@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/models/reservationModel.dart';
 
-
 abstract class AppState {}
 
 class InitialState extends AppState {}
@@ -23,6 +22,7 @@ class ReservationErrorState extends AppState {
   final dynamic error;
   ReservationErrorState(this.error);
 }
+
 //......................********* here states for department ***********................
 class GetAllDepartmentLoadingState extends AppState {}
 
@@ -35,7 +35,9 @@ class GetAllDepartmentErrorState extends AppState {
   final dynamic error;
   GetAllDepartmentErrorState(this.error);
 }
+
 class chnageButtonDepartmenTColor extends AppState {}
+
 //......................********* here states for all clinics of department ***********................
 class GetAllClinicsDepartmentLoadingState extends AppState {}
 
@@ -48,6 +50,7 @@ class GetAllClinicsDepartmentErrorState extends AppState {
   final dynamic error;
   GetAllClinicsDepartmentErrorState(this.error);
 }
+
 //......................********* here states for all clinics   for home ui ***********................
 class GetAllClinicsLoadingState extends AppState {}
 
@@ -60,6 +63,7 @@ class GetAllClinicsErrorState extends AppState {
   final dynamic error;
   GetAllClinicsErrorState(this.error);
 }
+
 //......................********* here states for all diseases   for medical h drop down ***********................
 class GetAllDiseasesLoadingState extends AppState {}
 
@@ -77,7 +81,7 @@ class GetAllDiseasesErrorState extends AppState {
 class PostDiseasesLoading extends AppState {}
 
 class PostDiseasesSuccess extends AppState {
-  final succeeded; 
+  final succeeded;
   PostDiseasesSuccess(this.succeeded);
 }
 
@@ -85,12 +89,12 @@ class PostDiseasesError extends AppState {
   final dynamic error;
   PostDiseasesError(this.error);
 }
-//............................... diseases
-class DiseasePhotoSelectedstate extends AppState {
-  final file;
-  DiseasePhotoSelectedstate(this.file );
-}
 
+//............................... photo diseases
+class DiseasePhotoSelectedstate extends AppState {
+  
+  DiseasePhotoSelectedstate();
+}
 
 class DiseasePhotoSelectionErrorstate extends AppState {
   final dynamic error;
@@ -101,7 +105,7 @@ class DiseasePhotoSelectionErrorstate extends AppState {
 class getBasicDataLoading extends AppState {}
 
 class getBasicDataSuccess extends AppState {
-  final  model; 
+  final model;
   getBasicDataSuccess(this.model);
 }
 
@@ -109,14 +113,18 @@ class getBasicDataError extends AppState {
   final dynamic error;
   getBasicDataError(this.error);
 }
-// ...................................for file picker
-class YourCubitInitial extends AppState {}
+//...................................cubit for PostDiseaseLoadingState...................................
+class PostDiseaseLoadingState extends AppState {}
 
-class YourCubitFilePicked extends AppState {
-  final FilePickerResult file;
-
-  YourCubitFilePicked(this.file);
+class PostDiseaseSuccessState extends AppState {
+ 
 }
+
+class PostDiseaseErrorState extends AppState {
+  // final dynamic error;
+  // PostDiseaseErrorState(this.error);
+}
+
 
 
 //class shopInitialState extends shopState {}

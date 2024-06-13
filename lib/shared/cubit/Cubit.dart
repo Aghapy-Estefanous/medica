@@ -67,8 +67,8 @@ class AppCubit extends Cubit<AppState> {
   List<Widget> Screen = [
     Home_Screen(),
     SplashScreen(),
-    Testing(),
     ProfileScreen(),
+    Testing(),
     MedicalHistoryScreen(),
   ];
   // MyHomeModel? homeModel;
@@ -109,10 +109,9 @@ class AppCubit extends Cubit<AppState> {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
 
-      SharedPreferences sharedPreferences =
+   SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      String? token = sharedPreferences.getString('Token');
-      var response = await api.get(
+      String? token = sharedPreferences.getString('Token');      var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
       // print(response.data);
@@ -262,8 +261,9 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
-  late List<DiseasesOfUser> AllUserDiseasesList = [];
+   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
+  late List<DiseasesOfUser> AllUserDiseasesList = [
+  ];
 
   getAllUserDiseases() async {
     try {
@@ -286,16 +286,17 @@ class AppCubit extends Cubit<AppState> {
 
   //................................. setstate current image picker.....
 
-  // File? imagePathFromgallary;
-  // void pickImage() async {
-  //   final picker = ImagePicker();
-  //   final pickedImage = await picker.pickImage(
-  //     source: ImageSource.gallery,
-  //   );
-  //   if (pickedImage != null) {
-  //     currentSelectedImage(pickedImage);
-  //   }
-  // }
+  XFile? imagePathFromgallary;
+  void pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImage != null) {
+      imagePathFromgallary=pickedImage;
+      DiseasePhotoSelectedstate();
+    }
+  }
 
 //...............................image picker diseases ........................
 
@@ -304,19 +305,19 @@ class AppCubit extends Cubit<AppState> {
   //   emit(DiseasePhotoSelectedstate(currentImage));
   // }
   //...............................file picker new........................
-  FilePickerResult? pickedFile;
+  // FilePickerResult? pickedFile;
 
-  void pickFile2() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.any,
-      allowMultiple: false,
-    );
+  // void pickFile2() async {
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //     type: FileType.any,
+  //     allowMultiple: false,
+  //   );
 
-    if (result != null) {
-      pickedFile = result;
-      emit(YourCubitFilePicked(result));
-    }
-  }
+  //   if (result != null) {
+  //     pickedFile = result;
+  //     emit(YourCubitFilePicked(result));
+  //   }
+  // }
   //...............................post diseases edit........................
 
   PostDiseases(
@@ -330,8 +331,7 @@ class AppCubit extends Cubit<AppState> {
     String diagnosis,
     DateTime diagnosisDate,
     //String diagnosisDate,
-
-    FilePickerResult? file,
+   
   ) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('Token');
@@ -341,55 +341,84 @@ class AppCubit extends Cubit<AppState> {
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhIiwianRpIjoiZWY3MDM1MTgtNzlhZC00OWZlLTkwZjQtNDkzOTM2ZDYwYmUzIiwiZW1haWwiOiJkOXR0QGdtYWlsLmNvbSIsInVpZCI6Ijk5OTk5OTk5OTk5OTk5Iiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzIwMDEzNjQ5fQ.4wIxRP4UMaHfLfo8NzxfHaUel6LZzpM27EFv90hbuzw',
       "Content-Type": "multipart/form-data"
     };
-    // var bodydata = FormData.fromMap({
-    //   'files': [await MultipartFile.fromFile(file!.path, filename: file.path)]
-    // });
-
-    // Convert FilePickerResult to MultipartFile
-    MultipartFile? multipartFile;
-    if (file != null && file.files.isNotEmpty) {
-      final pickedFile = file.files.first;
-      multipartFile = await MultipartFile.fromFile(
-        pickedFile.path!,
-        filename: pickedFile.name,
+   //take form data
+    var response = await api.get(
+        Endpoint.BaseUrl + Endpoint.ALLCLINICS,
       );
+     
+    if (response.statusCode==200){
+   
+      emit(PostDiseaseSuccessState());
+    } else{
+       emit(PostDiseaseErrorState());
     }
-    var data = FormData.fromMap({
-      'Photo': multipartFile,
-    });
-    var dio = Dio();
-    String baseUrl = Endpoint.BaseUrl + Endpoint.ADD_DISEASE;
-    String url = '$baseUrl?'
-        'Type=$type'
-        '&ValueResult=$valueResult'
-        '&Description=$description'
-        '&Height=$height'
-        '&Weight=$weight'
-        '&UserId=$userId'
-        '&DiseaseId=$diseaseId'
-        '&Diagnosis=$diagnosis'
-        '&DiagnosisDate=$diagnosisDate';
-    var response = await dio
-        .request(
-      url,
-      options: Options(
-        method: 'POST',
-        headers: headers,
-      ),
-      data: data,
-    )
-        .then((value) {
-      print(" from post $value");
-    }).catchError((e) {
-      emit(PostDiseasesError(e.toString()));
-    });
-  }
 
+  }
+  // //...............................post diseases edit........................
+
+  // PostDiseases(
+  //   String type,
+  //   double valueResult,
+  //   String description,
+  //   double height,
+  //   double weight,
+  //   String? userId,
+  //   int? diseaseId,
+  //   String diagnosis,
+  //   DateTime diagnosisDate,
+  //   //String diagnosisDate,
+   
+  // ) async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   var token = sharedPreferences.getString('Token');
+  //   var headers = {
+  //     // 'Authorization': 'Bearer $token',
+  //     'Authorization':
+  //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhIiwianRpIjoiZWY3MDM1MTgtNzlhZC00OWZlLTkwZjQtNDkzOTM2ZDYwYmUzIiwiZW1haWwiOiJkOXR0QGdtYWlsLmNvbSIsInVpZCI6Ijk5OTk5OTk5OTk5OTk5Iiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzIwMDEzNjQ5fQ.4wIxRP4UMaHfLfo8NzxfHaUel6LZzpM27EFv90hbuzw',
+  //     "Content-Type": "multipart/form-data"
+  //   };
+  //   // var bodydata = FormData.fromMap({
+  //   //   'files': [await MultipartFile.fromFile(file!.path, filename: file.path)]
+  //   // });
+    
+  //  // Convert FilePickerResult to MultipartFile
+
+  // var data = FormData.fromMap({
+  //     'Photo':  imagePathFromgallary,
+  //   });
+  //   var dio = Dio();
+  //   String baseUrl = Endpoint.BaseUrl + Endpoint.ADD_DISEASE;
+  //   String url = '$baseUrl?'
+  //       'Type=$type'
+  //       '&ValueResult=$valueResult'
+  //       '&Description=$description'
+  //       '&Height=$height'
+  //       '&Weight=$weight'
+  //       '&UserId=$userId'
+  //       '&DiseaseId=$diseaseId'
+  //       '&Diagnosis=$diagnosis'
+  //       '&DiagnosisDate=$diagnosisDate';
+  //   var response = await dio
+  //       .request(
+  //     url,
+  //     options: Options(
+  //       method: 'POST',
+  //       headers: headers,
+  //     ),
+  //     data: data,
+  //   )
+  //       .then((value) {
+  //     print(" from post $value");
+  //   }).catchError((e) {
+  //     emit(PostDiseasesError(e.toString()));
+  //   });
+  // }
+ 
   //.............get basic data..........................
   //late List<BasicDataData?> BasicDataModelList=[];
   GetBasicData() async {
     try {
-      late BasicDataModel basicDataModel;
+       late BasicDataModel basicDataModel;
       emit(getBasicDataLoading());
 
       var response = await api.get(
@@ -399,10 +428,12 @@ class AppCubit extends Cubit<AppState> {
       //print("add from basic${}");
       // print("add from basic${response}");
       //access model from list
-      // BasicDataModelList.add(basicDataModel.data);
-      // print(BasicDataModelList);
-      print(" print from model${basicDataModel.data!.firstName}");
+        // BasicDataModelList.add(basicDataModel.data);
+        // print(BasicDataModelList);
+        print(" print from model${basicDataModel.data!.firstName}");
       emit(getBasicDataSuccess(basicDataModel));
+
+       
     } on ServerExceptions catch (e) {
       print(e.toString());
       emit(getBasicDataError(e.errorModel.message));

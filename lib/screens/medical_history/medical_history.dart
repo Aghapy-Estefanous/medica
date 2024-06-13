@@ -1,7 +1,7 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import '../static_pages/testing/result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -10,9 +10,9 @@ import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
 import 'package:medica/screens/medical_history/disease_details.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
+import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
 
-import '../static_pages/testing/result.dart';
 
 TextEditingController _typeController = TextEditingController();
 TextEditingController _descriptionController = TextEditingController();
