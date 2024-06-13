@@ -48,13 +48,7 @@ class RegisterScreen extends StatelessWidget {
             //     token = state.model?.data!.token;
             //     print('from register token value is :$value');
             //     print('from register token from model is :$token');
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomeLayout(),
-              ),
-              (route) => false,
-            );
+            Navigator.pop(context);
             // navigateToScreen(context, const ShopLayout());
           }
         }
@@ -292,7 +286,7 @@ class RegisterScreen extends StatelessWidget {
                                       confirmPassword:
                                           confirmPassController.text,
                                       birthDate: cubit.date,
-                                      gender:gender.text,
+                                      gender: gender.text,
                                     );
                                   }),
                               const SizedBox(height: 15),
@@ -410,8 +404,6 @@ class RegisterScreen extends StatelessWidget {
       },
     );
   }
-
-  
 }
 
 DateTime birthDate = DateTime.now();

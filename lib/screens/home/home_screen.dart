@@ -1,10 +1,11 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:medica/ReservationScreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/models/clinicModel.dart';
+import 'package:medica/screens/auth/Profile/cubit/profile_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -13,39 +14,56 @@ import 'package:medica/screens/home/searchScreen.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/home/AllclinicsOfDepartment.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
-import 'package:medica/screens/details_screen/details_clinics.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home_Screen extends StatelessWidget {
   const Home_Screen({Key? key}) : super(key: key);
+
+  Future<String> getname() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString('name') ?? 'User';
+  }
+
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
-    return BlocConsumer<AppCubit, AppState>(listener: (context, state) {
-      if (state is GetAllDepartmentSuccessState) {}
-      if (state is GetAllClinicsSuccessState) {
-        print(cubit.allClinicslist?[0]);
-      }
-    }, builder: (context, state) {
-      return Scaffold(
+
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, state) {
+        if (state is GetAllDepartmentSuccessState) {}
+        if (state is GetAllClinicsSuccessState) {
+          print(cubit.allClinicslist?[0]);
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
           backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Hello! Alex",
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.06,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage:
-                      AssetImage("assets/images/home-Images/baby.jpg"),
-                ),
-              ],
+            title: FutureBuilder<String>(
+              future: getname(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text("Hello!");
+                } else if (snapshot.hasError) {
+                  return Text("Hello!");
+                } else {
+                  return Text(
+                    "Hello! ${snapshot.data}",
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  );
+                }
+              },
             ),
+            actions: [
+              CircleAvatar(
+                radius: 25,
+                backgroundImage:
+                    AssetImage("assets/images/home-Images/baby.jpg"),
+              ),
+            ],
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -54,14 +72,12 @@ class Home_Screen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 10),
-                  //...........start of search container ....................
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
                         onTap: () {
-                           navigateToScreen(context, Search_Screen());
-
+                          navigateToScreen(context, Search_Screen());
                         },
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 0.45,
@@ -114,7 +130,6 @@ class Home_Screen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      //......................................end of search container
                       InkWell(
                         onTap: () {
                           navigateToScreen(context, TicketScreen());
@@ -207,7 +222,6 @@ class Home_Screen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
                       "Popular Clinics",
-                      //title style
                       style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.w500,
@@ -277,7 +291,7 @@ class Home_Screen extends StatelessWidget {
                                       Text(
                                         cubit.allClinicslist?[index]
                                                 .description ??
-                                        "department..........................................gsaggghvcvggvcgcgvvvbvv xvvvvx gvv gvg ggv gbxvsgg gxgv",
+                                            "department..........................................gsaggghvcvggvcgcgvvvbvv xvvvvx gvv gvg ggv gbxvsgg gxgv",
                                         style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -285,27 +299,8 @@ class Home_Screen extends StatelessWidget {
                                               0.035, // Adjust font size
                                           color: Colors.black45,
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.attach_money_outlined,
-                                            color: Colors.amber,
-                                          ),
-                                          Text(
-                                            "${cubit.allClinicslist?[index].price ?? "24"} EGP",
-                                            style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.035, // Adjust font size
-                                              color: Colors.black45,
-                                            ),
-                                          ),
-                                        ],
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ],
                                   ),
@@ -317,12 +312,12 @@ class Home_Screen extends StatelessWidget {
                 ],
               ),
             ),
-          ));
-    
-    });
+          ),
+        );
+      },
+    );
   }
 }
-
 
 InkWell departementWidget(
     int index, String? name, int? id, var context, AppCubit cubit) {
@@ -332,10 +327,7 @@ InkWell departementWidget(
       navigateToScreen(
           context,
           departmentClinicsScreen(
-            DepertmentId: id,
-            DepertmentName: name,
-            cubit:cubit
-          ));
+              DepertmentId: id, DepertmentName: name, cubit: cubit));
     },
     child: Container(
       width: 150,
