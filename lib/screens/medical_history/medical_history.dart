@@ -8,6 +8,7 @@ import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
+import 'package:medica/screens/medical_history/disease_details.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
 
@@ -33,9 +34,9 @@ class MedicalHistoryScreen extends StatelessWidget {
     late BasicDataModel baisdataModelData = BasicDataModel();
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
-        if (state is YourCubitFilePicked) {
-          pickedFile = state.file;
-        }
+        // if (state is YourCubitFilePicked) {
+        //   pickedFile = state.file;
+        // }
         if (state is getBasicDataSuccess) {
           baisdataModelData = state.model;
         }
@@ -136,7 +137,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
+
                   SizedBox(height: 30),
                   cardRowWidget(Icons.dashboard_customize_rounded,
                       "Prescriptions", prescriptionsScreen(), context),
@@ -163,6 +166,12 @@ class MedicalHistoryScreen extends StatelessWidget {
                           ))
                     ],
                   ),
+
+                  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
+                  cubit.AllUserDiseasesList.isEmpty==true ?  SizedBox(
+                    height: 250,
+                    child:Image.asset('assets/images/ilustrations/nodata.jpg'),):
+
                   SizedBox(
                     height: 400,
                     child: ListView.separated(
@@ -275,7 +284,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                                       ),
                                     ),
                                     //for showing sheet
-                                    onPressed: () {},
+                                    onPressed: () {
+                                        DiseaseDetailsScreen(diseaseData: cubit.AllUserDiseasesList[index],);
+                                    },
                                     child: Text(
                                       "Details",
                                       style: TextStyle(color: Colors.white),
@@ -457,14 +468,14 @@ class MedicalHistoryScreen extends StatelessWidget {
                           ),
                           IconButton(
                               onPressed: () {
-                                cubit.pickFile2();
+                                // cubit.pickFile2();
                               },
                               icon: Icon(
                                 Iconsax.document_upload,
                                 color: AppColor.primaryColor,
                               ))
                         ],
-                      ),
+                      ), 
                       // SizedBox(height: 20),
                       // cubit.imagePathFromgallary == null
                       //     ? Text('No image selected.')
