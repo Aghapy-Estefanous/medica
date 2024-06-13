@@ -302,6 +302,27 @@ class Home_Screen extends StatelessWidget {
                                         maxLines: 3,
                                         overflow: TextOverflow.ellipsis,
                                       ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.attach_money_outlined,
+                                            color: Colors.amber,
+                                          ),
+                                          Text(
+                                            "${cubit.allClinicslist?[index].price ?? "24"} EGP",
+                                            style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.035, // Adjust font size
+                                              color: Colors.black45,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),

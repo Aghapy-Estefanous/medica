@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'FirstAid.dart';
 import 'available.dart'; // Make sure to import your AvailablePage here
 import 'cubit/tests_cubit.dart';
 import 'prepare.dart';
@@ -74,7 +75,8 @@ class Testing extends StatelessWidget {
                           onTap: () {
                             cubit.selected(index);
                             // TestsCubit cubit2 = TestsCubit.get(context);
-                            if (index == 1) cubit.available();
+                            if (index == 1)
+                              cubit.available();
                             else if (index == 2) cubit.testResult();
                           },
                           child: Container(
@@ -103,17 +105,9 @@ class Testing extends StatelessWidget {
                 else if (cubit.select == 1)
                   AvailablePage()
                 else if (cubit.select == 2)
-                  // SliverList(
-                  //   delegate: SliverChildBuilderDelegate(
-                  //     (context, index) {
-                  //       return ListTile(
-                  //         title: Text('count : $index'),
-                  //       );
-                  //     },
-                  //     childCount: 20,
-                  //   ),
-                  // ),
-                  ResultPage(),
+                  ResultPage()
+                else
+                  FirstAid()
               ],
             ),
           ),
@@ -123,4 +117,9 @@ class Testing extends StatelessWidget {
   }
 }
 
-List<String> items = ['تحضيرات التحاليل', 'التحاليل المتاحة', 'نتائج التحاليل'];
+List<String> items = [
+  'تحضيرات التحاليل',
+  'التحاليل المتاحة',
+  'نتائج التحاليل',
+  'First Aid'
+];
