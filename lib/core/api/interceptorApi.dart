@@ -10,7 +10,7 @@ class ApiInterceptor  extends Interceptor
     await SharedPreferences.getInstance();
     String? token = sharedPreferences.getString('Token');
    // options.headers['Authorization']= 'Bearer ${token}';
-    options.headers['Authorization']= 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmb3gzMDQ0IiwianRpIjoiMWFiY2ZlODUtOTM2NC00N2VhLTk0ZjItZGIxNjg2MGNkZDc5IiwiZW1haWwiOiJzZWNlQG1haWxpbmF0b3IuY29tIiwidWlkIjoiMTQ3ODUyMzY5Nzg5NDUiLCJyb2xlcyI6IlVzZXIiLCJleHAiOjE3MjA1MTQ4NTd9.hC1iIDfNvJ0zXywxAcwN5bqOD7VTnKSeaPj-vHHM38c';
+    options.headers['Authorization']= 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ2hhcHkiLCJqdGkiOiJmYzE1OTVlNC0yYjIxLTQzNjctYTU3MS1kZDYyYjI5N2UzYTkiLCJlbWFpbCI6ImFnaGFweTA4MEBnbWFpbC5jb20iLCJ1aWQiOiIxMTIyMzM0NDU1NjY3NyIsInJvbGVzIjoiVXNlciIsImV4cCI6MTcyMDUzMzQ1NX0.F02wKFgGnYsTNSjyYrHzHwSm9e5R0kUpOIwPRnPWUP0';
    // options.headers['Authorization']= 'Bearer ${await CachHelper.getdata(key: 'token')}';
     super.onRequest(options, handler);
   }

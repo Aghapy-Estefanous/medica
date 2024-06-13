@@ -7,6 +7,7 @@ import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
+import 'package:medica/screens/medical_history/disease_details.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
 
@@ -30,9 +31,9 @@ class MedicalHistoryScreen extends StatelessWidget {
     late BasicDataModel baisdataModelData = BasicDataModel();
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
-        if (state is YourCubitFilePicked) {
-          pickedFile = state.file;
-        }
+        // if (state is YourCubitFilePicked) {
+        //   pickedFile = state.file;
+        // }
         if (state is getBasicDataSuccess) {
           baisdataModelData = state.model;
         }
@@ -132,77 +133,8 @@ class MedicalHistoryScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-<<<<<<< HEAD
                         ),
-=======
-
-                          presonalDataComponent("Height", "178", Icons.height),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 2, // Thickness of the line
-                            height: 20, // Height of the line
-                            color: Color.fromARGB(255, 197, 191, 191),
-                          ),
-                          SizedBox(width: 3),
-                          presonalDataComponent(
-                              "Weight", "78", Icons.accessibility),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 2, // Thickness of the line
-                            height: 20, // Height of the line
-                            color: Color.fromARGB(255, 197, 191, 191),
-
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "mohamed Abeltwaap  mahmoud",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Age: 22',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    TextButton(
-                                      onPressed: () {
-                                        print('funnnn');
-                                        LoginCubit.get(context).logout();
-                                      },
-                                      child: Text(
-                                        'LogOut',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-
-                          ),
-                          SizedBox(width: 3),
-                          presonalDataComponent("Pressure", "178",
-                              Icons.favorite_border_outlined),
-                        ],
-                      ),
-                    ),
-                  ),
->>>>>>> 8b462b5f2aa263141bf0953746c2b38c178c7789
-                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
+                  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
                   SizedBox(height: 30),
                   cardRowWidget(Icons.dashboard_customize_rounded,
                       "Prescriptions", prescriptionsScreen(), context),
@@ -230,6 +162,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                     ],
                   ),
                   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
+                  cubit.AllUserDiseasesList.isEmpty==true ?  SizedBox(
+                    height: 250,
+                    child:Image.asset('assets/images/ilustrations/nodata.jpg'),):
                   SizedBox(
                     height: 400,
                     child: ListView.separated(
@@ -348,7 +283,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                                       ),
                                     ),
                                     //for showing sheet
-                                    onPressed: () {},
+                                    onPressed: () {
+                                        DiseaseDetailsScreen(diseaseData: cubit.AllUserDiseasesList[index],);
+                                    },
                                     child: Text(
                                       "Details",
                                       style: TextStyle(color: Colors.white),
@@ -530,14 +467,14 @@ class MedicalHistoryScreen extends StatelessWidget {
                           ),
                           IconButton(
                               onPressed: () {
-                                cubit.pickFile2();
+                                // cubit.pickFile2();
                               },
                               icon: Icon(
                                 Iconsax.document_upload,
                                 color: AppColor.primaryColor,
                               ))
                         ],
-                      ),
+                      ), 
                       // SizedBox(height: 20),
                       // cubit.imagePathFromgallary == null
                       //     ? Text('No image selected.')
