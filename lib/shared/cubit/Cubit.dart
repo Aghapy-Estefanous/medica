@@ -1,18 +1,15 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:bloc/bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medica/models/clinicModel.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
+import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/models/departmentModel.dart';
-import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
@@ -20,7 +17,6 @@ import 'package:medica/screens/auth/Profile/profile.dart';
 import 'package:medica/models/user/AllDiseasesOfUser.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
@@ -65,11 +61,11 @@ class AppCubit extends Cubit<AppState> {
         )),
   ];
   List<Widget> Screen = [
-    Home_Screen(),
-    SplashScreen(),
-    ProfileScreen(),
+    const Home_Screen(),
+    const SplashScreen(),
+    const ProfileScreen(),
     Testing(),
-    MedicalHistoryScreen(),
+    const MedicalHistoryScreen(),
   ];
   // MyHomeModel? homeModel;
   // CategoriesModel? categoriesModel;
@@ -102,16 +98,19 @@ class AppCubit extends Cubit<AppState> {
 
 //   *******get all department for home**************
 
-  late List<Data>? alldepartmentslist = [];
+  late List<Data>? alldepartmentslist = [
+    //DataDepartment(id: 12,name: "test department")
+  ];
 
   GetAllDepartments() async {
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
 
-   SharedPreferences sharedPreferences =
+      SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      String? token = sharedPreferences.getString('Token');      var response = await api.get(
+      String? token = sharedPreferences.getString('Token');
+      var response = await api.get(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
       // print(response.data);
@@ -146,11 +145,11 @@ class AppCubit extends Cubit<AppState> {
 
       var filterParameter = "departmentID=$Did";
       String xx =
-          Endpoint.BaseUrl + Endpoint.ALLCLINICS + "filter=$filterParameter";
+          "${Endpoint.BaseUrl}${Endpoint.ALLCLINICS}filter=$filterParameter";
       print(xx);
 
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
+        "${Endpoint.BaseUrl}${Endpoint.ALLCLINICS}?filter=$filterParameter",
       );
 
       Model = ClinicModel.fromJson(response as Map<String, dynamic>);
@@ -205,7 +204,7 @@ class AppCubit extends Cubit<AppState> {
 
       var filterParameter = "name=$searchWord";
       var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS + "?filter=$filterParameter",
+        "${Endpoint.BaseUrl}${Endpoint.ALLCLINICS}?filter=$filterParameter",
       );
 
       Model = ClinicModel.fromJson(response);
@@ -231,56 +230,50 @@ class AppCubit extends Cubit<AppState> {
   }
 
   //.............get all diseases for drop down in form post disases..........................
-  late List<singleDiseasObjectData> ALLDiseasesList = [
-    singleDiseasObjectData(
-        id: 1,
-        name: "Alzheimer's Disease",
-        description:
-            "A progressive disorder that causes brain cells to waste away",
-        symptoms: "Memory loss, confusion, difficulty with language",
-        causes:
-            "Genetic factors, age, family history, certain genetic mutations.")
-  ];
+ List<singleDiseasObjectData>? ALLDiseasesList = [];
+Alldiseases? Model2;
 
-  getALLDiseases() async {
-    try {
-      late Alldiseases Model;
-      emit(GetAllDiseasesLoadingState());
+getALLDiseases2() async {
+  try {
+    emit(GetAllDiseasesLoadingState());
 
-      var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS,
-      );
+    var response = await api.getWithqueryParameter( Endpoint.BaseUrl+ Endpoint.All_POSSIBL_EDISEASES);
+     print('🌍🟢🟢????????  Alldiseases? response: $response');
+    Model2 = Alldiseases.fromJson(response);
+    ALLDiseasesList = Model2?.data;
+   // print('🌍🟢🟢 all diseases: $ALLDiseasesList');
+    print(Model2?.data);
 
-      Model = Alldiseases.fromJson(response);
-      ALLDiseasesList = Model.data!;
-      print(Model.data);
-      emit(GetAllDepartmentSuccessState());
-    } on ServerExceptions catch (e) {
-      print(e.toString());
-      emit(GetAllDepartmentErrorState(e.errorModel.message));
-    }
+    emit(GetAllDiseasesSuccessState());
+  } catch (e) {
+    print("error  diseases  ❌⭕ ${e.toString()}");
+    emit(GetAllDiseasesErrorState(e.toString()));
   }
+}
 
-   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
-  late List<DiseasesOfUser> AllUserDiseasesList = [
-  ];
 
+
+
+  //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
+  late List<DiseasesOfUser> AllUserDiseasesList = [];
+  AllDiseasesOfUserModel? Model;
   getAllUserDiseases() async {
     try {
-      late AllDiseasesOfUserModel Model;
+     
       emit(GetAllDiseasesLoadingState());
 
-      var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS,
+      var response = await api.getWithqueryParameter(
+        Endpoint.BaseUrl + Endpoint.USER_Disease,
       );
 
       Model = AllDiseasesOfUserModel.fromJson(response);
-      AllUserDiseasesList = Model.data!;
-      print(Model.data);
-      emit(GetAllDepartmentSuccessState());
-    } on ServerExceptions catch (e) {
-      print(e.toString());
-      emit(GetAllDepartmentErrorState(e.errorModel.message));
+      AllUserDiseasesList = Model!.data!;
+      print("user dieases now get✅✅🟢${AllUserDiseasesList}");
+      emit(GetAllDiseasesSuccessState());
+    } catch (e) {
+     // print(e.toString());
+       print("error in user dieases🚨 $e");
+      emit(GetAllDiseasesErrorState(e.toString()));
     }
   }
 
@@ -288,159 +281,81 @@ class AppCubit extends Cubit<AppState> {
 
   XFile? imagePathFromgallary;
   void pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedImage = await picker.pickImage(
       source: ImageSource.gallery,
+      imageQuality: 50,
     );
     if (pickedImage != null) {
-      imagePathFromgallary=pickedImage;
+      imagePathFromgallary = pickedImage;
+      print("🟢🟢🟢upload image successfuly🟢🟢🟢");
       DiseasePhotoSelectedstate();
     }
   }
-
-//...............................image picker diseases ........................
-
-  // void currentSelectedImage(File currentImage) {
-  //   imagePathFromgallary = currentImage;
-  //   emit(DiseasePhotoSelectedstate(currentImage));
-  // }
-  //...............................file picker new........................
-  // FilePickerResult? pickedFile;
-
-  // void pickFile2() async {
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.any,
-  //     allowMultiple: false,
-  //   );
-
-  //   if (result != null) {
-  //     pickedFile = result;
-  //     emit(YourCubitFilePicked(result));
-  //   }
-  // }
-  //...............................post diseases edit........................
-
-  PostDiseases(
-    String type,
-    double valueResult,
-    String description,
-    double height,
-    double weight,
-    String? userId,
-    int? diseaseId,
-    String diagnosis,
-    DateTime diagnosisDate,
-    //String diagnosisDate,
-   
-  ) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString('Token');
-    var headers = {
-      // 'Authorization': 'Bearer $token',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhIiwianRpIjoiZWY3MDM1MTgtNzlhZC00OWZlLTkwZjQtNDkzOTM2ZDYwYmUzIiwiZW1haWwiOiJkOXR0QGdtYWlsLmNvbSIsInVpZCI6Ijk5OTk5OTk5OTk5OTk5Iiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzIwMDEzNjQ5fQ.4wIxRP4UMaHfLfo8NzxfHaUel6LZzpM27EFv90hbuzw',
-      "Content-Type": "multipart/form-data"
-    };
-   //take form data
-    var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.ALLCLINICS,
-      );
-     
-    if (response.statusCode==200){
-   
-      emit(PostDiseaseSuccessState());
-    } else{
-       emit(PostDiseaseErrorState());
-    }
-
-  }
-  // //...............................post diseases edit........................
-
-  // PostDiseases(
-  //   String type,
-  //   double valueResult,
-  //   String description,
-  //   double height,
-  //   double weight,
-  //   String? userId,
-  //   int? diseaseId,
-  //   String diagnosis,
-  //   DateTime diagnosisDate,
-  //   //String diagnosisDate,
-   
-  // ) async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   var token = sharedPreferences.getString('Token');
-  //   var headers = {
-  //     // 'Authorization': 'Bearer $token',
-  //     'Authorization':
-  //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYXJhIiwianRpIjoiZWY3MDM1MTgtNzlhZC00OWZlLTkwZjQtNDkzOTM2ZDYwYmUzIiwiZW1haWwiOiJkOXR0QGdtYWlsLmNvbSIsInVpZCI6Ijk5OTk5OTk5OTk5OTk5Iiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNzIwMDEzNjQ5fQ.4wIxRP4UMaHfLfo8NzxfHaUel6LZzpM27EFv90hbuzw',
-  //     "Content-Type": "multipart/form-data"
-  //   };
-  //   // var bodydata = FormData.fromMap({
-  //   //   'files': [await MultipartFile.fromFile(file!.path, filename: file.path)]
-  //   // });
-    
-  //  // Convert FilePickerResult to MultipartFile
-
-  // var data = FormData.fromMap({
-  //     'Photo':  imagePathFromgallary,
-  //   });
-  //   var dio = Dio();
-  //   String baseUrl = Endpoint.BaseUrl + Endpoint.ADD_DISEASE;
-  //   String url = '$baseUrl?'
-  //       'Type=$type'
-  //       '&ValueResult=$valueResult'
-  //       '&Description=$description'
-  //       '&Height=$height'
-  //       '&Weight=$weight'
-  //       '&UserId=$userId'
-  //       '&DiseaseId=$diseaseId'
-  //       '&Diagnosis=$diagnosis'
-  //       '&DiagnosisDate=$diagnosisDate';
-  //   var response = await dio
-  //       .request(
-  //     url,
-  //     options: Options(
-  //       method: 'POST',
-  //       headers: headers,
-  //     ),
-  //     data: data,
-  //   )
-  //       .then((value) {
-  //     print(" from post $value");
-  //   }).catchError((e) {
-  //     emit(PostDiseasesError(e.toString()));
-  //   });
-  // }
  
+ double? lastUserHeight;
+ double?lastUserWeight;
+
+  Future<dynamic> postFormData2(
+    String type,
+    String description,
+    String diagnosis,
+    {
+    
+    required String nid,
+    required  DateTime dateOfDiagonsises ,
+    required double valueResult,
+    required double height,
+    required double weight,
+  }) async {
+    emit(PostDiseasesLoadingS());
+    FormData formData = FormData.fromMap({
+      'Photo': await MultipartFile.fromFile(imagePathFromgallary!.path),
+    });
+
+    await api
+        .postAsFormData(
+      apiUrl: Endpoint.ADD_DISEASE(
+        diseaseType: type,
+        diseaseValueResult: valueResult,
+        diseaseDescription: description,
+        disease: diagnosis,
+        diseaseUsrId:nid,
+        diseaseHeight: height,
+        diseaseWeight: weight,
+        diseaseId: SelectedDisease?.id == null ? 1 : SelectedDisease!.id!,
+        diseaseDate: dateOfDiagonsises.toIso8601String(),
+      ),
+      data: formData,
+    )
+        .then((dynamic value) {
+      emit(PostDiseasesSuccessS());
+      if (value != null) {
+        print("🚨 data after send it $value 🌍");
+      }
+    }).catchError((e) {
+      print("error in function🚨 $e");
+      emit(PostDiseasesErrorS(e.toString()));
+    });
+  }
+
   //.............get basic data..........................
-  //late List<BasicDataData?> BasicDataModelList=[];
-  GetBasicData() async {
-    try {
-       late BasicDataModel basicDataModel;
-      emit(getBasicDataLoading());
 
-      var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.BASIC_DATA,
-      );
-      basicDataModel = BasicDataModel.fromJson(response);
-      //print("add from basic${}");
-      // print("add from basic${response}");
-      //access model from list
-        // BasicDataModelList.add(basicDataModel.data);
-        // print(BasicDataModelList);
-        print(" print from model${basicDataModel.data!.firstName}");
-      emit(getBasicDataSuccess(basicDataModel));
+  BasicDataModel? basicDataModel;
+  Future getBasicData() async {
+    emit(GetBasicDataLoadingState());
+    await api.get(Endpoint.BASIC_DATA).then((value) {
+      print('🌍 get basic data done!');
 
-       
-    } on ServerExceptions catch (e) {
-      print(e.toString());
-      emit(getBasicDataError(e.errorModel.message));
-    }
+      print('🌍Basic Data: $value}');
+      basicDataModel = BasicDataModel.fromJson(value);
+      emit(GetBasicDataSuccessState());
+    }).catchError((error) {
+      print("🚨Error to get the basic data=> $error");
+      emit(GetBasicDataErrorState(error.toString()));
+    });
   }
 }
-
 /*
   late UserReservationModel modelReservation;
   void getReservationdata() async {

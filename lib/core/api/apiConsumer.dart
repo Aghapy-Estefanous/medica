@@ -4,15 +4,14 @@ abstract class ApiConsumer {
   Future<dynamic> get(
     String url, {
     Object? data,
-    
-    Map<String, dynamic>? queryParameter,
-    
   });
-  Future<dynamic> getAsFormData(
+  Future<dynamic> getWithqueryParameter(
     String url, {
+    Object? data,
+  });
+  Future<dynamic> postAsFormData({
+    required String apiUrl,
     FormData? data,
-    Map<String, dynamic>? queryParameter,
-    
   });
   Future<dynamic> post(
     String url, {

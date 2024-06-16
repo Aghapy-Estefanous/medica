@@ -4,7 +4,7 @@ import 'package:medica/models/user/AllDiseasesOfUser.dart';
 class DiseaseDetailsScreen extends StatelessWidget {
   final DiseasesOfUser diseaseData;
 
-  const DiseaseDetailsScreen({Key? key, required this.diseaseData})
+   DiseaseDetailsScreen({Key? key, required this.diseaseData})
       : super(key: key);
 
   @override

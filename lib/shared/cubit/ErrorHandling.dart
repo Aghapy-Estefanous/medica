@@ -3,5 +3,5 @@ String ErrMessage(statusCode) {
     return 'Network problem';
   else if (statusCode == 400) return 'E-mail not found';
   else if (statusCode == 404) return 'page not found';
-  return 'dsd';
+  return 'may be server or connections errors';
 }

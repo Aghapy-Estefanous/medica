@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/core/api/dioConsumer.dart';
-import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/shared/styles/AppColor.dart';
-import 'package:medica/screens/home/home_screen.dart';
 import 'screens/auth/Profile/cubit/profile_cubit.dart';
 import 'package:medica/shared/cubit/blocObservser.dart';
 import 'package:medica/shared/network/local/sharedPref.dart';
@@ -18,6 +16,7 @@ import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
 import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
+
 
 const BaseAPI = 'http://medicalsystem.runasp.net';
 
@@ -55,23 +54,22 @@ class MainApp extends StatelessWidget {
         ..getdata()
         ..GetAllDepartments()
         ..GetAllClinics()
-        ..getALLDiseases()
-        ..GetBasicData()
-        ..GetAllClinics() ..getAllUserDiseases(),
-        
+        ..getALLDiseases2()
+        ..getBasicData()
+        ..GetAllClinics()
+        ..getAllUserDiseases(),
       child: MaterialApp(
-          theme: ThemeData(
-            useMaterial3: false,
-            primaryColor: AppColor.primaryColor,
-            colorScheme: ColorScheme.fromSwatch().copyWith(
-              primary: AppColor.primaryColor,
-              secondary: AppColor.orangcolor,
-            ),
+        theme: ThemeData(
+          useMaterial3: false,
+          primaryColor: AppColor.primaryColor,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: AppColor.primaryColor,
+            secondary: AppColor.orangcolor,
           ),
-          debugShowCheckedModeBanner: false,
-          //  theme: liteTheme(),
-          home: MedicalHistoryScreen()),
-
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const MedicalHistoryScreen(),
+      ),
     );
   }
 }

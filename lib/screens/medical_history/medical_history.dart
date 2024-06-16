@@ -1,18 +1,16 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import '../static_pages/testing/result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
-import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
+import 'package:medica/shared/widgets/flutter_toast.dart';
 import 'package:medica/screens/medical_history/disease_details.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
 import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/screens/medical_history/all_prescriptionsScreen.dart';
-
 
 TextEditingController _typeController = TextEditingController();
 TextEditingController _descriptionController = TextEditingController();
@@ -26,64 +24,71 @@ final _formKey = GlobalKey<FormState>();
 var pickedFile;
 
 class MedicalHistoryScreen extends StatelessWidget {
-  const MedicalHistoryScreen({Key? key}) : super(key: key);
+  const MedicalHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AppCubit cubit = AppCubit.get(context);
-    late BasicDataModel baisdataModelData = BasicDataModel();
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
-        // if (state is YourCubitFilePicked) {
-        //   pickedFile = state.file;
-        // }
-        if (state is getBasicDataSuccess) {
-          baisdataModelData = state.model;
+        if (state is DiseasePhotoSelectedstate) {
+          showToast(
+            text: 'Image selected successfully',
+            state: ToastStates.SUCCESS,
+          );
+        }
+        if (state is GetBasicDataSuccessState) {
+          showToast(
+            text: 'Basic data loaded successfully',
+            state: ToastStates.SUCCESS,
+          );
         }
       },
       builder: (context, state) {
-        var modelbasic = baisdataModelData.data;
-        print(modelbasic);
+        AppCubit cubit = AppCubit.get(context);
         return Scaffold(
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Container(height: MediaQuery.sizeOf(context).height * 0.055),
-                  modelbasic == null
-                      ? CircularProgressIndicator()
+                  cubit.basicDataModel == null
+                      ? const CircularProgressIndicator()
                       : Container(
                           decoration: const BoxDecoration(
                               color: AppColor.primaryColor,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
-                          padding: EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(12),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 radius: 40,
                                 backgroundColor: Colors.amber,
                                 backgroundImage: NetworkImage(
                                     'https://static.vecteezy.com/system/resources/thumbnails/020/926/555/small/young-man-portrait-photo.jpg'),
                               ),
-                              SizedBox(width: 5),
+                              const SizedBox(width: 5),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      modelbasic.firstName ?? "No name",
+                                      cubit.basicDataModel?.data.firstName ==
+                                              null
+                                          ? "No name"
+                                          : cubit
+                                              .basicDataModel!.data.firstName,
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),
                                     ),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(
-                                      modelbasic.age.toString(),
-                                      style: TextStyle(
+                                      cubit.basicDataModel!.data.age.toString(),
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.grey,
                                       ),
@@ -94,10 +99,10 @@ class MedicalHistoryScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                  SizedBox(height: 8),
-                  modelbasic == null
-                      ? CircularProgressIndicator()
-                      : Container(
+                  const SizedBox(height: 8),
+                  cubit.basicDataModel == null
+                      ? const CircularProgressIndicator()
+                      : SizedBox(
                           height: MediaQuery.of(context).size.height * 0.08,
                           child: Center(
                             child: ListView(
@@ -105,32 +110,40 @@ class MedicalHistoryScreen extends StatelessWidget {
                               children: [
                                 presonalDataComponent(
                                     "Blood",
-                                    modelbasic.bloodType.toString(),
+                                    cubit.basicDataModel!.data.bloodType
+                                        .toString(),
                                     Icons.bloodtype_outlined),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Container(
                                   width: 2, // Thickness of the line
                                   height: 10, // Height of the line
-                                  color: Color.fromARGB(255, 197, 191, 191),
+                                  color:
+                                      const Color.fromARGB(255, 197, 191, 191),
                                 ),
                                 presonalDataComponent(
-                                    "Height", "178", Icons.height),
-                                SizedBox(width: 10),
+                                    "Height",
+                                    cubit.lastUserHeight.toString(),
+                                    Icons.height),
+                                const SizedBox(width: 10),
                                 Container(
                                   width: 2, // Thickness of the line
                                   height: 20, // Height of the line
-                                  color: Color.fromARGB(255, 197, 191, 191),
+                                  color:
+                                      const Color.fromARGB(255, 197, 191, 191),
                                 ),
-                                SizedBox(width: 3),
+                                const SizedBox(width: 3),
                                 presonalDataComponent(
-                                    "Weight", "78", Icons.accessibility),
-                                SizedBox(width: 10),
+                                    "Weight",
+                                    cubit.lastUserWeight.toString(),
+                                    Icons.accessibility),
+                                const SizedBox(width: 10),
                                 Container(
                                   width: 2, // Thickness of the line
                                   height: 20, // Height of the line
-                                  color: Color.fromARGB(255, 197, 191, 191),
+                                  color:
+                                      const Color.fromARGB(255, 197, 191, 191),
                                 ),
-                                SizedBox(width: 3),
+                                const SizedBox(width: 3),
                                 presonalDataComponent("Pressure", "178",
                                     Icons.favorite_border_outlined),
                               ],
@@ -140,18 +153,18 @@ class MedicalHistoryScreen extends StatelessWidget {
 
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   cardRowWidget(Icons.dashboard_customize_rounded,
-                      "Prescriptions", prescriptionsScreen(), context),
-                  SizedBox(height: 10),
+                      "Prescriptions", const prescriptionsScreen(), context),
+                  const SizedBox(height: 10),
                   cardRowWidget(Icons.local_hospital, "Medical tests",
-                      ResultPage2(), context),
-                  SizedBox(height: 10),
+                      const ResultPage2(), context),
+                  const SizedBox(height: 10),
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("All records of disease",
+                      const Text("All records of disease",
                           style: TextStyle(fontSize: 16)),
                       IconButton(
                           onPressed: () {
@@ -161,139 +174,125 @@ class MedicalHistoryScreen extends StatelessWidget {
                             backgroundColor:
                                 const Color.fromARGB(82, 255, 153, 0)
                                     .withOpacity(0.9),
-                            child: Icon(Icons.add,
+                            child: const Icon(Icons.add,
                                 color: AppColor.whiteColor, size: 20),
                           ))
                     ],
                   ),
 
                   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
-                  cubit.AllUserDiseasesList.isEmpty==true ?  SizedBox(
-                    height: 250,
-                    child:Image.asset('assets/images/ilustrations/nodata.jpg'),):
-
-                  SizedBox(
-                    height: 400,
-                    child: ListView.separated(
-                        itemCount: 10,
-                        separatorBuilder: (context, index) => const SizedBox(
-                              height: 8,
-                            ),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            //color: AppColor.primaryColor,
-                            decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                color: Color.fromARGB(219, 2, 78, 154)),
-                            child: ListTile(
-                                title: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 40,
-                                          margin: EdgeInsets.all(12),
-                                          decoration: BoxDecoration(
-                                              color: AppColor.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(4)),
-                                          child: Center(
-                                            child: Text(
-                                              'name',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge!
-                                                  .copyWith(
-                                                      color:
-                                                          AppColor.primaryColor,
-                                                      fontSize: 14),
-                                            ),
+                  cubit.AllUserDiseasesList.isEmpty == true
+                      ? InkWell(
+                          onTap: () {
+                            cubit.getBasicData();
+                          },
+                          child: SizedBox(
+                            height: 250,
+                            child: Image.asset(
+                                'assets/images/ilustrations/nodata.jpg'),
+                          ),
+                        )
+                      : SizedBox(
+                          height: 400,
+                          child: ListView.separated(
+                              itemCount: cubit.AllUserDiseasesList.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  //color: AppColor.primaryColor,
+                                  decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                      color: Color.fromARGB(219, 2, 78, 154)),
+                                  child: ListTile(
+                                      title: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                          
+                                              Expanded(
+                                                child: Text(
+                                                   cubit.AllUserDiseasesList[index].diseaseName.toString(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyLarge
+                                                        ?.copyWith(
+                                                          color: AppColor
+                                                              .whiteColor,
+                                                        )),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                              "name of disease 1hnmfjhhj jdbh ghhxfn ِللالاات تبللابس j,hf gsfugh ggs ybdg hg",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge
-                                                  ?.copyWith(
-                                                    color: AppColor.whiteColor,
-                                                  )),
-                                        ),
-                                      ],
-                                    ),
-                                    //...........................................date
+                                          //...........................................date
 
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.date_range,
-                                              color: AppColor.orangcolor,
-                                              size: 17,
-                                            ),
-                                            Text("12/3/2024",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall
-                                                    ?.copyWith(
-                                                      color:
-                                                          AppColor.whiteColor,
-                                                    )),
-                                          ],
-                                        ),
-                                        //..............for clock
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.alarm_rounded,
-                                              color: AppColor.orangcolor,
-                                              size: 17,
-                                            ),
-                                            Text("12.55 pm",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall
-                                                    ?.copyWith(
-                                                      color:
-                                                          AppColor.whiteColor,
-                                                    )),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                trailing: TextButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          WidgetStateProperty.all<Color>(
-                                              AppColor.orangcolor),
-                                      shape: WidgetStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              12.0), // Adjust the value as needed
-                                        ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.date_range,
+                                                    color: AppColor.orangcolor,
+                                                    size: 17,
+                                                  ),
+                                                  Text(convertDateTime(cubit.AllUserDiseasesList[index].diagnosisDate)["date"].toString() ,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodySmall
+                                                          ?.copyWith(
+                                                            color: AppColor
+                                                                .whiteColor,
+                                                          )),
+                                                ],
+                                              ),
+                                              //..............for clock
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.alarm_rounded,
+                                                    color: AppColor.orangcolor,
+                                                    size: 17,
+                                                  ),
+                                                  Text(convertDateTime(cubit.AllUserDiseasesList[index].diagnosisDate)["time"].toString() ,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodySmall
+                                                          ?.copyWith(
+                                                            color: AppColor
+                                                                .whiteColor,
+                                                 )),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    //for showing sheet
-                                    onPressed: () {
-                                        DiseaseDetailsScreen(diseaseData: cubit.AllUserDiseasesList[index],);
-                                    },
-                                    child: Text(
-                                      "Details",
-                                      style: TextStyle(color: Colors.white),
-                                    ))),
-                          );
-                        }),
-                  )
+                                      trailing: TextButton(
+                                        style:TextButton.styleFrom(
+                                          backgroundColor: AppColor.orangcolor
+                                        ) ,
+                                          onPressed: () {
+                                            DiseaseDetailsScreen(
+                                              diseaseData: cubit
+                                                  .AllUserDiseasesList[index],
+                                            );
+                                          },
+                                          child: const Text(
+                                            "Details",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ))),
+                                );
+                              }),
+                        )
                 ],
               ),
             ),
@@ -322,18 +321,18 @@ class MedicalHistoryScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   'Enter Details',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
                       TextFormField(
                         controller: _typeController,
-                        decoration: InputDecoration(labelText: 'type'),
+                        decoration: const InputDecoration(labelText: 'type'),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a type personal or family';
@@ -343,7 +342,8 @@ class MedicalHistoryScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: _descriptionController,
-                        decoration: InputDecoration(labelText: 'Description'),
+                        decoration:
+                            const InputDecoration(labelText: 'Description'),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a description';
@@ -366,7 +366,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                         decoration: const InputDecoration(
                           labelText: 'type of disease',
                         ),
-                        items: cubit.ALLDiseasesList.map(
+                        items: cubit.ALLDiseasesList?.map(
                             (singleDiseasObjectData diseaseObject) {
                           return DropdownMenuItem<singleDiseasObjectData>(
                             value: diseaseObject,
@@ -380,10 +380,11 @@ class MedicalHistoryScreen extends StatelessWidget {
                       //.........................Diagnosis
                       TextFormField(
                         controller: _Diagnosis,
-                        decoration: InputDecoration(labelText: 'Description'),
+                        decoration:
+                            const InputDecoration(labelText: 'Diagnosis'),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a description';
+                            return 'Please enter a Diagnosis';
                           }
                           return null;
                         },
@@ -391,7 +392,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                       //.........................date time
                       TextFormField(
                         controller: _dateController,
-                        decoration: InputDecoration(labelText: 'Date'),
+                        decoration: const InputDecoration(labelText: 'Date'),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter a date';
@@ -414,7 +415,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: _weightController,
-                        decoration: InputDecoration(labelText: 'Weight'),
+                        decoration: const InputDecoration(labelText: 'Weight'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -430,7 +431,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                       //..................................height
                       TextFormField(
                         controller: _heightController,
-                        decoration: InputDecoration(labelText: 'Height'),
+                        decoration: const InputDecoration(labelText: 'Height'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -444,8 +445,8 @@ class MedicalHistoryScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: _diseaseValueController,
-                        decoration:
-                            InputDecoration(labelText: 'Value of Disease'),
+                        decoration: const InputDecoration(
+                            labelText: 'Value of Disease'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -460,7 +461,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'upload image',
                               style: TextStyle(fontSize: 16),
@@ -468,63 +469,73 @@ class MedicalHistoryScreen extends StatelessWidget {
                           ),
                           IconButton(
                               onPressed: () {
-                                // cubit.pickFile2();
+                                cubit.pickImage();
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Iconsax.document_upload,
                                 color: AppColor.primaryColor,
                               ))
                         ],
-                      ), 
-                      // SizedBox(height: 20),
-                      // cubit.imagePathFromgallary == null
-                      //     ? Text('No image selected.')
-                      //     : Text('${cubit.imagePathFromgallary!.name}'),
-
+                      ),
                       SizedBox(height: 20),
-                      TextButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                AppColor.orangcolor),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    12.0), // Adjust the value as needed
-                              ),
-                            ),
-                          ),
+                      cubit.imagePathFromgallary == null
+                          ? Text('No image selected.')
+                          : Text('${cubit.imagePathFromgallary!.name}'),
 
-                          //for showing sheet
-                          onPressed: () async {
-                            // print(cubit.pickedFile!.files.first.path);
-                            // if (_formKey.currentState!.validate()) {
-                            //   double height =
-                            //       double.parse(_heightController.text);
-                            //   double weight =
-                            //       double.parse(_weightController.text);
-                            //   double valueResult =
-                            //       double.parse(_diseaseValueController.text);
-                            //   //post data
-                            //   await cubit.PostDiseases(
-                            //     _typeController.text,
-                            //     valueResult,
-                            //     _descriptionController.text,
-                            //     height,
-                            //     weight,
-                            //     "22222222222222", // Hardcoded user ID for demonstration
-                            //     cubit.SelectedDisease?.id,
-                            //     _Diagnosis.text,
-                            //     DateTime.now(),
-                            //     cubit.pickedFile,
-                            //   );
-                            // }
+                      const SizedBox(height: 20),
+                      TextButton(
+                          style: TextButton.styleFrom(
+                            minimumSize: const Size(100, 40),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            foregroundColor:
+                                const Color.fromARGB(255, 211, 48, 48),
+                            backgroundColor: AppColor.primaryColor,
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              cubit
+                                  .postFormData2(
+                                _typeController.text,
+                                _descriptionController.text,
+                                _Diagnosis.text,
+                                nid: cubit.basicDataModel!.data.nid,
+                                height: double.parse(_heightController.text),
+                                weight: double.parse(_weightController.text),
+                                valueResult:
+                                    double.parse(_diseaseValueController.text),
+                                dateOfDiagonsises:
+                                    DateTime.parse(_dateController.text),
+                              )
+                                  .then((e) {
+                                _typeController.text = "";
+                                _descriptionController.text = "";
+                                _Diagnosis.text = "";
+                                _heightController.text = "";
+                                _weightController.text = "";
+                                _diseaseValueController.text = "";
+                                _dateController.text = "";
+                                cubit.SelectedDisease = null;
+                              });
+                             
+                             showToast(
+                                text: 'Disease added successfully',
+                                state: ToastStates.SUCCESS,
+                              );
+
+                              // Delay the pop to allow the toast to show
+                              Future.delayed(Duration(seconds: 2), () {
+                                Navigator.pop(context); // This will close the bottom sheet
+                              });
+                            
+                            }
                           },
-                          child: Text(
+                          child: const Text(
                             "submit",
                             style: TextStyle(color: Colors.white),
                           )),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                     ],
                   ),
                 ),
@@ -552,10 +563,10 @@ class MedicalHistoryScreen extends StatelessWidget {
               color: AppColor.highlightColor,
               size: 16,
             ),
-            SizedBox(width: 2),
+            const SizedBox(width: 2),
             Text(
-              '$title',
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: AppColor.primaryColor,
@@ -564,8 +575,8 @@ class MedicalHistoryScreen extends StatelessWidget {
           ],
         ),
         Text(
-          '$dataValue',
-          style: TextStyle(
+          dataValue,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Color.fromARGB(255, 82, 80, 80),
@@ -579,7 +590,7 @@ class MedicalHistoryScreen extends StatelessWidget {
 Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
   TestsCubit cubit = TestsCubit.get(context);
 
-  cubit.testResult();
+  //cubit.testResult();
   return Container(
     decoration: const BoxDecoration(
         color: AppColor.primaryColor,
@@ -590,21 +601,21 @@ Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
       children: [
         Row(
           children: [
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Icon(
               icon,
               size: 14,
               color: AppColor.orangcolor,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               label,
-              style: TextStyle(fontSize: 15, color: AppColor.whiteColor),
+              style: const TextStyle(fontSize: 15, color: AppColor.whiteColor),
             ),
           ],
         ),
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_forward_ios,
             size: 17,
             color: AppColor.orangcolor,
@@ -618,11 +629,6 @@ Widget cardRowWidget(IconData icon, String label, dynamic ScreenName, context) {
   );
 }
 
-List<String> ListOfDiseases = [
-  "d1",
-  "d2",
-  "d3",
-];
 
 /**
  * 
