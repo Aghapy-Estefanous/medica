@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:medica/shared/network/local/sharedPref.dart';
 
 class ApiInterceptor  extends Interceptor
 {

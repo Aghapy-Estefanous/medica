@@ -15,7 +15,7 @@ class Alldiseases {
     if (json['data'] != null) {
       data = <singleDiseasObjectData>[];
       json['data'].forEach((v) {
-        data!.add(new singleDiseasObjectData.fromJson(v));
+        data!.add( singleDiseasObjectData.fromJson(v));
       });
     }
   }

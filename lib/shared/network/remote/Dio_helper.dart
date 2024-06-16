@@ -1,26 +1,20 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 
-
 class dio_helper {
   static late Dio dio;
   static init() {
-    // dio?.options.headers['Authorization'] = 'f96edd43fbc848b69a17ab04fec81381';
-    dio = Dio(BaseOptions(
-      baseUrl: Endpoint.BaseUrl,
-
-      receiveDataWhenStatusError: true,
-      validateStatus: (status) {
-        return status! >= 200 && status < 500; // Adjust as needed
-      },
-      // headers: {         ❌ "remove and use it get & post data"
-      //   //const header
-      //   'Content-Type': 'application/json',
-      // }
-    ));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: Endpoint.BaseUrl,
+        receiveDataWhenStatusError: true,
+        validateStatus: (status) {
+          return status! >= 200 && status < 500; // Adjust as needed
+        },
+      ),
+    );
   }
 
   static Future<Response?> getData({
@@ -31,10 +25,7 @@ class dio_helper {
   }) async {
     try {
       var headers = {
-        // 'Authorization': 'Bearer $AccessToken',
-
         'Authorization': 'Bearer $AccessToken',
-
         'Content-Type': 'application/json',
       };
       var dio = Dio();
@@ -77,10 +68,11 @@ class dio_helper {
       // 'lang': lang,
       'Content-Type': 'application/json',
       'accept': '*/*',
-      'Authorization': 'Bearer ${AccessToken}'
+      'Authorization': 'Bearer $AccessToken'
     };
     return await dio.post(url, queryParameters: query, data: data);
   }
+
   static Future<Response?> postDataWithFile({
     required String url, //endpionts
     Map<String, dynamic>? query,
@@ -94,19 +86,21 @@ class dio_helper {
       // 'lang': lang,
       // 'Content-Type': 'application/json',
       'accept': '*/*',
-      'Authorization': 'Bearer ${AccessToken}'
+      'Authorization': 'Bearer $AccessToken'
     };
-     FormData formData = FormData.fromMap(data);
+    FormData formData = FormData.fromMap(data);
     if (file != null) {
       formData.files.add(MapEntry(
         'Photo', // This should match the expected key on the backend
-        await MultipartFile.fromFile(file.path, filename: file.path.split('/').last),
+        await MultipartFile.fromFile(file.path,
+            filename: file.path.split('/').last),
       ));
     }
     return await dio.post(url, queryParameters: query, data: data);
   }
+
   static Future<Response?> putData({
-    required String url, //endpionts    
+    required String url, //endpionts
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
     String? AccessToken,

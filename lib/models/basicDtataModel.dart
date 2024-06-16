@@ -1,56 +1,83 @@
+import 'package:dio/dio.dart';
+
 class BasicDataModel {
-  String? statusCode;
-  bool? succeeded;
-  String? message;
+  String statusCode;
+  dynamic meta;
+  bool succeeded;
+  String message;
+  dynamic errors;
+  DataModel data;
 
-  BasicDataData? data;
-
-  BasicDataModel({this.statusCode, this.succeeded, this.message, this.data});
-
-  BasicDataModel.fromJson(Map<String, dynamic> json) {
-    statusCode = json['statusCode'];
-
-    succeeded = json['succeeded'];
-    message = json['message'];
-
-    data = json['data'] != null ? BasicDataData.fromJson(json['data']) : null;
-  }
-}
-
-class BasicDataData {
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? phoneNumber;
-  String? nid;
-  String? bloodType;
-  int? age;
-  // List<Null>? report;
-
-  BasicDataData({
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneNumber,
-    this.nid,
-    this.bloodType,
-    this.age,
-    // this.report
+  BasicDataModel({
+    required this.statusCode,
+    required this.meta,
+    required this.succeeded,
+    required this.message,
+    required this.errors,
+    required this.data,
   });
 
-  BasicDataData.fromJson(Map<String, dynamic> json) {
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    email = json['email'];
-    phoneNumber = json['phoneNumber'];
-    nid = json['nid'];
-    bloodType = json['bloodType'];
-    age = json['age'];
-    // if (json['report'] != null) {
-    //   report = <Null>[];
-    //   json['report'].forEach((v) {
-    //     report!.add(new Null.fromJson(v));
-    //   });
-    // }
+  factory BasicDataModel.fromJson(Response<dynamic> response) {
+    Map<String, dynamic> json = response.data;
+    return BasicDataModel(
+      statusCode: json["statusCode"],
+      meta: json["meta"],
+      succeeded: json["succeeded"],
+      message: json["message"],
+      errors: json["errors"],
+      data: DataModel.fromJson(json["data"]),
+    );
   }
+  Map<String, dynamic> toJson() => {
+        "statusCode": statusCode,
+        "meta": meta,
+        "succeeded": succeeded,
+        "message": message,
+        "errors": errors,
+        "data": data.toJson(),
+      };
+}
+
+class DataModel {
+  String firstName;
+  String lastName;
+  String email;
+  dynamic phoneNumber;
+  String nid;
+  dynamic bloodType;
+  int age;
+  dynamic report;
+
+  DataModel({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phoneNumber,
+    required this.nid,
+    required this.bloodType,
+    required this.age,
+    required this.report,
+  });
+
+  factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        email: json["email"],
+        phoneNumber: json["phoneNumber"],
+        nid: json["nid"],
+        bloodType: json["bloodType"],
+        age: json["age"],
+        report: json["report"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "nid": nid,
+        "bloodType": bloodType,
+        "age": age,
+        "report": report,
+      };
 }

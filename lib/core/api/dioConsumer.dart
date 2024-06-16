@@ -2,17 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:medica/core/api/apiConsumer.dart';
 import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/core/api/interceptorApi.dart';
-import 'package:medica/core/errors/error_model.dart';
 import 'package:medica/shared/network/remote/endpoint.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
-   
-  DioConsumer({required this.dio})
-  {
-           dio.options.baseUrl=Endpoint.BaseUrl;
-           dio.interceptors.add(ApiInterceptor());
-           //dio.interceptors.add(LogInterceptor(requestHeader: true,request: true,responseBody: true));
+
+  DioConsumer({required this.dio}) {
+    dio.options.baseUrl = Endpoint.BaseUrl;
+    dio.interceptors.add(ApiInterceptor());
+    //dio.interceptors.add(LogInterceptor(requestHeader: true,request: true,responseBody: true));
   }
   @override
   Future delete(String url,
@@ -27,10 +25,21 @@ class DioConsumer extends ApiConsumer {
     }
   }
 
- 
-
   @override
-  Future get(String url, {Object? data, Map<String, dynamic>? queryParameter})async {
+  Future get(
+    String url, {
+    Object? data,
+  }) async {
+    try {
+      final response = await dio.get(url, data: data);
+      return response;
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+      return e.response!;
+    }
+  }
+   @override
+  Future getWithqueryParameter(String url, {Object? data, Map<String, dynamic>? queryParameter})async {
    try {
       final response =
           await dio.get(url, data: data, queryParameters: queryParameter);
@@ -43,7 +52,7 @@ class DioConsumer extends ApiConsumer {
 
   @override
   Future post(String url,
-      {Object? data, Map<String, dynamic>? queryParameter}) async{
+      {Object? data, Map<String, dynamic>? queryParameter}) async {
     try {
       final response =
           await dio.post(url, data: data, queryParameters: queryParameter);
@@ -53,10 +62,16 @@ class DioConsumer extends ApiConsumer {
       handleDioExceptions(e);
     }
   }
-  
+
   @override
-  Future getAsFormData(String url, {FormData? data, Map<String, dynamic>? queryParameter}) {
-    // TODO: implement getAsFormData
-    throw UnimplementedError();
+  Future<Response> postAsFormData(
+      {required String apiUrl, FormData? data}) async {
+    try {
+      final response = await dio.post(apiUrl, data: data);
+      return response;
+    } on DioException catch (e) {
+      handleDioExceptions(e);
+      return e.response!;
+    }
   }
 }

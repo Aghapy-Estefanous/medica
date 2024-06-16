@@ -1,7 +1,3 @@
-import 'dart:io';
-import 'package:file_picker/file_picker.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/models/reservationModel.dart';
 
 abstract class AppState {}
@@ -78,21 +74,17 @@ class GetAllDiseasesErrorState extends AppState {
 }
 
 //................................post diseases
-class PostDiseasesLoading extends AppState {}
+class PostDiseasesLoadingS extends AppState {}
 
-class PostDiseasesSuccess extends AppState {
-  final succeeded;
-  PostDiseasesSuccess(this.succeeded);
-}
+class PostDiseasesSuccessS extends AppState {}
 
-class PostDiseasesError extends AppState {
+class PostDiseasesErrorS extends AppState {
   final dynamic error;
-  PostDiseasesError(this.error);
+  PostDiseasesErrorS(this.error);
 }
 
 //............................... photo diseases
 class DiseasePhotoSelectedstate extends AppState {
-  
   DiseasePhotoSelectedstate();
 }
 
@@ -102,23 +94,21 @@ class DiseasePhotoSelectionErrorstate extends AppState {
 }
 
 //...............................user basic data
-class getBasicDataLoading extends AppState {}
+class GetBasicDataLoadingState extends AppState {}
 
-class getBasicDataSuccess extends AppState {
-  final model;
-  getBasicDataSuccess(this.model);
+class GetBasicDataSuccessState extends AppState {
+  GetBasicDataSuccessState();
 }
 
-class getBasicDataError extends AppState {
-  final dynamic error;
-  getBasicDataError(this.error);
+class GetBasicDataErrorState extends AppState {
+  final String error;
+  GetBasicDataErrorState(this.error);
 }
+
 //...................................cubit for PostDiseaseLoadingState...................................
 class PostDiseaseLoadingState extends AppState {}
 
-class PostDiseaseSuccessState extends AppState {
- 
-}
+class PostDiseaseSuccessState extends AppState {}
 
 class PostDiseaseErrorState extends AppState {
   // final dynamic error;
