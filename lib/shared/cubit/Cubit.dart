@@ -110,7 +110,7 @@ class AppCubit extends Cubit<AppState> {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       String? token = sharedPreferences.getString('Token');
-      var response = await api.get(
+      var response = await api.getWithqueryParameter(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
       // print(response.data);
@@ -148,7 +148,7 @@ class AppCubit extends Cubit<AppState> {
           "${Endpoint.BaseUrl}${Endpoint.ALLCLINICS}filter=$filterParameter";
       print(xx);
 
-      var response = await api.get(
+      var response = await api.getWithqueryParameter(
         "${Endpoint.BaseUrl}${Endpoint.ALLCLINICS}?filter=$filterParameter",
       );
 
@@ -175,7 +175,7 @@ class AppCubit extends Cubit<AppState> {
       late ClinicModel clinicModel;
       emit(GetAllClinicsLoadingState());
 
-      var response = await api.get(
+      var response = await api.getWithqueryParameter(
         Endpoint.BaseUrl + Endpoint.ALLCLINICS,
       );
 
@@ -203,7 +203,7 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllDepartmentLoadingState());
 
       var filterParameter = "name=$searchWord";
-      var response = await api.get(
+      var response = await api.getWithqueryParameter(
         "${Endpoint.BaseUrl}${Endpoint.ALLCLINICS}?filter=$filterParameter",
       );
 
@@ -215,9 +215,9 @@ class AppCubit extends Cubit<AppState> {
       print("from cubit :${SearchResponseList?[0].name}");
 
       emit(GetAllDepartmentSuccessState());
-    } on ServerExceptions catch (e) {
+    }  catch (e) {
       print(e.toString());
-      emit(GetAllDepartmentErrorState(e.errorModel.message));
+      emit(GetAllDepartmentErrorState(e.toString()));
     }
   }
 

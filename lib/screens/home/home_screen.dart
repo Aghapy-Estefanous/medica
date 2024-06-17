@@ -1,20 +1,19 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:medica/ReservationScreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/models/clinicModel.dart';
-import 'package:medica/screens/auth/Profile/cubit/profile_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
+import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/home/searchScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/home/AllclinicsOfDepartment.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:medica/screens/auth/Profile/cubit/profile_cubit.dart';
 
 class Home_Screen extends StatelessWidget {
   const Home_Screen({Key? key}) : super(key: key);

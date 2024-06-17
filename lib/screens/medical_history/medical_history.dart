@@ -188,8 +188,15 @@ class MedicalHistoryScreen extends StatelessWidget {
                           },
                           child: SizedBox(
                             height: 250,
-                            child: Image.asset(
-                                'assets/images/ilustrations/nodata.jpg'),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                    'assets/images/backgrounds/emptydata.png'),
+                                Text("there is no data click add to add yours",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge),
+                              ],
+                            ),
                           ),
                         )
                       : SizedBox(
@@ -216,10 +223,13 @@ class MedicalHistoryScreen extends StatelessWidget {
                                         children: [
                                           Row(
                                             children: [
-                                          
                                               Expanded(
                                                 child: Text(
-                                                   cubit.AllUserDiseasesList[index].diseaseName.toString(),
+                                                    cubit
+                                                        .AllUserDiseasesList[
+                                                            index]
+                                                        .diseaseName
+                                                        .toString(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodyLarge
@@ -243,7 +253,13 @@ class MedicalHistoryScreen extends StatelessWidget {
                                                     color: AppColor.orangcolor,
                                                     size: 17,
                                                   ),
-                                                  Text(convertDateTime(cubit.AllUserDiseasesList[index].diagnosisDate)["date"].toString() ,
+                                                  Text(
+                                                      convertDateTime(cubit
+                                                                  .AllUserDiseasesList[
+                                                                      index]
+                                                                  .diagnosisDate)[
+                                                              "date"]
+                                                          .toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .bodySmall
@@ -261,14 +277,20 @@ class MedicalHistoryScreen extends StatelessWidget {
                                                     color: AppColor.orangcolor,
                                                     size: 17,
                                                   ),
-                                                  Text(convertDateTime(cubit.AllUserDiseasesList[index].diagnosisDate)["time"].toString() ,
+                                                  Text(
+                                                      convertDateTime(cubit
+                                                                  .AllUserDiseasesList[
+                                                                      index]
+                                                                  .diagnosisDate)[
+                                                              "time"]
+                                                          .toString(),
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .bodySmall
                                                           ?.copyWith(
                                                             color: AppColor
                                                                 .whiteColor,
-                                                 )),
+                                                          )),
                                                 ],
                                               ),
                                             ],
@@ -276,14 +298,17 @@ class MedicalHistoryScreen extends StatelessWidget {
                                         ],
                                       ),
                                       trailing: TextButton(
-                                        style:TextButton.styleFrom(
-                                          backgroundColor: AppColor.orangcolor
-                                        ) ,
+                                          style: TextButton.styleFrom(
+                                              backgroundColor:
+                                                  AppColor.orangcolor),
                                           onPressed: () {
-                                            DiseaseDetailsScreen(
-                                              diseaseData: cubit
-                                                  .AllUserDiseasesList[index],
-                                            );
+                                            navigateToScreen(
+                                                context,
+                                                DiseaseDetailsScreen(
+                                                  diseaseData:
+                                                      cubit.AllUserDiseasesList[
+                                                          index],
+                                                ));
                                           },
                                           child: const Text(
                                             "Details",
@@ -518,17 +543,17 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 _dateController.text = "";
                                 cubit.SelectedDisease = null;
                               });
-                             
-                             showToast(
+
+                              showToast(
                                 text: 'Disease added successfully',
                                 state: ToastStates.SUCCESS,
                               );
 
                               // Delay the pop to allow the toast to show
                               Future.delayed(Duration(seconds: 2), () {
-                                Navigator.pop(context); // This will close the bottom sheet
+                                Navigator.pop(
+                                    context); // This will close the bottom sheet
                               });
-                            
                             }
                           },
                           child: const Text(

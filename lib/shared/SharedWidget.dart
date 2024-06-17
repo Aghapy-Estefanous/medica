@@ -75,7 +75,7 @@ AppBar MyAppBarWidget(BuildContext context, String title) {
     ),
     title: Text(
       title,
-      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20,color:  AppColor.primaryColor,),
     ),
   );
 }

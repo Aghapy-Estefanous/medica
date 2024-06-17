@@ -2,6 +2,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+
 class DetailsScreen extends StatelessWidget {
   final clinicData;
   DetailsScreen(this.clinicData, {Key? key}) : super(key: key);
@@ -72,9 +73,57 @@ class DetailsScreen extends StatelessWidget {
                 color: Color.fromARGB(255, 133, 129, 129),
               ),
             ),
-            // SizedBox(
-            //   height: 20,
-            // ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 15,
+                      height: 15,
+                      decoration: BoxDecoration(
+                        color: AppColor.primaryColor,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      'Available',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 15,
+                      height: 15,
+                      decoration: BoxDecoration(
+                        color: AppColor.orangcolor,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      'unavailable',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: height * 0.020),
               child: Container(
@@ -95,7 +144,6 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(vertical: height * 0.020),
               child: Row(
