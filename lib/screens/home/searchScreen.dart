@@ -66,7 +66,11 @@ class Search_Screen extends StatelessWidget {
                                       child: Column(
                                         children: [
                                           Image.asset(
-                                              'assets/images/ilustrations/nodata.jpg'),
+                                         //   assets\images\backgrounds\search.png
+                                              'assets/images/backgrounds/search.png'),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
                                           Text(
                                             "There is no Results!",
                                             style: Theme.of(context)

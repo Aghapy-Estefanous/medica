@@ -38,6 +38,7 @@ dependencies:
   file_picker: ^8.0.0+1
   web: 0.3.0
   fluttertoast: ^8.2.5
+  photo_view: ^0.15.0
 
 
 dev_dependencies:

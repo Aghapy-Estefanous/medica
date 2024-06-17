@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/core/api/dioConsumer.dart';
+import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'screens/auth/Profile/cubit/profile_cubit.dart';
 import 'package:medica/shared/cubit/blocObservser.dart';
@@ -68,7 +69,7 @@ class MainApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: const MedicalHistoryScreen(),
+        home: SplashScreen(),
       ),
     );
   }
