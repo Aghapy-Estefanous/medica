@@ -14,6 +14,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   iconsax: ^0.0.8
   flutter_otp_text_field: ^1.1.0+2
   js: ^0.6.3
@@ -36,7 +38,7 @@ dependencies:
   # bottom_sheet: ^4.0.4
   image_picker: ^1.0.8
   file_picker: ^8.0.0+1
-  web: 0.3.0
+  web: ^0.5.1
   fluttertoast: ^8.2.5
 
 

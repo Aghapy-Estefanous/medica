@@ -19,31 +19,33 @@ class GenderSelector extends StatelessWidget {
     List<Gender> genders = [
       Gender("Male", Iconsax.man, false),
       Gender("Female", Iconsax.woman, false),
-      Gender("Others", Iconsax.omega_circle, false),
+      // Gender("Others", Iconsax.omega_circle, false),
     ];
 
     return Container(
       height: 120, // Provide a fixed height here
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: genders.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            // splashColor: Colors.pinkAccent,
-            onTap: () {
-              // Update the selected gender
-              gender?.text = genders[index].name;
-              for (int i = 0; i < genders.length; i++) {
-                genders[i].isSelected = (i == index);
-              }
-              // Trigger a rebuild to reflect the changes
-              // in the UI
-              // ignore: invalid_use_of_protected_member
-              (context as Element).markNeedsBuild();
-            },
-            child: CustomRadio(gender: genders[index]),
-          );
-        },
+      child: Center(
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: genders.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              // splashColor: Colors.pinkAccent,
+              onTap: () {
+                // Update the selected gender
+                gender?.text = genders[index].name;
+                for (int i = 0; i < genders.length; i++) {
+                  genders[i].isSelected = (i == index);
+                }
+                // Trigger a rebuild to reflect the changes
+                // in the UI
+                // ignore: invalid_use_of_protected_member
+                (context as Element).markNeedsBuild();
+              },
+              child: CustomRadio(gender: genders[index]),
+            );
+          },
+        ),
       ),
     );
   }
