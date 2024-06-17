@@ -30,6 +30,14 @@ class bottomsheetwidget extends StatelessWidget {
     return TextButton(
       onPressed: () {
         showModalBottomSheet(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20.0),
+            ),
+          ),
+          useSafeArea: true,
+          enableDrag: true,
+          showDragHandle: true,
           context: context,
           isScrollControlled:
               true, // This makes the modal bottom sheet full screen
@@ -49,6 +57,18 @@ class bottomsheetwidget extends StatelessWidget {
                         key: formstate,
                         child: Column(
                           children: [
+                            Center(
+                              child: Text(
+                                'Update Your Profile',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             CustomTxtFormField(
                               validator: (String? value) {
                                 if (value!.isEmpty) {

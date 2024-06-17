@@ -17,6 +17,7 @@ import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
 import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 
+import 'screens/splash_screen.dart';
 
 const BaseAPI = 'http://medicalsystem.runasp.net';
 
@@ -68,7 +69,7 @@ class MainApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: const MedicalHistoryScreen(),
+        home: SplashScreen(),
       ),
     );
   }
