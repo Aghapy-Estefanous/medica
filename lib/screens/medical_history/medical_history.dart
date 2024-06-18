@@ -551,6 +551,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                     DateTime.parse(_dateController.text),
                               )
                                   .then((e) {
+                                    cubit.getAllUserDiseases();
                                 _typeController.text = "";
                                 _descriptionController.text = "";
                                 _Diagnosis.text = "";
