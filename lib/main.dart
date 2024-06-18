@@ -12,6 +12,7 @@ import 'package:medica/shared/network/remote/Dio_helper.dart';
 import 'screens/auth/Profile/cubit/update_profile_cubit.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
+import 'package:medica/screens/calculateResultTest/valuesOfTests.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/email_cubit.dart';
 import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
@@ -70,7 +71,7 @@ class MainApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: CalculateTestVitResultScreen(),
       ),
     );
   }
