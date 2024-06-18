@@ -115,6 +115,7 @@ class PostDiseaseErrorState extends AppState {
   // PostDiseaseErrorState(this.error);
 }
 
+class UpdateLengthState extends AppState {}
 
 
 //class shopInitialState extends shopState {}
