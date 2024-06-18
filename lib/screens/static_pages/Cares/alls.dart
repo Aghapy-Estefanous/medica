@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/screens/static_pages/Cares/MamyCare.dart';
 import 'package:medica/screens/static_pages/Cares/cubit/care_cubit.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import '../../calculateResultTest/valuesOfTests.dart';
 import 'FirstAid.dart';
 import 'BabyCare.dart';
 
@@ -87,7 +88,9 @@ class CareScreen extends StatelessWidget {
                     ? BabyCare()
                     : cubit.select == 1
                         ? MamyCare()
-                        : FirstAid(),
+                        : cubit.select == 2
+                            ? FirstAid()
+                            : CalculateTestVitResultScreen(),
               ],
             ),
           ),
@@ -101,4 +104,5 @@ List<String> items = [
   'BabyCare',
   'Pregnancy Care',
   'First Aid',
+  'Vitamins Calculator',
 ];

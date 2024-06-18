@@ -61,6 +61,8 @@ class ProfileScreen extends StatelessWidget {
           child: CircleAvatar(
             radius: 80.0,
             // backgroundImag0e: const AssetImage('assets/images/homeRepaire2.jpg'),
+            backgroundImage:
+                AssetImage('assets/images/Auth/Profile-Avatar-PNG.png'),
             child: Align(
               alignment: Alignment.bottomRight,
               child: CircleAvatar(
@@ -112,7 +114,7 @@ class ProfileScreen extends StatelessWidget {
                     Icon(Iconsax.location,
                         size: 18.0, color: AppColor.primaryColor),
                     const SizedBox(width: 10),
-                    Text('المركز , المنطقة', style: TextStyle(fontSize: 16.0)),
+                    Text('Location', style: TextStyle(fontSize: 16.0)),
                   ],
                 ),
               ],
@@ -197,7 +199,7 @@ class mylogOutWidget extends StatelessWidget {
                     color: AppColor.orangcolorwithOpacity,
                   ),
                   onPressed: () {
-                    // context.read<ProfileCubit>().logout();
+                    context.read<ProfileCubit>().logout();
                   },
                 ),
                 Text(
