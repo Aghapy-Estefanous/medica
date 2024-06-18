@@ -160,8 +160,8 @@ class MedicalHistoryScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("All records of disease",
-                          style: TextStyle(fontSize: 16)),
+                      Text("All records of disease",
+                          style: Theme.of(context).textTheme.bodyLarge),
                       IconButton(
                           onPressed: () {
                             showmodelBottonsheetWidget(context, cubit);
@@ -181,13 +181,18 @@ class MedicalHistoryScreen extends StatelessWidget {
                       ? InkWell(
                           onTap: () {
                             cubit.getBasicData();
+                          //  cubit.updateLength();
+
                           },
                           child: SizedBox(
                             height: 250,
                             child: Column(
                               children: [
                                 Image.asset(
-                                    'assets/images/backgrounds/emptydata.png'),
+                                  'assets/images/backgrounds/emptydata.png',
+                                  width: 200,
+                                  height: 200,
+                                ),
                                 Text("there is no data click add to add yours",
                                     style:
                                         Theme.of(context).textTheme.bodyLarge),
@@ -198,12 +203,13 @@ class MedicalHistoryScreen extends StatelessWidget {
                       : SizedBox(
                           height: 400,
                           child: ListView.separated(
-                              itemCount: cubit.AllUserDiseasesList.length,
+                              itemCount: cubit.LengthOfAllUserDiseasesList,
                               separatorBuilder: (context, index) =>
                                   const SizedBox(
                                     height: 8,
                                   ),
                               itemBuilder: (context, index) {
+                                print("💥💤💥the l of list user diseases ${ cubit.LengthOfAllUserDiseasesList}");
                                 return Container(
                                   height: 66,
                                   decoration: BoxDecoration(
@@ -218,8 +224,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                                       ),
                                     ],
                                     border: Border.all(
-                                      color: Color.fromARGB(255, 107, 160, 189).withOpacity(
-                                          0.5), // border color with opacity
+                                      color: Color.fromARGB(255, 107, 160, 189)
+                                          .withOpacity(
+                                              0.5), // border color with opacity
                                       width: 1, // border width
                                     ),
                                     color: Colors.white,

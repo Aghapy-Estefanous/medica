@@ -10,6 +10,7 @@ import 'package:medica/screens/splash_screen.dart';
 import 'package:medica/core/errors/Exceptions.dart';
 import 'package:medica/models/basicDtataModel.dart';
 import 'package:medica/models/departmentModel.dart';
+import '../../screens/static_pages/Cares/alls.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/home_screen.dart';
@@ -20,7 +21,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
-import '../../screens/static_pages/Cares/alls.dart';
 
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
@@ -228,6 +228,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   //.............get all diseases for drop down in form post disases..........................
+  
   List<singleDiseasObjectData>? ALLDiseasesList = [];
   Alldiseases? Model2;
 
@@ -251,6 +252,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All diseases of user.............🟢🟢🟢🟢🟢🟢......
+  int LengthOfAllUserDiseasesList = 0;
   late List<DiseasesOfUser> AllUserDiseasesList = [];
   AllDiseasesOfUserModel? Model;
   getAllUserDiseases() async {
@@ -263,6 +265,7 @@ class AppCubit extends Cubit<AppState> {
 
       Model = AllDiseasesOfUserModel.fromJson(response);
       AllUserDiseasesList = Model!.data!;
+      LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
       print("user dieases now get✅✅🟢${AllUserDiseasesList}");
       emit(GetAllDiseasesSuccessState());
     } catch (e) {
@@ -271,6 +274,15 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllDiseasesErrorState(e.toString()));
     }
   }
+ 
+
+//  int updateLength() {
+//   emit(UpdateLengthState());
+//  return  LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
+//    // print("💤💥Notify UI to update ${LengthOfAllUserDiseasesList}") ;
+
+// }
+ // Initialize with 0 initially
 
   //................................. setstate current image picker.....
 
@@ -322,6 +334,7 @@ class AppCubit extends Cubit<AppState> {
       data: formData,
     )
         .then((dynamic value) {
+     LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
       emit(PostDiseasesSuccessS());
       if (value != null) {
         print("🚨 data after send it $value 🌍");
