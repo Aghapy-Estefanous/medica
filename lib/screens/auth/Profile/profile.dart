@@ -98,15 +98,15 @@ class ProfileScreen extends StatelessWidget {
           child: CustomContainer(
             child: Column(
               children: [
-                CustomRow(userProfile?.phoneNumber, Iconsax.call),
-                SizedBox(height: 20),
+                // CustomRow(userProfile?.phoneNumber, Iconsax.call),
+                // SizedBox(height: 20),
                 CustomRow(userProfile?.email, Iconsax.message),
                 SizedBox(height: 20),
                 CustomRow(userProfile?.nid, Iconsax.card),
                 SizedBox(height: 20),
                 CustomRow(userProfile?.phoneNumber, Iconsax.mobile),
                 SizedBox(height: 20),
-                CustomRow(userProfile?.age.toString(), Iconsax.calendar),
+                CustomRow('22 years', Iconsax.calendar),
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -128,10 +128,10 @@ class ProfileScreen extends StatelessWidget {
         CustomContainer(
           child: Column(
             children: [
-              RowUseritems(
-                  icon: Iconsax.money_send,
-                  label: 'Payment methods',
-                  fun: () {}),
+              // RowUseritems(
+              //     icon: Iconsax.money_send,
+              //     label: 'Payment methods',
+              //     fun: () {}),
               RowUseritems(
                   icon: Icons.people, label: 'Share to friends', fun: () {}),
               RowUseritems(
