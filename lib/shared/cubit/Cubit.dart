@@ -79,8 +79,8 @@ class AppCubit extends Cubit<AppState> {
     try {
       late UserReservationModel modelReservation;
       emit(ReservationLoadingState());
-      var response = await api.get(
-        Endpoint.BaseUrl + Endpoint.REGISTER,
+      var response = await api.getWithqueryParameter(
+        Endpoint.BaseUrl + Endpoint.USER_RESERVATION,
       );
       // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
