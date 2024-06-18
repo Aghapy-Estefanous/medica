@@ -85,10 +85,11 @@ class AppCubit extends Cubit<AppState> {
       // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
       myReservationsList = modelReservation.data;
-      print(modelReservation.data?[0].firstname);
+      print("❄ 🟢❄🟢💤get all reservation${modelReservation.data?[0].firstname}");
 
-      emit(ReservationSuccessState(modelReservation));
+      emit(ReservationSuccessState());
     } on ServerExceptions catch (e) {
+       print("❄ 💥❌error💥💤get all reservation${e.toString()}}");
       print(e.toString());
       emit(ReservationErrorState(e.errorModel.message));
     }

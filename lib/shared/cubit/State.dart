@@ -10,8 +10,8 @@ class ChangeBottomNavigateBarState extends AppState {}
 class ReservationLoadingState extends AppState {}
 
 class ReservationSuccessState extends AppState {
-  final UserReservationModel? modelReservation;
-  ReservationSuccessState(this.modelReservation);
+  //final UserReservationModel? modelReservation;
+  ReservationSuccessState();
 }
 
 class ReservationErrorState extends AppState {
