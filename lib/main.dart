@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/screens/static_pages/Cares/cubit/care_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/core/api/dioConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -14,13 +14,13 @@ import 'screens/auth/Profile/cubit/update_profile_cubit.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
 import 'package:medica/screens/calculateResultTest/valuesOfTests.dart';
+import 'package:medica/screens/static_pages/Cares/cubit/care_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/email_cubit.dart';
 import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
 import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
 import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 
-import 'screens/splash_screen.dart';
 
 const BaseAPI = 'http://medicalsystem.runasp.net';
 
