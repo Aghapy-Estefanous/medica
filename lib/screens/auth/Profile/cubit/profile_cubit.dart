@@ -39,7 +39,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      await sharedPreferences.remove('token');
+      await sharedPreferences.remove('Token');
       emit(ProfileLoggedOut());
     } catch (e) {
       emit(ProfileError('Failed to log out'));
