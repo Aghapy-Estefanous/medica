@@ -2,7 +2,7 @@ const BaseUrl = 'http://medicalsystem.runasp.net/api/';
 const LOGIN = 'Auth/LogIn';
 const REGISTER = 'Auth/register';
 
-const USER_RESERVATION = '/api/Reservation/UserReservations';
+//const USER_RESERVATION = 'Reservation/UserReservations';
 const ReservationINFO = 'Reservation/ReservationINFO/15';
 
 class Endpoint {
