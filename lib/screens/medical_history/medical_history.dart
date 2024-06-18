@@ -37,10 +37,10 @@ class MedicalHistoryScreen extends StatelessWidget {
           );
         }
         if (state is GetBasicDataSuccessState) {
-          showToast(
-            text: 'Basic data loaded successfully',
-            state: ToastStates.SUCCESS,
-          );
+          // showToast(
+          //   text: 'Basic data loaded successfully',
+          //   state: ToastStates.SUCCESS,
+          // );
         }
       },
       builder: (context, state) {
@@ -75,11 +75,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      cubit.basicDataModel?.data.firstName ==
-                                              null
-                                          ? "No name"
-                                          : cubit
-                                              .basicDataModel!.data.firstName,
+                                      "name : ${cubit.basicDataModel?.data.firstName} ${cubit.basicDataModel?.data.lastName}",
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -87,7 +83,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      cubit.basicDataModel!.data.age.toString(),
+                                      "age : ${cubit.basicDataModel!.data.age.toString()} ",
                                       style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.grey,
@@ -153,13 +149,13 @@ class MedicalHistoryScreen extends StatelessWidget {
 
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   cardRowWidget(Icons.dashboard_customize_rounded,
                       "Prescriptions", const prescriptionsScreen(), context),
                   const SizedBox(height: 10),
                   cardRowWidget(Icons.local_hospital, "Medical tests",
                       const ResultPage2(), context),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,15 +205,29 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   ),
                               itemBuilder: (context, index) {
                                 return Container(
-                                  //color: AppColor.primaryColor,
-                                  decoration: const BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
-                                      color: Color.fromARGB(219, 2, 78, 154)),
+                                  height: 66,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromARGB(255, 48, 52, 56)
+                                            .withOpacity(
+                                                0.3), // shadow color with opacity
+                                        blurRadius: 4, // blur radius
+                                        offset: Offset(2, 2), // shadow offset
+                                      ),
+                                    ],
+                                    border: Border.all(
+                                      color: Color.fromARGB(255, 107, 160, 189).withOpacity(
+                                          0.5), // border color with opacity
+                                      width: 1, // border width
+                                    ),
+                                    color: Colors.white,
+                                  ),
                                   child: ListTile(
                                       title: Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.spaceEvenly,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -235,7 +245,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                                         .bodyLarge
                                                         ?.copyWith(
                                                           color: AppColor
-                                                              .whiteColor,
+                                                              .primaryColor,
                                                         )),
                                               ),
                                             ],
@@ -265,7 +275,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                                           .bodySmall
                                                           ?.copyWith(
                                                             color: AppColor
-                                                                .whiteColor,
+                                                                .dividerColor,
                                                           )),
                                                 ],
                                               ),
@@ -289,7 +299,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                                           .bodySmall
                                                           ?.copyWith(
                                                             color: AppColor
-                                                                .whiteColor,
+                                                                .dividerColor,
                                                           )),
                                                 ],
                                               ),
@@ -297,8 +307,8 @@ class MedicalHistoryScreen extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      trailing: TextButton(
-                                          style: TextButton.styleFrom(
+                                      trailing: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
                                               backgroundColor:
                                                   AppColor.orangcolor),
                                           onPressed: () {

@@ -3,6 +3,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/user/AllDiseasesOfUser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:medica/shared/network/remote/Dio_helper.dart';
 
 class DiseaseDetailsScreen extends StatelessWidget {
   final DiseasesOfUser diseaseData;
@@ -13,6 +15,9 @@ class DiseaseDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.arrow_back_ios)),
         title: Text('Disease Details'),
         backgroundColor: AppColor.primaryColor,
       ),
@@ -28,7 +33,6 @@ class DiseaseDetailsScreen extends StatelessWidget {
             //         AssetImage('assets/logo.png'), // Add your logo asset here
             //   ),
             // ),
-         
             Center(
               child: Text(
                 diseaseData.diseaseName.toString(),
@@ -143,7 +147,14 @@ class FullScreenImageViewer extends StatelessWidget {
             right: 20,
             child: IconButton(
               icon: Icon(Icons.close, color: Colors.white, size: 30),
-              onPressed: () {
+              onPressed: () async {
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                String? token = sharedPreferences.getString('Token');
+                final response = await dio_helper.getData(
+                  url: Uri.parse(imageUrl).toString(),
+                );
+                print(response);
                 Navigator.pop(context);
               },
             ),
