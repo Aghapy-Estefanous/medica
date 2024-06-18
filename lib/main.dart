@@ -73,7 +73,7 @@ class MainApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: CalculateTestVitResultScreen(),
+        home: SplashScreen(),
       ),
     );
   }
