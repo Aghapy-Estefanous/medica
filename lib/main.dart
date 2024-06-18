@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medica/screens/static_pages/Cares/cubit/care_cubit.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/core/api/dioConsumer.dart';
 import 'package:medica/screens/splash_screen.dart';
@@ -39,6 +40,7 @@ main() async {
         BlocProvider(create: (context) => TestsCubit()),
         BlocProvider(create: (context) => ProfileCubit()),
         BlocProvider(create: (context) => UpdateProfileCubit()),
+        BlocProvider(create: (context) => CareCubit()),
       ],
       child: const MainApp(),
     ),

@@ -116,7 +116,7 @@ class Email extends StatelessWidget {
                                     email: emailController.text.trim(),
                                   );
                                 }
-                              }, 'ConfirmEmaillllllllllll', context);
+                              }, 'ConfirmEmail', context);
                             },
                             condition: state is! EmailLoadingState,
                           ),

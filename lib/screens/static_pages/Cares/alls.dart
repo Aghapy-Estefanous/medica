@@ -2,33 +2,32 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Cares/FirstAid.dart';
-import 'available.dart'; // Make sure to import your AvailablePage here
-import 'cubit/tests_cubit.dart';
-import 'prepare.dart';
+import 'package:medica/screens/static_pages/Cares/cubit/care_cubit.dart';
+
 import 'package:medica/shared/styles/AppColor.dart';
 
-import 'result.dart';
+import 'BabyCare.dart';
+import 'FirstAid.dart';
 
-class Testing extends StatelessWidget {
-  Testing({Key? key}) : super(key: key);
+class CareScreen extends StatelessWidget {
+  CareScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TestsCubit, TestsState>(
+    return BlocConsumer<CareCubit, CareState>(
       listener: (context, state) {
         // TODO: implement listener
       },
       builder: (context, state) {
-        TestsCubit cubit = TestsCubit.get(context);
+        CareCubit cubit = CareCubit.get(context);
         return SafeArea(
           child: Scaffold(
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  surfaceTintColor: (AppColor.secondaryTextColor),
-                  shadowColor: AppColor.brawn,
-                  foregroundColor: AppColor.bink,
+                  // surfaceTintColor: (AppColor.secondaryTextColor),
+                  // shadowColor: AppColor.brawn,
+                  // foregroundColor: AppColor.bink,
                   pinned: true,
                   floating: true,
                   expandedHeight: 160,
@@ -36,32 +35,35 @@ class Testing extends StatelessWidget {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          items[cubit.select],
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w700),
+                        Center(
+                          child: Text(
+                            items[cubit.select],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ),
                         SizedBox(
                           width: 20,
                         )
                       ],
                     ),
-                    background: BackdropFilter(
-                      filter: ImageFilter.blur(
-                          sigmaX: 10,
-                          sigmaY:
-                              10), // Adjust sigmaX and sigmaY for blur intensity
-                      child: ColorFiltered(
-                        colorFilter: ColorFilter.mode(
-                          Colors.white.withOpacity(0.4),
-                          BlendMode.srcOver,
-                        ),
-                        child: Image.network(
-                          'assets/images/backgrounds/tests.jpeg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                    // background: BackdropFilter(
+                    //   filter: ImageFilter.blur(
+                    //       sigmaX: 10,
+                    //       sigmaY:
+                    //           10), // Adjust sigmaX and sigmaY for blur intensity
+                    //   child: ColorFiltered(
+                    //     colorFilter: ColorFilter.mode(
+                    //       Colors.white.withOpacity(0.4),
+                    //       BlendMode.srcOver,
+                    //     ),
+                    //     child: Image.network(
+                    //       'assets/images/backgrounds/tests.jpeg',
+                    //       fit: BoxFit.cover,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -75,9 +77,9 @@ class Testing extends StatelessWidget {
                           onTap: () {
                             cubit.selected(index);
                             // TestsCubit cubit2 = TestsCubit.get(context);
-                            if (index == 1)
-                              cubit.available();
-                            else if (index == 2) cubit.testResult();
+                            // if (index == 1)
+                            //   cubit.available();
+                            // else if (index == 2) cubit.testResult();
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -101,11 +103,11 @@ class Testing extends StatelessWidget {
                   ),
                 ),
                 if (cubit.select == 0)
-                  Prepare()
-                else if (cubit.select == 1)
-                  AvailablePage()
-                else if (cubit.select == 2)
-                  ResultPage()
+                  BabyCare()
+                // else if (cubit.select == 1)
+                //   AvailablePage()
+                // else if (cubit.select == 2)
+                //   ResultPage()
                 else
                   FirstAid()
               ],
@@ -118,8 +120,9 @@ class Testing extends StatelessWidget {
 }
 
 List<String> items = [
-  'تحضيرات التحاليل',
-  'التحاليل المتاحة',
-  'نتائج التحاليل',
+  'BabyCare',
+  // 'تحضيرات التحاليل',
+  // 'التحاليل المتاحة',
+  // 'نتائج التحاليل',
   'First Aid'
 ];

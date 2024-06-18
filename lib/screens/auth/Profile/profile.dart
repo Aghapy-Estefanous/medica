@@ -8,6 +8,7 @@ import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 
 // import '../register_auth/Gender.dart';
+import '../../splash_screen.dart';
 import 'cubit/profile_cubit.dart';
 // import 'cubit/update_profile_cubit.dart';
 
@@ -173,7 +174,7 @@ class mylogOutWidget extends StatelessWidget {
         if (state is ProfileLoggedOut) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => BoardingScreen()),
+            MaterialPageRoute(builder: (context) => SplashScreen()),
             (route) => false,
           );
         }
@@ -181,26 +182,31 @@ class mylogOutWidget extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Row(
-            children: [
-              IconButton(
-                icon: Icon(
-                  Iconsax.logout_14,
-                  size: 22,
-                  color: AppColor.orangcolorwithOpacity,
+          child: InkWell(
+            onTap: () {
+              context.read<ProfileCubit>().logout();
+            },
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Iconsax.logout_14,
+                    size: 22,
+                    color: AppColor.orangcolorwithOpacity,
+                  ),
+                  onPressed: () {
+                    // context.read<ProfileCubit>().logout();
+                  },
                 ),
-                onPressed: () {
-                  context.read<ProfileCubit>().logout();
-                },
-              ),
-              Text(
-                'تسجيل الخروج',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColor.orangcolorwithOpacity,
+                Text(
+                  'تسجيل الخروج',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColor.orangcolorwithOpacity,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
