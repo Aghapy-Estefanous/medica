@@ -32,15 +32,15 @@ class Prepare extends StatelessWidget {
               child: ListTile(
                 title: Text(
                   labels[index],
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.ltr,
                 ),
                 subtitle: cubit.selectedDescriptionIndex == index
                     ? Text(
                         descriptions[index],
-                        textDirection: TextDirection.rtl,
+                        textDirection: TextDirection.ltr,
                       )
                     : null,
-                leading: IconButton(
+                trailing: IconButton(
                   icon: Icon(
                     cubit.selectedDescriptionIndex == index
                         ? Icons.remove
@@ -64,41 +64,41 @@ class Prepare extends StatelessWidget {
 }
 
 final List<String> labels = [
-  'دهون الدم',
-  'سكر صائم',
-  'سكر بعد الأكل بساعتين',
-  'منحنى السكر',
-  'عينة البول للدرن',
-  'تجميع بول 24 ساعة',
-  'اختبار حمل بالبول',
-  'مزرعة البول',
-  'مسحة الحلق',
-  'عينة البصاق للدرن',
-  'تحليل المنى',
-  'عينة البصاق',
-  'مزرعة البروستاتا',
-  'مزرعة البراز',
-  'تحليل براز الدم الخفي',
-  'أدوية الربو أو أدوية الصرع',
-  'تحليل الحديد',
+  'Blood Lipids',
+  'Fasting Blood Sugar',
+  'Postprandial Blood Sugar (2 hours)',
+  'Glucose Tolerance Test',
+  'Tuberculosis Urine Sample',
+  '24-Hour Urine Collection',
+  'Urine Pregnancy Test',
+  'Urine Culture',
+  'Throat Swab',
+  'Tuberculosis Sputum Sample',
+  'Semen Analysis',
+  'Sputum Sample',
+  'Prostate Culture',
+  'Stool Culture',
+  'Fecal Occult Blood Test',
+  'Asthma or Epilepsy Medications',
+  'Iron Test',
 ];
 
 final List<String> descriptions = [
-  'عند اجراء تحاليل دهون كامله مع سكر صائم يشترط الصيام 10ساعات بالظبط يمتنع فيهم عن الاكل و التدخين و يسمح فقط بالماء و الدواء',
-  'يشترط الصيام من 6- 8 ساعات مسموح بشرب المياه والدواء و نمتنع عن الاكل و التدخين عند اجراء تحاليل دهون كامله مع سكر صائم يشترط الصيام 10ساعات بالظبط يمتنع فيهم عن الاكل و التدخين و يسمح فقط بالماء و الدواء',
-  'يتم احتساب الساعتين من بداية الأكل يشترط الانتهاء من الأكل في خلال 10 دقائق على الأكثر وإذا كان المريض يأخذ علاج للسكر فيتم أخذ العلاج إلا إذا كان للطبيب المعالج رأي أخر علما بأنه يمكن شرب الماء فقط أثناء الساعتين.',
-  'يجب على المريض الحضور صباحا الى المعمل ويكون صائم لمده 12 ساعة الامتناع تماما عن التدخين أثناء اجراء الاختبار يتم اخذ عينه والمريض صائم ثم يتم تناول جرعه الجلوكوز المعده بالمعمل يتم اخذ عينه بعد ساعه و بعد ساعتين ( 3 ساعات للسيدات الحوامل)',
-  'يتم تجميع البول الصباحي لمدة 3 أيام متتالية يمكن حفظ العينات فى الثلاجة لحين استكمال العدد وارسالها الى المعمل أو ارسال عينة تلو الاخرى',
-  'افراغ المثانة كاملة في دورة المياه مع القيام بتسجيل الوقت في ذلك الحين تجميع أي بول بعد ذلك في زجاجة مناسبة نظيفة و جافة و و كافيه للتجميع و يستمر تجميع البول حتى نفس الوقت المسجل في اليوم التالي يحفظ البول في الثلاجة لحين إرساله إلى المعمل',
-  'يفضل اول بول في الصباح ضروره الإقلال من تناول السوائل مساء اليوم السابق للتحليل علما بان اختبار الحمل بالدم أكثر حساسيه منه في البول',
-  'غسل اليد و الأعضاء التناسلية بالماء و الصابون تطهير فتحة البول بالماء والصابون و يتم ابعاد الجلد اوالشفرتين عن مجرى البول فى السيدات اثناء جمع العينة يفرغ الجزء الأول من البول في دورة المياه ثم يوضع جزء من البول فى الاناء المعقم الذي يوفره المعمل ثم يفرغ الجزء الاخير فى دورة المياه الامتناع عن تناول المضاد الحيوي لمده 48 ساعه قبل اجراء الاختبار ما لم يكن للطبيب المعالج رأي اخر. و في حاله احضار العينه من المنزل يجب أن تصل للمعمل خلال ساعتين على الأكثر.',
-  'يجب ان يكون المريض صائما 8 ساعات ويفضل ايقاف المضاد الحيوى لمدة 48 ساعة وعدم استخدام الغرغرة او أي محلول مطهر للحلق قبل عمل المسحة بحوالي 8 ساعات.',
-  'تؤخذ ثلاث عينات في ثلاثة أيام متتالية كما فى طريقة تجميع البصاق العادي يمكن حفظ العينات في الثلاجة لحين استكمال العدد وارسال الثلاث عينات او ارسال عينة تلو الاخرى.',
-  'يشترط الإمتناع عن الجماع أو حدوث الاحتلام لمده 3-5 أيام متتالية قبل اجراء التحليل يفضل اعطاء العينه بالمعمل مع ضرورة الاهتمام بوضع كل المنى وخاصة النقط الأولى في الكوب المعد لذلك ضروره مراعاة عدم وجود أي ماء أو صابون . في حاله احضار العينه من المنزل يجب ألا يمر عليها أكثر من 20 دقيقة يتم استلام العينات المنى فى الفرع الرئيسى فقط وتوضع فى الحضانة لحين فحصها',
-  'تؤخذ العينة في الصباح فور استيقاظ المريض من النوم وقبل تناول الافطار يقوم المريض بمضمضة فمه بالماء فقط ويضع العينة بالكوب ويغلقه جيدا بسرعة يطهر سطحه الخارجي باستخدام قطنة مبللة بكحول 70% يمكن تسهيل خروج العينة باستنشاق بخار ماء ساخن . ترسل العينة الي المعمل في أسرع وقت ممكن (فى غضون ساعة من الجمع ) وإذا تعذر ذلك توضع فى الثلاجة ( 2-8م) وترسل فى أسرع وقت .',
-  'يتم الامتناع عن تناول المضاد الحيوى لمده 48 ساعه قبل اجراء الاختبار يتم الامتناع ايضا عن الجماع لمده 3-5 ايام قبل اجراء الاختبار ويتم حبس البول لمده ساعه قبل اجراء الاختبار',
-  'ايقاف المضادات الحيوية لمدة 48 ساعة تجميع العينة فى وعاء نظيف وجاف ترسل العينة إلى المعمل فى خلال ساعة ولا يتم قبول العينات فى الحفاضات ولا مخلوطة بالماء أو الصابون أو البول أو المناديل الورقية',
-  'يمتنع المريض لمده 48 ساعة عن تناول جميع انواع اللحوم الحمراء و الكبده و الفجل و أدوية الروماتيزم و أي أدوية تحتوى على الأسبرين أو فيتامين ج أوالكورتيزون أو الحديد لا يسمح بأخذ ملينات',
-  'يؤخذ الدواء لمده 5 ايام على الاقل بانتظام قبل التحليل يشترط عدم وجود قىء أو اسهال لمده 48 ساعه قبل اجراء الاختبار تؤخذ عينة دم خلال ساعة قبل موعد الجرعة لقياس أقل نسبة للدواء بالدم تؤخذعينة أخرى بعد الجرعة بعدة ساعات ( تختلف من دواء الى أخر ) لقياس اعلى نسبه للدواء بالدم .',
-  'صيام 6 - 8 ساعات. يتم سحب عينة الدم صباحاً بعد انتهاء الدورة الشهرية (للسيدات) ويفضل قبل بداية علاج الحديد'
+  'When performing complete lipid tests with fasting blood sugar, a precise 10-hour fast is required, during which no food or smoking is allowed, only water and medication.',
+  'A fast of 6-8 hours is required, during which only water and medication are allowed, and no food or smoking. When performing complete lipid tests with fasting blood sugar, a precise 10-hour fast is required, during which no food or smoking is allowed, only water and medication.',
+  'The 2-hour countdown begins at the start of eating. The meal should be completed within 10 minutes. If the patient is taking medication for diabetes, they should take their medication unless otherwise directed by their doctor. Water can be consumed during the 2 hours.',
+  'The patient should come to the lab in the morning after fasting for 12 hours and abstaining from smoking during the test. A sample is taken while fasting, then a glucose dose is given, and samples are taken after 1 hour and 2 hours (3 hours for pregnant women).',
+  'Collect the morning urine for 3 consecutive days. Samples can be stored in the refrigerator until the required number is complete and sent to the lab, or sent one by one.',
+  'Empty the bladder completely in the toilet and record the time. Collect any urine thereafter in a suitable clean, dry container, continuing to collect urine until the recorded time the next day. Store the urine in the refrigerator until it is sent to the lab.',
+  'The first urine of the morning is preferred. Reduce fluid intake the evening before the test. Note that a blood pregnancy test is more sensitive than a urine test.',
+  'Wash hands and genital area with soap and water. Clean the urethral opening with soap and water, and during collection, avoid skin contact. Collect the first part of urine in the toilet, the midstream in the provided sterile container, and the last part in the toilet. Avoid antibiotics for 48 hours before the test unless directed by your doctor. If the sample is collected at home, it must reach the lab within 2 hours.',
+  'The patient should fast for 8 hours, and it is preferable to stop antibiotics for 48 hours. Avoid using mouthwash or antiseptic solutions 8 hours before the swab.',
+  'Three samples should be taken on three consecutive days, as with normal sputum collection. Samples can be stored in the refrigerator until all are collected and sent together or one by one.',
+  'Abstain from ejaculation for 3-5 consecutive days before the test. It is preferable to provide the sample in the lab, ensuring that all semen, especially the first drops, is collected in the prepared cup, without any water or soap contamination. If the sample is brought from home, it should not be older than 20 minutes. Samples are received only at the main branch and placed in an incubator for testing.',
+  'The sample is taken in the morning immediately after waking up and before breakfast. The patient rinses their mouth with water only, collects the sample in the cup, closes it quickly, and disinfects the outer surface with a cotton swab moistened with 70% alcohol. Facilitating the sample collection can be done by inhaling steam. Send the sample to the lab as soon as possible (within an hour of collection), or store it in the refrigerator (2-8°C) and send it as soon as possible.',
+  'Avoid antibiotics for 48 hours before the test. Abstain from ejaculation for 3-5 days before the test, and hold urine for 1 hour before the test.',
+  'Stop antibiotics for 48 hours before the test. Collect the sample in a clean, dry container and send it to the lab within an hour. Samples are not accepted in diapers or mixed with water, soap, urine, or tissue paper.',
+  'Avoid all types of red meat, liver, radish, rheumatism medications, and any medication containing aspirin, vitamin C, cortisone, or iron for 48 hours. Do not take laxatives.',
+  'Take the medication regularly for at least 5 days before the test. Ensure there is no vomiting or diarrhea for 48 hours before the test. A blood sample is taken within an hour before the dose to measure the lowest drug level in the blood. Another sample is taken several hours after the dose (varying by drug) to measure the highest drug level in the blood.',
+  'Fasting for 6-8 hours. The blood sample is taken in the morning after the menstrual period (for women) and preferably before starting iron treatment.',
 ];

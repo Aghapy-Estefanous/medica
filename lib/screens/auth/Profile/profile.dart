@@ -127,11 +127,13 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               RowUseritems(
-                  icon: Iconsax.money_send, label: 'طريقة الدفع', fun: () {}),
+                  icon: Iconsax.money_send,
+                  label: 'Payment methods',
+                  fun: () {}),
               RowUseritems(
-                  icon: Icons.people, label: "ارسل لاصدقائك", fun: () {}),
+                  icon: Icons.people, label: 'Share to friends', fun: () {}),
               RowUseritems(
-                  icon: Iconsax.setting_24, label: 'الاعدادات', fun: () {}),
+                  icon: Iconsax.setting_24, label: 'Settings', fun: () {}),
             ],
           ),
         ),
@@ -199,7 +201,7 @@ class mylogOutWidget extends StatelessWidget {
                   },
                 ),
                 Text(
-                  'تسجيل الخروج',
+                  'Logout',
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColor.orangcolorwithOpacity,

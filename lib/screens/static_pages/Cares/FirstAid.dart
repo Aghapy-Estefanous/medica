@@ -14,19 +14,18 @@ class FirstAid extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          // return 
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: index == 0
-          //       ? first()
-          //       : index == 1
-          //           ? second()
-          //           : index == 2
-          //               ? third()
-          //               : fourth(),
-          // );
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: index == 0
+                ? first()
+                : index == 1
+                    ? second()
+                    : index == 2
+                        ? third()
+                        : fourth(),
+          );
         },
-        childCount: 4,
+        childCount: 5,
       ),
     );
   }
@@ -224,19 +223,22 @@ class FirstAid extends StatelessWidget {
           Text.rich(
             TextSpan(children: <TextSpan>[
               spointtxt('First-degree burn: '),
-              ssectxt("This kind of burn only affects only the outer layer of skin and causes redness and swelling. It is considered a minor burn."),
+              ssectxt(
+                  "This kind of burn only affects only the outer layer of skin and causes redness and swelling. It is considered a minor burn."),
             ]),
           ),
           Text.rich(
             TextSpan(children: <TextSpan>[
               spointtxt('Second-degree burn: '),
-              ssectxt("This kind of burn affects two layers of skin and causes blistering, redness, and swelling. It is considered a major burn if it's more than 3 inches wide or is on the face, hands, feet, genitals, buttocks, or over a major joint."),
+              ssectxt(
+                  "This kind of burn affects two layers of skin and causes blistering, redness, and swelling. It is considered a major burn if it's more than 3 inches wide or is on the face, hands, feet, genitals, buttocks, or over a major joint."),
             ]),
           ),
           Text.rich(
             TextSpan(children: <TextSpan>[
               spointtxt('Third-degree burn: '),
-              ssectxt("This kind of burn affects deeper layers of skin and causes white or blackened skin that can be numb. It is always considered a major burn."),
+              ssectxt(
+                  "This kind of burn affects deeper layers of skin and causes white or blackened skin that can be numb. It is always considered a major burn."),
             ]),
           ),
         ]));
@@ -288,30 +290,3 @@ class FirstAid extends StatelessWidget {
     );
   }
 }
-
-final List<String> labels = [
-  'ABCs of First Aid',
-  'سكر صائم',
-  'سكر بعد الأكل بساعتين',
-  'منحنى السكر',
-  'عينة البول للدرن',
-  'تجميع بول 24 ساعة',
-  'اختبار حمل بالبول',
-  'مزرعة البول',
-  'مسحة الحلق',
-  'عينة البصاق للدرن',
-  'تحليل المنى',
-  'عينة البصاق',
-  'مزرعة البروستاتا',
-  'مزرعة البراز',
-  'تحليل براز الدم الخفي',
-  'أدوية الربو أو أدوية الصرع',
-  'تحليل الحديد',
-];
-
-final List<List<String>> descriptions = [
-  [
-    '',
-    '',
-  ]
-];

@@ -33,18 +33,10 @@ class Testing extends StatelessWidget {
                   floating: true,
                   expandedHeight: 160,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          items[cubit.select],
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w700),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        )
-                      ],
+                    title: Text(
+                      items[cubit.select],
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w700),
                     ),
                     background: BackdropFilter(
                       filter: ImageFilter.blur(
@@ -106,8 +98,8 @@ class Testing extends StatelessWidget {
                   AvailablePage()
                 else if (cubit.select == 2)
                   ResultPage()
-                else
-                  FirstAid()
+                // else
+                //   FirstAid()
               ],
             ),
           ),
@@ -118,8 +110,11 @@ class Testing extends StatelessWidget {
 }
 
 List<String> items = [
-  'تحضيرات التحاليل',
-  'التحاليل المتاحة',
-  'نتائج التحاليل',
-  'First Aid'
+  // 'تحضيرات التحاليل',
+  // 'التحاليل المتاحة',
+  // 'نتائج التحاليل',
+  'Tests Prepare',
+  'Available Tests',
+  'Tests Result',
+  // 'First Aid'
 ];
