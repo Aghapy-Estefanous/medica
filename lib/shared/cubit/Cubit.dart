@@ -37,9 +37,9 @@ class AppCubit extends Cubit<AppState> {
           Iconsax.home,
         )),
     NavigationDestination(
-        label: "Categories",
+        label: "Aids",
         icon: Icon(
-          Icons.category,
+          Icons.medical_information_outlined,
         )),
     NavigationDestination(
         label: "Labs",
