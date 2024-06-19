@@ -47,7 +47,7 @@ class CareScreen extends StatelessWidget {
                           Colors.white.withOpacity(0.4),
                           BlendMode.srcOver,
                         ),
-                        child: Image.network(
+                        child: Image.asset(
                           'assets/images/backgrounds/tests.jpeg',
                           fit: BoxFit.cover,
                         ),
