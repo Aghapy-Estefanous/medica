@@ -519,10 +519,33 @@
                                   ))
                             ],
                           ),
-                          SizedBox(height: 20),
-                          cubit.imagePathFromgallary == null
-                              ? Text('No image selected.')
-                              : Text('${cubit.imagePathFromgallary!.name}'),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              cubit
+                                  .postFormData2(
+                                _typeController.text,
+                                _descriptionController.text,
+                                _Diagnosis.text,
+                                nid: cubit.basicDataModel!.data.nid,
+                                height: double.parse(_heightController.text),
+                                weight: double.parse(_weightController.text),
+                                valueResult:
+                                    double.parse(_diseaseValueController.text),
+                                dateOfDiagonsises:
+                                    DateTime.parse(_dateController.text),
+                              )
+                                  .then((e) {
+                                    cubit.getAllUserDiseases();
+                                _typeController.text = "";
+                                _descriptionController.text = "";
+                                _Diagnosis.text = "";
+                                _heightController.text = "";
+                                _weightController.text = "";
+                                _diseaseValueController.text = "";
+                                _dateController.text = "";
+                                cubit.SelectedDisease = null;
+                              });
+
 
                           const SizedBox(height: 20),
                           TextButton(
