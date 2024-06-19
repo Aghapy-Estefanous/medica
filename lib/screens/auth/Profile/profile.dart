@@ -61,6 +61,8 @@ class ProfileScreen extends StatelessWidget {
           child: CircleAvatar(
             radius: 80.0,
             // backgroundImag0e: const AssetImage('assets/images/homeRepaire2.jpg'),
+            backgroundImage:
+                AssetImage('assets/images/Auth/Profile-Avatar-PNG.png'),
             child: Align(
               alignment: Alignment.bottomRight,
               child: CircleAvatar(
@@ -96,15 +98,15 @@ class ProfileScreen extends StatelessWidget {
           child: CustomContainer(
             child: Column(
               children: [
-                CustomRow(userProfile?.phoneNumber, Iconsax.call),
-                SizedBox(height: 20),
+                // CustomRow(userProfile?.phoneNumber, Iconsax.call),
+                // SizedBox(height: 20),
                 CustomRow(userProfile?.email, Iconsax.message),
                 SizedBox(height: 20),
                 CustomRow(userProfile?.nid, Iconsax.card),
                 SizedBox(height: 20),
                 CustomRow(userProfile?.phoneNumber, Iconsax.mobile),
                 SizedBox(height: 20),
-                CustomRow(userProfile?.age.toString(), Iconsax.calendar),
+                CustomRow('22 years', Iconsax.calendar),
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -112,7 +114,7 @@ class ProfileScreen extends StatelessWidget {
                     Icon(Iconsax.location,
                         size: 18.0, color: AppColor.primaryColor),
                     const SizedBox(width: 10),
-                    Text('المركز , المنطقة', style: TextStyle(fontSize: 16.0)),
+                    Text('Location', style: TextStyle(fontSize: 16.0)),
                   ],
                 ),
               ],
@@ -126,10 +128,10 @@ class ProfileScreen extends StatelessWidget {
         CustomContainer(
           child: Column(
             children: [
-              RowUseritems(
-                  icon: Iconsax.money_send,
-                  label: 'Payment methods',
-                  fun: () {}),
+              // RowUseritems(
+              //     icon: Iconsax.money_send,
+              //     label: 'Payment methods',
+              //     fun: () {}),
               RowUseritems(
                   icon: Icons.people, label: 'Share to friends', fun: () {}),
               RowUseritems(
@@ -197,7 +199,7 @@ class mylogOutWidget extends StatelessWidget {
                     color: AppColor.orangcolorwithOpacity,
                   ),
                   onPressed: () {
-                    // context.read<ProfileCubit>().logout();
+                    context.read<ProfileCubit>().logout();
                   },
                 ),
                 Text(

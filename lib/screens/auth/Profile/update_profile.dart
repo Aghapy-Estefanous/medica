@@ -5,6 +5,7 @@ import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/screens/auth/Profile/cubit/update_profile_cubit.dart';
 import 'package:medica/screens/auth/register_auth/Gender.dart';
 import 'package:medica/shared/SharedWidget.dart';
+import 'package:medica/shared/styles/AppColor.dart';
 
 class bottomsheetwidget extends StatelessWidget {
   const bottomsheetwidget({
@@ -215,7 +216,7 @@ class bottomsheetwidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
         decoration: const BoxDecoration(
-          color: Color(0xFFEF476F),
+          color: AppColor.primaryColor,
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
         child: Text(

@@ -21,7 +21,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
-
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -229,7 +228,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   //.............get all diseases for drop down in form post disases..........................
-  
+
   List<singleDiseasObjectData>? ALLDiseasesList = [];
   Alldiseases? Model2;
 
@@ -275,7 +274,6 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllDiseasesErrorState(e.toString()));
     }
   }
- 
 
 //  int updateLength() {
 //   emit(UpdateLengthState());
@@ -283,7 +281,7 @@ class AppCubit extends Cubit<AppState> {
 //    // print("💤💥Notify UI to update ${LengthOfAllUserDiseasesList}") ;
 
 // }
- // Initialize with 0 initially
+  // Initialize with 0 initially
 
   //................................. setstate current image picker.....
 
@@ -335,7 +333,7 @@ class AppCubit extends Cubit<AppState> {
       data: formData,
     )
         .then((dynamic value) {
-     LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
+      LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
       emit(PostDiseasesSuccessS());
       if (value != null) {
         print("🚨 data after send it $value 🌍");
