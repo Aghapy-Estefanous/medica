@@ -62,6 +62,11 @@ class _TestResultDetailsState extends State<TestResultDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios)),
         title: Text(widget.test!.title),
       ),
       body: SingleChildScrollView(
