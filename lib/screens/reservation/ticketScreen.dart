@@ -15,7 +15,7 @@ class TicketScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppState>(listener: (context, state) {
-      if (state is ReservationSuccessState) {}
+     
     }, builder: (context, state) {
       return State is ReservationLoadingState
           ? Center(child: CircularProgressIndicator())

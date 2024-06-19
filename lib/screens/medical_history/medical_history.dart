@@ -118,7 +118,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 ),
                                 presonalDataComponent(
                                     "Height",
-                                    cubit.lastUserHeight.toString(),
+                                    cubit.AllUserDiseasesList[cubit.LengthOfAllUserDiseasesList-1].height.toString(),
                                     Icons.height),
                                 const SizedBox(width: 10),
                                 Container(
@@ -130,18 +130,18 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 const SizedBox(width: 3),
                                 presonalDataComponent(
                                     "Weight",
-                                    cubit.lastUserWeight.toString(),
+                                      cubit.AllUserDiseasesList[cubit.LengthOfAllUserDiseasesList-1].height.toString(),
                                     Icons.accessibility),
                                 const SizedBox(width: 10),
-                                Container(
-                                  width: 2, // Thickness of the line
-                                  height: 20, // Height of the line
-                                  color:
-                                      const Color.fromARGB(255, 197, 191, 191),
-                                ),
-                                const SizedBox(width: 3),
-                                presonalDataComponent("Pressure", "178",
-                                    Icons.favorite_border_outlined),
+                                // Container(
+                                //   width: 2, // Thickness of the line
+                                //   height: 20, // Height of the line
+                                //   color:
+                                //       const Color.fromARGB(255, 197, 191, 191),
+                                // ),
+                                // const SizedBox(width: 3),
+                                // presonalDataComponent("Pressure", "178",
+                                //     Icons.favorite_border_outlined),
                               ],
                             ),
                           ),

@@ -15,9 +15,11 @@ class DiseaseDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios)),
         title: Text('Disease Details'),
         backgroundColor: AppColor.primaryColor,
       ),
@@ -70,12 +72,16 @@ class DiseaseDetailsScreen extends StatelessWidget {
                       color: AppColor.primaryColor),
                 ),
                 IconButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      String? token = sharedPreferences.getString('Token');
+
                       navigateToScreen(
                           context,
                           FullScreenImageViewer(
                               imageUrl: removeFirstAndLastChar(
-                                  diseaseData.docViewUrl.toString())));
+                                  diseaseData.docViewUrl.toString()), Token: token,),);
                     },
                     icon: Icon(
                       Icons.now_wallpaper,
@@ -128,8 +134,9 @@ String removeFirstAndLastChar(String str) {
 
 class FullScreenImageViewer extends StatelessWidget {
   final String imageUrl;
+   String? Token;
 
-  FullScreenImageViewer({required this.imageUrl});
+  FullScreenImageViewer({required this.imageUrl, this.Token});
 
   @override
   Widget build(BuildContext context) {
@@ -137,9 +144,10 @@ class FullScreenImageViewer extends StatelessWidget {
       body: Stack(
         children: [
           PhotoView(
-            imageProvider: NetworkImage(imageUrl),
+            
+            imageProvider: NetworkImage(imageUrl, headers: {'Authorization': 'Bearer $Token'} ),
             backgroundDecoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColor.primaryColor,
             ),
           ),
           Positioned(
@@ -151,10 +159,7 @@ class FullScreenImageViewer extends StatelessWidget {
                 SharedPreferences sharedPreferences =
                     await SharedPreferences.getInstance();
                 String? token = sharedPreferences.getString('Token');
-                final response = await dio_helper.getData(
-                  url: Uri.parse(imageUrl).toString(),
-                );
-                print(response);
+
                 Navigator.pop(context);
               },
             ),

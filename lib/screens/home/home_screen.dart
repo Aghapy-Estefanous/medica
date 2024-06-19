@@ -8,13 +8,13 @@ import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/searchScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/home/AllclinicsOfDepartment.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
 import 'package:medica/screens/auth/Profile/cubit/profile_cubit.dart';
-
 class Home_Screen extends StatelessWidget {
   const Home_Screen({Key? key}) : super(key: key);
 
@@ -131,6 +131,8 @@ class Home_Screen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          cubit.getAllReservation();
+                          print("list reservation🍓🍓 is ${cubit.myReservationsList}");
                           navigateToScreen(context, TicketScreen());
                         },
                         child: Container(

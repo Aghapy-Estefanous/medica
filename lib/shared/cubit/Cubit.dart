@@ -21,7 +21,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/screens/static_pages/testing/testing.dart';
 import 'package:medica/screens/medical_history/medical_history.dart';
 
-
 // import 'package:medica/screens/auth/loginS/loginS.dart';
 
 class AppCubit extends Cubit<AppState> {
@@ -39,23 +38,16 @@ class AppCubit extends Cubit<AppState> {
     NavigationDestination(
         label: "Aids",
         icon: Icon(
-          Icons.medical_information_outlined,
+          Iconsax.add_square,
+          // Icons.medical_information_outlined,
         )),
-    NavigationDestination(
-        label: "Labs",
-        icon: Icon(
-          Icons.library_books_outlined,
-        )),
+    NavigationDestination(label: "Labs", icon: Icon(Iconsax.health)),
     NavigationDestination(
         label: "profile",
         icon: Icon(
-          Icons.person,
+          Iconsax.user,
         )),
-    NavigationDestination(
-        label: "medical history",
-        icon: Icon(
-          Icons.settings,
-        )),
+    NavigationDestination(label: "medical history", icon: Icon(Iconsax.heart)),
   ];
   List<Widget> Screen = [
     const Home_Screen(),
@@ -74,22 +66,24 @@ class AppCubit extends Cubit<AppState> {
   }
 
 // reserve method1
-  List<DataUserReservation>? myReservationsList = [];
-  getdata() async {
+  late List<DataUserReservation>? myReservationsList=[];
+   UserReservationModel? modelReservation;
+  Future<void> getAllReservation() async {
     try {
-      late UserReservationModel modelReservation;
+      
       emit(ReservationLoadingState());
       var response = await api.getWithqueryParameter(
         Endpoint.BaseUrl + Endpoint.USER_RESERVATION,
       );
       // print(response.data);
       modelReservation = UserReservationModel.fromJson(response);
-      myReservationsList = modelReservation.data;
-      print("❄ 🟢❄🟢💤get all reservation${modelReservation.data?[0].firstname}");
+      myReservationsList = modelReservation?.data;
+      print(
+          "❄ 🟢❄🟢💤get all reservation ${modelReservation?.data?[0].firstname}");
 
       emit(ReservationSuccessState());
     } on ServerExceptions catch (e) {
-       print("❄ 💥❌error💥💤get all reservation${e.toString()}}");
+      print("❄ 💥❌error💥💤get all reservation${e.toString()}}");
       print(e.toString());
       emit(ReservationErrorState(e.errorModel.message));
     }
@@ -106,9 +100,6 @@ class AppCubit extends Cubit<AppState> {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
 
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      String? token = sharedPreferences.getString('Token');
       var response = await api.getWithqueryParameter(
         Endpoint.BaseUrl + Endpoint.ALLDEPARTMENTS,
       );
@@ -229,7 +220,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   //.............get all diseases for drop down in form post disases..........................
-  
+
   List<singleDiseasObjectData>? ALLDiseasesList = [];
   Alldiseases? Model2;
 
@@ -275,7 +266,6 @@ class AppCubit extends Cubit<AppState> {
       emit(GetAllDiseasesErrorState(e.toString()));
     }
   }
- 
 
 //  int updateLength() {
 //   emit(UpdateLengthState());
@@ -283,7 +273,7 @@ class AppCubit extends Cubit<AppState> {
 //    // print("💤💥Notify UI to update ${LengthOfAllUserDiseasesList}") ;
 
 // }
- // Initialize with 0 initially
+  // Initialize with 0 initially
 
   //................................. setstate current image picker.....
 
@@ -335,7 +325,7 @@ class AppCubit extends Cubit<AppState> {
       data: formData,
     )
         .then((dynamic value) {
-     LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
+      LengthOfAllUserDiseasesList = AllUserDiseasesList.length;
       emit(PostDiseasesSuccessS());
       if (value != null) {
         print("🚨 data after send it $value 🌍");

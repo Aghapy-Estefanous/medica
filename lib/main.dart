@@ -56,7 +56,7 @@ class MainApp extends StatelessWidget {
     cubit.userData();
     return BlocProvider(
       create: (context) => AppCubit(DioConsumer(dio: Dio()))
-        ..getdata()
+        ..getAllReservation()
         ..GetAllDepartments()
         ..GetAllClinics()
         ..getALLDiseases2()
