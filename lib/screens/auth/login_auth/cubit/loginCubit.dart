@@ -68,8 +68,8 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   //VisiablityIconState
-  bool isvisiable = false;
-  IconData icon = Icons.visibility;
+  bool isvisiable = true;
+  IconData icon = Icons.visibility_off;
 
   void ChangeVisiablityIcon() {
     isvisiable = !isvisiable;

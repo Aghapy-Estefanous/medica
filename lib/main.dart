@@ -19,7 +19,7 @@ import 'package:medica/screens/auth/register_auth/cubit/register_cubit.dart';
 import 'package:medica/screens/auth/NewPasswordS/cubit/new_password_cubit.dart';
 import 'package:medica/screens/auth/ConfirmEmailS/cubit/confirm_email_cubit.dart';
 
-const BaseAPI = 'http://medicalsystem.runasp.net';
+const BaseAPI = 'https://medicalsystem.runasp.net';
 
 main() async {
   Bloc.observer = MyBlocObserver();

@@ -29,7 +29,6 @@ class Endpoint {
   static const BASIC_DATA = 'ApplicationUser/BasicData';
   static const All_POSSIBL_EDISEASES = 'Disease';
   static const USER_Disease = 'ApplicationUser/GetAllDiseaseOfUser';
- 
 }
 //http://medicalsystem-001-site1.ftempurl.com
 //Authorization : 'Bearer ${AccessToken}'

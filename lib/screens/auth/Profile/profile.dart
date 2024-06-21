@@ -3,14 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/screens/auth/Profile/update_profile.dart';
+import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/screens/onboarding/onboarding.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-// import '../register_auth/Gender.dart';
-import '../../splash_screen.dart';
-import 'cubit/profile_cubit.dart';
-// import 'cubit/update_profile_cubit.dart';
+import 'cubit/profile_cubit.dart'; // Import this
+
+// Your existing imports
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -21,7 +22,6 @@ class ProfileScreen extends StatelessWidget {
       create: (context) => ProfileCubit()..userData(),
       child: Scaffold(
         body: Container(
-          // height: 650,
           margin: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -35,12 +35,12 @@ class ProfileScreen extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is ProfileData) {
                   var userProfile = state.userProfile;
-                  return cool(userProfile, context);
+                  return _buildProfile(userProfile, context);
                 } else if (state is ProfileError) {
                   return Center(child: Text(state.message));
                 } else {
                   return Center(
-                      child: Text('Please login to see your profile'));
+                      child: Text(tr('loginMessage'))); // Localized string
                 }
               },
             ),
@@ -50,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Column cool(ProfileModel? userProfile, BuildContext context) {
+  Widget _buildProfile(ProfileModel? userProfile, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -60,7 +60,6 @@ class ProfileScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           child: CircleAvatar(
             radius: 80.0,
-            // backgroundImag0e: const AssetImage('assets/images/homeRepaire2.jpg'),
             backgroundImage:
                 AssetImage('assets/images/Auth/Profile-Avatar-PNG.png'),
             child: Align(
@@ -84,8 +83,11 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16.0),
             child: Text(
               userProfile != null
-                  ? 'Hi ${userProfile.firstName} ${userProfile.lastName}'
-                  : 'Hi User',
+                  ? tr('nameLabel2', namedArgs: {
+                      'first': userProfile.firstName ?? '',
+                      'second': userProfile.lastName ?? '',
+                    })
+                  : tr('helloUserMessage'), // Localized strings
               style: TextStyle(
                 fontFamily: 'SF Pro',
                 fontWeight: FontWeight.w700,
@@ -98,15 +100,14 @@ class ProfileScreen extends StatelessWidget {
           child: CustomContainer(
             child: Column(
               children: [
-                // CustomRow(userProfile?.phoneNumber, Iconsax.call),
-                // SizedBox(height: 20),
                 CustomRow(userProfile?.email, Iconsax.message),
                 SizedBox(height: 20),
                 CustomRow(userProfile?.nid, Iconsax.card),
                 SizedBox(height: 20),
                 CustomRow(userProfile?.phoneNumber, Iconsax.mobile),
                 SizedBox(height: 20),
-                CustomRow('22 years', Iconsax.calendar),
+                CustomRow(
+                    tr('ageMessage',namedArgs: {"age": userProfile?.age.toString() ?? ""}), Iconsax.calendar), // Localized string
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -114,7 +115,8 @@ class ProfileScreen extends StatelessWidget {
                     Icon(Iconsax.location,
                         size: 18.0, color: AppColor.primaryColor),
                     const SizedBox(width: 10),
-                    Text('Location', style: TextStyle(fontSize: 16.0)),
+                    Text(tr('locationMessage'),
+                        style: TextStyle(fontSize: 16.0)), // Localized string
                   ],
                 ),
               ],
@@ -128,14 +130,14 @@ class ProfileScreen extends StatelessWidget {
         CustomContainer(
           child: Column(
             children: [
-              // RowUseritems(
-              //     icon: Iconsax.money_send,
-              //     label: 'Payment methods',
-              //     fun: () {}),
               RowUseritems(
-                  icon: Icons.people, label: 'Share to friends', fun: () {}),
+                  icon: Icons.people,
+                  label: tr('shareMessage'),
+                  fun: () {}), // Localized string
               RowUseritems(
-                  icon: Iconsax.setting_24, label: 'Settings', fun: () {}),
+                  icon: Iconsax.setting_24,
+                  label: tr('settingsMessage'),
+                  fun: () {}), // Localized string
             ],
           ),
         ),
@@ -146,6 +148,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
+// CustomRow, mylogOutWidget, RowUseritems widgets remain unchanged
 class CustomRow extends StatelessWidget {
   final String? txt;
   final IconData iconed;
@@ -178,7 +181,7 @@ class mylogOutWidget extends StatelessWidget {
         if (state is ProfileLoggedOut) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => SplashScreen()),
+            MaterialPageRoute(builder: (context) => LoginScreen()),
             (route) => false,
           );
         }
@@ -203,7 +206,7 @@ class mylogOutWidget extends StatelessWidget {
                   },
                 ),
                 Text(
-                  'Logout',
+                  tr('logoutMessage'),
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColor.orangcolorwithOpacity,
