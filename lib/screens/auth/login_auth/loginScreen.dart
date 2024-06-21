@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                           //************************password filed*************************
                           TextFormField(
                             controller: passwordController,
-                            obscureText: LoginCubit.get(context).isvisiable,
+                            obscureText: cubit.isvisiable,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';
@@ -143,10 +143,9 @@ class LoginScreen extends StatelessWidget {
                               prefixIcon: Icon(Iconsax.lock),
                               suffixIcon: IconButton(
                                 alignment: Alignment.centerRight,
-                                icon: Icon(Icons.visibility_off),
+                                icon: Icon(cubit.icon),
                                 onPressed: () {
-                                  LoginCubit.get(context)
-                                      .ChangeVisiablityIcon();
+                                  cubit.ChangeVisiablityIcon();
                                 },
                               ),
                               hintText: 'Password',
@@ -158,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                             child: Text(
                               ' Forgot password?',
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w500),
+                                  fontSize: 15, fontWeight: FontWeight.w500,color:AppColor.orangcolor ),
                             ),
                             onTap: () {
                               navigateToScreen(
