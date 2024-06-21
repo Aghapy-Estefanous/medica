@@ -39,6 +39,152 @@
 
   "noDataMessage": "There is no data. Click add to add yours",
   "detailsButton": "Details",
+  "#####################################     Profile     #############################################":"",
+    "nameLabel2": "Hello {first} {second}",
+    "helloUserMessage": "Hello User",
+    "loginMessage": "Please login to see your profile",
+    "ageMessage": "{age} years",
+    "locationMessage": "Location",
+    "shareMessage": "Share to friends",
+    "settingsMessage": "Settings",
+    "logoutMessage":"Logout",
+    "update":"Update Your Profile",
+
+
+  "fn" : "First Name",
+  "ln" : "Last Name",
+  "age" : "Age",
+  "num" : "Number",
+  "email" : "Email",
+  "nid" : "NID",
+  "Select your gender :" : "Select your gender :",
+  "Male" : "Male",
+  "Female" : "Female",
+  "Update" : "Update",
+
+  "6to8":"Signs of readiness for solid food\n\nSame as 4 to 6 months\n\nWhat to feed\n\nBreast milk or formula, plus\nPureed or strained fruits (banana, pears, applesauce, peaches, avocado)\nPureed or strained vegetables (well-cooked carrots, squash, sweet potato)\nPureed or mashed meat (chicken, pork, beef)\nPureed or mashed tofu\nSmall amounts of pureed or soft pasteurized cheese, cottage cheese, or unsweetened yogurt (no cow's milk until age 1)\nPureed or mashed legumes (black beans, chickpeas, edamame, fava beans, black-eyed peas, lentils, kidney beans)\nIron-fortified cereal (oats, barley); small pieces of bread and crackers\n\nHow much per day\n\nBreastfeeding or formula: 3 to 5 feedings (breastfeeding, or 6- to 8-ounce bottles)\n2 to 3 tablespoons fruit, gradually increasing to 4 to 8 tablespoons\n2 to 3 tablespoons vegetables, gradually increasing to 4 to 8 tablespoons\n1 to 2 tablespoons grain products, gradually increasing to 2 to 4 tablespoons\n1 to 2 tablespoons protein-rich foods, gradually increasing to 2 to 4 tablespoons\n\nFeeding tips\n\nAs your baby gets more comfortable with eating, you can start to add a variety of foods and increase the frequency of meals. By 8 months, it's typical for your baby to be eating one to two meals a day.\nWhenever you introduce a new food, start with a very small amount (a teaspoon or two) to allow your baby to get used to a new flavor and texture.",
+  "8to12":"Signs of readiness for solid and soft finger foods\n\nSame as 6 to 8 months, plus\nPicks up objects with thumb and forefinger (pincer grasp)\nCan transfer items from one hand to the other\nMoves jaw in a chewing motion\nSwallows food more easily\nNo longer pushes food out of mouth with tongue\nTries to use a spoon\n\nWhat to feed\n\nBreast milk or formula, plus\nSoft pasteurized cheese, cottage cheese, and unsweetened yogurt\nBite-size, soft-cooked vegetables (carrots, squash, potatoes, sweet potatoes)\nFruit mashed or cut into soft cubes or strips (bananas, peaches, pears, avocados)\nFinger foods (O-shaped cereal, small bits of scrambled eggs, well-cooked pieces of potato, well-cooked spiral pasta, teething crackers, small pieces of bagel)\nProtein-rich foods (small bits of meat, poultry, boneless fish, tofu, and well-cooked beans, like lentils, split peas, pintos, or black beans)\nIron-fortified cereal and other grains (barley, wheat, oats, mixed cereals)\n\nHow much per day\n\nBreastfeeding or formula: 3 to 4 feedings (breastfeeding, or 7- to 8-ounce bottles)\n1/2 to 3/4 cup fruit\n1/2 to 3/4 cup vegetables\n1/4 to 1/2 cup grain products\n1/4 to 1/2 cup protein-rich foods\n\nFeeding tips\n\nBy 8 months or so, babies often have three meals and start adding snacks.\nContinue to offer a wide variety of fruits, vegetables, grains, and protein-rich foods. As your baby's eating skills improve, gradually introduce more textures and soft finger foods.\nIt's fine to serve your baby what the rest of the family is eating – just watch out for added sugars, which aren't recommended for children under 2. Check the Nutrition Facts label on packaged foods, and try to steer clear of foods that list 1 gram or more of 'Added Sugars.'",
+
+
+  "babyFeedingGuideIntro":"Use this baby feeding guide to find out what and how much to feed your child in the first year. The amounts are general recommendations only, so don't worry if your little one eats a bit more or less than suggested. It's always a good idea to discuss your plan for starting solids with your child's doctor before getting started.",
+
+  "painfulLetdownExplanation":"A tingling sensation is typical when the milk ducts in your breasts constrict to pump milk into the nipples (this is called letdown). But some women have pain during letdown.\n\nThis can happen if you're producing too much milk, or if you have clogged ducts or mastitis (an inflammation of breast tissue). It can also happen if you have a thrush on your nipples/breasts. Use breathing or relaxation techniques to cope, and see your provider if you have any signs of infection, such as a fever or itchy, red, or burning nipples.\n\nLearn more about handling painful letdown.",
+
+  "vasospasmExplanation" :"Restricted blood flow caused by tightening blood vessels in your breasts can cause a burning or stabbing pain. You may notice that your breasts become blanched and your nipples change color (become more purple or red). Having cracked nipples or an infection can make the pain worse. Keeping your breasts warm and avoiding caffeine may help. But see your healthcare provider or lactation consultant to get to the underlying reason for the vasospasms. They may recommend medication.",
+
+
+  "teethingExplanation":"Your baby may get new teeth without it affecting breastfeeding in the least. But – in an effort to adjust because of the pain they feel on their gums when nursing – they may change position or latch, or even bite to relieve the discomfort.\n\nPay attention to your baby's latch, and experiment with different breastfeeding positions. Anticipate a bite, when you can (you may notice your baby moves their tongue out of the way first), and unlatch your baby by putting your finger in the corner of their mouth. Massaging your baby's gums or giving them a teether before nursing may help.",
+
+
+  "sensitiveNipplesExplanation":"Tender nipples are often an early sign of pregnancy or an imminent menstrual period. And some breast surgeries may result in numbness or even pain in your nipple or breast, because of nerve damage. Having your baby latch on when your nipples are feeling sensitive can be very uncomfortable. To avoid nipple pain, make sure your baby has a good latch (they aren't sucking on the end of your nipple, for example).",
+
+  "postpartumCrampingExplanation":"After you deliver your baby, your uterus needs to return to its pre-pregnancy size. You may feel some cramping when this happens, and the cramping may be especially intense while nursing. That's because breastfeeding can stimulate uterine contractions – which is good, though sometimes painful.\n\nBreathing exercises and massage may help you get through the cramping. If needed, you can also take over-the-counter pain relievers to help with the pain, which should disappear within a week or so.",
+
+  "breastfeedingNotAlwaysHard":"Breastfeeding isn't always hard. Sometimes the whole process goes smoothly and comfortably, and a mom and baby breastfeed for months or years without a hitch. But breastfeeding often comes with challenges, big and little. Your baby may take some time to learn to latch on, for example, or you may struggle with milk supply, pain, or infection. Complications like these often come at the beginning of your breastfeeding journey, which can be especially discouraging.",
+
+  "breastfeedingPain":"Breastfeeding shouldn't hurt. If it does, it's a sign that something's wrong. Most often it's because your baby isn't latching well (see below). A lactation consultant can help you determine if that's the case and show you how to correct your baby's latch.\n\nOther issues that cause discomfort can pop up, too, such as:",
+
+
+
+
+
+  "maintxt": "Focus on eating well",
+    "sectxt": "Keep plenty of healthy snacks on hand, and plan your meals around whole grains and fresh fruits and vegetables. (Learn the 12 best foods to eat when pregnant.) Limit calories from saturated fats and added sugars. If you're on a special diet (for diabetes, a food allergy, or food intolerance, for example) or are a vegetarian or vegan, you may find it helpful to consult with a dietitian for help making sure you meet all of your nutritional requirements during pregnancy.\n\nMake sure you get plenty of protein, which is the building block of cells. You now need about 70 grams a day compared to 45 grams before you got pregnant. You also need:",
+    "spointtxt": {
+      "folic_acid": "Folic acid",
+      "iron": "Iron",
+      "calcium": "Calcium",
+      "iodine": "Iodine",
+      "choline": "Choline",
+      "vitamin_a": "Vitamin A",
+      "vitamin_c": "Vitamin C",
+      "vitamin_d": "Vitamin D",
+      "vitamin_b6": "Vitamin B6",
+      "vitamin_b12": "Vitamin B12",
+      "dha": "DHA"
+    },
+    "ssectxt": {
+      "folic_acid": " (600 mcg daily) to help prevent neural tube defects (NTDs).",
+      "iron": " (27 mg daily) to help red blood cells deliver oxygen to your baby. Iron also helps prevent anemia.",
+      "calcium": " (1000 mg for women over age 18, 1300 mg for women 18 and younger) to build strong bones and teeth and develop a healthy heart, nerves, and muscles.",
+      "iodine": " (220 mcg daily) to help with brain, skeleton, and nervous system development.",
+      "choline": " (450 mg daily) for brain and spinal cord development.",
+      "vitamin_a": " (770 mcg RAE daily for women ages 19 and older, 750 mcg RAE for women ages 18 and younger) for your baby's eyesight, organs, and bone growth.",
+      "vitamin_c": " (85 mg daily if 19 years or older, 80 mg daily if 18 or younger) to help build strong bones and muscles. Vitamin C will also help you absorb more iron.",
+      "vitamin_d": " (600 IU daily) to build your baby's bones and teeth.",
+      "vitamin_b6": " (1.9 mg daily) to help build your baby's brain and nervous system.",
+      "vitamin_b12": " (2.6 mcg daily) to make healthy red blood cells and ensure proper brain and spinal cord development.",
+      "dha": ", an omega-3 fatty acid (at least 200 mg) for the development of your baby's brain and eyes."
+    },
+    "intro": {
+      "pointtxt": "Good prenatal care is essential for you and your baby. If you haven't yet chosen a doctor or a midwife to care for you during pregnancy, start asking for recommendations from friends, family, and any of your other healthcare providers. If you don't have health insurance or need low-cost prenatal care, there are options. It's important to find a pregnancy caregiver who makes you feel comfortable and safe.",
+      "sectxt": "Once you get a positive home pregnancy test, call your healthcare provider right away and schedule your first prenatal visit. During that visit you'll be screened for certain conditions that could lead to complications. Your provider will also review any medications you're taking and discuss the risks and benefits before making the decision to stop taking any medicines."
+    }
+
+
+
+
+    ,"first_aid": {
+    "first": "First aid is the immediate care a sick or injured person gets. In some cases, it may be the only care a person needs. In others, first aid is a way to prevent a person's condition from worsening and keep them alive until paramedics arrive or they are taken to the hospital. The best way to prepare for these events is to get official first-aid training. In the meantime, there are some basic life-saving steps you can learn. This article goes over the first aid steps to follow in 10 different situations and how to tell if more care is needed.",
+    "second": {
+      "title": "ABCs of First Aid",
+      "description": "If someone is unconscious or unresponsive, the basic principle of first aid that you need to know is ABC: airway, breathing, and circulation.",
+      "airway": "Airway",
+      "airway_desc": "If someone's not breathing, the first thing you need to do is open their airway.",
+      "breathing": "Breathing",
+      "breathing_desc": "If you have cleared a person's airway but they're still not breathing, provide rescue breathing.",
+      "circulation": "Circulation",
+      "circulation_desc": "As you are doing rescue breathing, perform chest compressions to keep the person's blood circulating. If the person is not responsive, check their pulse. If their heart has stopped, provide chest compressions."
+    },
+    "third": {
+      "title": "First Aid for a Stopped Heart",
+      "image": "https://www.verywellhealth.com/thmb/EiHS9rCIq-hQJehIKP2Se8ioEDE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-505252032-56d1ec685f9b5879cc81553d.jpg",
+      "description": "Cardiopulmonary resuscitation (CPR) is one of the most important emergency medical procedures that a person can know.",
+      "cpr_desc": "When a person is in cardiac arrest (heart is not beating), doing CPR and/or using an AED could restart their heart and/or recirculate blood until their heart can be restarted with a defibrillator. Saving lives: why CPR AED training matter. This can restore their life.",
+      "aed_desc": "AEDs are available in many public areas and businesses. These first aid devices are made to be easy to use even if you have no training.",
+      "aed_avail_desc": "AEDs are available in many public areas and businesses. These first aid devices are made to be easy to use even if you have no training.",
+      "what_to_do": "What to Do",
+      "what_to_do_1": "1. Find a person nearby. Make eye contact, point to them, and say: “Call 911.”",
+      "what_to_do_2": "2. Start doing chest compressions on the person who needs help. Using both your hands, push down hard and fast in the center of the person's chest. Let their chest come back up naturally between compressions. You may hear pops or snaps; this is normal.",
+      "what_to_do_3": "3. Keep going until someone with more training arrives.",
+      "what_to_do_4": "4. If you're trained in CPR, you can use chest compressions and rescue breathing.",
+      "what_to_do_5": "5. If it's available, use an AED. However, do not put off doing chest compressions to go look for an AED. If possible, instruct someone else to go find the device and bring it to you."
+    },
+    "fourth": {
+      "title": "First Aid for Bleeding",
+      "image": "https://www.verywellhealth.com/thmb/S7Pp-oYhwU-A86gseGC41RDFM24=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-525386797-5a6a1eccfa6bcc003690b97f.jpg",
+      "description": "The color of the blood and how it's leaving the body can give you a sense of the extent of the injury:",
+      "capillaries": "Capillaries: ",
+      "capillaries_desc": "Bleeding from the smallest blood vessels (capillaries) looks like a trickle. This kind of bleeding usually stops on its own.",
+      "veins": "Veins: ",
+      "veins_desc": "A consistent blood flow and blood that's a dark red color is most likely coming from the veins. This type of bleeding can range from mild to severe.",
+      "arteries": "Arteries: ",
+      "arteries_desc": "Arteries are the largest blood vessels and carry a lot of oxygen. If they are injured, bright red blood will spurt out. Blood can be lost very fast with this kind of bleeding.",
+      "what_to_do": "What to Do",
+      "what_to_do_1": "1. Put on disposable gloves if you have them. This will protect you from infectious diseases like viral hepatitis and HIV/AIDS that can be spread in a person's blood.",
+      "what_to_do_2": "2. Rinse the wound with water.",
+      "what_to_do_3": "3. Cover the wound with a gauze or cloth (e.g., towel, blanket, clothing).",
+      "what_to_do_4": "4. Apply direct pressure to stop the flow of blood and encourage clotting (when blood naturally thickens to stop blood loss).",
+      "what_to_do_5": "5. Elevate the bleeding body part above the person’s heart if you can.",
+      "what_to_do_6": "6. Do not remove the cloth if it becomes soaked. Removing the first layer will interfere with the clotting process and result in more blood loss. Instead, add more layers if needed.",
+      "what_to_do_7": "7. Once bleeding has stopped, put a clean bandage on the wound."
+    },
+    "fifth": {
+      "title": "First Aid for Burns",
+      "image": "https://www.verywellhealth.com/thmb/kkbt6ABHO51uhwxndw_i06VDV7U=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/woman-washing-hands-in-washstand-882017214-5b57492cc9e77c003756d31c.jpg",
+      "description": "The first step to treating a burn is to stop the burning process. Initial first aid treatment for minor burns. This might mean: Cleaning up chemicals Turning off electricity Cooling heat with running water Covering up or taking a person inside out of the sun",
+      "severity": "The severity of a burn is based on how deep in the skin it is and how big it is:",
+      "first_degree": "First-degree burn: ",
+      "first_degree_desc": "This kind of burn only affects only the outer layer of skin and causes redness and swelling. It is considered a minor burn.",
+      "second_degree": "Second-degree burn: ",
+      "second_degree_desc": "This kind of burn affects two layers of skin and causes blistering, redness, and swelling. It is considered a major burn if it's more than 3 inches wide or is on the face, hands, feet, genitals, buttocks, or over a major joint.",
+      "third_degree": "Third-degree burn: ",
+      "third_degree_desc": "This kind of burn affects deeper layers of skin and causes white or blackened skin that can be numb. It is always considered a major burn."
+    }
+  },
+
+
+  "detailsButton": "Details",
 
   "_comment---5": "🔥✅medical post✅",
   "enterDiseaseDetails": "Enter Disease Details",

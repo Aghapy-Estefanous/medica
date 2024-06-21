@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
@@ -17,8 +18,8 @@ class GenderSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Gender> genders = [
-      Gender("Male", Iconsax.man, false),
-      Gender("Female", Iconsax.woman, false),
+      Gender("Male".tr(), Iconsax.man, false),
+      Gender("Female".tr(), Iconsax.woman, false),
       // Gender("Others", Iconsax.omega_circle, false),
     ];
 
