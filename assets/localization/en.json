@@ -38,7 +38,6 @@
   "addButtonLabel": "Add",
 
   "noDataMessage": "There is no data. Click add to add yours",
-  "detailsButton": "Details",
   "#####################################     Profile     #############################################":"",
     "nameLabel2": "Hello {first} {second}",
     "helloUserMessage": "Hello User",
