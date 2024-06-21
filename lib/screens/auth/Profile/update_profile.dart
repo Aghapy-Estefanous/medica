@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -60,7 +61,7 @@ class bottomsheetwidget extends StatelessWidget {
                           children: [
                             Center(
                               child: Text(
-                                'Update Your Profile',
+                                'update'.tr(),
                                 style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
@@ -71,18 +72,18 @@ class bottomsheetwidget extends StatelessWidget {
                               height: 15,
                             ),
                             CustomTxtFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your first name';
-                                } else if (value.length < 3) {
-                                  return 'name length must be at least 3 chars ';
-                                }
-                                return null;
-                              },
+                              // validator: (String? value) {
+                              //   if (value!.isEmpty) {
+                              //     return 'nameError'.tr();
+                              //   } else if (value.length < 3) {
+                              //     return 'name length must be at least 3 chars ';
+                              //   }
+                              //   return null;
+                              // },
                               controller: _firstnameController,
-                              hint: 'First Name',
+                              hint: 'fn'.tr(),
                               icon: Icon(Iconsax.user),
-                              text: 'First Name',
+                              text: 'fn'.tr(),
                               // initialValue:
                               //     userProfile?.firstName ?? 'FirstName',
                             ),
@@ -90,93 +91,93 @@ class bottomsheetwidget extends StatelessWidget {
                               height: 15,
                             ),
                             CustomTxtFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your last name';
-                                } else if (value.length < 3) {
-                                  return 'name length must be at least 3 chars ';
-                                }
-                                return null;
-                              },
+                              // validator: (String? value) {
+                              //   if (value!.isEmpty) {
+                              //     return 'Please enter your last name';
+                              //   } else if (value.length < 3) {
+                              //     return 'name length must be at least 3 chars ';
+                              //   }
+                              //   return null;
+                              // },
                               controller: _lastnameController,
-                              hint: 'Last Name',
+                              hint: 'ln'.tr(),
                               icon: Icon(Iconsax.user),
-                              text: 'Last Name',
+                              text: 'ln'.tr(),
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             CustomTxtFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your E-mail';
-                                } else if (RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(value) ==
-                                    false) {
-                                  return 'Please enter a valid E-mail';
-                                }
-                                return null;
-                              },
+                              // validator: (String? value) {
+                              //   if (value!.isEmpty) {
+                              //     return 'Please enter your E-mail';
+                              //   } else if (RegExp(
+                              //               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              //           .hasMatch(value) ==
+                              //       false) {
+                              //     return 'Please enter a valid E-mail';
+                              //   }
+                              //   return null;
+                              // },
                               controller: _emailController,
-                              hint: 'E-mail',
+                              hint: 'email'.tr(),
                               icon: Icon(Iconsax.message),
-                              text: 'E-mail',
+                              text: 'email'.tr(),
                               keyType: TextInputType.emailAddress,
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             CustomTxtFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your age';
-                                }
-                                return null;
-                              },
+                              // validator: (String? value) {
+                              //   if (value!.isEmpty) {
+                              //     return 'ageError'.tr();
+                              //   }
+                              //   return null;
+                              // },
                               controller: _ageController,
-                              hint: 'Age',
+                              hint: 'age'.tr(),
                               icon: Icon(Iconsax.calendar),
-                              text: 'Age',
+                              text: 'age'.tr(),
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             CustomTxtFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your phone number';
-                                } else if (value.length < 11) {
-                                  return 'phone length must be at least 11 number ';
-                                }
-                                return null;
-                              },
+                              // validator: (String? value) {
+                              //   if (value!.isEmpty) {
+                              //     return 'Please enter your phone number';
+                              //   } else if (value.length < 11) {
+                              //     return 'phone length must be at least 11 number ';
+                              //   }
+                              //   return null;
+                              // },
                               controller: _phoneController,
-                              hint: 'Phone',
+                              hint: 'num'.tr(),
                               icon: Icon(Iconsax.call),
-                              text: 'Phone Number',
+                              text: 'num'.tr(),
                               keyType: TextInputType.number,
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             CustomTxtFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your NID';
-                                }
-                                return null;
-                              },
+                              // validator: (String? value) {
+                              //   if (value!.isEmpty) {
+                              //     return 'Please enter your NID';
+                              //   }
+                              //   return null;
+                              // },
                               controller: _nidController,
-                              hint: 'Nid',
+                              hint: 'nid'.tr(),
                               icon: Icon(Iconsax.card),
-                              text: 'National ID',
+                              text: 'nid'.tr(),
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             Text(
-                              'Select your gender :',
+                              'Select your gender :'.tr(),
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             GenderSelector(_gender),
@@ -186,20 +187,19 @@ class bottomsheetwidget extends StatelessWidget {
                             BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
                               builder: (context, state) {
                                 return mySubmitButton(() {
-                                  if (formstate.currentState!.validate()) {
-                                    UpdateProfileCubit cubit =
-                                        UpdateProfileCubit.get(context);
-                                    cubit.updateProfile(
-                                      firstName: _firstnameController.text,
-                                      lastName: _lastnameController.text,
-                                      nid: _nidController.text,
-                                      email: _emailController.text,
-                                      age: _ageController.text,
-                                      phoneNumber: _phoneController.text,
-                                      gender: _gender.text,
-                                    );
-                                  }
-                                }, 'Submit', context);
+                                  // if (formstate.currentState!.validate()) {}
+                                  UpdateProfileCubit cubit =
+                                      UpdateProfileCubit.get(context);
+                                  cubit.updateProfile(
+                                    firstName: _firstnameController.text,
+                                    lastName: _lastnameController.text,
+                                    nid: _nidController.text,
+                                    email: _emailController.text,
+                                    age: _ageController.text,
+                                    phoneNumber: _phoneController.text,
+                                    gender: _gender.text,
+                                  );
+                                }, 'Update'.tr(), context);
                               },
                             )
                           ],
@@ -220,7 +220,7 @@ class bottomsheetwidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
         child: Text(
-          'Edit',
+          'Edit'.tr(),
           style: TextStyle(
             fontFamily: 'SF Pro',
             color: Colors.white,

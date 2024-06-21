@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/screens/static_pages/Cares/MamyCare.dart';
@@ -101,8 +102,8 @@ class CareScreen extends StatelessWidget {
 }
 
 List<String> items = [
-  'BabyCare',
-  'Pregnancy Care',
-  'First Aid',
-  'Vitamins Calculator',
+  'Baby Care'.tr(),
+  'Pregnancy Care'.tr(),
+  'First Aid'.tr(),
+  'Vitamins Calculator'.tr(),
 ];
