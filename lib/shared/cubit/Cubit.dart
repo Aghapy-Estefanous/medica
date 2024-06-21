@@ -64,7 +64,7 @@ class AppCubit extends Cubit<AppState> {
   // CategoriesModel? categoriesModel;
   int currentIndex = 0;
   ChangeBottomNavigateBar({required index})async {
-     await checkConnectivity();
+     
     currentIndex = index;
     emit(ChangeBottomNavigateBarState());
   }
@@ -100,7 +100,7 @@ class AppCubit extends Cubit<AppState> {
   ];
 
   GetAllDepartments() async {
-    await checkConnectivity();
+  
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());

@@ -130,11 +130,13 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 presonalDataComponent(
                                     tr('heightLabel'),
                                     cubit
+                                        .AllUserDiseasesList.isNotEmpty?  
+                                    cubit
                                         .AllUserDiseasesList[
                                             cubit.LengthOfAllUserDiseasesList -
                                                 1]
                                         .height
-                                        .toString(),
+                                        .toString():"0",
                                     Icons.height),
                                 const SizedBox(width: 10),
                                 Container(
@@ -146,12 +148,15 @@ class MedicalHistoryScreen extends StatelessWidget {
                                 const SizedBox(width: 3),
                                 presonalDataComponent(
                                     tr('weightLabel'),
+                                    
+                                    cubit
+                                        .AllUserDiseasesList.isNotEmpty?  
                                     cubit
                                         .AllUserDiseasesList[
                                             cubit.LengthOfAllUserDiseasesList -
                                                 1]
                                         .weight
-                                        .toString(),
+                                        .toString():"0",
                                     Icons.accessibility),
                               ],
                             ),
