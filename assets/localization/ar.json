@@ -1,0 +1,42 @@
+{
+    "search_screen_title": "ابحث عن أي عيادة",
+    "search_hint": "ابحث عن...",
+    "no_results": "لا توجد نتائج!",
+    "details": "التفاصيل",
+    "_comment---1": "🔥✅size data for home texts✅", 
+
+    "hello": "مرحبا!",
+    "search_clinics": "ابحث عن \nأي عيادات",
+    "explore_clinics": "استكشف أي عيادة الآن",
+    "visit_reservation": "قم بزيارة \nالحجز الخاص بك",
+    "see_reservation": "شاهد جميع الحجوزات",
+    "departments": "الأقسام",
+    "popular_clinics": "العيادات الشائعة",
+
+    "_comment---2": "🔥✅size data for details clinic texts + details repated✅",
+     "all_clinics_in": "جميع العيادات في",
+      
+   "_comment---3": "🔥✅size data for details clinic texts ✅",
+   "clinics_details": "تفاصيل العيادة",
+   "description_placeholder": "هذه هي وصف المكان في الطابق 2، رقم الغرفة: 321",
+   "available": "متاح",
+   "unavailable": "غير متاح",
+   "price": "السعر",
+   "start_time": "وقت البدء: ",
+   "end_time": "وقت الانتهاء: ",
+    "_comment---4": "🔥✅medical history ✅",
+    "nameLabel": "الاسم: {firstName} {lastName}",
+    "ageLabel": "العمر: {age}",
+    "bloodLabel": "فصيلة الدم",
+    "heightLabel": "الطول",
+    "weightLabel": "الوزن",
+    "prescriptionsLabel": "الروشتات الطبية",
+    "medicalTestsLabel": "التحاليل الطبية",
+    "allRecordsLabel": "سجلات المرض السابقة",
+    "addButtonLabel": "إضافة",
+    "noDataMessage": "لا توجد بيانات. انقر لإضافة الخاصة بك",
+    "detailsButton": "تفاصيل"
+   
+
+  }
+  

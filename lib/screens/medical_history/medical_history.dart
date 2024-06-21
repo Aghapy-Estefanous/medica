@@ -6,6 +6,7 @@ import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/AllDiseasesModel.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:medica/shared/widgets/flutter_toast.dart';
 import 'package:medica/screens/medical_history/disease_details.dart';
 import 'package:medica/screens/medical_history/medical_testsScreen.dart';
@@ -51,7 +52,7 @@ class MedicalHistoryScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(height: MediaQuery.sizeOf(context).height * 0.055),
+                  Container(height: MediaQuery.of(context).size.height * 0.055),
                   cubit.basicDataModel == null
                       ? const CircularProgressIndicator()
                       : Container(
@@ -75,7 +76,14 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "name : ${cubit.basicDataModel?.data.firstName} ${cubit.basicDataModel?.data.lastName}",
+                                      tr('nameLabel', namedArgs: {
+                                        'firstName': cubit.basicDataModel?.data
+                                                .firstName ??
+                                            '',
+                                        'lastName': cubit.basicDataModel?.data
+                                                .lastName ??
+                                            ''
+                                      }),
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -83,7 +91,10 @@ class MedicalHistoryScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      "age : ${cubit.basicDataModel!.data.age.toString()} ",
+                                      tr('ageLabel', namedArgs: {
+                                        'age': cubit.basicDataModel!.data.age
+                                            .toString()
+                                      }),
                                       style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.grey,
@@ -105,19 +116,19 @@ class MedicalHistoryScreen extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               children: [
                                 presonalDataComponent(
-                                    "Blood",
+                                    tr('bloodLabel'),
                                     cubit.basicDataModel!.data.bloodType
                                         .toString(),
                                     Icons.bloodtype_outlined),
                                 const SizedBox(width: 10),
                                 Container(
-                                  width: 2, // Thickness of the line
-                                  height: 10, // Height of the line
+                                  width: 2,
+                                  height: 10,
                                   color:
                                       const Color.fromARGB(255, 197, 191, 191),
                                 ),
                                 presonalDataComponent(
-                                    "Height",
+                                    tr('heightLabel'),
                                     cubit
                                         .AllUserDiseasesList[
                                             cubit.LengthOfAllUserDiseasesList -
@@ -127,14 +138,14 @@ class MedicalHistoryScreen extends StatelessWidget {
                                     Icons.height),
                                 const SizedBox(width: 10),
                                 Container(
-                                  width: 2, // Thickness of the line
-                                  height: 20, // Height of the line
+                                  width: 2,
+                                  height: 20,
                                   color:
                                       const Color.fromARGB(255, 197, 191, 191),
                                 ),
                                 const SizedBox(width: 3),
                                 presonalDataComponent(
-                                    "Weight",
+                                    tr('weightLabel'),
                                     cubit
                                         .AllUserDiseasesList[
                                             cubit.LengthOfAllUserDiseasesList -
@@ -142,35 +153,26 @@ class MedicalHistoryScreen extends StatelessWidget {
                                         .weight
                                         .toString(),
                                     Icons.accessibility),
-                                const SizedBox(width: 10),
-                                // Container(
-                                //   width: 2, // Thickness of the line
-                                //   height: 20, // Height of the line
-                                //   color:
-                                //       const Color.fromARGB(255, 197, 191, 191),
-                                // ),
-                                // const SizedBox(width: 3),
-                                // presonalDataComponent("Pressure", "178",
-                                //     Icons.favorite_border_outlined),
                               ],
                             ),
                           ),
                         ),
 
-                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... prescrpition &tests..............🟢🟢🟢🟢🟢🟢......
-
                   const SizedBox(height: 10),
-                  cardRowWidget(Icons.dashboard_customize_rounded,
-                      "Prescriptions", const prescriptionsScreen(), context),
+                  cardRowWidget(
+                      Icons.dashboard_customize_rounded,
+                      tr('prescriptionsLabel'),
+                      const prescriptionsScreen(),
+                      context),
                   const SizedBox(height: 10),
-                  cardRowWidget(Icons.local_hospital, "Medical tests",
+                  cardRowWidget(Icons.local_hospital, tr('medicalTestsLabel'),
                       const ResultPage2(), context),
                   const SizedBox(height: 5),
-                  //.🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("All records of disease",
+                      Text(tr('allRecordsLabel'),
                           style: Theme.of(context).textTheme.titleLarge),
                       IconButton(
                           onPressed: () {
@@ -187,11 +189,10 @@ class MedicalHistoryScreen extends StatelessWidget {
                   ),
 
                   //🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢................... All records of disease..............🟢🟢🟢🟢🟢🟢......
-                  cubit.AllUserDiseasesList.isEmpty == true
+                  cubit.AllUserDiseasesList.isEmpty
                       ? InkWell(
                           onTap: () {
                             cubit.getBasicData();
-                            //  cubit.updateLength();
                           },
                           child: SizedBox(
                             height: 250,
@@ -202,9 +203,10 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   width: 200,
                                   height: 200,
                                 ),
-                                Text("there is no data click add to add yours",
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge),
+                                Text(
+                                  tr('noDataMessage'),
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
                               ],
                             ),
                           ),
@@ -212,147 +214,144 @@ class MedicalHistoryScreen extends StatelessWidget {
                       : SizedBox(
                           height: 400,
                           child: ListView.separated(
-                              itemCount: cubit.LengthOfAllUserDiseasesList,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                              itemBuilder: (context, index) {
-                                print(
-                                    "💥💤💥the l of list user diseases ${cubit.LengthOfAllUserDiseasesList}");
-                                return Container(
-                                  height: 66,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromARGB(255, 48, 52, 56)
-                                            .withOpacity(
-                                                0.3), // shadow color with opacity
-                                        blurRadius: 4, // blur radius
-                                        offset: Offset(2, 2), // shadow offset
-                                      ),
-                                    ],
-                                    border: Border.all(
-                                      color: Color.fromARGB(255, 107, 160, 189)
-                                          .withOpacity(
-                                              0.5), // border color with opacity
-                                      width: 1, // border width
+                            itemCount: cubit.LengthOfAllUserDiseasesList,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                              height: 8,
+                            ),
+                            itemBuilder: (context, index) {
+                              print(
+                                  "💥💤💥the l of list user diseases ${cubit.LengthOfAllUserDiseasesList}");
+                              return Container(
+                                height: 66,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 48, 52, 56)
+                                          .withOpacity(0.3),
+                                      blurRadius: 4,
+                                      offset: const Offset(2, 2),
                                     ),
-                                    color: Colors.white,
+                                  ],
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 107, 160, 189)
+                                        .withOpacity(0.5),
+                                    width: 1,
                                   ),
-                                  child: ListTile(
-                                      title: Column(
+                                  color: Colors.white,
+                                ),
+                                child: ListTile(
+                                  title: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              cubit.AllUserDiseasesList[index]
+                                                  .diseaseName
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.copyWith(
+                                                    color:
+                                                        AppColor.primaryColor,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [
-                                              Expanded(
-                                                child: Text(
-                                                    cubit
+                                              Icon(
+                                                Iconsax.calendar,
+                                                color: AppColor.orangcolor,
+                                                size: 17,
+                                              ),
+                                              Text(
+                                                convertDateTime(cubit
                                                         .AllUserDiseasesList[
                                                             index]
-                                                        .diseaseName
-                                                        .toString(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge
-                                                        ?.copyWith(
-                                                          color: AppColor
-                                                              .primaryColor,
-                                                        )),
+                                                        .diagnosisDate)["date"]
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(
+                                                      color:
+                                                          AppColor.dividerColor,
+                                                    ),
                                               ),
                                             ],
                                           ),
-                                          //...........................................date
-
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                     Iconsax.calendar,
-                                                    color: AppColor.orangcolor,
-                                                    size: 17,
-                                                  ),
-                                                  Text(
-                                                      convertDateTime(cubit
-                                                                  .AllUserDiseasesList[
-                                                                      index]
-                                                                  .diagnosisDate)[
-                                                              "date"]
-                                                          .toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodySmall
-                                                          ?.copyWith(
-                                                            color: AppColor
-                                                                .dividerColor,
-                                                          )),
-                                                ],
+                                              Icon(
+                                                Iconsax.clock,
+                                                color: AppColor.orangcolor,
+                                                size: 17,
                                               ),
-                                              //..............for clock
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Iconsax.clock,
-                                                    color: AppColor.orangcolor,
-                                                    size: 17,
-                                                  ),
-                                                  Text(
-                                                      convertDateTime(cubit
-                                                                  .AllUserDiseasesList[
-                                                                      index]
-                                                                  .diagnosisDate)[
-                                                              "time"]
-                                                          .toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodySmall
-                                                          ?.copyWith(
-                                                            color: AppColor
-                                                                .dividerColor,
-                                                          )),
-                                                ],
+                                              Text(
+                                                convertDateTime(cubit
+                                                        .AllUserDiseasesList[
+                                                            index]
+                                                        .diagnosisDate)["time"]
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(
+                                                      color:
+                                                          AppColor.dividerColor,
+                                                    ),
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
-                                      trailing: TextButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(AppColor.orangcolor),
-                                            shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(
-                                                    12.0), // Adjust the value as needed
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            navigateToScreen(
-                                                context,
-                                                DiseaseDetailsScreen(
-                                                  diseaseData:
-                                                      cubit.AllUserDiseasesList[
-                                                          index],
-                                                ));
-                                          },
-                                          child: Text(
-                                            "Details",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ))),
-                                );
-                              }),
+                                    ],
+                                  ),
+                                  trailing: TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              AppColor.orangcolor),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      navigateToScreen(
+                                        context,
+                                        DiseaseDetailsScreen(
+                                          diseaseData:
+                                              cubit.AllUserDiseasesList[index],
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      tr('detailsButton'),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         )
                 ],
               ),

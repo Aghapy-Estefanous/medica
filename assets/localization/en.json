@@ -1,0 +1,44 @@
+{
+    "search_screen_title": "Search for any clinic",
+    "search_hint": "Search for...",
+    "no_results": "There is no Results!",
+    "details": "Details",
+
+   "_comment---1": "size data for home texts✅", 
+
+   "hello": "Hello!",
+   "search_clinics": "Search \nfor any clinics",
+   "explore_clinics": "explore any clinic now",
+   "visit_reservation": "Visit your \nreservation",
+   "see_reservation": "see all reservation",
+   "departments": "Departments",
+   "popular_clinics": "Popular Clinics",
+
+   "_comment---2": "🔥✅size data for department of clinics clinic texts + details repated✅",
+   "all_clinics_in": "All Clinics in",
+
+   "_comment---3": "🔥✅size data for details clinic texts ✅",
+   "clinics_details": "Clinics Details",
+   "description_placeholder": "This is the description of the place in floor 2, room number: 321",
+   "available": "Available",
+   "unavailable": "Unavailable",
+   "price": "Price",
+   "start_time": "Start time: ",
+   "end_time": "End time: ",
+
+ "_comment---4": "🔥✅medical history ✅",
+ "nameLabel": "Name: {firstName} {lastName}",
+  "ageLabel": "Age: {age}",
+  "bloodLabel": "Blood",
+  "heightLabel": "Height",
+  "weightLabel": "Weight",
+  "prescriptionsLabel": "Prescriptions",
+  "medicalTestsLabel": "Medical tests",
+  "allRecordsLabel": "All records of disease",
+  "addButtonLabel": "Add",
+
+  "noDataMessage": "There is no data. Click add to add yours",
+  "detailsButton": "Details"
+  
+  }
+  
