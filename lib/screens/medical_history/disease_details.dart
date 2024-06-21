@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:medica/models/user/AllDiseasesOfUser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/shared/network/remote/Dio_helper.dart';
@@ -20,7 +21,7 @@ class DiseaseDetailsScreen extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios)),
-        title: Text('Disease Details'),
+        title: Text(tr('diseaseDetailsTitle')),
         backgroundColor: AppColor.primaryColor,
       ),
       body: SingleChildScrollView(
@@ -28,13 +29,6 @@ class DiseaseDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Center(
-            //   child: CircleAvatar(
-            //     radius: 60,
-            //     backgroundImage:
-            //         AssetImage('assets/logo.png'), // Add your logo asset here
-            //   ),
-            // ),
             Center(
               child: Text(
                 diseaseData.diseaseName.toString(),
@@ -45,27 +39,15 @@ class DiseaseDetailsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24),
-            buildDetailCard(
-                'Description', diseaseData.description.toString(), context),
-            buildDetailCard(
-                'Symptoms', diseaseData.diseaseSymptoms.toString(), context),
-            buildDetailCard(
-                'Causes', diseaseData.diseaseCauses.toString(), context),
-            buildDetailCard(
-                'Diagnosis', diseaseData.diagnosis.toString(), context),
-            buildDetailCard('Diagnosis Date',
-                diseaseData.diagnosisDate.toString(), context),
-
-            // buildDetailCard(
-            //     'Document View URL',
-            //     removeFirstAndLastChar(diseaseData.docViewUrl.toString()),
-            //     context),
-            // Image.network(
-            //     removeFirstAndLastChar(diseaseData.docViewUrl.toString())),
+            buildDetailCard(tr('description'), diseaseData.description.toString(), context),
+            buildDetailCard(tr('symptoms'), diseaseData.diseaseSymptoms.toString(), context),
+            buildDetailCard(tr('causes'), diseaseData.diseaseCauses.toString(), context),
+            buildDetailCard(tr('diagnosis'), diseaseData.diagnosis.toString(), context),
+            buildDetailCard(tr('diagnosisDate'), diseaseData.diagnosisDate.toString(), context),
             Row(
               children: [
                 Text(
-                  ' Document View URL',
+                  tr('documentViewUrl'),
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -78,10 +60,12 @@ class DiseaseDetailsScreen extends StatelessWidget {
                       String? token = sharedPreferences.getString('Token');
 
                       navigateToScreen(
-                          context,
-                          FullScreenImageViewer(
-                              imageUrl: removeFirstAndLastChar(
-                                  diseaseData.docViewUrl.toString()), Token: token,),);
+                        context,
+                        FullScreenImageViewer(
+                          imageUrl: removeFirstAndLastChar(diseaseData.docViewUrl.toString()),
+                          Token: token,
+                        ),
+                      );
                     },
                     icon: Icon(
                       Icons.now_wallpaper,
@@ -100,8 +84,7 @@ class DiseaseDetailsScreen extends StatelessWidget {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
-        width: MediaQuery.of(context).size.width -
-            32, // Full width with padding accounted for
+        width: MediaQuery.of(context).size.width - 32, // Full width with padding accounted for
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +117,7 @@ String removeFirstAndLastChar(String str) {
 
 class FullScreenImageViewer extends StatelessWidget {
   final String imageUrl;
-   String? Token;
+  String? Token;
 
   FullScreenImageViewer({required this.imageUrl, this.Token});
 
@@ -144,8 +127,7 @@ class FullScreenImageViewer extends StatelessWidget {
       body: Stack(
         children: [
           PhotoView(
-            
-            imageProvider: NetworkImage(imageUrl, headers: {'Authorization': 'Bearer $Token'} ),
+            imageProvider: NetworkImage(imageUrl, headers: {'Authorization': 'Bearer $Token'}),
             backgroundDecoration: BoxDecoration(
               color: AppColor.primaryColor,
             ),
@@ -155,11 +137,7 @@ class FullScreenImageViewer extends StatelessWidget {
             right: 20,
             child: IconButton(
               icon: Icon(Icons.close, color: Colors.white, size: 30),
-              onPressed: () async {
-                SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                String? token = sharedPreferences.getString('Token');
-
+              onPressed: () {
                 Navigator.pop(context);
               },
             ),

@@ -38,7 +38,41 @@
   "addButtonLabel": "Add",
 
   "noDataMessage": "There is no data. Click add to add yours",
-  "detailsButton": "Details"
+  "detailsButton": "Details",
+
+  "_comment---5": "🔥✅medical post✅",
+  "enterDiseaseDetails": "Enter Disease Details",
+  "typeLabel": "Type",
+  "typeValidation": "Please enter a type: personal or family",
+  "descriptionLabel": "Description",
+  "descriptionValidation": "Please enter a description",
+  "diseaseTypeLabel": "Type of disease",
+  "diseaseTypeValidation": "Choose type of disease",
+  "diagnosisLabel": "Diagnosis",
+  "diagnosisValidation": "Please enter a Diagnosis",
+  "diagnosisDateLabel": "Diagnosis Date",
+  "diagnosisDateValidation": "Please enter a diagnosis date",
+  "weightValidation": "Please enter your weight",
+  "validNumberValidation": "Please enter a valid number",
+  "heightValidation": "Please enter your height",
+  "uploadImageLabel": "Upload image",
+  "noImageSelected": "No image selected.",
+  "diseaseValueLabel": "Value of Disease",
+  "diseaseValueValidation": "Please enter the value of the disease. If not, enter 0",
+  "submitButton": "Submit",
+  "diseaseAddedSuccess": "Disease added successfully",
+  
+  "_comment---6": "🔥✅medical details disaese ✅",
+  "diseaseDetailsTitle": "Disease Details",
+  "description": "Description",
+  "symptoms": "Symptoms",
+  "causes": "Causes",
+  "diagnosis": "Diagnosis",
+  "diagnosisDate": "Diagnosis Date",
+  "documentViewUrl": "Document View URL",
+  "fullScreenImageClose": "Close",
+  "patientPrescription": "Patient Prescription"
+
   
   }
   

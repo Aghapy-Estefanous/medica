@@ -362,226 +362,211 @@ class MedicalHistoryScreen extends StatelessWidget {
     );
   }
 
-  Future<dynamic> showmodelBottonsheetWidget(
-    BuildContext context,
-    AppCubit cubit,
-  ) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: 16,
-            right: 16,
-            top: 16,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Enter Details',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 16),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _typeController,
-                        decoration: const InputDecoration(labelText: 'type'),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a type personal or family';
-                          }
-                          return null;
-                        },
+ Future<dynamic> showmodelBottonsheetWidget(
+  BuildContext context,
+  AppCubit cubit,
+) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (context) {
+      return Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          left: 16,
+          right: 16,
+          top: 16,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                tr('enterDiseaseDetails'),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _typeController,
+                      decoration: InputDecoration(labelText: tr('typeLabel')),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('typeValidation');
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _descriptionController,
+                      decoration: InputDecoration(labelText: tr('descriptionLabel')),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('descriptionValidation');
+                        }
+                        return null;
+                      },
+                    ),
+                    DropdownButtonFormField<singleDiseasObjectData>(
+                      value: cubit.SelectedDisease,
+                      onChanged: (newValue) {
+                        cubit.currentDiseaseObject(newValue!);
+                      },
+                      validator: (singleDiseasObjectData? value) {
+                        if (value == null) {
+                          return tr('diseaseTypeValidation');
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: tr('diseaseTypeLabel'),
                       ),
-                      TextFormField(
-                        controller: _descriptionController,
-                        decoration:
-                            const InputDecoration(labelText: 'Description'),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a description';
-                          }
-                          return null;
-                        },
-                      ),
-                      // .................list of diseases................
-                      DropdownButtonFormField<singleDiseasObjectData>(
-                        value: cubit.SelectedDisease,
-                        onChanged: (newValue) {
-                          cubit.currentDiseaseObject(newValue!);
-                        },
-                        validator: (singleDiseasObjectData? value) {
-                          if (value == null) {
-                            return 'choose type of disease';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                          labelText: 'type of disease',
+                      items: cubit.ALLDiseasesList?.map((singleDiseasObjectData diseaseObject) {
+                        return DropdownMenuItem<singleDiseasObjectData>(
+                          value: diseaseObject,
+                          child: Text(diseaseObject.name.toString()),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 18),
+                    TextFormField(
+                      controller: _Diagnosis,
+                      decoration: InputDecoration(labelText: tr('diagnosisLabel')),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('diagnosisValidation');
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _dateController,
+                      decoration: InputDecoration(labelText: tr('diagnosisDateLabel')),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('diagnosisDateValidation');
+                        }
+                        return null;
+                      },
+                      onTap: () async {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101),
+                        );
+                        if (pickedDate != null) {
+                          _dateController.text = "${pickedDate.toLocal()}".split(' ')[0];
+                        }
+                      },
+                    ),
+                    TextFormField(
+                      controller: _weightController,
+                      decoration: InputDecoration(labelText: tr('weightLabel')),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('weightValidation');
+                        }
+                        if (double.tryParse(value) == null) {
+                          return tr('validNumberValidation');
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _heightController,
+                      decoration: InputDecoration(labelText: tr('heightLabel')),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('heightValidation');
+                        }
+                        if (double.tryParse(value) == null) {
+                          return tr('validNumberValidation');
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            tr('uploadImageLabel'),
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ),
-                        items: cubit.ALLDiseasesList?.map(
-                            (singleDiseasObjectData diseaseObject) {
-                          return DropdownMenuItem<singleDiseasObjectData>(
-                            value: diseaseObject,
-                            child: Text(diseaseObject.name.toString()),
-                          );
-                        }).toList(),
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      //.........................Diagnosis
-                      TextFormField(
-                        controller: _Diagnosis,
-                        decoration:
-                            const InputDecoration(labelText: 'Diagnosis'),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a Diagnosis';
-                          }
-                          return null;
-                        },
-                      ),
-                      //.........................date time
-                      TextFormField(
-                        controller: _dateController,
-                        decoration: const InputDecoration(labelText: 'Date'),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a date';
-                          }
-                          return null;
-                        },
-                        onTap: () async {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2101),
-                          );
-                          if (pickedDate != null) {
-                            _dateController.text =
-                                "${pickedDate.toLocal()}".split(' ')[0];
-                          }
-                        },
-                      ),
-                      TextFormField(
-                        controller: _weightController,
-                        decoration: const InputDecoration(labelText: 'Weight'),
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter weight';
-                          }
-                          if (double.tryParse(value) == null) {
-                            return 'Please enter a valid number';
-                          }
-
-                          return null;
-                        },
-                      ),
-                      //..................................height
-                      TextFormField(
-                        controller: _heightController,
-                        decoration: const InputDecoration(labelText: 'Height'),
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter height';
-                          }
-                          if (double.tryParse(value) == null) {
-                            return 'Please enter a valid number';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: _diseaseValueController,
-                        decoration: const InputDecoration(
-                            labelText: 'Value of Disease'),
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter the value of the disease';
-                          }
-                          if (double.tryParse(value) == null) {
-                            return 'Please enter a valid number';
-                          }
-                          return null;
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Expanded(
-                            child: Text(
-                              'upload image',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                cubit.pickImage();
-                              },
-                              icon: const Icon(
-                                Iconsax.document_upload,
-                                color: AppColor.primaryColor,
-                              ))
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      cubit.imagePathFromgallary == null
-                          ? Text('No image selected.')
-                          : Text('${cubit.imagePathFromgallary!.name}'),
-
-                      const SizedBox(height: 20),
-                      TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(100, 40),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            foregroundColor:
-                                const Color.fromARGB(255, 211, 48, 48),
-                            backgroundColor: AppColor.primaryColor,
-                          ),
+                        IconButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              cubit
-                                  .postFormData2(
-                                _typeController.text,
-                                _descriptionController.text,
-                                _Diagnosis.text,
-                                nid: cubit.basicDataModel!.data.nid,
-                                height: double.parse(_heightController.text),
-                                weight: double.parse(_weightController.text),
-                                valueResult:
-                                    double.parse(_diseaseValueController.text),
-                                dateOfDiagonsises:
-                                    DateTime.parse(_dateController.text),
-                              )
-                                  .then((e) {
-                                cubit.getAllUserDiseases();
-                                _typeController.text = "";
-                                _descriptionController.text = "";
-                                _Diagnosis.text = "";
-                                _heightController.text = "";
-                                _weightController.text = "";
-                                _diseaseValueController.text = "";
-                                _dateController.text = "";
-                                cubit.SelectedDisease = null;
-                              });
-
-                              showToast(
-                                text: 'Disease added successfully',
+                            cubit.pickImage();
+                          },
+                          icon: const Icon(
+                            Iconsax.document_upload,
+                            color: AppColor.primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(color: Colors.grey),
+                    TextFormField(
+                      controller: _diseaseValueController,
+                      decoration: InputDecoration(labelText: tr('diseaseValueLabel')),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return tr('diseaseValueValidation');
+                        }
+                        if (double.tryParse(value) == null) {
+                          return tr('validNumberValidation');
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 5),
+                    cubit.imagePathFromgallary == null
+                        ? Text(tr('noImageSelected'))
+                        : Text('${cubit.imagePathFromgallary!.name}'),
+                    const SizedBox(height: 20),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: const Size(100, 40),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        foregroundColor: const Color.fromARGB(255, 211, 48, 48),
+                        backgroundColor: AppColor.primaryColor,
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          cubit
+                              .postFormData2(
+                            _typeController.text,
+                            _descriptionController.text,
+                            _Diagnosis.text,
+                            nid: cubit.basicDataModel!.data.nid,
+                            height: double.parse(_heightController.text),
+                            weight: double.parse(_weightController.text),
+                            valueResult: double.parse(_diseaseValueController.text),
+                            dateOfDiagonsises: DateTime.parse(_dateController.text),
+                          )
+                              .then((e) {
+                            cubit.getAllUserDiseases();
+                            _typeController.text = "";
+                            _descriptionController.text = "";
+                            _Diagnosis.text = "";
+                            _heightController.text = "";
+                            _weightController.text = "";
+                            _diseaseValueController.text = "";
+                            _dateController.text = "";
+                            cubit.SelectedDisease = null;
+                          });                           showToast(
+                                text: tr('diseaseAddedSuccess'),
                                 state: ToastStates.SUCCESS,
                               );
 
@@ -592,8 +577,8 @@ class MedicalHistoryScreen extends StatelessWidget {
                               });
                             }
                           },
-                          child: const Text(
-                            "submit",
+                          child:  Text(
+                           tr('submitButton'),
                             style: TextStyle(color: Colors.white),
                           )),
                       const SizedBox(height: 5),

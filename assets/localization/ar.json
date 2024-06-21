@@ -35,8 +35,39 @@
     "allRecordsLabel": "سجلات المرض السابقة",
     "addButtonLabel": "إضافة",
     "noDataMessage": "لا توجد بيانات. انقر لإضافة الخاصة بك",
-    "detailsButton": "تفاصيل"
-   
+    "detailsButton": "تفاصيل",
+
+    "_comment---5": "🔥✅medical history post disease ✅",
+    "enterDiseaseDetails": "أدخل تفاصيل المرض",
+    "typeLabel": "نوع",
+    "typeValidation": "يرجى إدخال نوع: شخصي أو عائلي",
+    "descriptionLabel": "وصف",
+    "descriptionValidation": "يرجى إدخال وصف",
+    "diseaseTypeLabel": "نوع المرض",
+    "diseaseTypeValidation": "اختر نوع المرض",
+    "diagnosisLabel": "تشخيص",
+    "diagnosisValidation": "يرجى إدخال التشخيص",
+    "diagnosisDateLabel": "تاريخ التشخيص",
+    "diagnosisDateValidation": "يرجى إدخال تاريخ التشخيص",
+    "weightValidation": "يرجى إدخال وزنك",
+    "validNumberValidation": "يرجى إدخال رقم صالح",
+    "heightValidation": "يرجى إدخال طولك",
+    "uploadImageLabel": "تحميل الصورة",
+    "noImageSelected": "لم يتم تحديد صورة.",
+    "diseaseValueLabel": "قيمة المرض",
+    "diseaseValueValidation": "يرجى إدخال قيمة المرض. إذا لم يكن كذلك ، أدخل 0",
+    "submitButton": "إرسال",
+    "diseaseAddedSuccess": "تمت إضافة المرض بنجاح",
+    "_comment---6": "🔥✅medical details disaese ✅",
+    "diseaseDetailsTitle": "تفاصيل المرض",
+    "description": "وصف",
+    "symptoms": "الأعراض",
+    "causes": "الأسباب",
+    "diagnosis": "التشخيص",
+    "diagnosisDate": "تاريخ التشخيص",
+    "documentViewUrl": "رابط عرض الوثيقة",
+    "fullScreenImageClose": "إغلاق",
+    "patientPrescription": "وصفة المريض"
 
   }
   
