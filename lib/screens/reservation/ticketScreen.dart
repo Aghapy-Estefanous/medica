@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
+import 'package:medica/screens/connections.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/reservationModel.dart';
-import 'package:medica/screens/%E2%9C%85connections.dart';
 
 class TicketScreen extends StatelessWidget {
   const TicketScreen({super.key});

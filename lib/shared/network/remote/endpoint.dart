@@ -1,4 +1,4 @@
-const BaseUrl = 'http://medicalsystem.runasp.net/api/';
+const BaseUrl = 'https://medicalsystem.runasp.net/api/';
 const LOGIN = 'Auth/LogIn';
 const REGISTER = 'Auth/register';
 
@@ -7,7 +7,7 @@ const ReservationINFO = 'Reservation/ReservationINFO/15';
 
 class Endpoint {
   Endpoint._();
-  static const BaseUrl = 'http://medicalsystem.runasp.net/api/';
+  static const BaseUrl = 'https://medicalsystem.runasp.net/api/';
   static const LOGIN = 'Auth/LogIn';
   static const REGISTER = 'Auth/register';
   static const USER_RESERVATION = 'Reservation/UserReservations';

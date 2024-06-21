@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/cubit/State.dart';
 import 'package:medica/shared/SharedWidget.dart';
+import 'package:medica/screens/connections.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:medica/screens/%E2%9C%85connections.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
 
 TextEditingController SearchController = TextEditingController();

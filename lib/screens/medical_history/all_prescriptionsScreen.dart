@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class prescriptionsScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-              appBar: MyAppBarWidget(context, "Patient Prescription"),
+             appBar: MyAppBarWidget(context, tr('patientPrescription')),
               body: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
