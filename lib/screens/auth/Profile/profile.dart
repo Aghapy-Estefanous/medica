@@ -5,10 +5,13 @@ import 'package:medica/models/ProfileModel.dart';
 import 'package:medica/screens/auth/Profile/update_profile.dart';
 import 'package:medica/screens/auth/login_auth/loginScreen.dart';
 import 'package:medica/screens/onboarding/onboarding.dart';
+import 'package:medica/screens/static_pages/Cares/MamyCare.dart';
+import 'package:provider/provider.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../../../shared/styles/ThemeProvider.dart';
 import 'cubit/profile_cubit.dart'; // Import this
 
 // Your existing imports
@@ -24,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
         body: Container(
           margin: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: SingleChildScrollView(
@@ -57,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
         const SizedBox(height: 10),
         CircleAvatar(
           radius: 70.0,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).cardColor,
           child: CircleAvatar(
             radius: 80.0,
             backgroundImage:
@@ -97,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         Center(
-          child: CustomContainer(
+          child: CustomContainer(context,
             child: Column(
               children: [
                 CustomRow(userProfile?.email, Iconsax.message),
@@ -107,7 +110,9 @@ class ProfileScreen extends StatelessWidget {
                 CustomRow(userProfile?.phoneNumber, Iconsax.mobile),
                 SizedBox(height: 20),
                 CustomRow(
-                    tr('ageMessage',namedArgs: {"age": userProfile?.age.toString() ?? ""}), Iconsax.calendar), // Localized string
+                    tr('ageMessage',
+                        namedArgs: {"age": userProfile?.age.toString() ?? ""}),
+                    Iconsax.calendar), // Localized string
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -127,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
         Center(
             child:
                 bottomsheetwidget(userProfile: userProfile, context: context)),
-        CustomContainer(
+        CustomContainer(context,
           child: Column(
             children: [
               RowUseritems(
@@ -137,13 +142,83 @@ class ProfileScreen extends StatelessWidget {
               RowUseritems(
                   icon: Iconsax.setting_24,
                   label: tr('settingsMessage'),
-                  fun: () {}), // Localized string
+                  fun: () {
+                    settingwidget(context);
+                  }), // Localized string
             ],
           ),
         ),
         const SizedBox(height: 20),
         mylogOutWidget(),
       ],
+    );
+  }
+
+  Future<dynamic> settingwidget(BuildContext context) {
+    return showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20.0),
+          ),
+        ),
+        useSafeArea: true,
+        enableDrag: true,
+        showDragHandle: true,
+        context: context,
+
+        // isScrollControlled: true,
+        builder: (context) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return Wrap(
+            children: [
+              Center(
+                child: maintxt(
+                  "Change Language :".tr(),
+                ),
+              ),
+              Column(
+                children: [
+                  cuscont(context, "English", () {
+                    context.setLocale(const Locale('en'));
+                  }),
+                  cuscont(context, "العربية", () {
+                    context.setLocale(const Locale('ar'));
+                  }),
+                ],
+              ),
+              Divider(),
+              SwitchListTile(
+                title: Text('Dark Theme'.tr()),
+                value: themeProvider.isDarkTheme,
+                onChanged: (value) {
+                  themeProvider.toggleTheme();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Widget cuscont(context, txt, fun) {
+    return InkWell(
+      onTap: fun,
+      child: Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).cardColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Center(child: Text(txt))),
     );
   }
 }

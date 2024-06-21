@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/screens/static_pages/testing/TestResultDetails.dart';
@@ -14,7 +15,7 @@ class ResultPage2 extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Your Tests'),
+          title: Text('Tests Result'.tr()),
         ),
         body: BlocBuilder<TestsCubit, TestsState>(
           builder: (context, state) {
@@ -25,7 +26,7 @@ class ResultPage2 extends StatelessWidget {
                 itemCount: state.testResults.length,
                 itemBuilder: (context, index) {
                   var test = state.testResults[index];
-                  var cubit = TestsCubit.get(context);
+                  // var cubit = TestsCubit.get(context);
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -63,7 +64,7 @@ class ResultPage2 extends StatelessWidget {
                         ),
                         subtitle: Text(
                           '${test.test.name}',
-                          textDirection: TextDirection.rtl,
+                          // textDirection: TextDirection.rtl,
                         ),
                       ),
                     ),

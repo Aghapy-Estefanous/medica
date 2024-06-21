@@ -74,6 +74,7 @@ class _TestResultDetailsState extends State<TestResultDetails> {
           child: Column(
             children: [
               CustomContainer(
+                context,
                 child: Column(
                   children: [
                     CustomText(child: widget.test!.description),
@@ -102,6 +103,7 @@ class _TestResultDetailsState extends State<TestResultDetails> {
 
   Widget IMGview(String url) {
     return CustomContainer(
+      context,
       child: FutureBuilder<String>(
         future: getToken(),
         builder: (context, snapshot) {
@@ -143,6 +145,7 @@ class _TestResultDetailsState extends State<TestResultDetails> {
 
   Widget PDFview(String url) {
     return CustomContainer(
+      context,
       child: FutureBuilder<String>(
         future: getToken(),
         builder: (context, snapshot) {

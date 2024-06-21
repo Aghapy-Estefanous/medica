@@ -11,10 +11,10 @@ class BabyCare extends StatelessWidget {
       child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
-            FIntro(),
-            CustomContainer(
+            FIntro(context),
+            CustomContainer(context,
                 child: maintxt("Age-by-age guide to feeding your baby".tr())),
-            CustomContainer(
+            CustomContainer(context,
                 child: Column(
               children: [
                 Text.rich(
@@ -37,21 +37,21 @@ class BabyCare extends StatelessWidget {
                 )
               ],
             )),
-            Title(),
-            Intro(),
-            Breadfest()
+            Title(context),
+            Intro(context),
+            Breadfest(context)
           ])),
     );
   }
 
-  Container FIntro() {
-    return CustomContainer(
+  Container FIntro(context) {
+    return CustomContainer(context,
       child: sectxt("babyFeedingGuideIntro".tr()),
     );
   }
 
-  Container Breadfest() {
-    return CustomContainer(
+  Container Breadfest(context) {
+    return CustomContainer(context,
         child: Column(
       children: [
         maintxt("Does breastfeeding hurt?".tr()),
@@ -81,8 +81,8 @@ class BabyCare extends StatelessWidget {
     ));
   }
 
-  Container Intro() {
-    return CustomContainer(
+  Container Intro(context) {
+    return CustomContainer(context,
       child: Column(
         children: [
           maintxt("Why is breastfeeding so hard?".tr()),
@@ -93,8 +93,8 @@ class BabyCare extends StatelessWidget {
     );
   }
 
-  Container Title() {
-    return CustomContainer(
+  Container Title(context) {
+    return CustomContainer(context,
       child: maintxt("How to handle common breastfeeding problems".tr()),
     );
   }

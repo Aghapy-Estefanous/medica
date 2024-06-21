@@ -10,8 +10,8 @@ class MamyCare extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            intro(),
-            CustomContainer(
+            intro(context),
+            CustomContainer(context,
               child: Column(children: [
                 maintxt("maintxt".tr()),
                 sectxt("sectxt".tr()),
@@ -51,8 +51,8 @@ class MamyCare extends StatelessWidget {
     );
   }
 
-  Container intro() {
-    return CustomContainer(
+  Container intro(context) {
+    return CustomContainer(context,
         child: Column(
       children: [
         pointtxt("intro.pointtxt".tr()),
