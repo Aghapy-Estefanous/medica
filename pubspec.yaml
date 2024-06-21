@@ -14,8 +14,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+  
   iconsax: ^0.0.8
   flutter_otp_text_field: ^1.1.0+2
   js: ^0.6.3
@@ -41,6 +40,7 @@ dependencies:
   web: ^0.5.1
   fluttertoast: ^8.2.5
   photo_view: ^0.15.0
+  easy_localization: ^3.0.7
 
 
 dev_dependencies:
@@ -73,6 +73,7 @@ flutter:
     - assets/images/Auth/
     - assets/images/backgrounds/
     - assets/images/ilustrations/
+    - assets/localization/
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

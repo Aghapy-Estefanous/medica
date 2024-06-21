@@ -59,6 +59,18 @@ class GetAllClinicsErrorState extends AppState {
   final dynamic error;
   GetAllClinicsErrorState(this.error);
 }
+//......................*********search for home ui ***********................
+class SearchLoadingState extends AppState {}
+
+class SearchSuccessState extends AppState {
+  // final UserReservationModel? modelReservation;
+  // ReservationSuccessState(this.modelReservation);
+}
+
+class SearchErrorState extends AppState {
+  final dynamic error;
+  SearchErrorState(this.error);
+}
 
 //......................********* here states for all diseases   for medical h drop down ***********................
 class GetAllDiseasesLoadingState extends AppState {}
@@ -116,50 +128,9 @@ class PostDiseaseErrorState extends AppState {
 }
 
 class UpdateLengthState extends AppState {}
+//  ✅ 💥 ✅  check for connections
+class AppConnectedState extends AppState{}
 
-
-//class shopInitialState extends shopState {}
-
-// class shopHomeLoadingState extends shopState {}
-
-// class shopHomeSuccessgState extends shopState {
-//   MyHomeModel? model;
-//   shopHomeSuccessgState(this.model);
-// }
-
-// class shopHomeErrorState extends shopState {
-//   final String error;
-//   shopHomeErrorState(this.error);
-// }
-
-
-
-
-//user data states
-// class GetUserLoadingState extends shopState {}
-
-// class GetUserSuccessState extends shopState {
-//   UserModel model;
-//   GetUserSuccessState(this.model);
-// }
-
-// class GetUserErrorState extends shopState {
-//   final String error;
-//   GetUserErrorState(this.error);
-// }
-//user data states
-// class RegisterLoadingState extends shopState {}
-// class RegisterSuccessState extends shopState {
-//    loginModel? model;
-//    RegisterSuccessState(this.model);
-
-  
-// }
-
-// class RegisterErrorState extends shopState {
-//   final String error;
-//   RegisterErrorState(this.error);
-// }
-//    class RsgisterVisiablityIconState extends shopState{}
+class AppNoInternetState extends AppState{}
 
 

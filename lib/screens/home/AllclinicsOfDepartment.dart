@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/models/clinicModel.dart';
 import 'package:medica/shared/cubit/State.dart';
+import 'package:medica/shared/cubit/Cubit.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
-import 'package:medica/shared/cubit/Cubit.dart';
-
 import '../auth/Profile/cubit/profile_cubit.dart'; // Import your cubit file
+
 
 class departmentClinicsScreen extends StatefulWidget {
   final int? DepertmentId;
@@ -45,11 +46,11 @@ class _departmentClinicsScreenState extends State<departmentClinicsScreen> {
     }, builder: (context, state) {
       print("depart id ${widget.DepertmentId} ");
 
-      return State is GetAllDepartmentLoadingState
+      return state is GetAllDepartmentLoadingState
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
               appBar: MyAppBarWidget(
-                  context, "All Clinics in ${widget.DepertmentName}"),
+                  context, "${"all_clinics_in".tr()} ${widget.DepertmentName}"),
               body: Padding(
                   padding: EdgeInsets.all(8),
                   child: Column(
@@ -101,7 +102,7 @@ class _departmentClinicsScreenState extends State<departmentClinicsScreen> {
                                                   cliniclist?[index]));
                                         },
                                         child: Text(
-                                          "Details",
+                                          "details".tr(),
                                           style: TextStyle(color: Colors.white),
                                         ))),
                               );

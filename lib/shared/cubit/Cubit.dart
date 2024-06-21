@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medica/models/clinicModel.dart';
@@ -60,17 +63,18 @@ class AppCubit extends Cubit<AppState> {
   // MyHomeModel? homeModel;
   // CategoriesModel? categoriesModel;
   int currentIndex = 0;
-  ChangeBottomNavigateBar({required index}) {
+  ChangeBottomNavigateBar({required index})async {
+     await checkConnectivity();
     currentIndex = index;
     emit(ChangeBottomNavigateBarState());
   }
 
 // reserve method1
-  late List<DataUserReservation>? myReservationsList=[];
-   UserReservationModel? modelReservation;
+  late List<DataUserReservation>? myReservationsList = [];
+  UserReservationModel? modelReservation;
   Future<void> getAllReservation() async {
+  
     try {
-      
       emit(ReservationLoadingState());
       var response = await api.getWithqueryParameter(
         Endpoint.BaseUrl + Endpoint.USER_RESERVATION,
@@ -96,6 +100,7 @@ class AppCubit extends Cubit<AppState> {
   ];
 
   GetAllDepartments() async {
+    await checkConnectivity();
     try {
       late DepartmentsModel departmentsModel;
       emit(GetAllDepartmentLoadingState());
@@ -129,6 +134,7 @@ class AppCubit extends Cubit<AppState> {
   ];
 
   GetAllClinicOfDepartments(int? Did) async {
+     await checkConnectivity();
     try {
       late ClinicModel Model;
       emit(GetAllDepartmentLoadingState());
@@ -188,9 +194,10 @@ class AppCubit extends Cubit<AppState> {
   ];
 
   ScearchFunction(String searchWord) async {
+      await checkConnectivity();
     try {
       late ClinicModel Model;
-      emit(GetAllDepartmentLoadingState());
+      emit(SearchLoadingState());
 
       var filterParameter = "name=$searchWord";
       var response = await api.getWithqueryParameter(
@@ -204,10 +211,10 @@ class AppCubit extends Cubit<AppState> {
       print("list :${SearchResponseList?.length}");
       print("from cubit :${SearchResponseList?[0].name}");
 
-      emit(GetAllDepartmentSuccessState());
-    } catch (e) {
+      emit(SearchSuccessState());
+    }on ServerExceptions catch (e) {
       print(e.toString());
-      emit(GetAllDepartmentErrorState(e.toString()));
+      emit(SearchErrorState(e.errorModel.message));
     }
   }
 
@@ -351,5 +358,33 @@ class AppCubit extends Cubit<AppState> {
       print("🚨Error to get the basic data=> $error");
       emit(GetBasicDataErrorState(error.toString()));
     });
+  }
+
+Future<void> checkConnectivity() async {
+  try {
+    final response = await http.get(Uri.parse('https://google.com'));
+    if (response.statusCode == 200) {
+      emit(AppConnectedState());
+    } else {
+        emit(AppNoInternetState());
+    }
+  } on SocketException catch (_) {
+    emit(AppNoInternetState());
+    print('No internet connection');
+  } catch (e) {
+    print('Unexpected error: $e');
+  }
+}
+
+   Future<void> retryAllApiCalls() async {
+    await checkConnectivity();
+    if (state is AppConnectedState) {
+      getAllReservation();
+      GetAllDepartments();
+      GetAllClinics();
+      getALLDiseases2();
+      getBasicData();
+      getAllUserDiseases();
+    }
   }
 }

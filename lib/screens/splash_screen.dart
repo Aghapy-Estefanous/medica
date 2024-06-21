@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:medica/screens/auth/login_auth/cubit/loginCubit.dart';
-import 'package:medica/screens/auth/login_auth/cubit/loginState.dart';
+import 'package:medica/home_layout.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/screens/onboarding/onboarding.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medica/home_layout.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

@@ -10,11 +10,14 @@ import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
 import 'package:medica/models/reservationModel.dart';
 import 'package:medica/screens/home/searchScreen.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:medica/screens/%E2%9C%85connections.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medica/screens/reservation/ticketScreen.dart';
 import 'package:medica/screens/home/AllclinicsOfDepartment.dart';
 import 'package:medica/screens/details_screen/details_clinics.dart';
 import 'package:medica/screens/auth/Profile/cubit/profile_cubit.dart';
+
 class Home_Screen extends StatelessWidget {
   const Home_Screen({Key? key}) : super(key: key);
 
@@ -29,25 +32,33 @@ class Home_Screen extends StatelessWidget {
 
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {
-        if (state is GetAllDepartmentSuccessState) {}
+        if (state is GetAllDepartmentErrorState) {
+         print(" error from home no iternet almafrood 🔥${state.error}");
+        }
+
         if (state is GetAllClinicsSuccessState) {
           print(cubit.allClinicslist?[0]);
         }
       },
       builder: (context, state) {
-        return Scaffold(
+        
+        return  state is GetAllDepartmentErrorState?
+         
+        NoInternetScreen(message_error: state.error,):
+        
+          Scaffold(
           backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
             title: FutureBuilder<String>(
               future: getname(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text("Hello!");
+                  return Text("hello".tr());
                 } else if (snapshot.hasError) {
-                  return Text("Hello!");
+                  return Text("hello".tr());
                 } else {
                   return Text(
-                    "Hello! ${snapshot.data}",
+                    "${"hello".tr()} ${snapshot.data}",
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.06,
                       fontWeight: FontWeight.w500,
@@ -70,6 +81,16 @@ class Home_Screen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  IconButton(
+                    onPressed: () {
+                      if (context.locale.toString() == 'en') {
+                        context.setLocale(const Locale('ar'));
+                      } else {
+                        context.setLocale(const Locale('en'));
+                      }
+                    },
+                    icon: Icon(Icons.language),
+                  ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -110,17 +131,16 @@ class Home_Screen extends StatelessWidget {
                               ),
                               SizedBox(height: 30),
                               Text(
-                                "Search \nfor any clinics",
+                                "search_clinics".tr(),
                                 style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.045,
+                                  fontSize: MediaQuery.of(context).size.width * 0.045,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                               SizedBox(height: 5),
                               Text(
-                                "explore any clinic now",
+                                "explore_clinics".tr(),
                                 style: TextStyle(
                                   color: Colors.white54,
                                 ),
@@ -165,21 +185,19 @@ class Home_Screen extends StatelessWidget {
                               ),
                               SizedBox(height: 30),
                               Text(
-                                "Visit your \nreservation",
+                                "visit_reservation".tr(),
                                 style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.045,
+                                  fontSize: MediaQuery.of(context).size.width * 0.045,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                               SizedBox(height: 5),
                               Text(
-                                "see all reservation",
+                                "see_reservation".tr(),
                                 style: TextStyle(
                                   color: Colors.black54,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.040,
+                                  fontSize: MediaQuery.of(context).size.width * 0.040,
                                 ),
                               ),
                             ],
@@ -192,7 +210,7 @@ class Home_Screen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
-                      "Departments",
+                      "departments".tr(),
                       style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.w500,
@@ -222,7 +240,7 @@ class Home_Screen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Text(
-                      "Popular Clinics",
+                      "popular_clinics".tr(),
                       style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.w500,
@@ -370,61 +388,4 @@ InkWell departementWidget(
     ),
   );
 }
-
-// Material myClinicCard(BuildContext context, ScreenName) {
-//   return Material(
-//     elevation: 1,
-//     shadowColor: Color.fromARGB(134, 21, 21, 21),
-//     borderRadius: BorderRadius.all(Radius.circular(12)),
-//     child: Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.all(Radius.circular(12)),
-//       ),
-//       height: MediaQuery.of(context).size.height * 0.22,
-//       width: MediaQuery.of(context).size.width * 0.45,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Container(
-//             height: MediaQuery.of(context).size.height * 0.129,
-//             width: MediaQuery.of(context).size.width * 0.45,
-//             child: Image.asset(
-//               'assets/images/home-Images/baby.jpg',
-//               fit: BoxFit.cover,
-//             ),
-//           ),
-//           SizedBox(height: MediaQuery.of(context).size.height * 0.001),
-//           const Text(
-//             "  baby clinic",
-//             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-//           ),
-//           SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-//           Padding(
-//             padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 detailsButtoncustom(context, ScreenName),
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.person,
-//                       size: 18,
-//                       color: AppColor.orangcolor,
-//                     ),
-//                     Text(
-//                       '1462',
-//                       style: TextStyle(fontSize: 12),
-//                     )
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
 
