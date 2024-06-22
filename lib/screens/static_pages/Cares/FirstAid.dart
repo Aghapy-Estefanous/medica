@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
-import 'package:medica/shared/styles/AppColor.dart';
+// import 'package:medica/screens/static_pages/testing/cubit/tests_cubit.dart';
+// import 'package:medica/shared/styles/AppColor.dart';
 
 class FirstAid extends StatelessWidget {
   const FirstAid({
@@ -10,7 +10,7 @@ class FirstAid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TestsCubit cubit = TestsCubit.get(context);
+    // TestsCubit cubit = TestsCubit.get(context);
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(

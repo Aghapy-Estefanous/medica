@@ -141,9 +141,10 @@ class ProfileScreen extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Center(
-            child: UpdateProfileScreen(
+            child: BottomSheetWidget(
           userProfile: userProfile,
         )),
+        
         CustomContainer(
           context,
           child: Column(

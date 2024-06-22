@@ -18,6 +18,6 @@ class CaresItemSelected extends CareState {
 
   CaresItemSelected(this.selectedIndex);
 
-  @override
+  // @override
   List<Object> get props => [selectedIndex];
 }

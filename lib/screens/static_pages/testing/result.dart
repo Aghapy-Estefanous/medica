@@ -22,7 +22,7 @@ class ResultPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 var test = state.testResults[index];
-                var cubit = TestsCubit.get(context);
+                // var cubit = TestsCubit.get(context);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
