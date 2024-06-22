@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/tests_cubit.dart';
@@ -52,7 +53,7 @@ class AvailablePage extends StatelessWidget {
                         ),
                         subtitle: Text(
                           'Price: ${test.price.toString()}EGP', // Replace with actual description if available
-                          textDirection: TextDirection.rtl,
+                          // textDirection: TextDirection.rtl,
                         )),
                   ),
                 );
@@ -62,11 +63,31 @@ class AvailablePage extends StatelessWidget {
           );
         } else if (state is TestsError) {
           return SliverToBoxAdapter(
-            child: Center(child: Text('Error: ${state.error}')),
+            child: Center(
+                      child: Column(
+                    children: [
+                      Image.asset('assets/images/ilustrations/nodata.jpg'),
+                      Text(
+                        'There is an Error'.tr(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      )
+                    ],
+                  )),
           );
         } else {
           return SliverToBoxAdapter(
-            child: Center(child: Text('No data available.')),
+            child:Center(
+                      child: Column(
+                    children: [
+                      Image.asset('assets/images/ilustrations/nodata.jpg'),
+                      Text(
+                        'There is an Error'.tr(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      )
+                    ],
+                  )),
           );
         }
       },

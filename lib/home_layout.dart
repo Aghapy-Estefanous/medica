@@ -24,7 +24,7 @@ class HomeLayout extends StatelessWidget {
         return Scaffold(
             bottomNavigationBar: NavigationBar(
               height: 75,
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).cardColor,
               indicatorColor: AppColor.primaryColor,
               //onDestinationSelected
               animationDuration: Duration(milliseconds: 1100),

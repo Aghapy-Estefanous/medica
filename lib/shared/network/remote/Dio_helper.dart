@@ -109,9 +109,9 @@ class dio_helper {
     dio.options.headers = {
       //زود ع الهيدرز عشن محتاجهم لما لوجاوت او لما اغير اللغه
       // 'lang': lang,
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'multipart/form-data',
       'accept': '*/*',
-      //'tokenAuthorization': 'Bearer ${AccessToken}'
+      'Authorization': 'Bearer ${AccessToken}'
     };
     return await dio.put(url, queryParameters: query, data: data);
   }

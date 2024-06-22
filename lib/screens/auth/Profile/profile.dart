@@ -40,7 +40,17 @@ class ProfileScreen extends StatelessWidget {
                   var userProfile = state.userProfile;
                   return _buildProfile(userProfile, context);
                 } else if (state is ProfileError) {
-                  return Center(child: Text(state.message));
+                  return Center(
+                      child: Column(
+                    children: [
+                      Image.asset('assets/images/ilustrations/nodata.jpg'),
+                      Text(
+                        'There is an Error'.tr(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      )
+                    ],
+                  ));
                 } else {
                   return Center(
                       child: Text(tr('loginMessage'))); // Localized string
@@ -100,7 +110,8 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         Center(
-          child: CustomContainer(context,
+          child: CustomContainer(
+            context,
             child: Column(
               children: [
                 CustomRow(userProfile?.email, Iconsax.message),
@@ -130,9 +141,11 @@ class ProfileScreen extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Center(
-            child:
-                bottomsheetwidget(userProfile: userProfile, context: context)),
-        CustomContainer(context,
+            child: UpdateProfileScreen(
+          userProfile: userProfile,
+        )),
+        CustomContainer(
+          context,
           child: Column(
             children: [
               RowUseritems(

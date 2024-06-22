@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medica/shared/SharedWidget.dart';
@@ -59,7 +60,7 @@ class ResultPage extends StatelessWidget {
                       ),
                       subtitle: Text(
                         '${test.test.name}',
-                        textDirection: TextDirection.rtl,
+                        // textDirection: TextDirection.rtl,
                       ),
                     ),
                   ),
@@ -70,11 +71,31 @@ class ResultPage extends StatelessWidget {
           );
         } else if (state is TestResultError) {
           return SliverToBoxAdapter(
-            child: Center(child: Text('Error: ${state.errorMessage}')),
+            child:Center(
+                      child: Column(
+                    children: [
+                      Image.asset('assets/images/ilustrations/nodata.jpg'),
+                      Text(
+                        'There is an Error'.tr(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      )
+                    ],
+                  )),
           );
         } else {
           return SliverToBoxAdapter(
-            child: Center(child: Text('No data available.')),
+            child: Center(
+                      child: Column(
+                    children: [
+                      Image.asset('assets/images/ilustrations/nodata.jpg'),
+                      Text(
+                        'There is an Error'.tr(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      )
+                    ],
+                  )),
           );
         }
       },

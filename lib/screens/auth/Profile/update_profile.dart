@@ -1,234 +1,197 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medica/models/ProfileModel.dart';
-import 'package:medica/screens/auth/Profile/cubit/update_profile_cubit.dart';
-import 'package:medica/screens/auth/register_auth/Gender.dart';
 import 'package:medica/shared/SharedWidget.dart';
 import 'package:medica/shared/styles/AppColor.dart';
+import 'cubit/update_profile_cubit.dart';
 
-class bottomsheetwidget extends StatelessWidget {
-  const bottomsheetwidget({
-    super.key,
-    required this.userProfile,
-    required this.context,
-  });
-
+class UpdateProfileScreen extends StatelessWidget {
   final ProfileModel? userProfile;
-  final BuildContext context;
+
+  const UpdateProfileScreen({Key? key, this.userProfile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _firstnameController = TextEditingController();
-    TextEditingController _lastnameController = TextEditingController();
-    TextEditingController _ageController = TextEditingController();
-    TextEditingController _phoneController = TextEditingController();
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _nidController = TextEditingController();
-    TextEditingController _gender = TextEditingController();
-    GlobalKey<FormState> formstate = GlobalKey<FormState>();
-
-    return TextButton(
-      onPressed: () {
-        showModalBottomSheet(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20.0),
-            ),
-          ),
-          useSafeArea: true,
-          enableDrag: true,
-          showDragHandle: true,
-          context: context,
-          isScrollControlled:
-              true, // This makes the modal bottom sheet full screen
-          builder: (context) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize
-                      .min, // To make the bottom sheet wrap its content
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Form(
-                        key: formstate,
-                        child: Column(
-                          children: [
-                            Center(
-                              child: Text(
-                                'update'.tr(),
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CustomTxtFormField(
-                              // validator: (String? value) {
-                              //   if (value!.isEmpty) {
-                              //     return 'nameError'.tr();
-                              //   } else if (value.length < 3) {
-                              //     return 'name length must be at least 3 chars ';
-                              //   }
-                              //   return null;
-                              // },
-                              controller: _firstnameController,
-                              hint: 'fn'.tr(),
-                              icon: Icon(Iconsax.user),
-                              text: 'fn'.tr(),
-                              // initialValue:
-                              //     userProfile?.firstName ?? 'FirstName',
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CustomTxtFormField(
-                              // validator: (String? value) {
-                              //   if (value!.isEmpty) {
-                              //     return 'Please enter your last name';
-                              //   } else if (value.length < 3) {
-                              //     return 'name length must be at least 3 chars ';
-                              //   }
-                              //   return null;
-                              // },
-                              controller: _lastnameController,
-                              hint: 'ln'.tr(),
-                              icon: Icon(Iconsax.user),
-                              text: 'ln'.tr(),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CustomTxtFormField(
-                              // validator: (String? value) {
-                              //   if (value!.isEmpty) {
-                              //     return 'Please enter your E-mail';
-                              //   } else if (RegExp(
-                              //               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              //           .hasMatch(value) ==
-                              //       false) {
-                              //     return 'Please enter a valid E-mail';
-                              //   }
-                              //   return null;
-                              // },
-                              controller: _emailController,
-                              hint: 'email'.tr(),
-                              icon: Icon(Iconsax.message),
-                              text: 'email'.tr(),
-                              keyType: TextInputType.emailAddress,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CustomTxtFormField(
-                              // validator: (String? value) {
-                              //   if (value!.isEmpty) {
-                              //     return 'ageError'.tr();
-                              //   }
-                              //   return null;
-                              // },
-                              controller: _ageController,
-                              hint: 'age'.tr(),
-                              icon: Icon(Iconsax.calendar),
-                              text: 'age'.tr(),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CustomTxtFormField(
-                              // validator: (String? value) {
-                              //   if (value!.isEmpty) {
-                              //     return 'Please enter your phone number';
-                              //   } else if (value.length < 11) {
-                              //     return 'phone length must be at least 11 number ';
-                              //   }
-                              //   return null;
-                              // },
-                              controller: _phoneController,
-                              hint: 'num'.tr(),
-                              icon: Icon(Iconsax.call),
-                              text: 'num'.tr(),
-                              keyType: TextInputType.number,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CustomTxtFormField(
-                              // validator: (String? value) {
-                              //   if (value!.isEmpty) {
-                              //     return 'Please enter your NID';
-                              //   }
-                              //   return null;
-                              // },
-                              controller: _nidController,
-                              hint: 'nid'.tr(),
-                              icon: Icon(Iconsax.card),
-                              text: 'nid'.tr(),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Select your gender :'.tr(),
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            GenderSelector(_gender),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
-                              builder: (context, state) {
-                                return mySubmitButton(() {
-                                  // if (formstate.currentState!.validate()) {}
-                                  UpdateProfileCubit cubit =
-                                      UpdateProfileCubit.get(context);
-                                  cubit.updateProfile(
-                                    firstName: _firstnameController.text,
-                                    lastName: _lastnameController.text,
-                                    nid: _nidController.text,
-                                    email: _emailController.text,
-                                    age: _ageController.text,
-                                    phoneNumber: _phoneController.text,
-                                    gender: _gender.text,
-                                  );
-                                }, 'Update'.tr(), context);
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-        decoration: const BoxDecoration(
-          color: AppColor.primaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+    return BlocProvider(
+      create: (context) => UpdateProfileCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(tr('editProfile')),
         ),
-        child: Text(
-          'Edit'.tr(),
-          style: TextStyle(
-            fontFamily: 'SF Pro',
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-            fontSize: 16.0,
+        body: Container(
+          margin: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: UpdateProfileForm(userProfile: userProfile),
           ),
         ),
       ),
+    );
+  }
+}
+
+class UpdateProfileForm extends StatefulWidget {
+  final ProfileModel? userProfile;
+
+  const UpdateProfileForm({Key? key, this.userProfile}) : super(key: key);
+
+  @override
+  _UpdateProfileFormState createState() => _UpdateProfileFormState();
+}
+
+class _UpdateProfileFormState extends State<UpdateProfileForm> {
+  final _formKey = GlobalKey<FormState>();
+  late TextEditingController _firstNameController;
+  late TextEditingController _lastNameController;
+  late TextEditingController _emailController;
+  late TextEditingController _phoneController;
+  late TextEditingController _nidController;
+  late TextEditingController _ageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _firstNameController =
+        TextEditingController(text: widget.userProfile?.firstName ?? '');
+    _lastNameController =
+        TextEditingController(text: widget.userProfile?.lastName ?? '');
+    _emailController =
+        TextEditingController(text: widget.userProfile?.email ?? '');
+    _phoneController =
+        TextEditingController(text: widget.userProfile?.phoneNumber ?? '');
+    _nidController = TextEditingController(text: widget.userProfile?.nid ?? '');
+    _ageController =
+        TextEditingController(text: widget.userProfile?.age?.toString() ?? '');
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _nidController.dispose();
+    _ageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
+      listener: (context, state) {
+        if (state is UpdateProfileSuccessState) {
+          Navigator.pop(context);
+        } else if (state is UpdateProfileErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(state.error),
+            backgroundColor: Colors.red,
+          ));
+        }
+      },
+      builder: (context, state) {
+        return Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CustomTextField(
+                  controller: _firstNameController,
+                  label: tr('firstName'),
+                  icon: Icons.person,
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _lastNameController,
+                  label: tr('lastName'),
+                  icon: Icons.person,
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _emailController,
+                  label: tr('email'),
+                  icon: Icons.email,
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _phoneController,
+                  label: tr('phoneNumber'),
+                  icon: Icons.phone,
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _nidController,
+                  label: tr('nid'),
+                  icon: Icons.credit_card,
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _ageController,
+                  label: tr('age'),
+                  icon: Icons.cake,
+                ),
+                const SizedBox(height: 20),
+                state is UpdateProfileLoadingState
+                    ? Center(child: CircularProgressIndicator())
+                    : ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<UpdateProfileCubit>().updateProfile(
+                                  firstName: _firstNameController.text,
+                                  lastName: _lastNameController.text,
+                                  email: _emailController.text,
+                                  phoneNumber: _phoneController.text,
+                                  // nid: _nidController.text,
+                                  // age: int.tryParse(_ageController.text) ?? 0,
+                                );
+                          }
+                        },
+                        child: Text(tr('saveChanges')),
+                      ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  final IconData icon;
+
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.label,
+    required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return tr('fieldRequired');
+        }
+        return null;
+      },
     );
   }
 }

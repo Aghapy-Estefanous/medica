@@ -8,5 +8,6 @@ final class UpdateProfileLoadingState extends UpdateProfileState {}
 final class UpdateProfileSuccessState extends UpdateProfileState {}
 final class UpdateProfileErrorState extends UpdateProfileState {
   final String error;
+  
   UpdateProfileErrorState(this.error);
 }
